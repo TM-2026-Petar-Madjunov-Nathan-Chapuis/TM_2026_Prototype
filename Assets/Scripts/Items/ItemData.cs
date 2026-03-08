@@ -1,20 +1,25 @@
-
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Item")]
 public class ItemData : ScriptableObject
 {
-    
-    public string itemName { get; private set; }
-    public int itemId;
+    public string itemName { get; private set; } //unique
     public string description { get; private set; }
     public Sprite icon;
     public UseBehavior useBehavior;
 
-    public virtual void Use()
+    public ItemData(string name, string description, Sprite icon, UseBehavior useBehavior)
     {
-        Debug.Log("Using item");
+        this.name = name;
+        this.description = description;
+        this.icon = icon;
+        this.useBehavior = useBehavior;
+    }
+
+    public virtual void Use(GameObject user)
+    {
+        UnityEngine.Debug.Log("Using item");
+        useBehavior.Use(user, this);
     }
 }

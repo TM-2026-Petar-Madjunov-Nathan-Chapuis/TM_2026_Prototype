@@ -68,15 +68,4 @@ public class CairWalk : MonoBehaviour
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
 }

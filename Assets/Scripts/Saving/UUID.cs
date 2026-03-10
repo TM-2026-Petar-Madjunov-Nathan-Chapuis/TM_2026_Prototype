@@ -1,30 +1,36 @@
 using System;
+using Newtonsoft.Json;
+using UnityEngine;
 
-[Serializable]
-public struct UUID : IEquatable<UUID>
+namespace TM.Saving
 {
-    private int uuid;
-
-    public static UUID NewUUID()
+    [Serializable]
+    public struct UUID : IEquatable<UUID>
     {
-        int value = System.Security.Cryptography.RandomNumberGenerator.GetInt32(0, int.MaxValue);
-        UUID uUID = new UUID
+        [JsonProperty] private int uuid;
+
+        public static UUID NewUUID()
         {
-            uuid = value
-        };
-        return uUID;
-    }
-    public override bool Equals(UUID other)
-    {
-        return other.uuid == this.uuid;
-    }
-    public override int GetHashCode()
-    {
-        return this.uuid.GetHashCode();
-    }
+            int value = System.Security.Cryptography.RandomNumberGenerator.GetInt32(0, int.MaxValue);
+            UUID uUID = new UUID
+            {
+                uuid = value
+            };
+            return uUID;
+        }
+        public bool Equals(UUID other)
+        {
+            return other.uuid == this.uuid;
+        }
 
-    public interface IUUID
-    {
-        UUID UUID { get; }
+        public override bool Equals(object obj)  // override from Iquetable class
+        {
+            return obj is UUID other && Equals(other);
+        }
+
+        public override int GetHashCode()
+        {
+            return this.uuid.GetHashCode();
+        }
     }
 }

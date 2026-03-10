@@ -3,13 +3,10 @@ using UnityEngine;
 
 public class FunctionTester : MonoBehaviour, ISaveable
 {
-    public string UID { get; set; }
+    public string UID => "testesrserser";
 
     private void Start()
     {
-        UID = "test";
-        FindAnyObjectByType<TM.Saving.SavingManager>().Save();
-        FindAnyObjectByType<TM.Saving.SavingManager>().Load();
     }
 
     public object SaveData()

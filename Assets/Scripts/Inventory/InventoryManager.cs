@@ -1,6 +1,8 @@
 using System;
 using TM.Saving;
 using UnityEngine;
+using Newtonsoft.Json;
+using TM.Items;
 
 namespace TM.Inventory
 {
@@ -8,6 +10,7 @@ namespace TM.Inventory
     {
         public Inventory inventory;
         [field: SerializeField] public int slotNumber { get; private set; }
+        public WeaponData exasdéflkj;
 
         string ISaveable.UID => "InventoryManager";
 
@@ -15,23 +18,22 @@ namespace TM.Inventory
         private void Start()
         {
             inventory = new Inventory(slotNumber);
-            WeaponData exalibur = new WeaponData("exalibur", "The best sword in the world", null, null, 10, 100);
-            inventory.ModifySlot(3, exalibur, 50);
+            this.inventory.ModifySlot(3, exasdéflkj, 4);
         }
 
         public void LoadData(string data)
         {
-            InventorySaveData inventorySaveData = JsonUtility.FromJson<InventorySaveData>(data);
-            this.inventory = inventorySaveData.inventory;
-            this.slotNumber = inventorySaveData.slotNumber;
+            InventoryManagerSaveData saveData = JsonConvert.DeserializeObject<InventoryManagerSaveData>(data);
+            this.inventory.Load(saveData.inventory);
+            this.slotNumber = saveData.slotNumber;
         }
 
         public object SaveData()
         {
-            return new InventorySaveData
+            return new InventoryManagerSaveData
             {
-                inventory = this.inventory,
-                slotNumber = this.slotNumber,
+                inventory = this.inventory.Save(), //needs its own save implementation because it contains a Scriptable Object
+                slotNumber = this.slotNumber, 
             };
         }
         public void IncreaseSlots(int increase)
@@ -42,9 +44,9 @@ namespace TM.Inventory
     }
 
     [Serializable]
-    public struct InventorySaveData
+    public struct InventoryManagerSaveData
     {
-        public Inventory inventory;
+        public InventorySaveData inventory;
         public int slotNumber;
     }
 }

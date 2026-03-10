@@ -1,13 +1,17 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using TM.Saving;
+using TM.Items;
 
 namespace TM.Inventory
 {
     [Serializable]
     public class Inventory
     {
-        [field: SerializeField] public int slotNumber { get; private set; }
-        [field: SerializeField] public InventoryItem[] inventoryItems { get; private set; }
+        public int slotNumber { get; private set; }
+        public InventoryItem[] inventoryItems { get; private set; }
         public Inventory(int slotNumber)
         {
             this.slotNumber = slotNumber;
@@ -46,5 +50,44 @@ namespace TM.Inventory
             }
             this.inventoryItems = inventoryItems;
         }
+        public InventorySaveData Save()
+        {
+            InventoryItemSaveData[] inventoryItemSaveDatas = new InventoryItemSaveData[slotNumber];
+            for (int i = 0; i < slotNumber; i++) 
+            {
+                inventoryItemSaveDatas[i] = this.inventoryItems[i].Save();
+            }
+            return new InventorySaveData
+            {
+                inventoryItems = inventoryItemSaveDatas,
+                slotNumber = this.slotNumber,
+            };
+        }
+        public void Load(InventorySaveData saveData)
+        {
+            this.slotNumber = saveData.slotNumber;
+            InventoryItem[] savedItems = new InventoryItem[this.slotNumber];
+            for (int i = 0; i < this.slotNumber; i++)
+            {
+                savedItems[i] = new InventoryItem();
+            }
+            //We need to use UuidFinder.FindMultiple() to use less ressources by getting through the SOs loop O(n) once instead of calling findUnique() at each InventoryItem.Load() which would result in O(n**2)
+            UUID?[] uUIDs = saveData.inventoryItems.Select(item => item.itemDataUUID).ToArray();
+            Dictionary<UUID, ScriptableObject> lookup = UuidFinder.findMultiple(uUIDs);
+            for (int i = 0; i < this.slotNumber; i++)
+            {
+                UUID? uUID = saveData.inventoryItems[i].itemDataUUID;
+                if(uUID != null)
+                {
+                    savedItems[i].Load(saveData.inventoryItems[i], (ItemData)lookup[uUID.Value]);
+                }
+            }
+        }
+    }
+    [Serializable]
+    public struct InventorySaveData
+    {
+        public InventoryItemSaveData[] inventoryItems;
+        public int slotNumber;
     }
 }

@@ -1,9 +1,12 @@
 using UnityEngine;
 
-public abstract class UseBehavior : ScriptableObject
+namespace TM.Items
 {
-    public virtual void Use(GameObject user, ItemData item)
+    public abstract class UseBehavior : ScriptableObject
     {
-        Debug.Log($"{item.itemName} was used by {user.name}, but no effect defined");
+        public virtual void Use(GameObject user, ItemData item)
+        {
+            Debug.Log($"{item.itemName} was used by {user.name}, but no effect defined");
+        }
     }
 }

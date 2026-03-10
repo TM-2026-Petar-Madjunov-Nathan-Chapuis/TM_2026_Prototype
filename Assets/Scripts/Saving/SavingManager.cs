@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using Newtonsoft.Json;
 
 namespace TM.Saving
 {
@@ -12,17 +13,17 @@ namespace TM.Saving
         {
             try
             {
-                string path = Application.persistentDataPath + "/" + fileName + ".sav";
+                string path = Application.persistentDataPath + "/" + fileName + ".json";
                 SaveFile saveFile = new SaveFile();
                 MonoBehaviour[] monobehaviours = FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None);
                 foreach (MonoBehaviour monobehavior in monobehaviours)
                 {
                     if (monobehavior is ISaveable iSaveable)
                     {
-                        saveFile.saveData.Add(new SaveData(iSaveable.UID, JsonUtility.ToJson(iSaveable.SaveData(), true)));
+                        saveFile.saveData.Add(new SaveData(iSaveable.UID, JsonConvert.SerializeObject(iSaveable.SaveData())));
                     }
                 }
-                string json = JsonUtility.ToJson(saveFile, true);
+                string json = JsonConvert.SerializeObject(saveFile);
                 File.WriteAllText(path, json);
                 Debug.Log("Game saved at " + path);
             }
@@ -33,11 +34,11 @@ namespace TM.Saving
         }
         public void Load()
         {
-            try
-            {
-                string path = Application.persistentDataPath + "/" + fileName + ".sav";
+            // try
+            // {
+                string path = Application.persistentDataPath + "/" + fileName + ".json";
                 string json = File.ReadAllText(path);
-                SaveFile saveFile = JsonUtility.FromJson<SaveFile>(json);
+                SaveFile saveFile = JsonConvert.DeserializeObject<SaveFile>(json);
                 MonoBehaviour[] monobehaviours = FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None);
                 Dictionary<String, String> lookupTable = new Dictionary<string, string>();
                 foreach (SaveData saveData in saveFile.saveData)
@@ -52,11 +53,11 @@ namespace TM.Saving
                     }
                 }
                 Debug.Log("GAme Loaded at " + path);
-            }
-            catch (Exception e)
-            {
-                Debug.LogError(e);
-            }
+            // }
+            // catch (Exception e)
+            // {
+            //     Debug.LogError(e);
+            // }
         }
     }
 }

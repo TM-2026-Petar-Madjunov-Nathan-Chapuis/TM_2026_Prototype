@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
     {
         MoveFunction();
         JumpFunction();
+        LookFunction();
         
 
         
@@ -53,10 +54,10 @@ public class PlayerController : MonoBehaviour
     private void MoveFunction() //mouvement + gravity
     {
         Vector2 move = moveAction.ReadValue<Vector2>();
-        Vector3 XZmouvement = new Vector3(move.x, 0, move.y);
-        Vector3 XYZmouvement = new Vector3(XZmouvement.x*speed*Time.deltaTime, verticalSpeed*Time.deltaTime, XZmouvement.z*speed*Time.deltaTime);
+        Vector3 xZmouvement = new Vector3(move.x, 0, move.y);
+        Vector3 xYZmouvement = new Vector3(xZmouvement.x*speed*Time.deltaTime, verticalSpeed*Time.deltaTime, xZmouvement.z*speed*Time.deltaTime);
 
-        controller.Move(XYZmouvement);
+        controller.Move(xYZmouvement);
         
         if(controller.isGrounded && verticalSpeed <= 0)
         {
@@ -75,5 +76,9 @@ public class PlayerController : MonoBehaviour
         }
 
     }
-
+    private void LookFunction()
+    {
+        Vector2 look = lookAction.ReadValue<Vector2>();
+        
+    }
 }

@@ -7,6 +7,9 @@ public class PlayerController : MonoBehaviour
     private CharacterController controller;
     [Header("MouvementSettings")] 
     private float speed = 5f;
+    private float jumpForce = 5f;
+
+    [SerializeField] private float verticalSpeed = 0f; //modifiable
     [SerializeField] private float gravity = 9.81f;
 
     public InputActionAsset InputActions;
@@ -40,6 +43,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         MoveFunction();
+        JumpFunction();
         
 
         
@@ -49,22 +53,25 @@ public class PlayerController : MonoBehaviour
     private void MoveFunction() //mouvement + gravity
     {
         Vector2 move = moveAction.ReadValue<Vector2>();
-        Vector3 mouvement = new Vector3(move.x, 0, move.y);
+        Vector3 XZmouvement = new Vector3(move.x, 0, move.y);
+        Vector3 XYZmouvement = new Vector3(XZmouvement.x*speed*Time.deltaTime, verticalSpeed*Time.deltaTime, XZmouvement.z*speed*Time.deltaTime);
+
+        controller.Move(XYZmouvement);
         
-        if(controller.isGrounded)
+        if(controller.isGrounded && verticalSpeed <= 0)
         {
-            controller.Move(mouvement*speed*Time.deltaTime);
+            verticalSpeed = -1f;
         }
-        else;
+        else
         {
-            controller.Move(new Vector3(0,-gravity*Time.deltaTime,0)); 
+            verticalSpeed += -gravity*Time.deltaTime;
         }
     }
     private void JumpFunction()
     {
-        if(controller.isGrounded)
+        if(controller.isGrounded && jumpAction.WasPressedThisFrame())
         {
-            //
+            verticalSpeed = jumpForce;
         }
 
     }

@@ -6,10 +6,10 @@ public class PlayerController : MonoBehaviour
     [Header("References")]
     private CharacterController controller;
     [Header("MouvementSettings")] 
-    private float speed = 5f;
-    private float jumpForce = 5f;
+    [SerializeField] private float speed = 5f;
+    [SerializeField] private float jumpForce = 5f;
 
-    [SerializeField] private float verticalSpeed = 0f; //modifiable
+    [SerializeField] private float verticalSpeed = 0f;
     [SerializeField] private float gravity = 9.81f;
 
     public InputActionAsset InputActions;
@@ -45,10 +45,6 @@ public class PlayerController : MonoBehaviour
         MoveFunction();
         JumpFunction();
         LookFunction();
-        
-
-        
-
     }
 
     private void MoveFunction() //mouvement + gravity
@@ -74,7 +70,6 @@ public class PlayerController : MonoBehaviour
         {
             verticalSpeed = jumpForce;
         }
-
     }
     private void LookFunction()
     {

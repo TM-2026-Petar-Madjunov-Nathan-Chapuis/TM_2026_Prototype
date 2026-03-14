@@ -1699,6 +1699,7 @@ GameObject:
   - component: {fileID: 1892611298}
   - component: {fileID: 1892611297}
   - component: {fileID: 1892611299}
+  - component: {fileID: 1892611300}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1766,7 +1767,22 @@ MonoBehaviour:
   gravity: 20
   mouseSensibilityHorizontal: 100
   mouseSensibilityVertical: 50
+  maxUpCameraRotation: 90
+  maxDownCameraRotation: -90
+  cameraXRotation: 0
   InputActions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+--- !u!114 &1892611300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1892611295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fde2fc9956ee934995863cb0388bc24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CentrelizeMouse
 --- !u!1 &2034017164
 GameObject:
   m_ObjectHideFlags: 0

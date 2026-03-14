@@ -14,8 +14,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float gravity = 9.81f;
     [SerializeField] private float mouseSensibilityHorizontal = 100f;
     [SerializeField] private float mouseSensibilityVertical = 50f;
+    [SerializeField] private float maxUpCameraRotation = 90f;
+    [SerializeField] private float maxDownCameraRotation = -90f;
+
     
-    private Camera camera;
+    [SerializeField]float cameraXRotation = 0f;
+    private Camera playerCamera;
 
     public InputActionAsset InputActions;
 
@@ -43,7 +47,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         controller = GetComponent<CharacterController>();
-        camera = GetComponentInChildren<Camera>();
+        playerCamera = GetComponentInChildren<Camera>();
     }
 
     private void Update()
@@ -85,9 +89,12 @@ public class PlayerController : MonoBehaviour
 
         if(lookAction.triggered)
         {
+            cameraXRotation += -look.y*mouseSensibilityVertical*Time.deltaTime;
+            cameraXRotation = Mathf.Clamp(cameraXRotation,maxDownCameraRotation,maxUpCameraRotation);
+            
             transform.Rotate(0,look.x*mouseSensibilityHorizontal*Time.deltaTime,0);
-            camera.transform.Rotate(-look.y*mouseSensibilityVertical*Time.deltaTime,0,0);
-        
+            playerCamera.transform.localRotation = Quaternion.Euler(cameraXRotation,0f,0f);
+            //playerCamera.transform.Rotate(cameraXRotation,0,0);            
         }
     }    
 }

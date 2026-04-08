@@ -18,8 +18,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float maxDownCameraRotation = -90f;
 
     
+<<<<<<< Updated upstream
     [SerializeField]float cameraXRotation = 0f;
     private Camera playerCamera;
+=======
+    private new Camera camera;
+>>>>>>> Stashed changes
 
     public InputActionAsset InputActions;
 

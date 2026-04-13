@@ -12,49 +12,36 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] private float verticalSpeed = 0f;
     [SerializeField] private float gravity = 9.81f;
-    [SerializeField] private float mouseSensibilityHorizontal = 100f;
-    [SerializeField] private float mouseSensibilityVertical = 50f;
-    [SerializeField] private float maxUpCameraRotation = 90f;
-    [SerializeField] private float maxDownCameraRotation = -90f;
 
-    
-    [SerializeField]float cameraXRotation = 0f;
-    private Camera playerCamera;
-
-    public InputActionAsset InputActions;
+    public InputActionAsset inputActions;
 
     private InputAction moveAction;
-    private InputAction lookAction;
     private InputAction jumpAction;
     
     private void OnEnable()
     {
-        InputActions.FindActionMap("player").Enable();
+        inputActions.FindActionMap("Player").Enable();
     }
     private void OnDisable()
     {
-        InputActions.FindActionMap("player").Disable();
+        inputActions.FindActionMap("Player").Disable();
     }
     private void Awake()
     {
-       moveAction = InputSystem.actions.FindAction("Move");
-       lookAction = InputSystem.actions.FindAction("Look");
-       jumpAction = InputSystem.actions.FindAction("Jump");
-
-
+        InputActionMap playerMap = inputActions.FindActionMap("Player");
+        moveAction = playerMap.FindAction("Move", true);
+        jumpAction = playerMap.FindAction("Jump", true);
     }
 
     private void Start()
     {
         controller = GetComponent<CharacterController>();
-        playerCamera = GetComponentInChildren<Camera>();
     }
 
     private void Update()
     {
-        MoveFunction();
         JumpFunction();
-        LookFunction();
+        MoveFunction();
     }
 
     private void MoveFunction() //mouvement + gravity
@@ -82,19 +69,4 @@ public class PlayerController : MonoBehaviour
             verticalSpeed = jumpForce;
         }
     }
-    private void LookFunction()
-    {
-        Vector2 look = lookAction.ReadValue<Vector2>();
-        
-
-        if(lookAction.triggered)
-        {
-            cameraXRotation += -look.y*mouseSensibilityVertical*Time.deltaTime;
-            cameraXRotation = Mathf.Clamp(cameraXRotation,maxDownCameraRotation,maxUpCameraRotation);
-            
-            transform.Rotate(0,look.x*mouseSensibilityHorizontal*Time.deltaTime,0);
-            playerCamera.transform.localRotation = Quaternion.Euler(cameraXRotation,0f,0f);
-            //playerCamera.transform.Rotate(cameraXRotation,0,0);            
-        }
-    }    
 }

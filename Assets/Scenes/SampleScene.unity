@@ -272,12 +272,12 @@ Transform:
   m_GameObject: {fileID: 198024179}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.82, y: 1.29, z: -1.95}
+  m_LocalPosition: {x: 4.82, y: 1.585, z: -2.966}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1892611298}
   - {fileID: 1001308012}
+  - {fileID: 1892611298}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &316442823
@@ -1923,8 +1923,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1892611298}
   - component: {fileID: 1892611297}
-  - component: {fileID: 1892611299}
-  - component: {fileID: 1892611300}
+  - component: {fileID: 1892611302}
+  - component: {fileID: 1892611301}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1966,7 +1966,7 @@ Transform:
   m_GameObject: {fileID: 1892611295}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.3631, y: -0.6814101, z: -3.8001297}
+  m_LocalPosition: {x: -6.3631, y: -0.6814101, z: -3.8001294}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1974,7 +1974,30 @@ Transform:
   - {fileID: 330585546}
   m_Father: {fileID: 198024180}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1892611299
+--- !u!114 &1892611301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1892611295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21bfcd5462c597c4d94c15be8d465c8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerCamera
+  firstPerson: {fileID: 330585545}
+  thirdPerson: {fileID: 1001308015}
+  FOV: 90
+  isFirstPerson: 1
+  inputActionAsset: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  xRotation: 0
+  yRotation: 0
+  xSensitivity: 50
+  ySensitivity: 25
+  thirdPersonSmoothFactor: 9.35
+  yClamp: 1.92
+--- !u!114 &1892611302
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1990,24 +2013,7 @@ MonoBehaviour:
   jumpForce: 10
   verticalSpeed: 0
   gravity: 20
-  mouseSensibilityHorizontal: 50
-  mouseSensibilityVertical: 25
-  maxUpCameraRotation: 90
-  maxDownCameraRotation: -90
-  cameraXRotation: 0
-  InputActions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
---- !u!114 &1892611300
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1892611295}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fde2fc9956ee934995863cb0388bc24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CentrelizeMouse
+  inputActions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!1 &2034017164
 GameObject:
   m_ObjectHideFlags: 0

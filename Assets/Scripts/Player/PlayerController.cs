@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] private float verticalSpeed = 0f;
     [SerializeField] private float gravity = 9.81f;
+    [SerializeField] private Animator animator;
 
     public InputActionAsset inputActions;
 
@@ -52,14 +53,17 @@ public class PlayerController : MonoBehaviour
         Vector3 xYZPlayerMouvement = transform.TransformDirection(xYZmouvement);
 
         controller.Move(xYZPlayerMouvement);
+        animator.SetFloat("speed", Vector3.Magnitude(controller.velocity)/speed);
         
         if(controller.isGrounded && verticalSpeed <= 0)
         {
             verticalSpeed = -1f;
+            animator.SetBool("falling", false);
         }
         else
         {
             verticalSpeed += -gravity*Time.deltaTime;
+            animator.SetBool("falling", true);
         }
     }
     private void JumpFunction()
@@ -67,6 +71,11 @@ public class PlayerController : MonoBehaviour
         if(controller.isGrounded && jumpAction.WasPressedThisFrame())
         {
             verticalSpeed = jumpForce;
+            animator.SetBool("jump", true);
+        }
+        if(animator.GetBool("jump"))
+        {
+            animator.SetBool("jump", false);
         }
     }
 }

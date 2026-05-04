@@ -1,5 +1,6 @@
 using System;
 using Newtonsoft.Json;
+using TM.Input;
 using TM.Saving;
 using Unity.Mathematics;
 using Unity.VisualScripting;
@@ -14,10 +15,6 @@ public class PlayerCamera : MonoBehaviour, ISaveable
     [SerializeField] private int FOV = 90;
     public bool isFirstPerson = true;
     public string UID => "cameraToggle";
-    private InputAction lookAction;
-    private InputAction toggleCamera;
-    [SerializeField] private InputActionAsset inputActionAsset;
-
     [SerializeField] private float xRotation = 0f;
     [SerializeField] private float yRotation = 0f;
 
@@ -46,11 +43,15 @@ public class PlayerCamera : MonoBehaviour, ISaveable
             isFirstPerson = this.isFirstPerson,
         };
     }
-    void Awake()
+    private void OnEnable()
     {
-        InputActionMap playerActionMap = inputActionAsset.FindActionMap("Player", true);
-        lookAction = playerActionMap.FindAction("Look", true);
-        toggleCamera = playerActionMap.FindAction("ToggleCamera", true);
+        InputManager.Instance.RegisterListener("Look", Look, InputValueType.Vector2, true);
+        InputManager.Instance.RegisterListener("ToggleCamera", ToggleCamera, InputValueType.Button, false);        
+    }
+    private void OnDisable()
+    {
+        InputManager.Instance.UnRegisterListener("Look", Look);
+        InputManager.Instance.UnRegisterListener("ToggleCamera", ToggleCamera);   
     }
 
     void Start()
@@ -76,7 +77,7 @@ public class PlayerCamera : MonoBehaviour, ISaveable
         if (thirdPersonCameraPos == null) return;
         Gizmos.DrawLine(transform.position, thirdPersonCameraPos.transform.position);
     }
-    public void ToggleCamera()
+    public void ToggleCamera(InputValues inputValues) //Toggle camera called by input manager, input values is needed for type fulfilling but does nothing
     {
         this.isFirstPerson =  !this.isFirstPerson;
         if (isFirstPerson)
@@ -90,21 +91,9 @@ public class PlayerCamera : MonoBehaviour, ISaveable
             thirdPerson.gameObject.SetActive(true);
         }
     }
-    void Update()
-    {
-        Vector2 look = lookAction.ReadValue<Vector2>();
-        if (toggleCamera.triggered)
-        {
-            ToggleCamera();
-        }
-        if (lookAction.triggered)
-        {
-            Look(look);
-        }
-    }
     void LateUpdate()
     {
-        if (!isFirstPerson)
+        if (!isFirstPerson) //logic for the lerping of the third camera position to smooth movements
         {
             if (Vector3.Distance(thirdPerson.gameObject.transform.position, thirdPersonCameraPos.transform.position) > 0.1)
             {
@@ -113,8 +102,9 @@ public class PlayerCamera : MonoBehaviour, ISaveable
             thirdPerson.gameObject.transform.LookAt(this.gameObject.transform);
         }
     }
-    private void Look(Vector2 look)
+    private void Look(InputValues inputValues) // called by the InputManager at every triggered frame
     {
+        Vector2 look = inputValues.vector2Value;
         if (isFirstPerson)
         {
             yRotation += look.x * ySensitivity * Time.deltaTime; //horizontal
@@ -127,15 +117,15 @@ public class PlayerCamera : MonoBehaviour, ISaveable
         }
         else
         {
-            yRotation += look.x * ySensitivity * Time.deltaTime;
-            transform.localRotation = Quaternion.Euler(0f, yRotation, 0f);
+            yRotation += look.x * ySensitivity * Time.deltaTime; //horizontal
+            transform.localRotation = Quaternion.Euler(0f, yRotation, 0f); //transforms the player's rotation directly and camera follows as its a child of parent
 
-            thirdPersonVerticalOffset -= look.y * xSensitivity * Time.deltaTime;
-            thirdPersonVerticalOffset = Mathf.Clamp(thirdPersonVerticalOffset, -yClamp, yClamp);
+            thirdPersonVerticalOffset -= look.y * xSensitivity * Time.deltaTime; //vertical
+            thirdPersonVerticalOffset = Mathf.Clamp(thirdPersonVerticalOffset, -yClamp, yClamp); //clamp max vertical "rotation" or movement
 
             Vector3 pos = thirdPersonCameraPos.transform.position;
-            pos.y = thirdPersonBaseY + thirdPersonVerticalOffset + transform.position.y;
-            thirdPersonCameraPos.transform.position = pos;
+            pos.y = thirdPersonBaseY + thirdPersonVerticalOffset + transform.position.y; //calculate camera pos based on the offset
+            thirdPersonCameraPos.transform.position = pos; //set the third person camera target that the acutual camera will learp towards to the pos.
         }
     }
 }

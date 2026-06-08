@@ -1,0 +1,30 @@
+.inventory {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.inventory__equipement {
+    width: 25%;
+}
+
+.inventory__object-description {
+    width: 25%;
+}
+
+.inventory__items-list {
+    flex-grow: 1;
+}
+
+.inventory__weight-bar {
+    flex-grow: 0;
+    height: 10%;
+}
+.inventory__main {
+    flex-grow: 1;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+}

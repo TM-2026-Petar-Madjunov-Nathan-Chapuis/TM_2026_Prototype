@@ -1,0 +1,14 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/styles/Menu.uss?fileID=7433441132597879392&amp;guid=5b4142597d560b84c95230b338a4b8e4&amp;type=3"/>
+    <Style src="project://database/Assets/UI/styles/Font.uss?fileID=7433441132597879392&amp;guid=7eb4cac6f0f96404eb05acec29a0f1bf&amp;type=3"/>
+    <ui:VisualElement name="MenuBackground" class="menu">
+        <ui:VisualElement name="MenuTopBar" class="menu__topbar">
+            <ui:Button text="Button" name="TopBarLeft2Button" class="menu__topbar__button menu__topbar__button--2 font-small"/>
+            <ui:Button text="Button" name="TopBarLeftButton" class="menu__topbar__button font-medium"/>
+            <ui:Label text="Label" name="TopBarLabel" class="menu__topbar__label font-large"/>
+            <ui:Button text="Button" name="TopBarRightButton" class="menu__topbar__button font-medium"/>
+            <ui:Button text="Button" name="TopBarRight2Button" class="menu__topbar__button menu__topbar__button--2 font-small"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="MenuTemplateHolder" class="menu__templateholder" style="flex-grow: 1;"/>
+    </ui:VisualElement>
+</ui:UXML>

@@ -1,40 +1,48 @@
-using System;
-using TM.Input;
-using Unity.VisualScripting;
+using System.ComponentModel.Design.Serialization;
+using NUnit.Framework.Constraints;
+using TM.Items;
+using TM.UI;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace TM.Inventory.UI
 {
-    public class InventoryUIManager : MonoBehaviour
+    public class InventoryUIManager : GenericUITemplateManager
     {
-        [SerializeField] private UIDocument uIDocument;
-        private VisualElement root;
-        private bool isOpen = true;
-        void Awake()
+        private GameObject player;
+        private InventoryManager inventoryManager;
+        private VisualElement itemsContainers;
+        private VisualElement itemDescription;
+        private VisualElement equipment;
+        private ProgressBar weightBar;
+
+        public override void SetRoot(VisualElement root)
         {
-            root = uIDocument.rootVisualElement;
+            base.SetRoot(root);
+            this.player = GameObject.FindGameObjectWithTag("Player");
+            if (this.player == null){   throw new UnityException("no player found by tag : Player");    }
+            this.inventoryManager = this.player.GetComponent<InventoryManager>();
+
+            itemsContainers = this.root.Q<VisualElement>("ItemsList");
+            itemDescription = this.root.Q<VisualElement>("ItemDescription");
+            equipment = this.root.Q<VisualElement>("Equipement");
+            weightBar = this.root.Q<ProgressBar>("WeightBar");
         }
-        private void OnEnable()
+        public override void OnEnable()
         {
-            InputManager.Instance.RegisterListener("OpenInventory", ToggleHideShow, InputValueType.Button, false);
+            WeightBarUpdate();
+            Grid();
+            FillItems();
         }
-        private void OnDisable()
-        {
-            InputManager.Instance.UnRegisterListener("OpenInventory", ToggleHideShow);
-        }
-        void Start()
+        private void WeightBarUpdate()
         {
             
         }
-        void Update()
+        private void Grid()
         {
-            
         }
-        private void ToggleHideShow(InputValues inputValues)// called by the input manager, the argument is for type checking and is useless | for now simple hide and display but will need more logic when menu gets more populated with tabs
+        private void FillItems()
         {
-            root.style.display = isOpen ? DisplayStyle.None : DisplayStyle.Flex; //using display none, but many more available option at https://docs.unity3d.com/6000.0/Documentation/Manual/UIE-best-practices-for-managing-elements.html
-            isOpen = !isOpen;
         }
     }
 }

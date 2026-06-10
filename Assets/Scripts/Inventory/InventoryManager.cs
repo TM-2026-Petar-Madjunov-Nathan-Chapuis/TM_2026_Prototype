@@ -8,8 +8,8 @@ namespace TM.Inventory
 {
     public class InventoryManager : MonoBehaviour, ISaveable //sits on the player
     {
-        public Inventory inventory;
-        [field: SerializeField] public int slotNumber { get; private set; }
+        public InventoryGrid inventoryGrid;
+        [field: SerializeField] public Vector2Int gridSize { get; private set; }
         public WeaponData exasdéflkj;
 
         string ISaveable.UID => "InventoryManager";
@@ -17,29 +17,24 @@ namespace TM.Inventory
 
         private void Start()
         {
-            inventory = new Inventory(slotNumber);
-            this.inventory.ModifySlot(3, exasdéflkj, 4);
+            inventoryGrid = new InventoryGrid(gridSize);
+            this.inventoryGrid.TryInsertItem(exasdéflkj, new Vector2Int(2,2), 4);
         }
 
         public void LoadData(string data)
         {
             InventoryManagerSaveData saveData = JsonConvert.DeserializeObject<InventoryManagerSaveData>(data);
-            this.inventory.Load(saveData.inventory);
-            this.slotNumber = saveData.slotNumber;
+            this.inventoryGrid.Load(saveData.inventory);
+            this.gridSize = saveData.gridSize;
         }
 
         public object SaveData()
         {
             return new InventoryManagerSaveData
             {
-                inventory = this.inventory.Save(), //needs its own save implementation because it contains a Scriptable Object
-                slotNumber = this.slotNumber, 
+                inventory = this.inventoryGrid.Save(), //needs its own save implementation because it contains a Scriptable Object
+                gridSize = this.gridSize, 
             };
-        }
-        public void IncreaseSlots(int increase)
-        {
-            slotNumber += increase;
-            inventory.IncreaseSlots(increase);
         }
     }
 
@@ -47,6 +42,6 @@ namespace TM.Inventory
     public struct InventoryManagerSaveData
     {
         public InventorySaveData inventory;
-        public int slotNumber;
+        public Vector2Int gridSize;
     }
 }

@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using UnityEngine;
 using TM.Saving;
+using System;
 
 namespace TM.Items
 {
@@ -9,6 +10,7 @@ public class ItemData : ScriptableObject, IUUID
 {
     public string itemName { get; private set; } //unique
     public string description { get; private set; }
+    public Vector2Int size;
 
     [JsonProperty] private UUID uuid;
     public UUID UUID => uuid;
@@ -24,11 +26,12 @@ public class ItemData : ScriptableObject, IUUID
     public Sprite icon;
     public UseBehavior useBehavior;
 
-    public ItemData(string name, string description, Sprite icon, UseBehavior useBehavior)
+    public ItemData(string name, string description, Sprite icon, Vector2Int size, UseBehavior useBehavior)
     {
         this.name = name;
         this.description = description;
         this.icon = icon;
+        this.size = size;
         this.useBehavior = useBehavior;
     }
     public virtual void Use(GameObject user)

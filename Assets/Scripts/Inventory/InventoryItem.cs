@@ -22,19 +22,11 @@ namespace TM.Inventory
         }
         public InventoryItemSaveData Save()
         {
-            if (this.itemData)
-            {
-                return new InventoryItemSaveData
+            return new InventoryItemSaveData
                 {
-                    itemDataUUID = this.itemData.UUID,
+                    itemDataUUID = this.itemData ? this.itemData.UUID : null,
                     count = this.count,
                 };
-            }
-            return new InventoryItemSaveData
-            {
-                itemDataUUID = null,
-                count = this.count,
-            };
         }
         public void Load(InventoryItemSaveData saveData, ItemData itemData)
         {

@@ -11,8 +11,6 @@ namespace TM.Saving
         public string fileName;
         public void Save()
         {
-            try
-            {
                 string path = Application.persistentDataPath + "/" + fileName + ".json";
                 SaveFile saveFile = new SaveFile();
                 MonoBehaviour[] monobehaviours = FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None);
@@ -26,16 +24,11 @@ namespace TM.Saving
                 string json = JsonConvert.SerializeObject(saveFile);
                 File.WriteAllText(path, json);
                 Debug.Log("Game saved at " + path);
-            }
-            catch (Exception e)
-            {
-                Debug.LogError(e);
-            }
         }
         public void Load()
         {
-            // try
-            // {
+            try
+            {
                 string path = Application.persistentDataPath + "/" + fileName + ".json";
                 string json = File.ReadAllText(path);
                 SaveFile saveFile = JsonConvert.DeserializeObject<SaveFile>(json);
@@ -53,11 +46,11 @@ namespace TM.Saving
                     }
                 }
                 Debug.Log("GAme Loaded at " + path);
-            // }
-            // catch (Exception e)
-            // {
-            //     Debug.LogError(e);
-            // }
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+            }
         }
     }
 }

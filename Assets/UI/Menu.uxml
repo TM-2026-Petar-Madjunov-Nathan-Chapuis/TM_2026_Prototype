@@ -9,6 +9,6 @@
             <ui:Button text="Button" name="TopBarRightButton" class="menu__topbar__button font-medium"/>
             <ui:Button text="Button" name="TopBarRight2Button" class="menu__topbar__button menu__topbar__button--2 font-small"/>
         </ui:VisualElement>
-        <ui:VisualElement name="MenuTemplateHolder" class="menu__templateholder" style="flex-grow: 1;"/>
+        <ui:VisualElement name="MenuTemplateHolder" class="menu__templateholder"/>
     </ui:VisualElement>
 </ui:UXML>

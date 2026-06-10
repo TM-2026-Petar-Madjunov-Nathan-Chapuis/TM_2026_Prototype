@@ -21,16 +21,6 @@ namespace TM.Saving
             Debug.LogError("Tried to find no existant UUID");
             return null;
         }
-        public static Dictionary<UUID, ScriptableObject> findMultiple(UUID[] uUIDs)
-        {
-            Dictionary<UUID, ScriptableObject> lookup = getAllUUIDs();
-            Dictionary<UUID, ScriptableObject> final = new Dictionary<UUID, ScriptableObject>();
-            foreach (UUID uID in uUIDs)
-            {
-                final.Add(uID, lookup[uID]);
-            }
-            return final;
-        }
         public static Dictionary<UUID, ScriptableObject> findMultiple(UUID?[] uUIDs) // UUID might be null but we just dropp the null values and output the dict lookup containing only true UUID
         {
             Dictionary<UUID, ScriptableObject> lookup = getAllUUIDs();

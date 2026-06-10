@@ -1,11 +1,13 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/styles/Inventory.uss?fileID=7433441132597879392&amp;guid=c03df79fc3d2aec4592689a42e9be0f6&amp;type=3#Inventory"/>
+    <Style src="project://database/Assets/UI/styles/Font.uss?fileID=7433441132597879392&amp;guid=7eb4cac6f0f96404eb05acec29a0f1bf&amp;type=3#Font"/>
     <ui:VisualElement name="Inventory" class="inventory">
         <ui:VisualElement name="Equipement" class="inventory__equipement"/>
         <ui:VisualElement name="Main" class="inventory__main">
+            <ui:Label text="Items" class="inventory__items-label font-large"/>
             <ui:VisualElement name="ItemsList" class="inventory__items-list"/>
             <ui:ProgressBar name="WeightBar" value="0" class="inventory__weight-bar"/>
         </ui:VisualElement>
-        <ui:VisualElement name="ObjectDescription" class="inventory__object-description"/>
+        <ui:VisualElement name="ItemDescription" class="inventory__item-description"/>
     </ui:VisualElement>
 </ui:UXML>

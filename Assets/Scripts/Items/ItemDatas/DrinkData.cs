@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace TM.Items
@@ -7,7 +8,7 @@ namespace TM.Items
     {
         public int drinkAmmount;
 
-        public DrinkData(string name, string description, Sprite icon, UseBehavior useBehavior, int drinkAmmount) : base(name, description, icon, useBehavior)
+        public DrinkData(string name, string description, Sprite icon, Vector2Int size, UseBehavior useBehavior, int drinkAmmount) : base(name, description, icon, size, useBehavior)
         {
             this.drinkAmmount = drinkAmmount;
         }

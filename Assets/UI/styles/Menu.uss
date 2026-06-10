@@ -3,6 +3,7 @@
 
 .menu {
     flex-grow: 1;
+    flex-direction:column;
     position: absolute;
     top: 5%;
     left: 5%;
@@ -10,7 +11,7 @@
     right: 5%;
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 100px;
-    padding: 4%;
+    padding: 2%;
     align-items: center;
     justify-content: flex-start;
 }
@@ -20,8 +21,9 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 80%;
-    height: 13%;
+    width: 60%;
+    max-width: 1000px;
+    height: 10%;
     flex-grow: 0;
 }
 
@@ -62,4 +64,7 @@
 }
 .menu__templateholder {
     margin-top: 20px;
+    flex-grow: 1;
+    width: 100%;
+    align-self: stretch;
 }   

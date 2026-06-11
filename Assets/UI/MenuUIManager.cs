@@ -1,5 +1,6 @@
 using System;
 using TM.Input;
+using TM.Inventory.UI;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -24,6 +25,9 @@ namespace TM.UI
             instance.style.width = Length.Percent(100);
             instance.style.height = Length.Percent(100);
             templateHolder.Add(instance);
+            InventoryUIManager inventoryUIManager = new();
+            inventoryUIManager.SetRoot(templateHolder);
+            inventoryUIManager.OnEnable();
         }
         private void OnEnable()
         {

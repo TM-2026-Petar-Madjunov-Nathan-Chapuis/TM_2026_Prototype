@@ -3,12 +3,14 @@ using TM.Saving;
 using UnityEngine;
 using Newtonsoft.Json;
 using TM.Items;
+using Unity.VisualScripting;
 
 namespace TM.Inventory
 {
     public class InventoryManager : MonoBehaviour, ISaveable //sits on the player
     {
         public InventoryGrid inventoryGrid;
+        [field: SerializeField] public int cellSize { get; private set; } = 64 ;
         [field: SerializeField] public Vector2Int gridSize { get; private set; }
         public WeaponData exasdéflkj;
 

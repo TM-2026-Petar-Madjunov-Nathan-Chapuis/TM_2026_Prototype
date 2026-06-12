@@ -1640,6 +1640,7 @@ Transform:
   - {fileID: 1588413615}
   - {fileID: 673173264}
   - {fileID: 1429751699}
+  - {fileID: 2021081843}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1380634410
@@ -1730,7 +1731,7 @@ GameObject:
   - component: {fileID: 1429751699}
   - component: {fileID: 1429751700}
   m_Layer: 0
-  m_Name: InventoryUIManager
+  m_Name: MenuUIManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1765,6 +1766,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TM.Inventory.UI.InventoryUIManager
   inventoryTemplate: {fileID: 9197481963319205126, guid: cb78a766a12e36f4fbae4580922df79a, type: 3}
   uIDocument: {fileID: 1387130484}
+  blurManager: {fileID: 2021081842}
+  flipShader: {fileID: 4800000, guid: ae5480d81865f6442b8b3064f29fe557, type: 3}
 --- !u!1 &1444545219
 GameObject:
   m_ObjectHideFlags: 0
@@ -2313,6 +2316,53 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4a89d13416e3de42ad8a0202883c6ab, type: 3}
+--- !u!1 &2021081841
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2021081843}
+  - component: {fileID: 2021081842}
+  m_Layer: 0
+  m_Name: BlurManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2021081842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2021081841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3c58121032c6bc4a86056373d2de716, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BlurManager
+  blurShader: {fileID: 4800000, guid: 28001b4e58dc52a4f876f9b8c77b4eb9, type: 3}
+  horizontalBlur: 0.3
+  verticalBlur: 0.3
+--- !u!4 &2021081843
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2021081841}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1380634409}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2079469476
 GameObject:
   m_ObjectHideFlags: 0

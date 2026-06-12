@@ -1246,6 +1246,78 @@ Transform:
   m_Children: []
   m_Father: {fileID: 327682529}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 35.563}
+--- !u!1 &929258916
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 929258917}
+  - component: {fileID: 929258918}
+  - component: {fileID: 929258919}
+  m_Layer: 0
+  m_Name: ThermometerUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &929258917
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929258916}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2079469477}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &929258918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929258916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
+  m_PanelSettings: {fileID: 11400000, guid: 4254776b97f8d484c99e8bb9d81d0294, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 5729522c6d98cd04194d1c3f9f7ce6d7, type: 3}
+  m_SortingOrder: 0
+  m_Position: 0
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080
+  m_PivotReferenceSize: 0
+  m_Pivot: 0
+  m_WorldSpaceCollider: {fileID: 0}
+--- !u!114 &929258919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929258916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0e0d4962399c1f4fbb8d27c69afa51e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ThermometerDisplay
+  uIDocument: {fileID: 929258918}
+  coldMechanic: {fileID: 1892611305}
+  thermometerFillPercent: 0
+  playerCorporalTemperature: 0
 --- !u!1 &1001308011
 GameObject:
   m_ObjectHideFlags: 0
@@ -2116,6 +2188,7 @@ GameObject:
   - component: {fileID: 1892611301}
   - component: {fileID: 1892611304}
   - component: {fileID: 1892611303}
+  - component: {fileID: 1892611305}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2230,6 +2303,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TM.Inventory.InventoryManager
   <slotNumber>k__BackingField: 20
   "exasd\xE9flkj": {fileID: 11400000, guid: 650a0118680721241862d3af314c7733, type: 2}
+--- !u!114 &1892611305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1892611295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 660747fa5b6c69e4e9eafb273427238b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ColdMechanic
+  normalPlayerCorporalTemperature: 36.5
+  clothesResistance: 1
+  ambientTemperature: 0
+  metabolismWork: 0
+  deltaTime: 1
 --- !u!1001 &1961774166
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2342,6 +2432,7 @@ Transform:
   m_Children:
   - {fileID: 1657054183}
   - {fileID: 1387130483}
+  - {fileID: 929258917}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807

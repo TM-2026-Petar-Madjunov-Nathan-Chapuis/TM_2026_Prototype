@@ -1,0 +1,8 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="thermometer" style="flex-grow: 1; border-right-width: 3px; top: auto; bottom: 1.777778%; left: 1%; right: auto; width: 5%; height: 10%; aspect-ratio: 1; position: absolute; border-top-width: 3px; border-bottom-width: 3px; border-left-width: 3px; border-left-color: rgb(0, 0, 255); border-right-color: rgb(0, 0, 255); border-top-color: rgb(0, 0, 255); border-bottom-color: rgb(0, 0, 255);">
+        <ui:Label text="Label" name="temperatureLabel" style="position: absolute; left: auto; bottom: 0%; width: 50px; height: 20%; align-self: center;"/>
+        <ui:VisualElement name="thermometerTube" style="flex-grow: 1; height: 80%; position: absolute; top: 0%; width: 100%;">
+            <ui:VisualElement name="thermometerFill" style="flex-grow: 1; position: absolute; height: 90%; width: 70%; left: auto; align-self: center; align-content: auto; justify-content: flex-start; top: auto; visibility: visible; -unity-background-image-tint-color: rgb(0, 0, 0); background-color: rgb(190, 40, 40); bottom: 5%;"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

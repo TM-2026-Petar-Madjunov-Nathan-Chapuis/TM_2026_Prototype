@@ -5,15 +5,14 @@
     flex-grow: 1;
     flex-direction:column;
     position: absolute;
-    top: 5%;
-    left: 5%;
-    bottom: 5%;
-    right: 5%;
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 100px;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
     padding: 2%;
     align-items: center;
     justify-content: flex-start;
+    background-color: rgba(0, 0, 0, 0.97);
 }
 
 .menu__topbar {

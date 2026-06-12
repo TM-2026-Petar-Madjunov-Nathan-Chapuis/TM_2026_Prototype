@@ -1,5 +1,6 @@
 using System;
 using Newtonsoft.Json;
+using NUnit.Framework;
 using TM.Input;
 using TM.Saving;
 using Unity.Mathematics;
@@ -7,6 +8,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 public class PlayerCamera : MonoBehaviour, ISaveable
 {
@@ -25,7 +27,6 @@ public class PlayerCamera : MonoBehaviour, ISaveable
     private GameObject thirdPersonCameraPos = null;
     private float thirdPersonBaseY;
     private float thirdPersonVerticalOffset;
-
 
 
     public void LoadData(string data)
@@ -129,9 +130,9 @@ public class PlayerCamera : MonoBehaviour, ISaveable
         }
     }
 }
-    [Serializable]
-    public struct PlayerCameraSaveData
-    {
-        public int FOV;
-        public bool isFirstPerson;
-    }
+[Serializable]
+public struct PlayerCameraSaveData
+{
+    public int FOV;
+    public bool isFirstPerson;
+}

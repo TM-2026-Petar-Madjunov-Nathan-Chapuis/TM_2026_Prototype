@@ -1,0 +1,1 @@
+The blur shader in this folder was copied from unity's manual at https://docs.unity.cn/6000.2/Documentation/Manual/urp/renderer-features/create-custom-renderer-feature.html, all credits to them. and AI

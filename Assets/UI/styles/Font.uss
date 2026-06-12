@@ -1,11 +1,17 @@
 .font-small {
+    --unity-font-definition: resource("Assets/Resources/Font/LexendDeca-Regular SDF")
+    color: #fefefa;
     font-size: 12px;
 }
 
 .font-medium {
+    --unity-font-definition: resource("Assets/Resources/Font/LexendDeca-Regular SDF")
+    color: #fefefa;
     font-size: 16px;
 }
 
 .font-large {
+    --unity-font-definition: resource("Assets/Resources/Font/LexendDeca-Regular SDF")
+    color: #fefefa;
     font-size: 24px;
 }

@@ -1,3 +1,9 @@
+:root {
+    --light-black: rgb(46, 46, 46);
+    --bone-white: rgb(126, 126, 126);
+    color: white;
+}
+
 .font-small {
     --unity-font-definition: resource("Assets/Resources/Font/LexendDeca-Regular SDF")
     color: #fefefa;
@@ -15,3 +21,4 @@
     color: #fefefa;
     font-size: 24px;
 }
+

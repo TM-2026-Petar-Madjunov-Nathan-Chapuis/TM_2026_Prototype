@@ -9,7 +9,7 @@
                 <ui:VisualElement name="GridBackground" class="inventory__grid-background"/>
                 <ui:VisualElement name="ItemsLayer" class="inventory__items-layer"/>
             </ui:VisualElement>
-            <ui:ProgressBar name="WeightBar" value="0" class="inventory__weight-bar"/>
+            <ui:ProgressBar name="WeightBar" value="50" class="inventory__weight-bar"/>
         </ui:VisualElement>
         <ui:VisualElement name="ItemDescription" class="inventory__item-description"/>
     </ui:VisualElement>

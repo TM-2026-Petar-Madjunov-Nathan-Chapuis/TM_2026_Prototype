@@ -3,32 +3,47 @@
 
 .menu {
     flex-grow: 1;
-    flex-direction:column;
+    flex-direction: column;
     position: absolute;
     top: 0px;
     left: 0px;
     bottom: 0px;
     right: 0px;
-    padding: 2%;
+    padding: 0px;
     align-items: center;
     justify-content: flex-start;
     background-color: rgba(0, 0, 0, 0.97);
 }
 
 .menu__topbar {
+    border-color: var(--bone-white);
+    border-bottom-width: 2px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 10%;
+    flex-grow: 0;
+    padding: 10px;
+}
+
+.menu__navigation {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 60%;
     max-width: 1000px;
-    height: 10%;
+    height: 80%;
     flex-grow: 0;
+    width: 100%;
 }
 
 .menu__topbar__button {
     flex-grow: 1;
-    background-color: rgb(66, 109, 180);
+    background-color: var(--light-black);
+    border-color: var(--bone-white);
+    border-width: 1px;
     transition-property: scale;
     transition-duration: 100ms;
     height: 80%;
@@ -61,9 +76,9 @@
     background-color: rgb(90, 142, 227);
     scale: 1.1;
 }
+
 .menu__templateholder {
-    margin-top: 20px;
     flex-grow: 1;
     width: 100%;
     align-self: stretch;
-}   
+}

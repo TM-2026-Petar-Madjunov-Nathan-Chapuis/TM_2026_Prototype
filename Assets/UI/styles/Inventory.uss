@@ -8,27 +8,54 @@
 }
 
 .inventory__equipement {
+    border-left-width: 2px;
+    border-color: var(--bone-white);
+    padding-top: 20px;
     background-color: #0d00ff;
     flex-shrink: 0;
     width: 25%;
 }
 
 .inventory__item-description {
+    border-left-width: 2px;
+    border-color: var(--bone-white);
+    padding-top: 20px;
     background-color: #00ff0d;
     flex-shrink: 0;
     width: 25%;
 }
 
 .inventory__items-list {
+    margin-top: 10px;
     flex-grow: 1;
 }
 
 .inventory__weight-bar {
+    padding-left: 5%;
+    padding-right: 5%;
     align-self: stretch;
+    border-radius: 10px;
+    border-width: 0px;
     flex-grow: 0;
     height: 40px;
 }
+
+.inventory__weight-bar .unity-progress-bar__background {
+    border-radius: 10px;
+    background-color: var(--light-black)
+}
+
+.inventory__weight-bar .unity-progress-bar__progress {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    background-color: rgb(159, 31, 31);
+    -unity-background-scale-mode: stretch-to-fill;
+}
+
 .inventory__main {
+    border-left-width: 2px;
+    border-color: var(--bone-white);
+    padding-top: 20px;
     display: flex;
     flex-grow: 1;
     flex-direction: column;
@@ -43,12 +70,12 @@
 }
 .inventory__grid-background {
     position: absolute;
-    border-color: black;
+    border-color: var(--bone-white);
     border-bottom-width: 1px;
     border-left-width: 1px;
 }
 .inventory__slot {
-    border-color: black;
+    border-color: var(--bone-white);
     border-width: 1px;
     border-left-width: 0px;
     border-bottom-width: 0px;

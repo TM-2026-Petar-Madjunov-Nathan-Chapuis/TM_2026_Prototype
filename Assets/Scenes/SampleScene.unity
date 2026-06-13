@@ -2232,8 +2232,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3a9fd471c65846dfad58cfe5e28c894, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TM.Inventory.InventoryManager
-  <cellSize>k__BackingField: 64
-  <gridSize>k__BackingField: {x: 10, y: 5}
+  <cellSize>k__BackingField: 80
+  <gridSize>k__BackingField: {x: 10, y: 9}
   "exasd\xE9flkj": {fileID: 11400000, guid: 650a0118680721241862d3af314c7733, type: 2}
 --- !u!1001 &1961774166
 PrefabInstance:

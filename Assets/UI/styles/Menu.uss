@@ -12,7 +12,6 @@
     padding: 0px;
     align-items: center;
     justify-content: flex-start;
-    background-color: rgba(0, 0, 0, 0.97);
 }
 
 .menu__topbar {
@@ -26,6 +25,7 @@
     height: 10%;
     flex-grow: 0;
     padding: 10px;
+    background-color: var(--dark-background)
 }
 
 .menu__navigation {

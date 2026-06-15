@@ -14,28 +14,27 @@ namespace TM.Inventory
     public class InventoryGrid
     {
         public Vector2Int gridSize { get; private set; }
-        public InventoryItem[,] inventoryItems { get; private set; } // [,] means 2d array, [x,y]
+        public InventoryItem[,] itemGridMap { get; private set; } // [,] means 2d array, [x,y]
+        public List<InventoryItem> itemsList { get; private set; }
         public InventoryGrid(Vector2Int gridSize)
         {
             this.gridSize = gridSize;
-            this.inventoryItems = new InventoryItem[gridSize.x, gridSize.y];
+            this.itemGridMap = new InventoryItem[gridSize.x, gridSize.y];
+            this.itemsList = new();
         }
         public bool CanPlace(InventoryItem inventoryItem, Vector2Int pos)
         {
             Vector2Int size = inventoryItem.itemData.size;
 
             //boundary check
-            if (pos.x < 0 || pos.y < 0) return false;
-            if (pos.x + size.x > gridSize.x || pos.y + size.y > gridSize.y)
-            {
-                return false; //out of bounds
-            }
+            if (pos.x < 0 || pos.y < 0) return false; //out of bounds
+            if (pos.x + size.x > gridSize.x || pos.y + size.y > gridSize.y) return false; //out of bounds
 
-            for (int x = pos.x; x > x+size.x; x++) //check every square the item would occupy and if another item is in there just return false
+            for (int x = pos.x; x < pos.x+size.x; x++) //check every square the item would occupy and if another item is in there just return false
             {
-                for (int y = pos.y; y > y+size.y; y++)
+                for (int y = pos.y; y < pos.y+size.y; y++)
                 {
-                    if (inventoryItems[x,y] != null) return false; 
+                    if (itemGridMap[x,y] != null) return false; 
                 }
             }
             return true;
@@ -45,17 +44,18 @@ namespace TM.Inventory
             InventoryItem item = new InventoryItem();
             item.SetCount(count);
             item.SetItemData(itemData);
+            item.SetPosition(pos);
 
             if(!CanPlace(item, pos)) return false;
             Vector2Int size = item.itemData.size;
-            for(int x = pos.x; x < x + size.x;)
+            for(int x = pos.x; x < pos.x + size.x; x++)
             {
-                for (int y = pos.y; y < y + size.y;)
+                for (int y = pos.y; y < pos.y + size.y; y++)
                 {
-                    
-                    inventoryItems[x,y] = item;
+                    itemGridMap[x,y] = item;
                 }
             }
+            this.itemsList.Add(item);
             return true;
         }
         public void RemoveItem(InventoryItem item)
@@ -64,9 +64,10 @@ namespace TM.Inventory
             {
                 for(int y = 0; y < gridSize.y; y++)
                 {
-                    if(inventoryItems[x,y] == item) inventoryItems[x,y] = null;
+                    if(itemGridMap[x,y] == item) itemGridMap[x,y] = null;
                 }
             }
+            this.itemsList.Remove(item);
         }
         public InventorySaveData Save()
         {
@@ -75,7 +76,7 @@ namespace TM.Inventory
             {
                 for (int y = 0; y < gridSize.y; y++)
                 {
-                    inventoryItemSaveDatas[x,y] = this.inventoryItems[x,y] != null ? this.inventoryItems[x,y].Save() : default;
+                    inventoryItemSaveDatas[x,y] = this.itemGridMap[x,y] != null ? this.itemGridMap[x,y].Save() : default;
                 }
             }
             return new InventorySaveData
@@ -112,7 +113,7 @@ namespace TM.Inventory
                     }
                 }
             }
-            this.inventoryItems = savedItems;
+            this.itemGridMap = savedItems;
         }
     }
     [Serializable]

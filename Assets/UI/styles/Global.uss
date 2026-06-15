@@ -1,0 +1,46 @@
+:root {
+    --light-black: rgb(46, 46, 46);
+    --bone-white: rgb(126, 126, 126);
+    --dark-background: rgba(0,0,0,0.95);
+    --light-background: rgba(0,0,0,0.9);
+    color: white;
+}
+
+.font-size-small {
+    color: #fefefa;
+    font-size: 12px;
+}
+
+.font-size-medium {
+    color: #fefefa;
+    font-size: 16px;
+}
+
+.font-size-large {
+    color: #fefefa;
+    font-size: 24px;
+}
+
+.font-medium {
+    -unity-font-definition: resource("Font/Barlow_Condensed/BarlowCondensed-Medium");
+}
+
+.font-medium-italic {
+    -unity-font-definition: resource("Font/Barlow_Condensed/BarlowCondensed-MediumItalic");
+}
+
+.font-regular {
+    -unity-font-definition: resource("Font/Barlow_Condensed/BarlowCondensed-Regular");
+}
+
+.font-regular-italic {
+    -unity-font-definition: resource("Font/Barlow_Condensed/BarlowCondensed-Italic");
+}
+
+.font-light {
+    -unity-font-definition: resource("Font/Barlow_Condensed/BarlowCondensed-Light");
+}
+
+.font-light-italic {
+    -unity-font-definition: resource("Font/Barlow_Condensed/BarlowCondensed-LightItalic");
+}

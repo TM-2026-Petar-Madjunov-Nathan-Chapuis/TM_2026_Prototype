@@ -30,14 +30,23 @@
     flex-grow: 1;
 }
 
-.inventory__weight-bar {
-    padding-left: 5%;
-    padding-right: 5%;
+.inventory__weight-bar-holder {
     align-self: stretch;
+    flex-grow: 0;
+    height: 40px;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.inventory__weight-bar {
+    position: absolute; 
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
     border-radius: 10px;
     border-width: 0px;
     flex-grow: 0;
-    height: 40px;
 }
 
 .inventory__weight-bar .unity-progress-bar__background {
@@ -46,13 +55,14 @@
 }
 
 .inventory__weight-bar .unity-progress-bar__progress {
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
     background-color: rgb(159, 31, 31);
     -unity-background-scale-mode: stretch-to-fill;
 }
 
 .inventory__main {
+    background-color: var(--light-background);
     border-left-width: 2px;
     border-color: var(--bone-white);
     padding-top: 20px;
@@ -74,9 +84,15 @@
     border-bottom-width: 1px;
     border-left-width: 1px;
 }
+
 .inventory__slot {
+    opacity: 0.99;
+    background-image: resource("Assets/Resources/UI/slotShadow.png");
     border-color: var(--bone-white);
     border-width: 1px;
     border-left-width: 0px;
     border-bottom-width: 0px;
+}
+.inventory__item {
+    
 }

@@ -13,6 +13,7 @@ namespace TM.UI
         [SerializeField] private BlurManager blurManager;
         [SerializeField] private Shader flipShader;
         private Material flipMaterial;
+        private InventoryUIManager inventoryUIManager;
 
         private VisualElement root;
         private VisualElement templateHolder;
@@ -37,9 +38,8 @@ namespace TM.UI
 
             templateHolder.Add(instance);
 
-            InventoryUIManager inventoryUIManager = new();
+            inventoryUIManager = new();
             inventoryUIManager.SetRoot(templateHolder);
-            inventoryUIManager.OnEnable();
 
             flipMaterial = new Material(flipShader);
         }
@@ -68,11 +68,13 @@ namespace TM.UI
             if (isOpen)
             {
                 CaptureAndBlurBackground();
+                this.inventoryUIManager.OnEnable();
                 Time.timeScale = 0f; //stop time, but temporary. better implementation is global game state manager.
             }
             else
             {
                 Time.timeScale = 1f;
+                this.inventoryUIManager.OnDisable();
             }
         }
 

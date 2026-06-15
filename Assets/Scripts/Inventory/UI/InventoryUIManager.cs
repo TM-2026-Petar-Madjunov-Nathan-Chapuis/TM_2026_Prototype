@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.Design.Serialization;
+using CustomElements;
 using NUnit.Framework.Constraints;
 using TM.Items;
 using TM.UI;
@@ -15,6 +16,7 @@ namespace TM.Inventory.UI
         private GameObject player;
         private InventoryManager inventoryManager;
         private VisualElement[,] gridElements;
+        private VisualElement[,] itemsElements;
         private VisualElement itemLayer;
         private VisualElement itemGrid;
         private VisualElement itemDescription;
@@ -40,6 +42,11 @@ namespace TM.Inventory.UI
             Grid();
             FillItems();
         }
+        public override void OnDisable()
+        {
+            itemGrid.Clear();
+            itemLayer.Clear();
+        }
         private void WeightBarUpdate()
         {
             
@@ -47,6 +54,10 @@ namespace TM.Inventory.UI
         private void Grid()
         {
             gridElements = new VisualElement[
+                inventoryManager.gridSize.x,
+                inventoryManager.gridSize.y
+            ];
+            itemsElements = new VisualElement[
                 inventoryManager.gridSize.x,
                 inventoryManager.gridSize.y
             ];
@@ -58,24 +69,49 @@ namespace TM.Inventory.UI
 
                     slot.AddToClassList("inventory__slot");
                     slot.style.position = Position.Absolute;
-
+                
                     slot.style.left = x * this.inventoryManager.cellSize;
                     slot.style.top = y * this.inventoryManager.cellSize;
 
                     slot.style.width = this.inventoryManager.cellSize;
                     slot.style.height = this.inventoryManager.cellSize;
-                    
+
+
                     itemGrid.Add(slot);
                     gridElements[x,y] = slot;
                 }
             }
             itemGrid.style.width = this.inventoryManager.gridSize.x * this.inventoryManager.cellSize;
-            itemGrid.style.height = (this.inventoryManager.gridSize.y) * this.inventoryManager.cellSize;
+            itemGrid.style.height = this.inventoryManager.gridSize.y * this.inventoryManager.cellSize;
             itemLayer.style.width = this.inventoryManager.gridSize.x * this.inventoryManager.cellSize;
-            itemLayer.style.height = (this.inventoryManager.gridSize.y) * this.inventoryManager.cellSize;
+            itemLayer.style.height = this.inventoryManager.gridSize.y * this.inventoryManager.cellSize;
         }
         private void FillItems()
         {
+            foreach (InventoryItem invItem in this.inventoryManager.inventoryGrid.itemsList)
+            {
+                CreateItem(invItem);
+            }
+            foreach (VisualElement item in this.itemsElements) { //add the drag and drop behaviour/manipulator
+                item.AddManipulator(new DragAndDropManipulator(item));
+            }
+        }
+        private void CreateItem(InventoryItem inventoryItem)
+        {
+            VisualElement item = new VisualElement();
+
+            item.AddToClassList("inventory__item");
+            item.name = inventoryItem.itemData.name;
+
+            item.style.position = Position.Absolute;
+            item.style.left = inventoryItem.position.x * this.inventoryManager.cellSize;
+            item.style.top = inventoryItem.position.y * this.inventoryManager.cellSize;
+            item.style.width = inventoryItem.itemData.size.x * this.inventoryManager.cellSize;
+            item.style.height = inventoryItem.itemData.size.y * this.inventoryManager.cellSize;
+            item.style.backgroundImage = Background.FromSprite(inventoryItem.itemData.icon);
+
+            this.itemLayer.Add(item);
+            this.itemsElements[inventoryItem.position.x, inventoryItem.position.y] = item;
         }
     }
 }

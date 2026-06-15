@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c95b485f68213e84196e9228a8bb8f0c, type: 3}
   m_Name: New Weapon
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
-  icon: {fileID: 0}
+  size: {x: 2, y: 3}
+  icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   useBehavior: {fileID: 0}
   damage: 234234234
   durability: 123123123

@@ -1,13 +1,16 @@
 using System;
 using TM.Saving;
 using TM.Items;
+using System.Numerics;
+using UnityEngine;
 
 namespace TM.Inventory
 {
     public class InventoryItem
     {
         public ItemData itemData { get; private set; }
-        public int count { set; private get; }
+        public int count { get; private set; }
+        public Vector2Int position { get; private set; }
 
         public InventoryItem SetItemData(ItemData itemData)
         {
@@ -20,16 +23,23 @@ namespace TM.Inventory
             this.count = count;
             return this;
         }
+        public InventoryItem SetPosition(Vector2Int pos)
+        {
+            this.position = pos;
+            return this;
+        }
         public InventoryItemSaveData Save()
         {
             return new InventoryItemSaveData
                 {
                     itemDataUUID = this.itemData ? this.itemData.UUID : null,
                     count = this.count,
+                    position = this.position,
                 };
         }
         public void Load(InventoryItemSaveData saveData, ItemData itemData)
         {
+            this.position = saveData.position;
             this.count = saveData.count;
             this.itemData = itemData;
         }
@@ -39,5 +49,6 @@ namespace TM.Inventory
     {
         public UUID? itemDataUUID;
         public int count;
+        public Vector2Int position;
     }
 }

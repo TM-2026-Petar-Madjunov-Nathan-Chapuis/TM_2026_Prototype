@@ -1,14 +1,20 @@
+using System;
+using TM.Inventory;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class DragAndDropManipulator : PointerManipulator
+//inspired from unity's official tutorial about manipulators found on youtube. and the docs.
+
+public class ItemDragManipulator : PointerManipulator
 {
     private bool isDragging;
     private Vector2 startPointerPos;
     private Vector2 startTargetWorldPos;
+    public event Action<VisualElement> OnDragEndEvent;
+    public event Action<VisualElement, Vector2> OnDragMoveEvent;
 
-    public DragAndDropManipulator(VisualElement target)
+    public ItemDragManipulator(VisualElement target)
     {
         this.target = target;
     }
@@ -46,7 +52,7 @@ public class DragAndDropManipulator : PointerManipulator
     {
         if (!isDragging || !target.HasPointerCapture(upEvent.pointerId)) return; // if not dragging or target hasnt captured the pointer yet return
 
-        target.ReleasePointer(upEvent.pointerId); //release the pointer so that on cpature out fires.
+        target.ReleasePointer(upEvent.pointerId); //release the pointer so that on capture out fires.
 
         upEvent.StopPropagation();
     }
@@ -66,10 +72,13 @@ public class DragAndDropManipulator : PointerManipulator
         target.style.left = newLocalPos.x;
         target.style.top = newLocalPos.y;
 
+        OnDragMoveEvent.Invoke(target, pointerPos);
+
         moveEvent.StopPropagation();
     }
     private void OnCaptureOut(PointerCaptureOutEvent captureOutEvent) //read more about the docs but this gets fired when the drag stop basically. (precisely when the target loses capture of the pointer, of the mouse's "focus")
     {
         isDragging = false;
+        OnDragEndEvent.Invoke(target);
     }
 }

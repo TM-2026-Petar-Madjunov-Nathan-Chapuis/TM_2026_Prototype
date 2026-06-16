@@ -1,8 +1,6 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.Design.Serialization;
-using CustomElements;
-using NUnit.Framework.Constraints;
-using TM.Items;
 using TM.UI;
 using Unity.Collections;
 using Unity.Mathematics;
@@ -22,9 +20,12 @@ namespace TM.Inventory.UI
         private VisualElement itemDescription;
         private VisualElement equipment;
         private ProgressBar weightBar;
+        private InventoryGridHighlighter gridHighlighter;
+        private Dictionary<Vector2, Vector2Int> allParentToIndexPositions;
 
         public override void SetRoot(VisualElement root)
         {
+            this.gridHighlighter = GameObject.FindAnyObjectByType<InventoryGridHighlighter>();
             base.SetRoot(root);
             this.player = GameObject.FindGameObjectWithTag("Player");
             if (this.player == null){   throw new UnityException("no player found by tag : Player");    }
@@ -35,6 +36,7 @@ namespace TM.Inventory.UI
             itemGrid = this.root.Q<VisualElement>("GridBackground");
             equipment = this.root.Q<VisualElement>("Equipement");
             weightBar = this.root.Q<ProgressBar>("WeightBar");
+            allParentToIndexPositions = InventoryUIHelper.AllParentToIndexPositions(this.inventoryManager);
         }
         public override void OnEnable()
         {
@@ -88,12 +90,16 @@ namespace TM.Inventory.UI
         }
         private void FillItems()
         {
+            Debug.Log("items filled");
             foreach (InventoryItem invItem in this.inventoryManager.inventoryGrid.itemsList)
             {
                 CreateItem(invItem);
             }
             foreach (VisualElement item in this.itemsElements) { //add the drag and drop behaviour/manipulator
-                item.AddManipulator(new DragAndDropManipulator(item));
+                ItemDragManipulator itemDragManipulator = new ItemDragManipulator(item);
+                itemDragManipulator.OnDragEndEvent += HandleDragEnd;
+                itemDragManipulator.OnDragMoveEvent += HandleDragging;
+                item.AddManipulator(itemDragManipulator);
             }
         }
         private void CreateItem(InventoryItem inventoryItem)
@@ -103,15 +109,49 @@ namespace TM.Inventory.UI
             item.AddToClassList("inventory__item");
             item.name = inventoryItem.itemData.name;
 
+            item.userData = inventoryItem; //this stores the inventoryitem reference to the visualelement itself.
+
             item.style.position = Position.Absolute;
-            item.style.left = inventoryItem.position.x * this.inventoryManager.cellSize;
-            item.style.top = inventoryItem.position.y * this.inventoryManager.cellSize;
+            Vector2 pos = InventoryUIHelper.IndexToParentPos(inventoryItem.position, this.inventoryManager);
+            item.style.left = pos.x;
+            item.style.top = pos.y;
             item.style.width = inventoryItem.itemData.size.x * this.inventoryManager.cellSize;
             item.style.height = inventoryItem.itemData.size.y * this.inventoryManager.cellSize;
             item.style.backgroundImage = Background.FromSprite(inventoryItem.itemData.icon);
 
             this.itemLayer.Add(item);
             this.itemsElements[inventoryItem.position.x, inventoryItem.position.y] = item;
+        }
+        private void HandleDragEnd(VisualElement item)
+        {
+            VisualElement parent = item.parent;
+            if (parent == null) return;
+
+            InventoryItem inventoryItem = item.userData as InventoryItem;
+
+            Vector2 pos = new Vector2(item.style.left.value.value, item.style.top.value.value);
+            (Vector2, Vector2Int, float) i = InventoryUIHelper.NearestIndexedPosition(pos, allParentToIndexPositions);
+            Vector2Int oldPos = inventoryItem.position;
+            if (this.inventoryManager.inventoryGrid.TryMoveItem(inventoryItem, i.Item2))
+            {
+                Vector2 newPos = InventoryUIHelper.IndexToParentPos(i.Item2, this.inventoryManager);
+                item.style.left = newPos.x;
+                item.style.top = newPos.y; //move the item in UI, providing the snapping.
+
+                itemsElements[oldPos.x, oldPos.y] = null;
+                itemsElements[i.Item2.x, i.Item2.y] = item; // move the item on the 2d map of items.
+            }
+            else
+            {
+                Vector2 newPos = InventoryUIHelper.IndexToParentPos(inventoryItem.position, this.inventoryManager);
+                item.style.left = newPos.x;
+                item.style.top = newPos.y; //move the item back at the start position, providing the snapping.
+            }
+        }
+        private void HandleDragging(VisualElement item, Vector2 pointerPos)
+        {
+            gridHighlighter.OnDragMove(this.gridElements, item, this.inventoryManager, this.allParentToIndexPositions);
+            Debug.Log("moved");
         }
     }
 }

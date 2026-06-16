@@ -27,8 +27,6 @@ namespace TM.Saving
         }
         public void Load()
         {
-            try
-            {
                 string path = Application.persistentDataPath + "/" + fileName + ".json";
                 string json = File.ReadAllText(path);
                 SaveFile saveFile = JsonConvert.DeserializeObject<SaveFile>(json);
@@ -46,11 +44,6 @@ namespace TM.Saving
                     }
                 }
                 Debug.Log("GAme Loaded at " + path);
-            }
-            catch (Exception e)
-            {
-                Debug.LogError(e);
-            }
         }
     }
 }

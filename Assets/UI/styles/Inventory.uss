@@ -94,5 +94,6 @@
     border-bottom-width: 0px;
 }
 .inventory__item {
-    
+    border-color: var(--bone-white);
+    border-width: 1px;
 }

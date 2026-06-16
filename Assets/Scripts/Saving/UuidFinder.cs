@@ -27,7 +27,7 @@ namespace TM.Saving
             Dictionary<UUID, ScriptableObject> final = new Dictionary<UUID, ScriptableObject>();
             foreach (UUID? uID in uUIDs)
             {
-                if (uID != null)
+                if (uID != null && !final.ContainsKey(uID.Value))
                 {
                     final.Add(uID.Value, lookup[uID.Value]);
                 }

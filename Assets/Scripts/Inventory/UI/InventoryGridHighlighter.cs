@@ -42,7 +42,7 @@ public class InventoryGridHighlighter : MonoBehaviour
     {
         foreach (VisualElement visualElement in coloredOnes)
         {
-            visualElement.style.unityBackgroundImageTintColor = new Color(0,0,0,0);
+            visualElement.style.unityBackgroundImageTintColor = new Color(0,0,0,1);
         }
     }
 }

@@ -90,7 +90,6 @@ namespace TM.Inventory.UI
         }
         private void FillItems()
         {
-            Debug.Log("items filled");
             foreach (InventoryItem invItem in this.inventoryManager.inventoryGrid.itemsList)
             {
                 CreateItem(invItem);
@@ -124,6 +123,7 @@ namespace TM.Inventory.UI
         }
         private void HandleDragEnd(VisualElement item)
         {
+                gridHighlighter.ClearColors();
             VisualElement parent = item.parent;
             if (parent == null) return;
 
@@ -151,7 +151,6 @@ namespace TM.Inventory.UI
         private void HandleDragging(VisualElement item, Vector2 pointerPos)
         {
             gridHighlighter.OnDragMove(this.gridElements, item, this.inventoryManager, this.allParentToIndexPositions);
-            Debug.Log("moved");
         }
     }
 }

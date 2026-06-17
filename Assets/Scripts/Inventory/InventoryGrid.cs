@@ -37,7 +37,6 @@ namespace TM.Inventory
                     if (itemGridMap[x,y] != null && itemGridMap[x,y] != inventoryItem) return false; 
                 }
             }
-            Debug.Log("passed");
             return true;
         }
         public (List<Vector2Int>, List<Vector2Int>) OverLapingItems(InventoryItem inventoryItem, Vector2Int pos)
@@ -52,7 +51,7 @@ namespace TM.Inventory
                 {
                     if (pos.x < 0 || pos.y < 0)  break; //out of bounds
                     if (pos.x + size.x > gridSize.x || pos.y + size.y > gridSize.y) break; //out of bounds
-                    if (itemGridMap[x,y] != null) occupied.Add(new Vector2Int(x,y)); 
+                    if (itemGridMap[x,y] != null && itemGridMap[x,y] != inventoryItem) occupied.Add(new Vector2Int(x,y)); 
                     else availiable.Add(new Vector2Int(x,y));
                 }
             }

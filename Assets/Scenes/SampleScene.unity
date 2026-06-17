@@ -1539,8 +1539,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6ca19749bee81e49909aa3b3bbf1216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventoryGridHighlighter
-  availableColor: {r: 0.26606238, g: 1, b: 0, a: 0}
-  occupiedColor: {r: 1, g: 0, b: 0, a: 0}
+  availableColor: {r: 0.045387268, g: 1, b: 0, a: 1}
+  occupiedColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &1326675101
 GameObject:
   m_ObjectHideFlags: 0

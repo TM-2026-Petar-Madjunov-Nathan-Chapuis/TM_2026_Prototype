@@ -7,7 +7,6 @@ public static class InventoryUIHelper
 {
     public static (Vector2, Vector2Int, float) NearestIndexedPosition(Vector2 pos, Dictionary<Vector2, Vector2Int> allParentToIndexPosition)
     {
-        Debug.Log("inital pos" + pos);
         (Vector2, Vector2Int, float) i = (new Vector2(), new Vector2Int(), math.INFINITY);
         foreach (Vector2 key in allParentToIndexPosition.Keys)
         {
@@ -19,9 +18,6 @@ public static class InventoryUIHelper
                 i.Item2 = allParentToIndexPosition[key];
             }
         }
-        Debug.Log("coords" + i.Item1);
-        Debug.Log("index" + i.Item2);
-        Debug.Log("distance :" + i.Item3);
         return i;
     }
     public static Dictionary<Vector2, Vector2Int> AllParentToIndexPositions(InventoryManager inventoryManager)

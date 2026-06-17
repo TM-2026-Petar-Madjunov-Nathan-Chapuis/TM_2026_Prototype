@@ -55,9 +55,9 @@
 }
 
 .inventory__weight-bar .unity-progress-bar__progress {
+    background-image: resource("Assets/Resources/UI/Jauge_poid.png")
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
-    background-color: rgb(159, 31, 31);
     -unity-background-scale-mode: stretch-to-fill;
 }
 
@@ -87,7 +87,8 @@
 
 .inventory__slot {
     opacity: 0.99;
-    background-image: resource("Assets/Resources/UI/slotShadow.png");
+    background-image: resource("Assets/Resources/UI/whiteSlotBackground.png");
+    -unity-background-image-tint-color: black;
     border-color: var(--bone-white);
     border-width: 1px;
     border-left-width: 0px;

@@ -7,15 +7,6 @@
     align-items: stretch;
 }
 
-.inventory__equipement {
-    border-left-width: 2px;
-    border-color: var(--bone-white);
-    padding-top: 20px;
-    background-color: #0d00ff;
-    flex-shrink: 0;
-    width: 25%;
-}
-
 .inventory__item-description {
     border-left-width: 2px;
     border-color: var(--bone-white);
@@ -39,7 +30,7 @@
 }
 
 .inventory__weight-bar {
-    position: absolute; 
+    position: absolute;
     top: 0px;
     bottom: 0px;
     right: 0px;
@@ -51,11 +42,11 @@
 
 .inventory__weight-bar .unity-progress-bar__background {
     border-radius: 10px;
-    background-color: var(--light-black)
+    background-color: var(--light-black);
 }
 
 .inventory__weight-bar .unity-progress-bar__progress {
-    background-image: resource("Assets/Resources/UI/Jauge_poid.png")
+    background-image: resource("Assets/Resources/UI/Jauge_poid.png");
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
     -unity-background-scale-mode: stretch-to-fill;
@@ -72,17 +63,18 @@
     align-items: center;
     justify-content: center;
 }
+
 .inventory__items-label {
     -unity-text-align: middle-center;
 }
+
 .inventory__item-layout {
     position: absolute;
 }
+
 .inventory__grid-background {
     position: absolute;
     border-color: var(--bone-white);
-    border-bottom-width: 1px;
-    border-left-width: 1px;
 }
 
 .inventory__slot {
@@ -94,7 +86,64 @@
     border-left-width: 0px;
     border-bottom-width: 0px;
 }
+
 .inventory__item {
     border-color: var(--bone-white);
     border-width: 1px;
+}
+
+.inventory__equipement {
+    padding-top: 20px;
+    background-color: var(--dark-background);
+    flex-shrink: 0;
+    width: 25%;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+}
+
+.inventory__armor-slots-holder {
+    width: 100%;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.inventory__middle-slots-holder {
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+}
+
+.inventory__top-slots-holder {
+    justify-content: center;
+    align-items: center;
+}
+
+.inventory__bottom-slots-holder {
+    justify-content: center;
+    align-items: center;
+}
+
+.inventory__armor-slot-top {
+    background-color: green;
+    width: 60px;
+    height: 60px;
+}
+
+.inventory__armor-slot-left {
+    background-color: red;
+    width: 60px;
+    height: 60px;
+}
+
+.inventory__armor-slot-right {
+    background-color: blue;
+    width: 60px;
+    height: 60px;
+}
+
+.inventory__armor-slot-bottom {
+    background-color: cyan;
+    width: 60px;
+    height: 60px;
 }

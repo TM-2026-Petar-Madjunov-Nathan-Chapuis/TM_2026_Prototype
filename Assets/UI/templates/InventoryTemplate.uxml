@@ -2,9 +2,33 @@
     <Style src="project://database/Assets/UI/styles/Inventory.uss?fileID=7433441132597879392&amp;guid=c03df79fc3d2aec4592689a42e9be0f6&amp;type=3#Inventory"/>
     <Style src="project://database/Assets/UI/styles/Global.uss?fileID=7433441132597879392&amp;guid=7eb4cac6f0f96404eb05acec29a0f1bf&amp;type=3#Global"/>
     <ui:VisualElement name="Inventory" class="inventory">
-        <ui:VisualElement name="Equipement" class="inventory__equipement"/>
+        <ui:VisualElement name="Equipement" class="inventory__equipement">
+            <ui:VisualElement name="ArmorSlotsHolder" class="inventory__armor-slots-holder">
+                <ui:VisualElement name="TopSlotsHolder" class="inventory__top-slots-holder">
+                    <ui:VisualElement name="TopArmorSlot" class="inventory__armor-slot-top">
+                        
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement name="MiddleSlotsHolder" class="inventory__middle-slots-holder">
+                    <ui:VisualElement name="MiddleLeftArmorSlot" class="inventory__armor-slot-left">
+                        
+                    </ui:VisualElement>
+                    <ui:VisualElement name="PlayerView" class="inventory__player-view">
+                        
+                    </ui:VisualElement>
+                    <ui:VisualElement name="MiddleRightArmorSlot" class="inventory__armor-slot-right">
+                    
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement name="BottomSlotsHolder" class="inventory__bottom-slots-holder">
+                    <ui:VisualElement name="BottomArmorSlot" class="inventory__armor-slot-bottom">
+                        
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
         <ui:VisualElement name="Main" class="inventory__main">
-            <ui:Label text="ITEMS" class="inventory__items-label font-regular font-size-large"/>
+            <ui:Label text="ITEMS" name="Items Label" class="inventory__items-label font-regular font-size-large"/>
             <ui:VisualElement name="ItemsList" class="inventory__items-list">
                 <ui:VisualElement name="GridBackground" class="inventory__grid-background"/>
                 <ui:VisualElement name="ItemsLayer" class="inventory__items-layer"/>

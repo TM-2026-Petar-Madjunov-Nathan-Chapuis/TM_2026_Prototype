@@ -35,6 +35,6 @@ public static class InventoryUIHelper
     }
     public static Vector2 IndexToParentPos(Vector2Int vector2Int, InventoryManager inventoryManager)
     {
-        return new Vector2(vector2Int.x * inventoryManager.cellSize, vector2Int.y * inventoryManager.cellSize);
+        return new Vector2(vector2Int.x * inventoryManager.cellSize + inventoryManager.cellPosMargin, vector2Int.y * inventoryManager.cellSize + inventoryManager.cellPosMargin);
     }
 }

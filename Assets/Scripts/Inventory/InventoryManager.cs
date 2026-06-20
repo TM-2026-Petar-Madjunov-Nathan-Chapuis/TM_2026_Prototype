@@ -10,12 +10,21 @@ namespace TM.Inventory
     public class InventoryManager : MonoBehaviour, ISaveable //sits on the player
     {
         public InventoryGrid inventoryGrid;
-        [field: SerializeField] public int cellSize { get; private set; } = 64 ;
+        [field: SerializeField] public int cellSize {get; private set; } = 64 ;
+
+        [field: SerializeField, Range(0, 30f)]
+        public int cellPosMargin {get; private set; }
         [field: SerializeField] public Vector2Int gridSize { get; private set; }
         public WeaponData exasdéflkj;
 
         string ISaveable.UID => "InventoryManager";
 
+        public void UpdateCellsize(float width, float height) //width is the total pixel width of the cell slots. 
+        {
+            int f = (int)width / this.gridSize.x;
+            int j = (int)height / this.gridSize.y;
+            this.cellSize = f > j ? j : f;
+        }
 
         private void Start()
         {

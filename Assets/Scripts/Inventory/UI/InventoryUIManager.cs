@@ -19,6 +19,7 @@ namespace TM.Inventory.UI
         private VisualElement itemGrid;
         private VisualElement itemDescription;
         private VisualElement equipment;
+        private VisualElement itemMain;
         private ProgressBar weightBar;
         private InventoryGridHighlighter gridHighlighter;
         private Dictionary<Vector2, Vector2Int> allParentToIndexPositions;
@@ -36,13 +37,22 @@ namespace TM.Inventory.UI
             itemGrid = this.root.Q<VisualElement>("GridBackground");
             equipment = this.root.Q<VisualElement>("Equipement");
             weightBar = this.root.Q<ProgressBar>("WeightBar");
+            itemMain = this.root.Q<VisualElement>("Main");
             allParentToIndexPositions = InventoryUIHelper.AllParentToIndexPositions(this.inventoryManager);
         }
         public override void OnEnable()
         {
+            Debug.Log(this.inventoryManager.cellSize);
             WeightBarUpdate();
+            itemMain.RegisterCallback<GeometryChangedEvent>(ItemCallback); //needed because OnEnable might and does call before the UI even resolves for the user, leading to width = 0 on cellsize calculation. also it calls a redraw on every resolution change
+        }
+        private void ItemCallback(GeometryChangedEvent evt)
+        {
+            itemGrid.Clear();
+            itemLayer.Clear();
             Grid();
             FillItems();
+            allParentToIndexPositions = InventoryUIHelper.AllParentToIndexPositions(this.inventoryManager);
         }
         public override void OnDisable()
         {
@@ -55,6 +65,9 @@ namespace TM.Inventory.UI
         }
         private void Grid()
         {
+            float height = this.itemGrid.parent.resolvedStyle.height - this.inventoryManager.cellPosMargin * 2;
+            float width = this.itemMain.resolvedStyle.width - 2*this.inventoryManager.cellPosMargin;
+           this.inventoryManager.UpdateCellsize(width, height);
             gridElements = new VisualElement[
                 inventoryManager.gridSize.x,
                 inventoryManager.gridSize.y
@@ -72,21 +85,29 @@ namespace TM.Inventory.UI
                     slot.AddToClassList("inventory__slot");
                     slot.style.position = Position.Absolute;
                 
-                    slot.style.left = x * this.inventoryManager.cellSize;
-                    slot.style.top = y * this.inventoryManager.cellSize;
+                    slot.style.left = x * this.inventoryManager.cellSize + this.inventoryManager.cellPosMargin;
+                    slot.style.top = y * this.inventoryManager.cellSize + this.inventoryManager.cellPosMargin;
 
                     slot.style.width = this.inventoryManager.cellSize;
                     slot.style.height = this.inventoryManager.cellSize;
 
+                    if (x == 0)
+                    {
+                        slot.style.borderLeftWidth = 1;
+                    }
+                    if (y == this.inventoryManager.gridSize.y - 1)
+                    {
+                        slot.style.borderBottomWidth = 1;
+                    }
 
                     itemGrid.Add(slot);
                     gridElements[x,y] = slot;
                 }
             }
-            itemGrid.style.width = this.inventoryManager.gridSize.x * this.inventoryManager.cellSize;
-            itemGrid.style.height = this.inventoryManager.gridSize.y * this.inventoryManager.cellSize;
-            itemLayer.style.width = this.inventoryManager.gridSize.x * this.inventoryManager.cellSize;
-            itemLayer.style.height = this.inventoryManager.gridSize.y * this.inventoryManager.cellSize;
+            itemGrid.style.width = this.inventoryManager.gridSize.x * this.inventoryManager.cellSize + 2*this.inventoryManager.cellPosMargin;
+            itemGrid.style.height = this.inventoryManager.gridSize.y * this.inventoryManager.cellSize + 2*this.inventoryManager.cellPosMargin;
+            itemLayer.style.width = this.inventoryManager.gridSize.x * this.inventoryManager.cellSize + 2*this.inventoryManager.cellPosMargin;
+            itemLayer.style.height = this.inventoryManager.gridSize.y * this.inventoryManager.cellSize + 2*this.inventoryManager.cellPosMargin;
         }
         private void FillItems()
         {

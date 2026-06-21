@@ -20,9 +20,11 @@ namespace TM.Inventory.UI
         private VisualElement itemDescription;
         private VisualElement equipment;
         private VisualElement itemMain;
+        private VisualElement playerView;
         private ProgressBar weightBar;
         private InventoryGridHighlighter gridHighlighter;
         private Dictionary<Vector2, Vector2Int> allParentToIndexPositions;
+        private InventoryPlayerViewManager inventoryPlayerViewManager;
 
         public override void SetRoot(VisualElement root)
         {
@@ -38,13 +40,16 @@ namespace TM.Inventory.UI
             equipment = this.root.Q<VisualElement>("Equipement");
             weightBar = this.root.Q<ProgressBar>("WeightBar");
             itemMain = this.root.Q<VisualElement>("Main");
+            playerView = this.root.Q<VisualElement>("PlayerView");
             allParentToIndexPositions = InventoryUIHelper.AllParentToIndexPositions(this.inventoryManager);
+            inventoryPlayerViewManager = GameObject.FindAnyObjectByType<InventoryPlayerViewManager>();
         }
         public override void OnEnable()
         {
             Debug.Log(this.inventoryManager.cellSize);
             WeightBarUpdate();
             itemMain.RegisterCallback<GeometryChangedEvent>(ItemCallback); //needed because OnEnable might and does call before the UI even resolves for the user, leading to width = 0 on cellsize calculation. also it calls a redraw on every resolution change
+            inventoryPlayerViewManager.Enable(playerView);
         }
         private void ItemCallback(GeometryChangedEvent evt)
         {
@@ -58,6 +63,7 @@ namespace TM.Inventory.UI
         {
             itemGrid.Clear();
             itemLayer.Clear();
+            inventoryPlayerViewManager.Disable();
         }
         private void WeightBarUpdate()
         {

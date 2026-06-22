@@ -17,7 +17,6 @@ public class InventoryPlayerViewManager : MonoBehaviour
     public void Enable(VisualElement playerView)
     {
         this.gameObject.SetActive(true);
-        Debug.Log("started");
         this.playerView = playerView;
         PlayerViewManipulator playerViewManipulator = new(this.playerView);
         playerViewManipulator.OnMoveAction += OnMoveAction;
@@ -31,7 +30,6 @@ public class InventoryPlayerViewManager : MonoBehaviour
     }
     public void OnMoveAction(Vector2 delta)
     {
-        Debug.Log("move action");
         this.angleX += delta.x * moveSensitivity;
         Vector3 pos = new Vector3(dollPlayer.transform.position.x, dollPlayer.transform.position.y + playerYoffset, dollPlayer.transform.position.z);
         Vector3 camPos = PlayerViewCameraMovement.CameraPosByAngle(pos, angleX, cameraDownAngle, cameraDistance);

@@ -6,7 +6,6 @@ using UnityEngine.UIElements;
 public class PlayerViewManipulator : PointerManipulator
 {
     private bool isDragging;
-    private Vector2 initialPointerPos;
     public event Action<Vector2> OnMoveAction;
     public PlayerViewManipulator(VisualElement target)
     {
@@ -30,8 +29,6 @@ public class PlayerViewManipulator : PointerManipulator
     private void OnDragStart(PointerDownEvent downEvent) 
     {
         isDragging = true;
-        Debug.Log("started");
-        initialPointerPos = downEvent.position;
         target.CapturePointer(downEvent.pointerId);
         downEvent.StopPropagation();
     }
@@ -44,9 +41,6 @@ public class PlayerViewManipulator : PointerManipulator
     private void OnPointerMove(PointerMoveEvent moveEvent)
     {
         if (!isDragging || !target.HasPointerCapture(moveEvent.pointerId)) return; // if not dragging or target hasnt captured the pointer yet return
-        Vector2 pointerPos = (Vector2)moveEvent.position;
-        Vector2 delta = pointerPos - initialPointerPos;
-
         OnMoveAction.Invoke(moveEvent.deltaPosition);
 
         moveEvent.StopPropagation();

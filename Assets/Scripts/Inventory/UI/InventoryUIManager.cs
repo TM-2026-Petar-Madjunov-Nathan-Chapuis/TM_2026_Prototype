@@ -64,6 +64,7 @@ namespace TM.Inventory.UI
             itemGrid.Clear();
             itemLayer.Clear();
             inventoryPlayerViewManager.Disable();
+            itemMain.UnregisterCallback<GeometryChangedEvent>(ItemCallback);
         }
         private void WeightBarUpdate()
         {

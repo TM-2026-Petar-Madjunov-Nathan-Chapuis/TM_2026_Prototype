@@ -108,8 +108,8 @@ public class PlayerCamera : MonoBehaviour, ISaveable
         Vector2 look = inputValues.vector2Value;
         if (isFirstPerson)
         {
-            yRotation += look.x * ySensitivity * Time.deltaTime; //horizontal
-            xRotation -= look.y * xSensitivity * Time.deltaTime; //vertical
+            yRotation += look.x * ySensitivity * 0.01f; //horizontal
+            xRotation -= look.y * xSensitivity * 0.01f; //vertical
 
             xRotation = Mathf.Clamp(xRotation, -89f, 89f); //avoid over vertical rotation by clamping
 

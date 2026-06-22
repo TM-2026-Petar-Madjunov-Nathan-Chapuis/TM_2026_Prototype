@@ -128,58 +128,6 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
---- !u!1 &232056911150264404
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1035507699087810519}
-  - component: {fileID: 6215961237650233027}
-  m_Layer: 0
-  m_Name: PlayerViewManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1035507699087810519
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 232056911150264404}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.8081399, y: 0, z: 0.47123003}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 858142264137026750}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6215961237650233027
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 232056911150264404}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0684a746b65e2734e85e9a7957d1d592, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InventoryPlayerViewManager
-  cameraDistance: 2.14
-  cameraDownAngle: 21.7
-  moveSensitivity: -0.03
-  playerYoffset: 1.52
-  playerViewCamera: {fileID: 6187019496427537216}
-  dollPlayer: {fileID: 1674326813107267154}
-  angleX: 0
-  playerViewRT: {fileID: 8400000, guid: ad535af3c2b3ae64899a2087201c57e3, type: 2}
 --- !u!1 &3831218179761966468
 GameObject:
   m_ObjectHideFlags: 0
@@ -316,8 +264,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 858142264137026750}
+  - component: {fileID: 5833982886489883089}
   m_Layer: 14
-  m_Name: PlayerViewPrefab
+  m_Name: PlayerViewManagerPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -339,9 +288,28 @@ Transform:
   - {fileID: 2051310401267432680}
   - {fileID: 6873963569726501810}
   - {fileID: 278595939424616919}
-  - {fileID: 1035507699087810519}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5833982886489883089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5140881696348234452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0684a746b65e2734e85e9a7957d1d592, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventoryPlayerViewManager
+  cameraDistance: 2.14
+  cameraDownAngle: 21.7
+  moveSensitivity: -0.3
+  playerYoffset: 1.52
+  playerViewCamera: {fileID: 6187019496427537216}
+  dollPlayer: {fileID: 1674326813107267154}
+  angleX: 0
+  playerViewRT: {fileID: 8400000, guid: ad535af3c2b3ae64899a2087201c57e3, type: 2}
 --- !u!1001 &2016784204488416003
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -13,6 +13,7 @@ namespace TM.UI
         [SerializeField] private UIDocument uIDocument;
         [SerializeField] private BlurManager blurManager;
         [SerializeField] private Shader flipShader;
+        [SerializeField] private CentrelizeMouse centrelizeMouseManager;
         private Material flipMaterial;
         private InventoryUIManager inventoryUIManager;
 
@@ -27,6 +28,7 @@ namespace TM.UI
 
         void Awake()
         {
+            centrelizeMouseManager = GameObject.FindAnyObjectByType<CentrelizeMouse>();
             root = uIDocument.rootVisualElement;
             templateHolder = root.Q<VisualElement>("MenuTemplateHolder");
 
@@ -41,8 +43,11 @@ namespace TM.UI
 
             inventoryUIManager = new();
             inventoryUIManager.SetRoot(templateHolder);
-
+            inventoryUIManager.OnDisable();
             flipMaterial = new Material(flipShader);
+
+            root.style.display = DisplayStyle.None;
+            isOpen = false;
         }
 
         private void OnEnable()
@@ -68,14 +73,16 @@ namespace TM.UI
 
             if (isOpen)
             {
+                centrelizeMouseManager.ShowCursor();
                 CaptureAndBlurBackground();
                 this.inventoryUIManager.OnEnable();
-                Time.timeScale = 0f; //stop time, but temporary. better implementation is global game state manager.
+                Time.timeScale = 0f; //stop time (works for now, might need a global better implementation its own manager)
             }
             else
             {
                 Time.timeScale = 1f;
                 this.inventoryUIManager.OnDisable();
+                centrelizeMouseManager.HideCursor();
             }
         }
 

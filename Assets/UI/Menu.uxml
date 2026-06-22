@@ -4,11 +4,11 @@
     <ui:VisualElement name="MenuBackground" class="menu">
         <ui:VisualElement name="MenuTopBar" class="menu__topbar">
             <ui:VisualElement name="navigation" class="menu__navigation">
-                <ui:Button text="Button" name="TopBarLeft2Button" class="menu__topbar__button menu__topbar__button--2 font-regular font-size-small"/>
-                <ui:Button text="Button" name="TopBarLeftButton" class="menu__topbar__button font-regular font-size-medium"/>
-                <ui:Label text="Label" name="TopBarLabel" class="menu__topbar__label font-size-large font-medium" />
-                <ui:Button text="Button" name="TopBarRightButton" class="menu__topbar__button font-font-regular font-regular font-size-medium"/>
-                <ui:Button text="Button" name="TopBarRight2Button" class="menu__topbar__button menu__topbar__button--2 font-size-small font-regular"/>
+                <ui:Button text="CRAFTING" name="TopBarLeft2Button" class="menu__topbar__button menu__topbar__button--2 font-regular font-size-small"/>
+                <ui:Button text="JOURNAL" name="TopBarLeftButton" class="menu__topbar__button font-regular font-size-medium"/>
+                <ui:Label text="INVENTORY" name="TopBarLabel" selectable="false" focusable="false" class="menu__topbar__label font-size-large font-medium"/>
+                <ui:Button text="MAP" name="TopBarRightButton" class="menu__topbar__button font-font-regular font-regular font-size-medium"/>
+                <ui:Button text="STATS" name="TopBarRight2Button" emoji-fallback-support="true" class="menu__topbar__button menu__topbar__button--2 font-size-small font-regular"/>
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="MenuTemplateHolder" class="menu__templateholder"/>

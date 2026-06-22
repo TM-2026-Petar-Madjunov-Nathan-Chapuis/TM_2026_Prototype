@@ -30,6 +30,7 @@ namespace TM.Inventory
         {
             inventoryGrid = new InventoryGrid(gridSize);
             this.inventoryGrid.TryInsertItem(exasdéflkj, new Vector2Int(2,2), 4);
+            this.inventoryGrid.TryInsertItem(exasdéflkj, new Vector2Int(6,2), 4);
         }
 
         public void LoadData(string data)

@@ -16,6 +16,7 @@ public class InventoryPlayerViewManager : MonoBehaviour
     private VisualElement playerView;
     public void Enable(VisualElement playerView)
     {
+        this.gameObject.SetActive(true);
         Debug.Log("started");
         this.playerView = playerView;
         PlayerViewManipulator playerViewManipulator = new(this.playerView);
@@ -26,7 +27,7 @@ public class InventoryPlayerViewManager : MonoBehaviour
     }
     public void Disable()
     {
-        
+        this.gameObject.SetActive(false);
     }
     public void OnMoveAction(Vector2 delta)
     {

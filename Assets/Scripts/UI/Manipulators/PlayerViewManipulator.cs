@@ -47,7 +47,7 @@ public class PlayerViewManipulator : PointerManipulator
         Vector2 pointerPos = (Vector2)moveEvent.position;
         Vector2 delta = pointerPos - initialPointerPos;
 
-        OnMoveAction.Invoke(delta);
+        OnMoveAction.Invoke(moveEvent.deltaPosition);
 
         moveEvent.StopPropagation();
     }

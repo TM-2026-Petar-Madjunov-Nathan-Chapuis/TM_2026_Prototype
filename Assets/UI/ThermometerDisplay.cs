@@ -7,16 +7,23 @@ using UnityEngine.UIElements;
 public class ThermometerDisplay : MonoBehaviour
 {
     [SerializeField] private UIDocument uIDocument;
-    [SerializeField] private ColdMechanic coldMechanic;
+    [SerializeField] private CorporalTemperatureCalculation corporalTemperatureCalculation;
     [SerializeField] private Label temperatureLabel;
     [SerializeField] private VisualElement thermometerFill;
     [SerializeField] private float thermometerFillPercent;
-    [SerializeField] private float playerCorporalTemperature;
+    [SerializeField] private float localPlayerCorporalTemperature;
     private byte thermometerFillColorRed;
     private byte thermometerFillColorGreen = 0;
     private byte thermometerFillColorBlue;
     private byte thermometerFillColorOpacity = 255;
+    [SerializeField] private GameObject player;
+    private PlayerInfo playerInfo;
 
+
+    void Awake()
+    {
+        playerInfo = player.GetComponent<PlayerInfo>();
+    }
     void Start()
     {
         var root = uIDocument.rootVisualElement;
@@ -27,8 +34,7 @@ public class ThermometerDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerCorporalTemperature = coldMechanic.playerCorporalTemperature;
-        thermometerFillPercent = playerCorporalTemperature*2;
+        thermometerFillPercent = playerInfo.playerCorporalTemperature*2;
         
         DefineTemperatureLabelText();
         DefineThermometerFillHeight();
@@ -53,6 +59,6 @@ public class ThermometerDisplay : MonoBehaviour
     }
     void DefineTemperatureLabelText()
     {
-        temperatureLabel.text = $"{playerCorporalTemperature}";
+        temperatureLabel.text = $"{playerInfo.playerCorporalTemperature}";
     }
 }

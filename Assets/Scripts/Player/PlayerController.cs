@@ -5,71 +5,74 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
-{   
-    [Header("References")]
-    private CharacterController controller;
-    [Header("MouvementSettings")] 
-    [SerializeField] private float speed = 5f;
-    [SerializeField] private float jumpForce = 5f;
-    [SerializeField] private float verticalSpeed = 0f;
-    [SerializeField] private float gravity = 9.81f;
-    [SerializeField] private Animator animator;
-    private static readonly int JumpHash = Animator.StringToHash("jump"); // better performance according to unity UNT0041 warning (store hash reference to parameter rather than repeated id lookup)
-    private static readonly int SpeedHash = Animator.StringToHash("speed");
-    private static readonly int FallingHash = Animator.StringToHash("falling");
-
-    private void Start()
+namespace TM.Player
+{
+    public class PlayerController : MonoBehaviour
     {
-        controller = GetComponent<CharacterController>();
-    }
-    private void OnEnable()
-    {
-        InputManager.Instance.RegisterListener("Move", Move, InputValueType.Vector2, false);
-        InputManager.Instance.RegisterListener("Jump", Jump, InputValueType.Button, false);        
-    }
-    private void OnDisable()
-    {
-        InputManager.Instance.UnRegisterListener("Move", Move);
-        InputManager.Instance.UnRegisterListener("Jump", Jump);
-    }
+        [Header("References")]
+        private CharacterController controller;
+        [Header("MouvementSettings")]
+        [SerializeField] private float speed = 5f;
+        [SerializeField] private float jumpForce = 5f;
+        [SerializeField] private float verticalSpeed = 0f;
+        [SerializeField] private float gravity = 9.81f;
+        [SerializeField] private Animator animator;
+        private static readonly int JumpHash = Animator.StringToHash("jump"); // better performance according to unity UNT0041 warning (store hash reference to parameter rather than repeated id lookup)
+        private static readonly int SpeedHash = Animator.StringToHash("speed");
+        private static readonly int FallingHash = Animator.StringToHash("falling");
 
-    private void Update()
-    {
-
-    }
-
-    private void Move(InputValues inputValues) //mouvement + gravity | ran every frame by the input listener in input manager
-    {
-        Vector2 move = inputValues.vector2Value;
-        Vector3 xZmouvement = new Vector3(move.x, 0, move.y);
-        Vector3 xYZmouvement = new Vector3(xZmouvement.x*speed*Time.deltaTime, verticalSpeed*Time.deltaTime, xZmouvement.z*speed*Time.deltaTime);
-        Vector3 xYZPlayerMouvement = transform.TransformDirection(xYZmouvement);
-
-        controller.Move(xYZPlayerMouvement);
-        animator.SetFloat(SpeedHash, Math.Clamp(Vector3.Magnitude(controller.velocity)/speed, 0, 1)); // divide by default speed to get 0 -> 1 value (above default speed will default to 1)
-        
-        if(controller.isGrounded && verticalSpeed <= 0)
+        private void Start()
         {
-            verticalSpeed = -1f;
-            animator.SetBool(FallingHash, false);
+            controller = GetComponent<CharacterController>();
         }
-        else
+        private void OnEnable()
         {
-            verticalSpeed += -gravity*Time.deltaTime;
-            animator.SetBool(FallingHash, true);
+            InputManager.Instance.RegisterListener("Move", Move, InputValueType.Vector2, false);
+            InputManager.Instance.RegisterListener("Jump", Jump, InputValueType.Button, false);
         }
-    }
-    private void Jump(InputValues inputValues) //only called when jump button is pressed (and parameter is just for type checking, doesnt do anything)
-    {
-        if(controller.isGrounded)
+        private void OnDisable()
         {
-            verticalSpeed = jumpForce;
-            animator.SetBool(JumpHash, true);
+            InputManager.Instance.UnRegisterListener("Move", Move);
+            InputManager.Instance.UnRegisterListener("Jump", Jump);
         }
-        if(animator.GetBool(JumpHash))
+
+        private void Update()
         {
-            animator.SetBool(JumpHash, false);
+
+        }
+
+        private void Move(InputValues inputValues) //mouvement + gravity | ran every frame by the input listener in input manager
+        {
+            Vector2 move = inputValues.vector2Value;
+            Vector3 xZmouvement = new Vector3(move.x, 0, move.y);
+            Vector3 xYZmouvement = new Vector3(xZmouvement.x * speed * Time.deltaTime, verticalSpeed * Time.deltaTime, xZmouvement.z * speed * Time.deltaTime);
+            Vector3 xYZPlayerMouvement = transform.TransformDirection(xYZmouvement);
+
+            controller.Move(xYZPlayerMouvement);
+            animator.SetFloat(SpeedHash, Math.Clamp(Vector3.Magnitude(controller.velocity) / speed, 0, 1)); // divide by default speed to get 0 -> 1 value (above default speed will default to 1)
+
+            if (controller.isGrounded && verticalSpeed <= 0)
+            {
+                verticalSpeed = -1f;
+                animator.SetBool(FallingHash, false);
+            }
+            else
+            {
+                verticalSpeed += -gravity * Time.deltaTime;
+                animator.SetBool(FallingHash, true);
+            }
+        }
+        private void Jump(InputValues inputValues) //only called when jump button is pressed (and parameter is just for type checking, doesnt do anything)
+        {
+            if (controller.isGrounded)
+            {
+                verticalSpeed = jumpForce;
+                animator.SetBool(JumpHash, true);
+            }
+            if (animator.GetBool(JumpHash))
+            {
+                animator.SetBool(JumpHash, false);
+            }
         }
     }
 }

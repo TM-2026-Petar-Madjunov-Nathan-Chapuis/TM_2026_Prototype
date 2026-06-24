@@ -7,15 +7,6 @@
     align-items: stretch;
 }
 
-.inventory__item-description {
-    border-left-width: 2px;
-    border-color: var(--bone-white);
-    padding-top: 20px;
-    background-color: #00ff0d;
-    flex-shrink: 0;
-    width: 25%;
-}
-
 .inventory__items-list {
     margin-top: 10px;
     flex-grow: 1;
@@ -109,57 +100,160 @@
     align-items: stretch;
 }
 
-.inventory__middle-slots-holder {
+.inventory__armor-slot-holder-head {
     flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-end;
+    align-content: center;
+    margin-top: 20px;
 }
 
-.inventory__top-slots-holder {
-    justify-content: center;
-    align-items: center;
-}
-
-.inventory__bottom-slots-holder {
-    justify-content: center;
-    align-items: center;
-}
-
-.inventory__armor-slot-top {
+.inventory__armor-slot-head {
     background-color: green;
-    width: 60px;
-    height: 60px;
-    rotate: 45deg;
-    margin-bottom: 15px;
+    width: 64px;
+    height: 64px;
+    margin-right: 10%;
 }
 
-.inventory__armor-slot-left {
+.inventory__armor-slot-holder-chest {
+    flex-direction: row;
+    justify-content: flex-end;
+    align-content: center;
+    margin-top: 20px;
+}
+
+.inventory__armor-slot-chest {
     background-color: red;
-    width: 60px;
-    height: 60px;
-    rotate: 45deg;
-    margin-right: 15px;
+    width: 64px;
+    height: 64px;
+    margin-right: 10%;
 }
 
-.inventory__armor-slot-right {
+.inventory__armor-slot-holder-leg {
+    flex-direction: row;
+    justify-content: flex-end;
+    align-content: center;
+    margin-top: 20px;
+}
+
+.inventory__armor-slot-leg {
     background-color: blue;
-    rotate: 45deg;
-    margin-left: 15px;
-    width: 60px;
-    height: 60px;
+    width: 64px;
+    height: 64px;
+    margin-right: 10%;
 }
 
-.inventory__armor-slot-bottom {
-    background-color: cyan;
-    width: 60px;
-    height: 60px;
-    rotate: 45deg;
-    margin-top: 15px;
+.inventory__armor-slot-holder-boots {
+    flex-direction: row;
+    justify-content: flex-end;
+    align-content: center;
+    margin-top: 20px;
 }
+
+.inventory__armor-slot-boots {
+    background-color: cyan;
+    width: 64px;
+    height: 64px;
+    margin-right: 10%;
+}
+
 .inventory__player-view {
-    border-radius: 10000px;
+    margin-left: 40px;
     border-width: 1px;
     border-color: var(--bone-white);
-    width: 256px;
-    height: 256px;
+    width: 200px;
+    height: 600px;
 }
+
+.inventory__player-view-and-armor-slots {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.inventory__item-name-label {
+    border-color: var(--bone-white);
+    border-bottom-width: 1px;
+    padding-bottom: 5px;
+    border-top-width: 1px;
+    padding-top: 5px;
+    width: 100%;
+    -unity-text-align: middle-center;
+}
+
+.inventory__item-preview-holder {
+    background-color: cyan;
+    flex-direction: row;
+    align-items: stretch;
+    width: 100%;
+}
+
+.inventory__item-preview-item-holder {
+    background-color: gray;
+    flex-grow: 1;
+    flex-shrink: 1;
+    align-content: flex-start;
+}
+
+.inventory__item-type-holder {
+    background-color: red;
+    flex-direction: row;
+    align-self: flex-end;
+    flex-shrink: 0;
+}
+
+.inventory__item-stats-holder {
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.inventory__stats-label {
+    border-color: var(--bone-white);
+    border-bottom-width: 1px;
+    border-top-width: 1px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 100%;
+    -unity-text-align: middle-center;
+}
+.inventory__item-description {
+    border-left-width: 2px;
+    border-color: var(--bone-white);
+    padding-top: 20px;
+    background-color: var(--dark-background);
+    flex-shrink: 0;
+    width: 25%;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+
+.inventory__description-label {
+    border-color: var(--bone-white);
+    border-bottom-width: 1px;
+    border-top-width: 1px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 100%;
+    -unity-text-align: middle-center;
+}
+
+.inventory__item-stat {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.inventory__item-description-text {
+    white-space: normal;
+    -unity-text-align: middle-left;
+    width: 100%;
+}
+
+.inventory__description-holder {
+}
+

@@ -66,7 +66,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 38.3
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -74,7 +74,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 16384
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 8400000, guid: ad535af3c2b3ae64899a2087201c57e3, type: 2}
+  m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
@@ -302,14 +302,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0684a746b65e2734e85e9a7957d1d592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventoryPlayerViewManager
-  cameraDistance: 2.14
-  cameraDownAngle: 21.7
+  cameraDistance: 3.92
+  cameraDownAngle: 15.9
   moveSensitivity: -0.3
-  playerYoffset: 1.52
+  playerYoffset: 1.27
   playerViewCamera: {fileID: 6187019496427537216}
   dollPlayer: {fileID: 1674326813107267154}
   angleX: 0
-  playerViewRT: {fileID: 8400000, guid: ad535af3c2b3ae64899a2087201c57e3, type: 2}
+  widthSizePercentage: 93.1
+  aspectRatioheightperwidth: 1
+  playerViewRT: {fileID: 0}
 --- !u!1001 &2016784204488416003
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -332,7 +334,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e4a89d13416e3de42ad8a0202883c6ab, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.4154
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e4a89d13416e3de42ad8a0202883c6ab, type: 3}
       propertyPath: m_LocalScale.y
@@ -340,7 +342,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e4a89d13416e3de42ad8a0202883c6ab, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.4154
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e4a89d13416e3de42ad8a0202883c6ab, type: 3}
       propertyPath: m_LocalPosition.x

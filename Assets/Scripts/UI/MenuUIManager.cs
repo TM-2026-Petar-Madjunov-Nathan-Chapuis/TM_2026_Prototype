@@ -13,9 +13,9 @@ namespace TM.UI
         [SerializeField] private UIDocument uIDocument;
         [SerializeField] private BlurManager blurManager;
         [SerializeField] private Shader flipShader;
-        [SerializeField] private CentrelizeMouse centrelizeMouseManager;
         private Material flipMaterial;
-        private InventoryUIManager inventoryUIManager;
+        private InventoryManager inventoryUIManager;
+        private CentrelizeMouse centrelizeMouseManager;
 
         private VisualElement root;
         private VisualElement templateHolder;
@@ -44,6 +44,7 @@ namespace TM.UI
             inventoryUIManager = new();
             inventoryUIManager.SetRoot(templateHolder);
             inventoryUIManager.OnDisable();
+
             flipMaterial = new Material(flipShader);
 
             root.style.display = DisplayStyle.None;

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace TM.Items
@@ -7,12 +8,24 @@ namespace TM.Items
     public class WeaponData : ItemData
     {
         public int damage;
-        public int durability;
+        public float weight;
 
-        public WeaponData(string name, string description, Sprite icon, Vector2Int size, UseBehavior useBehavior, int damage, int durability) : base(name, description, icon, size, useBehavior)
+        public WeaponData(string name, string description, Sprite icon, Vector2Int size, UseBehavior useBehavior, int damage, float weight) : base(name, description, icon, size, useBehavior)
         {
             this.damage = damage;
-            this.durability = durability;
+            this.weight = weight;
+        }
+        public override List<ItemUIStat> GetItemUIStats()
+        {
+            return new List<ItemUIStat>()
+            {
+                new ItemUIStat("Weight", this.weight.ToString()),
+                new ItemUIStat("Damage", this.damage.ToString()),
+            };
+        }
+        public override ItemType GetItemType()
+        {
+            return ItemType.Weapon;
         }
     }
 }

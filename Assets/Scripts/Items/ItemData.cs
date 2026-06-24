@@ -2,42 +2,50 @@ using Newtonsoft.Json;
 using UnityEngine;
 using TM.Saving;
 using System;
+using System.Collections.Generic;
 
 namespace TM.Items
 {
-[CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Item")]
-public class ItemData : ScriptableObject, IUUID
-{
-    public string itemName { get; private set; } //unique
-    public string description { get; private set; }
-    public Vector2Int size;
-
-    [JsonProperty] private UUID uuid;
-    public UUID UUID => uuid;
-
-    private void OnValidate() // runs when asset is created/modified in editor
+    [CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Item")]
+    public class ItemData : ScriptableObject, IUUID
     {
-        if (uuid.Equals(default)) // Checks if uuid is at default value (0 in case of int structs i think)
+        public string itemName { get; private set; } //unique
+        public string description { get; private set; }
+        public Vector2Int size;
+        [JsonProperty] private UUID uuid;
+        public UUID UUID => uuid;
+
+        private void OnValidate() // runs when asset is created/modified in editor
         {
-            uuid = UUID.NewUUID(); // if so we must change it
+            if (uuid.Equals(default)) // Checks if uuid is at default value (0 in case of int structs i think)
+            {
+                uuid = UUID.NewUUID(); // if so we must change it
+            }
+        }
+        public virtual ItemType GetItemType()
+        {
+            return ItemType.None;
+        }
+        public virtual List<ItemUIStat> GetItemUIStats() //implement in childrens, used in ui item description.
+        {
+            return new List<ItemUIStat>();
+        }
+
+        public Sprite icon;
+        public UseBehavior useBehavior;
+
+        public ItemData(string name, string description, Sprite icon, Vector2Int size, UseBehavior useBehavior)
+        {
+            this.name = name;
+            this.description = description;
+            this.icon = icon;
+            this.size = size;
+            this.useBehavior = useBehavior;
+        }
+        public virtual void Use(GameObject user)
+        {
+            UnityEngine.Debug.Log("Using item");
+            useBehavior.Use(user, this);
         }
     }
-
-    public Sprite icon;
-    public UseBehavior useBehavior;
-
-    public ItemData(string name, string description, Sprite icon, Vector2Int size, UseBehavior useBehavior)
-    {
-        this.name = name;
-        this.description = description;
-        this.icon = icon;
-        this.size = size;
-        this.useBehavior = useBehavior;
-    }
-    public virtual void Use(GameObject user)
-    {
-        UnityEngine.Debug.Log("Using item");
-        useBehavior.Use(user, this);
-    }
-}
 }

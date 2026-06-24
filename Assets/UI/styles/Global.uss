@@ -20,6 +20,10 @@
     color: #fefefa;
     font-size: 24px;
 }
+.font-size-extra-large {
+    color: #fefefa;
+    font-size: 40px;
+}
 
 .font-medium {
     -unity-font-definition: resource("Font/Barlow_Condensed/BarlowCondensed-Medium");

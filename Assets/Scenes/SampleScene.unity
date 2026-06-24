@@ -152,6 +152,51 @@ Transform:
   - {fileID: 1892611298}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &309859388
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 309859389}
+  - component: {fileID: 309859390}
+  m_Layer: 0
+  m_Name: ItemDescriptor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &309859389
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309859388}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1380634409}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &309859390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309859388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 902fd573d3f69e748973ae0c606716b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TM.Inventory.UI.ItemDescriptor
+  itemStatTemplate: {fileID: 9197481963319205126, guid: c17a4628668484249984ad9360547f5b, type: 3}
 --- !u!1 &316442823
 GameObject:
   m_ObjectHideFlags: 0
@@ -1246,6 +1291,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 327682529}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 35.563}
+--- !u!20 &996052023 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 6187019496427537216, guid: eab12d4018840ad409fedea957aed6c7, type: 3}
+  m_PrefabInstance: {fileID: 2958197273129050822}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1001308011
 GameObject:
   m_ObjectHideFlags: 0
@@ -1585,6 +1635,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InventoryGridHighlighter
   availableColor: {r: 0.045387268, g: 1, b: 0, a: 1}
   occupiedColor: {r: 1, g: 0, b: 0, a: 1}
+  selectedColor: {r: 1, g: 1, b: 1, a: 1}
+  selectedBorderWidth: 3
 --- !u!1 &1326675101
 GameObject:
   m_ObjectHideFlags: 0
@@ -1733,6 +1785,7 @@ Transform:
   - {fileID: 2021081843}
   - {fileID: 1215177697}
   - {fileID: 1199853305}
+  - {fileID: 309859389}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1380634410
@@ -1860,7 +1913,6 @@ MonoBehaviour:
   uIDocument: {fileID: 1387130484}
   blurManager: {fileID: 2021081842}
   flipShader: {fileID: 4800000, guid: ae5480d81865f6442b8b3064f29fe557, type: 3}
-  centrelizeMouseManager: {fileID: 0}
 --- !u!1 &1444545219
 GameObject:
   m_ObjectHideFlags: 0
@@ -1942,6 +1994,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1444545219}
   m_CullTransparentMesh: 1
+--- !u!1 &1473176599 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1674326813107267154, guid: eab12d4018840ad409fedea957aed6c7, type: 3}
+  m_PrefabInstance: {fileID: 2958197273129050822}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1588413614
 GameObject:
   m_ObjectHideFlags: 0
@@ -2570,6 +2627,14 @@ PrefabInstance:
       propertyPath: m_UpdateMode
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5833982886489883089, guid: eab12d4018840ad409fedea957aed6c7, type: 3}
+      propertyPath: dollPlayer
+      value: 
+      objectReference: {fileID: 1473176599}
+    - target: {fileID: 5833982886489883089, guid: eab12d4018840ad409fedea957aed6c7, type: 3}
+      propertyPath: playerViewCamera
+      value: 
+      objectReference: {fileID: 996052023}
     - target: {fileID: 7697296655184927951, guid: eab12d4018840ad409fedea957aed6c7, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1

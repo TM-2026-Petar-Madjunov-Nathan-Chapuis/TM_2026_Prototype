@@ -1,18 +1,14 @@
-using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design.Serialization;
 using TM.UI;
-using Unity.Collections;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace TM.Inventory.UI
 {
-    public class InventoryUIManager : GenericUITemplateManager
+    public class InventoryManager : GenericUITemplateManager
     {
         private GameObject player;
-        private InventoryManager inventoryManager;
+        private Inventory.InventoryManager inventoryManager;
         private VisualElement[,] gridElements;
         private VisualElement[,] itemsElements;
         private VisualElement itemLayer;
@@ -22,17 +18,23 @@ namespace TM.Inventory.UI
         private VisualElement itemMain;
         private VisualElement playerView;
         private ProgressBar weightBar;
-        private InventoryGridHighlighter gridHighlighter;
+        private VisualElement headArmorSlot;
+        private VisualElement chestArmorSlot;
+        private VisualElement legArmorSlot;
+        private VisualElement bootsArmorSlot;
+        private GridHighlighter gridHighlighter;
+        private ItemDescriptor itemDescriptor;
         private Dictionary<Vector2, Vector2Int> allParentToIndexPositions;
-        private InventoryPlayerViewManager inventoryPlayerViewManager;
+        private PlayerViewManager inventoryPlayerViewManager;
 
         public override void SetRoot(VisualElement root)
         {
-            this.gridHighlighter = GameObject.FindAnyObjectByType<InventoryGridHighlighter>();
+            this.gridHighlighter = GameObject.FindAnyObjectByType<GridHighlighter>();
+            this.itemDescriptor = GameObject.FindAnyObjectByType<ItemDescriptor>();
             base.SetRoot(root);
             this.player = GameObject.FindGameObjectWithTag("Player");
             if (this.player == null){   throw new UnityException("no player found by tag : Player");    }
-            this.inventoryManager = this.player.GetComponent<InventoryManager>();
+            this.inventoryManager = this.player.GetComponent<Inventory.InventoryManager>();
 
             itemLayer = this.root.Q<VisualElement>("ItemsLayer");
             itemDescription = this.root.Q<VisualElement>("ItemDescription");
@@ -41,8 +43,12 @@ namespace TM.Inventory.UI
             weightBar = this.root.Q<ProgressBar>("WeightBar");
             itemMain = this.root.Q<VisualElement>("Main");
             playerView = this.root.Q<VisualElement>("PlayerView");
-            allParentToIndexPositions = InventoryUIHelper.AllParentToIndexPositions(this.inventoryManager);
-            inventoryPlayerViewManager = GameObject.FindAnyObjectByType<InventoryPlayerViewManager>();
+            headArmorSlot = this.root.Q<VisualElement>("HeadArmorSlot");
+            chestArmorSlot = this.root.Q<VisualElement>("ChestArmorSlot");
+            legArmorSlot = this.root.Q<VisualElement>("LegArmorSlot");
+            bootsArmorSlot = this.root.Q<VisualElement>("BootsArmorSlot");
+            allParentToIndexPositions = InventoryManagerHelper.AllParentToIndexPositions(this.inventoryManager);
+            inventoryPlayerViewManager = GameObject.FindAnyObjectByType<PlayerViewManager>();
         }
         public override void OnEnable()
         {
@@ -50,17 +56,20 @@ namespace TM.Inventory.UI
             WeightBarUpdate();
             itemMain.RegisterCallback<GeometryChangedEvent>(ItemCallback); //needed because OnEnable might and does call before the UI even resolves for the user, leading to width = 0 on cellsize calculation. also it calls a redraw on every resolution change
             inventoryPlayerViewManager.Enable(playerView);
+            itemDescriptor.Enable(this.root.Q<VisualElement>("ItemDescription"));
         }
         private void ItemCallback(GeometryChangedEvent evt)
         {
             itemGrid.Clear();
             itemLayer.Clear();
             Grid();
+            EquipementSlots();
             FillItems();
-            allParentToIndexPositions = InventoryUIHelper.AllParentToIndexPositions(this.inventoryManager);
+            allParentToIndexPositions = InventoryManagerHelper.AllParentToIndexPositions(this.inventoryManager);
         }
         public override void OnDisable()
         {
+            itemDescriptor.Disable();
             itemGrid.Clear();
             itemLayer.Clear();
             inventoryPlayerViewManager.Disable();
@@ -70,11 +79,22 @@ namespace TM.Inventory.UI
         {
             
         }
+        private void EquipementSlots()
+        {
+            this.headArmorSlot.style.width = this.inventoryManager.cellSize;
+            this.headArmorSlot.style.height = this.inventoryManager.cellSize;
+            this.chestArmorSlot.style.height = this.inventoryManager.cellSize;
+            this.chestArmorSlot.style.width = this.inventoryManager.cellSize;
+            this.legArmorSlot.style.width = this.inventoryManager.cellSize;
+            this.legArmorSlot.style.height = this.inventoryManager.cellSize;
+            this.bootsArmorSlot.style.height = this.inventoryManager.cellSize;
+            this.bootsArmorSlot.style.width = this.inventoryManager.cellSize;
+        }
         private void Grid()
         {
             float height = this.itemGrid.parent.resolvedStyle.height - this.inventoryManager.cellPosMargin * 2;
             float width = this.itemMain.resolvedStyle.width - 2*this.inventoryManager.cellPosMargin;
-           this.inventoryManager.UpdateCellsize(width, height);
+            this.inventoryManager.UpdateCellsize(width, height);
             gridElements = new VisualElement[
                 inventoryManager.gridSize.x,
                 inventoryManager.gridSize.y
@@ -126,6 +146,7 @@ namespace TM.Inventory.UI
                 ItemDragManipulator itemDragManipulator = new ItemDragManipulator(item);
                 itemDragManipulator.OnDragEndEvent += HandleDragEnd;
                 itemDragManipulator.OnDragMoveEvent += HandleDragging;
+                itemDragManipulator.OnDragStartEvent += HandleDragStart;
                 item.AddManipulator(itemDragManipulator);
             }
         }
@@ -139,7 +160,7 @@ namespace TM.Inventory.UI
             item.userData = inventoryItem; //this stores the inventoryitem reference to the visualelement itself.
 
             item.style.position = Position.Absolute;
-            Vector2 pos = InventoryUIHelper.IndexToParentPos(inventoryItem.position, this.inventoryManager);
+            Vector2 pos = InventoryManagerHelper.IndexToParentPos(inventoryItem.position, this.inventoryManager);
             item.style.left = pos.x;
             item.style.top = pos.y;
             item.style.width = inventoryItem.itemData.size.x * this.inventoryManager.cellSize;
@@ -151,18 +172,18 @@ namespace TM.Inventory.UI
         }
         private void HandleDragEnd(VisualElement item)
         {
-                gridHighlighter.ClearColors();
+            gridHighlighter.ClearColors();
             VisualElement parent = item.parent;
             if (parent == null) return;
 
             InventoryItem inventoryItem = item.userData as InventoryItem;
 
             Vector2 pos = new Vector2(item.style.left.value.value, item.style.top.value.value);
-            (Vector2, Vector2Int, float) i = InventoryUIHelper.NearestIndexedPosition(pos, allParentToIndexPositions);
+            (Vector2, Vector2Int, float) i = InventoryManagerHelper.NearestIndexedPosition(pos, allParentToIndexPositions);
             Vector2Int oldPos = inventoryItem.position;
             if (this.inventoryManager.inventoryGrid.TryMoveItem(inventoryItem, i.Item2))
             {
-                Vector2 newPos = InventoryUIHelper.IndexToParentPos(i.Item2, this.inventoryManager);
+                Vector2 newPos = InventoryManagerHelper.IndexToParentPos(i.Item2, this.inventoryManager);
                 item.style.left = newPos.x;
                 item.style.top = newPos.y; //move the item in UI, providing the snapping.
 
@@ -171,7 +192,7 @@ namespace TM.Inventory.UI
             }
             else
             {
-                Vector2 newPos = InventoryUIHelper.IndexToParentPos(inventoryItem.position, this.inventoryManager);
+                Vector2 newPos = InventoryManagerHelper.IndexToParentPos(inventoryItem.position, this.inventoryManager);
                 item.style.left = newPos.x;
                 item.style.top = newPos.y; //move the item back at the start position, providing the snapping.
             }
@@ -179,6 +200,10 @@ namespace TM.Inventory.UI
         private void HandleDragging(VisualElement item, Vector2 pointerPos)
         {
             gridHighlighter.OnDragMove(this.gridElements, item, this.inventoryManager, this.allParentToIndexPositions);
+        }
+        private void HandleDragStart(VisualElement item)
+        {
+            ItemSelector.OnDragStart(item, item.userData as InventoryItem, inventoryManager);
         }
     }
 }

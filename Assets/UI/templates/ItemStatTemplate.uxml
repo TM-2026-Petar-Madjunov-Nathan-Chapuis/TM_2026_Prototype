@@ -1,0 +1,8 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:custom="CustomElements" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/styles/Inventory.uss?fileID=7433441132597879392&amp;guid=c03df79fc3d2aec4592689a42e9be0f6&amp;type=3#Inventory"/>
+    <Style src="project://database/Assets/UI/styles/Global.uss?fileID=7433441132597879392&amp;guid=7eb4cac6f0f96404eb05acec29a0f1bf&amp;type=3#Global"/>
+        <ui:VisualElement name="StatTemplate" class="inventory__item-stat">
+            <ui:Label name="StatTitleTemplate" text="Damage" class="inventory__item-stat-title font-regular font-size-medium"/>
+            <ui:Label name="StatValueTemplate" text="5 kg" class="inventory__item-stat-value font-regular font-size-medium"/>
+        </ui:VisualElement>
+</ui:UXML>

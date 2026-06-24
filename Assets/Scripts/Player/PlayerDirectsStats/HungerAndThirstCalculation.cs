@@ -1,17 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class HungerAndThirstCalculation : MonoBehaviour
 {   
-    [SerializeField] private int roundedPlayerHunger;
-    //[SerializeField] private float playerHunger;
-    [SerializeField] private int roundedplayerThirst;
-    //[SerializeField] private float playerThirstt;
-    //[SerializeField] private float playerMetabolismWork;
-    [SerializeField] private float hungerMetabolismCoefficient;
-    [SerializeField] private float thirstMetabolismCoefficient;
+    //[SerializeField] private int roundedPlayerHunger;
+    //[SerializeField] private int roundedplayerThirst;
+    [field: SerializeField] public float hungerMetabolismCoefficient{get; private set; }
+    [field: SerializeField] public float thirstMetabolismCoefficient{get; private set; }
     [SerializeField] private float timeCoefficient = 0.005f;
     [SerializeField] private GameObject player;
     private PlayerInfo playerInfo;
@@ -62,7 +60,7 @@ public class HungerAndThirstCalculation : MonoBehaviour
 
         playerInfo.playerHunger -= timeCoefficient*hungerMetabolismCoefficient*Time.deltaTime;
         playerInfo.playerHunger = Math.Clamp(playerInfo.playerHunger, 0f, 100f);
-        roundedPlayerHunger = (int)Math.Round(playerInfo.playerHunger);
+        //roundedPlayerHunger = (int)Math.Round(playerInfo.playerHunger);
     }
     
     void ThirstCalculation()
@@ -71,7 +69,7 @@ public class HungerAndThirstCalculation : MonoBehaviour
 
         playerInfo.playerThirst -= timeCoefficient*thirstMetabolismCoefficient*Time.deltaTime;
         playerInfo.playerThirst = Math.Clamp(playerInfo.playerThirst, 0f, 100f);
-        roundedplayerThirst = (int)Math.Round(playerInfo.playerThirst);
+        //roundedplayerThirst = (int)Math.Round(playerInfo.playerThirst);
     }
     void Update()
     {

@@ -2192,6 +2192,7 @@ GameObject:
   - component: {fileID: 1892611305}
   - component: {fileID: 1892611306}
   - component: {fileID: 1892611307}
+  - component: {fileID: 1892611308}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2334,10 +2335,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c54d99d25caf3049985f19df5d3841e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HungerAndThirstCalculation
-  roundedPlayerHunger: 100
-  roundedplayerThirst: 0
-  hungerMetabolismCoefficient: 0
-  thirstMetabolismCoefficient: 0
+  <hungerMetabolismCoefficient>k__BackingField: 0
+  <thirstMetabolismCoefficient>k__BackingField: 0
   timeCoefficient: 0.005
   player: {fileID: 1892611295}
 --- !u!114 &1892611307
@@ -2355,8 +2354,12 @@ MonoBehaviour:
   playerHealth: 100
   playerHunger: 100
   playerThirst: 100
-  playerCorporalTemperature: 0
   playerNormalCorporalTemperature: 36.5
+  coldTemperatureLimit: 24
+  hotTemperatureLimit: 42
+  hypothermiaTemperature: 35
+  hyperthermiaTemperature: 39
+  playerCorporalTemperature: 0
   playerThermalBlilan: 0
   playerClothesResistance: 1
   playerMetabolismWork: 0
@@ -2364,6 +2367,26 @@ MonoBehaviour:
   playerMinimumMetabolismWork: -20
   playerMaximumMetabolismWork: 20
   playerBaseMetabolismwork: 8
+--- !u!114 &1892611308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1892611295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06311fe092a0dcd4d8f6ef276fd29da5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthCalculation
+  timeCoefficient: 0.05
+  HealthBecauseHungryCoefficient: 1
+  HealthBecauseThirstCoefficient: 1
+  healthBecauseHypothermiaCoefficient: 1
+  healthBecauseHyperthermiaCoefficient: 1
+  maximalHypothermicAndHyperthermicCoefficient: 10
+  hungerAndThirstCalculation: {fileID: 1892611306}
+  player: {fileID: 1892611295}
 --- !u!1001 &1961774166
 PrefabInstance:
   m_ObjectHideFlags: 0

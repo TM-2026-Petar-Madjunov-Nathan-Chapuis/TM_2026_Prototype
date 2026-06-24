@@ -65,16 +65,6 @@ public class CorporalTemperatureCalculation : MonoBehaviour
         playerInfo.playerCorporalTemperature += playerInfo.playerThermalBlilan*timeCoefficient*Time.deltaTime;
     }
 
-    void Hypothermia()
-    {
-        if (playerInfo.playerCorporalTemperature <= playerInfo.playerNormalCorporalTemperature-2)
-        {
-            
-        }
-
-
-    }
-
     void Update()
     {
         CalculatePlayerCorporalTemperature();

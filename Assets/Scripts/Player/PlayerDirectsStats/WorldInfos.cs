@@ -1,8 +1,11 @@
 using JetBrains.Annotations;
 using UnityEngine;
 
-public class WorldInfos
+namespace TM.Player
 {
-    public float ambientTemperature = 10;
+    public class WorldInfos
+    {
+        public float ambientTemperature = 10;
 
+    }
 }

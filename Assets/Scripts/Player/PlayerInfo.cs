@@ -25,17 +25,5 @@ namespace TM.Player
         public float playerMinimumMetabolismWork = -20f;
         public float playerMaximumMetabolismWork = 20f;
         public float playerBaseMetabolismwork = 8f; //Constante //le metabolisme produit par le corp quoi qu'il arrive
-        private void Start()
-        {
-        public int health; // 100 -> 0
-        public int hunger; // 100 -> 0
-        public int temperature; // [25; 45] < 28 mort, > 42 mort
-        public int thirst; // 100 -> 0
-        private void Start()
-        {
-
-        }
     }
-}
-
 }

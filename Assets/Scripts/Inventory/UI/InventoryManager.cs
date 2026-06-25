@@ -52,7 +52,6 @@ namespace TM.Inventory.UI
         }
         public override void OnEnable()
         {
-            Debug.Log(this.inventoryManager.cellSize);
             WeightBarUpdate();
             itemMain.RegisterCallback<GeometryChangedEvent>(ItemCallback); //needed because OnEnable might and does call before the UI even resolves for the user, leading to width = 0 on cellsize calculation. also it calls a redraw on every resolution change
             inventoryPlayerViewManager.Enable(playerView);

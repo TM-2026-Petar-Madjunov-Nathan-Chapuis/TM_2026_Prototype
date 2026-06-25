@@ -312,7 +312,7 @@ GameObject:
   m_Layer: 0
   m_Name: ENVIROMENTS
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1291,11 +1291,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 327682529}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 35.563}
---- !u!20 &996052023 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 6187019496427537216, guid: eab12d4018840ad409fedea957aed6c7, type: 3}
-  m_PrefabInstance: {fileID: 2958197273129050822}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &929258916
 GameObject:
   m_ObjectHideFlags: 0
@@ -1369,6 +1364,11 @@ MonoBehaviour:
   thermometerFillPercent: 0
   localPlayerCorporalTemperature: 0
   player: {fileID: 1892611295}
+--- !u!20 &996052023 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 6187019496427537216, guid: eab12d4018840ad409fedea957aed6c7, type: 3}
+  m_PrefabInstance: {fileID: 2958197273129050822}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1001308011
 GameObject:
   m_ObjectHideFlags: 0
@@ -1634,7 +1634,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1199853305
 Transform:
   m_ObjectHideFlags: 0
@@ -1835,7 +1835,7 @@ GameObject:
   m_Layer: 0
   m_Name: MANAGERS
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2683,7 +2683,7 @@ GameObject:
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1

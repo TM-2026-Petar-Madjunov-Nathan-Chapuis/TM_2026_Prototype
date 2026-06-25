@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
+using TM.Player;
 
 public class ThermometerDisplay : MonoBehaviour
 {

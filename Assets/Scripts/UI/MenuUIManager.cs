@@ -74,7 +74,7 @@ namespace TM.UI
 
             if (isOpen)
             {
-                centrelizeMouseManager.ShowCursor();
+                centrelizeMouseManager?.ShowCursor();
                 CaptureAndBlurBackground();
                 this.inventoryUIManager.OnEnable();
                 Time.timeScale = 0f; //stop time (works for now, might need a global better implementation its own manager)
@@ -83,7 +83,7 @@ namespace TM.UI
             {
                 Time.timeScale = 1f;
                 this.inventoryUIManager.OnDisable();
-                centrelizeMouseManager.HideCursor();
+                centrelizeMouseManager?.HideCursor();
             }
         }
 

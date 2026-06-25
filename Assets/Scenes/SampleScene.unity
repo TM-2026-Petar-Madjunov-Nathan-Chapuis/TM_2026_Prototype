@@ -1296,6 +1296,79 @@ Camera:
   m_CorrespondingSourceObject: {fileID: 6187019496427537216, guid: eab12d4018840ad409fedea957aed6c7, type: 3}
   m_PrefabInstance: {fileID: 2958197273129050822}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &929258916
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 929258917}
+  - component: {fileID: 929258918}
+  - component: {fileID: 929258919}
+  m_Layer: 0
+  m_Name: ThermometerUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &929258917
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929258916}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2079469477}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &929258918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929258916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
+  m_PanelSettings: {fileID: 11400000, guid: 4254776b97f8d484c99e8bb9d81d0294, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 5729522c6d98cd04194d1c3f9f7ce6d7, type: 3}
+  m_SortingOrder: 0
+  m_Position: 0
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080
+  m_PivotReferenceSize: 0
+  m_Pivot: 0
+  m_WorldSpaceCollider: {fileID: 0}
+--- !u!114 &929258919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929258916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0e0d4962399c1f4fbb8d27c69afa51e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ThermometerDisplay
+  uIDocument: {fileID: 929258918}
+  corporalTemperatureCalculation: {fileID: 1892611305}
+  thermometerFillPercent: 0
+  localPlayerCorporalTemperature: 0
+  player: {fileID: 1892611295}
 --- !u!1 &1001308011
 GameObject:
   m_ObjectHideFlags: 0
@@ -2270,6 +2343,10 @@ GameObject:
   - component: {fileID: 1892611301}
   - component: {fileID: 1892611304}
   - component: {fileID: 1892611303}
+  - component: {fileID: 1892611305}
+  - component: {fileID: 1892611306}
+  - component: {fileID: 1892611307}
+  - component: {fileID: 1892611308}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2386,6 +2463,86 @@ MonoBehaviour:
   <cellPosMargin>k__BackingField: 10
   <gridSize>k__BackingField: {x: 10, y: 9}
   "exasd\xE9flkj": {fileID: 11400000, guid: 650a0118680721241862d3af314c7733, type: 2}
+--- !u!114 &1892611305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1892611295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 660747fa5b6c69e4e9eafb273427238b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ColdMechanic
+  ambientTemperature: 15
+  deltaTemperature: 0
+  timeCoefficient: 0.005
+  player: {fileID: 1892611295}
+--- !u!114 &1892611306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1892611295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c54d99d25caf3049985f19df5d3841e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HungerAndThirstCalculation
+  <hungerMetabolismCoefficient>k__BackingField: 0
+  <thirstMetabolismCoefficient>k__BackingField: 0
+  timeCoefficient: 0.005
+  player: {fileID: 1892611295}
+--- !u!114 &1892611307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1892611295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8da0b70a197b6c94db12c0ac132e3079, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInfo
+  playerHealth: 100
+  playerHunger: 100
+  playerThirst: 100
+  playerNormalCorporalTemperature: 36.5
+  coldTemperatureLimit: 24
+  hotTemperatureLimit: 42
+  hypothermiaTemperature: 35
+  hyperthermiaTemperature: 39
+  playerCorporalTemperature: 0
+  playerThermalBlilan: 0
+  playerClothesResistance: 1
+  playerMetabolismWork: 0
+  playerBaseMaximumMetabolismwork: 20
+  playerMinimumMetabolismWork: -20
+  playerMaximumMetabolismWork: 20
+  playerBaseMetabolismwork: 8
+--- !u!114 &1892611308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1892611295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06311fe092a0dcd4d8f6ef276fd29da5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthCalculation
+  timeCoefficient: 0.05
+  HealthBecauseHungryCoefficient: 1
+  HealthBecauseThirstCoefficient: 1
+  healthBecauseHypothermiaCoefficient: 1
+  healthBecauseHyperthermiaCoefficient: 1
+  maximalHypothermicAndHyperthermicCoefficient: 10
+  hungerAndThirstCalculation: {fileID: 1892611306}
+  player: {fileID: 1892611295}
 --- !u!1001 &1961774166
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2545,6 +2702,7 @@ Transform:
   m_Children:
   - {fileID: 1657054183}
   - {fileID: 1387130483}
+  - {fileID: 929258917}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2958197273129050822

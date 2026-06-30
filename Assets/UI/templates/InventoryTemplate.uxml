@@ -34,11 +34,6 @@
         <ui:VisualElement name="ItemDescription" class="inventory__item-description">
             <ui:Label name="ItemName" text="Item Name Here" class="inventory__item-name-label font-regular font-size-large"/>
             <ui:VisualElement name="ItemPreviewHolder" class="inventory__item-preview-holder">
-                <ui:VisualElement name="ItemPreviewItemHolder" class="inventory__item-preview-item-holder"/>
-                <ui:VisualElement name="ItemTypeHolder" class="inventory__item-type-holder">
-                    <ui:Label text="TYPE :" name="ItemTypeTitle" class="inventory__item-type-title font-medium-italic font-size-medium"/>
-                    <ui:Label text="weapon" name="ItemTypeValue" class="inventory__item-type-value font-medium-italic font-size-medium"/>
-                </ui:VisualElement>
             </ui:VisualElement>
             <ui:Label text="Statistics" name="StatsLabel" class="inventory__stats-label font-medium font-size-medium"/>
             <ui:VisualElement name="ItemStatsHolder" class="inventory__item-stats-holder">

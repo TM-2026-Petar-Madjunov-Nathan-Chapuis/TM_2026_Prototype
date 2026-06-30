@@ -67,11 +67,7 @@ namespace TM.Player
             if (controller.isGrounded)
             {
                 verticalSpeed = jumpForce;
-                animator.SetBool(JumpHash, true);
-            }
-            if (animator.GetBool(JumpHash))
-            {
-                animator.SetBool(JumpHash, false);
+                animator.SetTrigger(JumpHash);
             }
         }
     }

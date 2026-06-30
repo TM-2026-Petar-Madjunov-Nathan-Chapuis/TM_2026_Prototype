@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TM.Inventory;
 using Unity.Mathematics;
@@ -6,6 +7,7 @@ namespace TM.Inventory.UI
 {
     public static class InventoryManagerHelper
     {
+        public static float MaxDistanceTreshold = 100;
         public static (Vector2, Vector2Int, float) NearestIndexedPosition(Vector2 pos, Dictionary<Vector2, Vector2Int> allParentToIndexPosition)
         {
             (Vector2, Vector2Int, float) i = (new Vector2(), new Vector2Int(), math.INFINITY);
@@ -18,6 +20,12 @@ namespace TM.Inventory.UI
                     i.Item1 = key;
                     i.Item2 = allParentToIndexPosition[key];
                 }
+            }
+            if(i.Item3 > MaxDistanceTreshold)
+            {
+                i.Item3 = MaxDistanceTreshold;
+                i.Item1 = new Vector2(-1, -1);
+                i.Item2 = new Vector2Int(-1, -1); //going to get discard in the grid hilighter checks.
             }
             return i;
         }

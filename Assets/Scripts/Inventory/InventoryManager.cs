@@ -3,7 +3,6 @@ using TM.Saving;
 using UnityEngine;
 using Newtonsoft.Json;
 using TM.Items;
-using Unity.VisualScripting;
 
 namespace TM.Inventory
 {
@@ -16,6 +15,7 @@ namespace TM.Inventory
         public int cellPosMargin {get; private set; }
         [field: SerializeField] public Vector2Int gridSize { get; private set; }
         public WeaponData exasdéflkj;
+        public DrinkData whatdsaélkfjasédf;
 
         string ISaveable.UID => "InventoryManager";
 
@@ -29,8 +29,9 @@ namespace TM.Inventory
         private void Start()
         {
             inventoryGrid = new InventoryGrid(gridSize);
-            this.inventoryGrid.TryInsertItem(exasdéflkj, new Vector2Int(2,2), 4);
-            this.inventoryGrid.TryInsertItem(exasdéflkj, new Vector2Int(6,2), 4);
+            this.inventoryGrid.TryInsertItem(exasdéflkj, new Vector2Int(2,2), 4, false);
+            this.inventoryGrid.TryInsertItem(exasdéflkj, new Vector2Int(6,2), 576, true);
+            this.inventoryGrid.TryInsertItem(whatdsaélkfjasédf, new Vector2Int(5,5), 3, true);
         }
 
         public void LoadData(string data)

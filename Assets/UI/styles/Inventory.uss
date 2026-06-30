@@ -182,9 +182,9 @@
 }
 
 .inventory__item-preview-holder {
-    background-color: cyan;
     flex-direction: row;
-    align-items: stretch;
+    align-items: center;
+    justify-content: center;
     width: 100%;
 }
 
@@ -193,13 +193,6 @@
     flex-grow: 1;
     flex-shrink: 1;
     align-content: flex-start;
-}
-
-.inventory__item-type-holder {
-    background-color: red;
-    flex-direction: row;
-    align-self: flex-end;
-    flex-shrink: 0;
 }
 
 .inventory__item-stats-holder {
@@ -218,6 +211,7 @@
     width: 100%;
     -unity-text-align: middle-center;
 }
+
 .inventory__item-description {
     border-left-width: 2px;
     border-color: var(--bone-white);
@@ -229,7 +223,6 @@
     justify-content: flex-start;
     align-items: center;
 }
-
 
 .inventory__description-label {
     border-color: var(--bone-white);
@@ -248,6 +241,14 @@
     width: 100%;
 }
 
+.inventory__item-stat-title {
+    align-self: flex-start;
+}
+
+.inventory__item-stat-value {
+    align-self: flex-end;
+}
+
 .inventory__item-description-text {
     white-space: normal;
     -unity-text-align: middle-left;
@@ -256,4 +257,3 @@
 
 .inventory__description-holder {
 }
-

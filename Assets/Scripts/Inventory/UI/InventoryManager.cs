@@ -33,7 +33,7 @@ namespace TM.Inventory.UI
             this.itemDescriptor = GameObject.FindAnyObjectByType<ItemDescriptor>();
             base.SetRoot(root);
             this.player = GameObject.FindGameObjectWithTag("Player");
-            if (this.player == null){   throw new UnityException("no player found by tag : Player");    }
+            if (this.player == null) { throw new UnityException("no player found by tag : Player"); }
             this.inventoryManager = this.player.GetComponent<Inventory.InventoryManager>();
 
             itemLayer = this.root.Q<VisualElement>("ItemsLayer");
@@ -76,7 +76,7 @@ namespace TM.Inventory.UI
         }
         private void WeightBarUpdate()
         {
-            
+
         }
         private void EquipementSlots()
         {
@@ -92,7 +92,7 @@ namespace TM.Inventory.UI
         private void Grid()
         {
             float height = this.itemGrid.parent.resolvedStyle.height - this.inventoryManager.cellPosMargin * 2;
-            float width = this.itemMain.resolvedStyle.width - 2*this.inventoryManager.cellPosMargin;
+            float width = this.itemMain.resolvedStyle.width - 2 * this.inventoryManager.cellPosMargin;
             this.inventoryManager.UpdateCellsize(width, height);
             gridElements = new VisualElement[
                 inventoryManager.gridSize.x,
@@ -110,7 +110,7 @@ namespace TM.Inventory.UI
 
                     slot.AddToClassList("inventory__slot");
                     slot.style.position = Position.Absolute;
-                
+
                     slot.style.left = x * this.inventoryManager.cellSize + this.inventoryManager.cellPosMargin;
                     slot.style.top = y * this.inventoryManager.cellSize + this.inventoryManager.cellPosMargin;
 
@@ -127,13 +127,13 @@ namespace TM.Inventory.UI
                     }
 
                     itemGrid.Add(slot);
-                    gridElements[x,y] = slot;
+                    gridElements[x, y] = slot;
                 }
             }
-            itemGrid.style.width = this.inventoryManager.gridSize.x * this.inventoryManager.cellSize + 2*this.inventoryManager.cellPosMargin;
-            itemGrid.style.height = this.inventoryManager.gridSize.y * this.inventoryManager.cellSize + 2*this.inventoryManager.cellPosMargin;
-            itemLayer.style.width = this.inventoryManager.gridSize.x * this.inventoryManager.cellSize + 2*this.inventoryManager.cellPosMargin;
-            itemLayer.style.height = this.inventoryManager.gridSize.y * this.inventoryManager.cellSize + 2*this.inventoryManager.cellPosMargin;
+            itemGrid.style.width = this.inventoryManager.gridSize.x * this.inventoryManager.cellSize + 2 * this.inventoryManager.cellPosMargin;
+            itemGrid.style.height = this.inventoryManager.gridSize.y * this.inventoryManager.cellSize + 2 * this.inventoryManager.cellPosMargin;
+            itemLayer.style.width = this.inventoryManager.gridSize.x * this.inventoryManager.cellSize + 2 * this.inventoryManager.cellPosMargin;
+            itemLayer.style.height = this.inventoryManager.gridSize.y * this.inventoryManager.cellSize + 2 * this.inventoryManager.cellPosMargin;
         }
         private void FillItems()
         {
@@ -141,12 +141,21 @@ namespace TM.Inventory.UI
             {
                 CreateItem(invItem);
             }
-            foreach (VisualElement item in this.itemsElements) { //add the drag and drop behaviour/manipulator
+            foreach (VisualElement item in this.itemsElements)
+            { //add the drag and drop behaviour/manipulator
                 ItemDragManipulator itemDragManipulator = new ItemDragManipulator(item);
                 itemDragManipulator.OnDragEndEvent += HandleDragEnd;
                 itemDragManipulator.OnDragMoveEvent += HandleDragging;
                 itemDragManipulator.OnDragStartEvent += HandleDragStart;
+                ManipulatorActivationFilter activator = new ManipulatorActivationFilter
+                {
+                    button = MouseButton.LeftMouse,
+                };
+                itemDragManipulator.activators.Add(activator);
                 item.AddManipulator(itemDragManipulator);
+                RightClickManipulator rightClickManipulator = new RightClickManipulator(item);
+                rightClickManipulator.OnRightClickEvent += HandleRotate;
+                item.AddManipulator(rightClickManipulator);
             }
         }
         private void CreateItem(InventoryItem inventoryItem)
@@ -162,9 +171,7 @@ namespace TM.Inventory.UI
             Vector2 pos = InventoryManagerHelper.IndexToParentPos(inventoryItem.position, this.inventoryManager);
             item.style.left = pos.x;
             item.style.top = pos.y;
-            item.style.width = inventoryItem.itemData.size.x * this.inventoryManager.cellSize;
-            item.style.height = inventoryItem.itemData.size.y * this.inventoryManager.cellSize;
-            item.style.backgroundImage = Background.FromSprite(inventoryItem.itemData.icon);
+            SetVisualItem(item, inventoryItem); 
 
             this.itemLayer.Add(item);
             this.itemsElements[inventoryItem.position.x, inventoryItem.position.y] = item;
@@ -185,15 +192,21 @@ namespace TM.Inventory.UI
                 Vector2 newPos = InventoryManagerHelper.IndexToParentPos(i.Item2, this.inventoryManager);
                 item.style.left = newPos.x;
                 item.style.top = newPos.y; //move the item in UI, providing the snapping.
-
+                inventoryItem.SetPosition(i.Item2);
                 itemsElements[oldPos.x, oldPos.y] = null;
                 itemsElements[i.Item2.x, i.Item2.y] = item; // move the item on the 2d map of items.
             }
             else
             {
-                Vector2 newPos = InventoryManagerHelper.IndexToParentPos(inventoryItem.position, this.inventoryManager);
+                Vector2 newPos = InventoryManagerHelper.IndexToParentPos(oldPos, this.inventoryManager);
+                bool result = this.inventoryManager.inventoryGrid.TryMoveItem(inventoryItem, oldPos);//checks if the item fits in the old space it occupied because it might have been rotated.
                 item.style.left = newPos.x;
-                item.style.top = newPos.y; //move the item back at the start position, providing the snapping.
+                item.style.top = newPos.y; //move the item back at the start position, providing the snapping.   
+                if (!result) //the item doesnt fit in the old space, which means it has beens rotated, so rotate it back to what it once was.
+                {
+                    inventoryItem.Rotate(); 
+                    SetVisualItem(item, inventoryItem); //update the item.
+                }
             }
         }
         private void HandleDragging(VisualElement item, Vector2 pointerPos)
@@ -202,7 +215,44 @@ namespace TM.Inventory.UI
         }
         private void HandleDragStart(VisualElement item)
         {
-            ItemSelector.OnDragStart(item, item.userData as InventoryItem, inventoryManager);
+            ItemSelector.Select(item, item.userData as InventoryItem, inventoryManager);
+        }
+        private void HandleRotate(VisualElement item)
+        {
+
+            InventoryItem inventoryItem = item.userData as InventoryItem;
+            if (gridHighlighter.isGridHighlighted) //the item is dragging, so we hold its rotated state and the handledropdown gets it back if it fails.
+            {
+                inventoryItem.Rotate();
+                SetVisualItem(item, inventoryItem);
+                gridHighlighter.Refresh(this.gridElements, item, this.inventoryManager, this.allParentToIndexPositions);
+            }
+            else
+            {
+                ItemSelector.Select(item, inventoryItem, this.inventoryManager);
+                bool result = this.inventoryManager.inventoryGrid.TryRotateItem(inventoryItem);
+                if (result)
+                {
+                    SetVisualItem(item, inventoryItem);
+                }
+                else
+                {
+                    Debug.Log("Failed to rotate"); //if we have time we can give here some visual and/or sound cue to the player for some feeback.
+                }
+            }
+        }
+        private VisualElement SetVisualItem(VisualElement item, InventoryItem inventoryItem)
+        {
+            Vector2Int size = inventoryItem.itemData.size;
+            if (inventoryItem.rotated)
+            {
+                size = new Vector2Int(size.y, size.x);
+            }
+            item.style.width = size.x * this.inventoryManager.cellSize;
+            item.style.height = size.y * this.inventoryManager.cellSize;
+
+            item.style.backgroundImage = Background.FromSprite(inventoryItem.rotated ? inventoryItem.itemData.iconRotated : inventoryItem.itemData.icon);
+            return item;
         }
     }
 }

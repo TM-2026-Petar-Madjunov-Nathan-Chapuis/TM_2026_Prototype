@@ -6,7 +6,7 @@ namespace TM.Items
     {
         public virtual void Use(GameObject user, ItemData item)
         {
-            Debug.Log($"{item.itemName} was used by {user.name}, but no effect defined");
+            Debug.Log($"{item.name} was used by {user.name}, but no effect defined");
         }
     }
 }

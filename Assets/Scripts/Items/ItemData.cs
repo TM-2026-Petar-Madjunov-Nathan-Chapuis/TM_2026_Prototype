@@ -9,11 +9,15 @@ namespace TM.Items
     [CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Item")]
     public class ItemData : ScriptableObject, IUUID
     {
-        public string itemName { get; private set; } //unique
-        public string description { get; private set; }
+
+        [SerializeField, TextArea(3, 10)]
+        public string description;
         public Vector2Int size;
         [JsonProperty] private UUID uuid;
         public UUID UUID => uuid;
+        public Sprite icon;
+        public Sprite iconRotated;
+        public UseBehavior useBehavior;
 
         private void OnValidate() // runs when asset is created/modified in editor
         {
@@ -31,17 +35,6 @@ namespace TM.Items
             return new List<ItemUIStat>();
         }
 
-        public Sprite icon;
-        public UseBehavior useBehavior;
-
-        public ItemData(string name, string description, Sprite icon, Vector2Int size, UseBehavior useBehavior)
-        {
-            this.name = name;
-            this.description = description;
-            this.icon = icon;
-            this.size = size;
-            this.useBehavior = useBehavior;
-        }
         public virtual void Use(GameObject user)
         {
             UnityEngine.Debug.Log("Using item");

@@ -197,7 +197,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TM.Inventory.UI.ItemDescriptor
   itemStatTemplate: {fileID: 9197481963319205126, guid: c17a4628668484249984ad9360547f5b, type: 3}
-  ItemPreviewHeight: 180
 --- !u!1 &316442823
 GameObject:
   m_ObjectHideFlags: 0
@@ -1711,7 +1710,6 @@ MonoBehaviour:
   occupiedColor: {r: 1, g: 0, b: 0, a: 1}
   selectedColor: {r: 1, g: 1, b: 1, a: 1}
   selectedBorderWidth: 3
-  isGridHighlighted: 0
 --- !u!1 &1326675101
 GameObject:
   m_ObjectHideFlags: 0
@@ -2465,7 +2463,6 @@ MonoBehaviour:
   <cellPosMargin>k__BackingField: 10
   <gridSize>k__BackingField: {x: 10, y: 9}
   "exasd\xE9flkj": {fileID: 11400000, guid: 650a0118680721241862d3af314c7733, type: 2}
-  "whatdsa\xE9lkfjas\xE9df": {fileID: 11400000, guid: 592d6b0ffb8e66248aaabce25c23372b, type: 2}
 --- !u!114 &1892611305
 MonoBehaviour:
   m_ObjectHideFlags: 0

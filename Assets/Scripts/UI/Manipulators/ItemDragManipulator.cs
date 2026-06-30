@@ -2,6 +2,7 @@ using System;
 using TM.Inventory;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 //inspired from unity's official tutorial about manipulators found on youtube. and the docs.
@@ -39,25 +40,30 @@ namespace TM.UI
         }
         private void OnDragStart(PointerDownEvent downEvent)
         {
-            isDragging = true;
-            target.style.position = Position.Absolute; //switch to absolute position.
+            if (CanStartManipulation(downEvent))
+            {
+                isDragging = true;
+                target.style.position = Position.Absolute; //switch to absolute position.
 
-            this.startPointerPos = downEvent.position;
-            this.startTargetWorldPos = target.worldBound.position;
+                this.startPointerPos = downEvent.position;
+                this.startTargetWorldPos = target.worldBound.position;
 
-            target.BringToFront(); //brings to the front of the scene.
-            target.CapturePointer(downEvent.pointerId); //this is related to capture events so reads the docs, but basically this makes the dragged element still "focused" when the mouse leaves its area
+                target.BringToFront(); //brings to the front of the scene.
+                target.CapturePointer(downEvent.pointerId); //this is related to capture events so reads the docs, but basically this makes the dragged element still "focused" when the mouse leaves its area
 
-            OnDragStartEvent.Invoke(target);
-            downEvent.StopPropagation(); //read more about event and their propagation (stopping propagation maybe not needed but advised)
+                OnDragStartEvent.Invoke(target);
+                downEvent.StopPropagation(); //read more about event and their propagation (stopping propagation maybe not needed but advised)      
+            }
+
         }
         private void OnDragEnd(PointerUpEvent upEvent)
         {
-            if (!isDragging || !target.HasPointerCapture(upEvent.pointerId)) return; // if not dragging or target hasnt captured the pointer yet return
-
-            target.ReleasePointer(upEvent.pointerId); //release the pointer so that on capture out fires.
-
-            upEvent.StopPropagation();
+            if (CanStartManipulation(upEvent))
+            {
+                if (!isDragging || !target.HasPointerCapture(upEvent.pointerId)) return; // if not dragging or target hasnt captured the pointer yet return
+                target.ReleasePointer(upEvent.pointerId); //release the pointer so that on capture out fires.
+                upEvent.StopPropagation();
+            }
         }
         private void OnPointerMove(PointerMoveEvent moveEvent)
         {
@@ -81,8 +87,11 @@ namespace TM.UI
         }
         private void OnCaptureOut(PointerCaptureOutEvent captureOutEvent) //read more about the docs but this gets fired when the drag stop basically. (precisely when the target loses capture of the pointer, of the mouse's "focus")
         {
-            isDragging = false;
-            OnDragEndEvent.Invoke(target);
+            if (isDragging)
+            {
+                isDragging = false;
+                OnDragEndEvent.Invoke(target);
+            }
         }
     }
 }

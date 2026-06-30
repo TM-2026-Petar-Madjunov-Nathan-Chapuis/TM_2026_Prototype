@@ -11,6 +11,7 @@ namespace TM.Inventory
         public ItemData itemData { get; private set; }
         public int count { get; private set; }
         public Vector2Int position { get; private set; }
+        public bool rotated { get; private set; }
 
         public InventoryItem SetItemData(ItemData itemData)
         {
@@ -28,6 +29,11 @@ namespace TM.Inventory
             this.position = pos;
             return this;
         }
+        public InventoryItem Rotate()
+        {
+            this.rotated = !this.rotated;
+            return this;
+        }
         public InventoryItemSaveData Save()
         {
             return new InventoryItemSaveData
@@ -35,6 +41,7 @@ namespace TM.Inventory
                     itemDataUUID = this.itemData ? this.itemData.UUID : null,
                     count = this.count,
                     position = this.position,
+                    rotated = this.rotated, 
                 };
         }
         public void Load(InventoryItemSaveData saveData, ItemData itemData)
@@ -42,6 +49,7 @@ namespace TM.Inventory
             this.position = saveData.position;
             this.count = saveData.count;
             this.itemData = itemData;
+            this.rotated = rotated;
         }
     }
     [Serializable]
@@ -50,5 +58,6 @@ namespace TM.Inventory
         public UUID? itemDataUUID;
         public int count;
         public Vector2Int position;
+        public bool rotated;
     }
 }

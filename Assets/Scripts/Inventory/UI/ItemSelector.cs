@@ -13,7 +13,7 @@ namespace TM.Inventory.UI
         public static int selectedBorderWidth;
         private static Color oldBorderColor;
         public static event Action<InventoryItem> OnSelectedChange;
-        public static void OnDragStart(VisualElement itemVEIn, InventoryItem item, Inventory.InventoryManager inventoryManager)
+        public static void Select(VisualElement itemVEIn, InventoryItem item, Inventory.InventoryManager inventoryManager)
         {
             if (item == selectedItem) return;
             ClearSelected();
@@ -38,7 +38,9 @@ namespace TM.Inventory.UI
         public static void ClearSelected()
         {
             selectedItem = null;
+
             setItemVE(1, oldBorderColor);
+            itemVE = null;
         }
     }
 }

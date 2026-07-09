@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e1ed819e44f71048a16d129b8395ac2, type: 3}
   m_Name: Checkbox
   m_EditorClassIdentifier: Assembly-CSharp::TM.Items.DrinkData
-  description: 
+  description: "xcvb\xE9\xE0xlcvbk\xE0xc\xE9vlkbjxcv\xE0\xE9lb kxc\xE0v\xE9lb xkcv\xE0b\xE9lxckvb\xE0\xE9xclvkb\xE0xc\xE9lv
+    bkxc\xE0v\xE9l bkxcv\xE0b \xE9l x ckvb\n\xE8xcvb xcvb xcvb xcvb xcvvb xcvb xcvb
+    xvcb xcvb xcvb "
   size: {x: 2, y: 2}
   icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-  iconRotated: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
+  iconRotated: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   useBehavior: {fileID: 0}
   drinkAmmount: 9
-  weight: 0.56
+  weight: 1284.04

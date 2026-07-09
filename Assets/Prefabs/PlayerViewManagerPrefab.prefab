@@ -67,8 +67,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 38.3
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 1.31
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -302,15 +302,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0684a746b65e2734e85e9a7957d1d592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventoryPlayerViewManager
-  cameraDistance: 3.92
+  cameraDistance: 12.38
   cameraDownAngle: 15.9
-  moveSensitivity: -0.3
+  moveSensitivity: -0.15
   playerYoffset: 1.27
-  playerViewCamera: {fileID: 6187019496427537216}
-  dollPlayer: {fileID: 1674326813107267154}
-  angleX: 0
-  widthSizePercentage: 93.1
-  aspectRatioheightperwidth: 1
+  playerViewCamera: {fileID: 0}
+  dollPlayer: {fileID: 0}
+  angleX: -10798.358
+  widthSizePercentage: 30.5
+  aspectRatioheightperwidth: 3
   playerViewRT: {fileID: 0}
 --- !u!1001 &2016784204488416003
 PrefabInstance:
@@ -334,7 +334,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e4a89d13416e3de42ad8a0202883c6ab, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3
+      value: 1.4154
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e4a89d13416e3de42ad8a0202883c6ab, type: 3}
       propertyPath: m_LocalScale.y
@@ -342,7 +342,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e4a89d13416e3de42ad8a0202883c6ab, type: 3}
       propertyPath: m_LocalScale.z
-      value: 3
+      value: 1.4154
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e4a89d13416e3de42ad8a0202883c6ab, type: 3}
       propertyPath: m_LocalPosition.x
@@ -661,11 +661,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4a89d13416e3de42ad8a0202883c6ab, type: 3}
---- !u!1 &1674326813107267154 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e4a89d13416e3de42ad8a0202883c6ab, type: 3}
-  m_PrefabInstance: {fileID: 2016784204488416003}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2051310401267432680 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e4a89d13416e3de42ad8a0202883c6ab, type: 3}

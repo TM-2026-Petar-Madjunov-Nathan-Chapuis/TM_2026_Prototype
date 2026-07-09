@@ -22,15 +22,19 @@ namespace TM.Inventory.UI
         private VisualElement chestArmorSlot;
         private VisualElement legArmorSlot;
         private VisualElement bootsArmorSlot;
+        private VisualElement itemWheelHolder;
+        private Dictionary<Vector2, Vector2Int> allParentToIndexPositions;
+        //LOWER "MANAGERS"
         private GridHighlighter gridHighlighter;
         private ItemDescriptor itemDescriptor;
-        private Dictionary<Vector2, Vector2Int> allParentToIndexPositions;
         private PlayerViewManager inventoryPlayerViewManager;
+        private ItemWheelManager itemWheelManager;
 
         public override void SetRoot(VisualElement root)
         {
             this.gridHighlighter = GameObject.FindAnyObjectByType<GridHighlighter>();
             this.itemDescriptor = GameObject.FindAnyObjectByType<ItemDescriptor>();
+            this.itemWheelManager = GameObject.FindAnyObjectByType<ItemWheelManager>();
             base.SetRoot(root);
             this.player = GameObject.FindGameObjectWithTag("Player");
             if (this.player == null) { throw new UnityException("no player found by tag : Player"); }
@@ -47,6 +51,7 @@ namespace TM.Inventory.UI
             chestArmorSlot = this.root.Q<VisualElement>("ChestArmorSlot");
             legArmorSlot = this.root.Q<VisualElement>("LegArmorSlot");
             bootsArmorSlot = this.root.Q<VisualElement>("BootsArmorSlot");
+            itemWheelHolder = this.root.Q<VisualElement>("ItemWheelHolder");
             allParentToIndexPositions = InventoryManagerHelper.AllParentToIndexPositions(this.inventoryManager);
             inventoryPlayerViewManager = GameObject.FindAnyObjectByType<PlayerViewManager>();
         }
@@ -54,8 +59,10 @@ namespace TM.Inventory.UI
         {
             WeightBarUpdate();
             itemMain.RegisterCallback<GeometryChangedEvent>(ItemCallback); //needed because OnEnable might and does call before the UI even resolves for the user, leading to width = 0 on cellsize calculation. also it calls a redraw on every resolution change
+            //ENABLE LOWER MANAGERS
             inventoryPlayerViewManager.Enable(playerView);
             itemDescriptor.Enable(this.root.Q<VisualElement>("ItemDescription"));
+            itemWheelManager.Enable(itemWheelHolder, inventoryManager);
         }
         private void ItemCallback(GeometryChangedEvent evt)
         {
@@ -179,14 +186,40 @@ namespace TM.Inventory.UI
         private void HandleDragEnd(VisualElement item)
         {
             gridHighlighter.ClearColors();
+            itemWheelManager.ClearHighlight();
             VisualElement parent = item.parent;
             if (parent == null) return;
 
             InventoryItem inventoryItem = item.userData as InventoryItem;
-
-            Vector2 pos = new Vector2(item.style.left.value.value, item.style.top.value.value);
-            (Vector2, Vector2Int, float) i = InventoryManagerHelper.NearestIndexedPosition(pos, allParentToIndexPositions);
             Vector2Int oldPos = inventoryItem.position;
+            Vector2 pos = new Vector2(item.style.left.value.value, item.style.top.value.value);
+            //IF POS < 0 THEN ITS ABOUT EITHER THE ARMOR OR THE ITEM WHEEL, SO DIFFERENT LOGIC
+            if (pos.x < 0)
+            {
+                if(pos.y > parent.resolvedStyle.height/2) //ITS ABOUT THE ARMOR
+                {
+                    
+                }
+                else //ITS ABOUT THE ITEMWHEEL
+                {
+                    pos = parent.ChangeCoordinatesTo(itemWheelHolder, pos); //convert the positions to itemwheellocal space.
+                    pos = new Vector2(pos.x + item.resolvedStyle.width/2, pos.y + item.resolvedStyle.height/2); //ajust to be the center of the item.
+                    int index = GameObject.FindAnyObjectByType<ItemWheelVectorImager>().NearestItemWheelPosition(pos, itemWheelHolder.resolvedStyle.width);
+                    this.itemWheelManager.AddItem(inventoryItem, index);
+                    //GET THE ITEM BACK AS WE STORE ONLY THE REFERENCE.
+                    Vector2 newPos = InventoryManagerHelper.IndexToParentPos(oldPos, this.inventoryManager);
+                    bool result = this.inventoryManager.inventoryGrid.TryMoveItem(inventoryItem, oldPos);//checks if the item fits in the old space it occupied because it might have been rotated.
+                    item.style.left = newPos.x;
+                    item.style.top = newPos.y; //move the item back at the start position, providing the snapping.   
+                    if (!result) //the item doesnt fit in the old space, which means it has beens rotated, so rotate it back to what it once was.
+                    {
+                        inventoryItem.Rotate(); 
+                        SetVisualItem(item, inventoryItem); //update the item.
+                    }
+                }
+            }
+
+            (Vector2, Vector2Int, float) i = InventoryManagerHelper.NearestGridIndexedPosition(pos, allParentToIndexPositions);
             if (this.inventoryManager.inventoryGrid.TryMoveItem(inventoryItem, i.Item2))
             {
                 Vector2 newPos = InventoryManagerHelper.IndexToParentPos(i.Item2, this.inventoryManager);
@@ -212,6 +245,8 @@ namespace TM.Inventory.UI
         private void HandleDragging(VisualElement item, Vector2 pointerPos)
         {
             gridHighlighter.OnDragMove(this.gridElements, item, this.inventoryManager, this.allParentToIndexPositions);
+            Vector2 pos = new Vector2(item.resolvedStyle.left + item.resolvedStyle.width/2, item.resolvedStyle.top + item.resolvedStyle.height/2 );
+            itemWheelManager.Highlight(GameObject.FindAnyObjectByType<ItemWheelVectorImager>().NearestItemWheelPosition(item.parent.ChangeCoordinatesTo(itemWheelHolder, pos), itemWheelHolder.resolvedStyle.width));
         }
         private void HandleDragStart(VisualElement item)
         {

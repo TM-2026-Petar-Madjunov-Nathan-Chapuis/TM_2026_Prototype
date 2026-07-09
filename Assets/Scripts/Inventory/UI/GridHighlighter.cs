@@ -25,7 +25,7 @@ namespace TM.Inventory.UI
         }
         public void OnDragMove(VisualElement[,] slots, VisualElement item, Inventory.InventoryManager inventoryManager, Dictionary<Vector2, Vector2Int> allParentToIndexPositions)
         {
-            (Vector2, Vector2Int, float) index = InventoryManagerHelper.NearestIndexedPosition(new Vector2(item.style.left.value.value, item.style.top.value.value), allParentToIndexPositions);
+            (Vector2, Vector2Int, float) index = InventoryManagerHelper.NearestGridIndexedPosition(new Vector2(item.style.left.value.value, item.style.top.value.value), allParentToIndexPositions);
             if (currentIndex != index.Item2)
             {
                 this.currentIndex = index.Item2;

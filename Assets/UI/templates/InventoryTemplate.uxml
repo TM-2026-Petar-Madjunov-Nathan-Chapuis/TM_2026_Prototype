@@ -2,27 +2,33 @@
     <Style src="project://database/Assets/UI/styles/Inventory.uss?fileID=7433441132597879392&amp;guid=c03df79fc3d2aec4592689a42e9be0f6&amp;type=3#Inventory"/>
     <Style src="project://database/Assets/UI/styles/Global.uss?fileID=7433441132597879392&amp;guid=7eb4cac6f0f96404eb05acec29a0f1bf&amp;type=3#Global"/>
     <ui:VisualElement name="Inventory" class="inventory">
-        <ui:VisualElement name="Equipement" class="inventory__equipement">
+        <ui:VisualElement name="Equipment" class="inventory__equipment">
+            <ui:Label text="EQUIPMENT" name="EquipmentLabel" class="inventory__equipment-label font-light font-size-very-large"/>
+            <ui:Label text="&lt;u&gt;ItemWheel" name="ItemWheelLabel" class="inventory__item-wheel-label font-medium font-size-medium"/>
+            <ui:VisualElement name="ItemWheelHolder" class="inventory__item-wheel-holder"/>
+            <ui:Label text="&lt;u&gt;Armor" name="ArmorLabel" class="inventory__armor-label font-medium font-size-medium"/>
             <ui:VisualElement name="PlayerViewAndArmorSlots" class="inventory__player-view-and-armor-slots">
-                <ui:VisualElement name="PlayerView" class="inventory__player-view"/>
-                <ui:VisualElement name="ArmorSlotsHolder" class="inventory__armor-slots-holder">
-                    <ui:VisualElement name="HeadArmorSlotHolder" class="inventory__armor-slot-holder-head">
-                        <ui:VisualElement name="HeadArmorSlot" class="inventory__armor-slot-head"/>
-                    </ui:VisualElement>
-                    <ui:VisualElement name="ChestArmorSlotHolder" class="inventory__armor-slot-holder-chest">
-                        <ui:VisualElement name="ChestArmorSlot" class="inventory__armor-slot-chest"/>
-                    </ui:VisualElement>
-                    <ui:VisualElement name="LegArmorSlotHolder" class="inventory__armor-slot-holder-leg">
+                <ui:VisualElement name="LeftArmorSlotsHolder" class="inventory__left-armor-slots-holder">
+                    <ui:VisualElement name="LegArmorSlotHolder" class="inventory__armor-slot-holder-leg">   d
                         <ui:VisualElement name="LegArmorSlot" class="inventory__armor-slot-leg"/>
                     </ui:VisualElement>
                     <ui:VisualElement name="BootsArmorSlotHolder" class="inventory__armor-slot-holder-boots">
                         <ui:VisualElement name="BootsArmorSlot" class="inventory__armor-slot-boots"/>
                     </ui:VisualElement>
                 </ui:VisualElement>
+                <ui:VisualElement name="PlayerView" class="inventory__player-view"/>
+                <ui:VisualElement name="RightArmorSlotsHolder" class="inventory__right-armor-slots-holder">
+                    <ui:VisualElement name="HeadArmorSlotHolder" class="inventory__armor-slot-holder-head">
+                        <ui:VisualElement name="HeadArmorSlot" class="inventory__armor-slot-head"/>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="ChestArmorSlotHolder" class="inventory__armor-slot-holder-chest">
+                        <ui:VisualElement name="ChestArmorSlot" class="inventory__armor-slot-chest"/>
+                    </ui:VisualElement>
+                </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="Main" class="inventory__main">
-            <ui:Label text="ITEMS" name="ItemsLabel" class="inventory__items-label font-regular font-size-extra-large"/>
+            <ui:Label text="ITEMS" name="ItemsLabel" class="inventory__items-label font-light font-size-very-large"/>
             <ui:VisualElement name="ItemsList" class="inventory__items-list">
                 <ui:VisualElement name="GridBackground" class="inventory__grid-background"/>
                 <ui:VisualElement name="ItemsLayer" class="inventory__items-layer"/>
@@ -32,9 +38,9 @@
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="ItemDescription" class="inventory__item-description">
-            <ui:Label name="ItemName" text="Item Name Here" class="inventory__item-name-label font-regular font-size-large"/>
-            <ui:VisualElement name="ItemPreviewHolder" class="inventory__item-preview-holder">
-            </ui:VisualElement>
+            <ui:Label name="ItemDescriptionLabel" text="SELECTED ITEM" class="inventory__item-description-label font-light font-size-very-large"/>
+            <ui:VisualElement name="ItemPreviewHolder" class="inventory__item-preview-holder"/>
+            <ui:Label text="ItemName" name="ItemName" class="inventory__item-name-label font-medium font-size-large"/>
             <ui:Label text="Statistics" name="StatsLabel" class="inventory__stats-label font-medium font-size-medium"/>
             <ui:VisualElement name="ItemStatsHolder" class="inventory__item-stats-holder">
                 <ui:VisualElement name="StatTemplate" class="inventory__item-stat">
@@ -44,7 +50,7 @@
             </ui:VisualElement>
             <ui:Label text="Description" name="DescriptionLabel" class="inventory__description-label font-medium font-size-medium"/>
             <ui:VisualElement name="DescriptionHolder" class="inventory__description-holder">
-                <ui:Label name="ItemDescriptionText" class="inventory__item-description-text font-light-italic font-size-medium" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." />
+                <ui:Label name="ItemDescriptionText" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." class="inventory__item-description-text font-light-italic font-size-medium"/>
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

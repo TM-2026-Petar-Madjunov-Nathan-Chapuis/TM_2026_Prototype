@@ -1,0 +1,6 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/styles/ItemWheel.uss?fileID=7433441132597879392&amp;guid=04088d7a14cacdc4e8f8efd58a13c2a2&amp;type=3#ItemWheel"/>
+    <ui:VisualElement name="Root" class="root">
+        <ui:VisualElement name="ItemWheelHolder" class="item-wheel-holder"/>
+    </ui:VisualElement>
+</ui:UXML>

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TM.Inventory;
 using Unity.Mathematics;
 using UnityEngine;
@@ -8,7 +9,18 @@ namespace TM.Inventory.UI
     public static class InventoryManagerHelper
     {
         public static float MaxDistanceTreshold = 100;
-        public static (Vector2, Vector2Int, float) NearestIndexedPosition(Vector2 pos, Dictionary<Vector2, Vector2Int> allParentToIndexPosition)
+        public static int NearestItemWheelPosition(Vector2 pos, Vector2[] positions)
+        {
+            (float, int) dis = (9999999, -99);
+            for (int i = 0; i < positions.Count(); i++)
+            {
+                float distance = Vector2.Distance(pos, positions[i]);
+                if (distance < dis.Item1) dis = (distance, i);
+            }
+            return dis.Item2;
+        }
+        
+        public static (Vector2, Vector2Int, float) NearestGridIndexedPosition(Vector2 pos, Dictionary<Vector2, Vector2Int> allParentToIndexPosition)
         {
             (Vector2, Vector2Int, float) i = (new Vector2(), new Vector2Int(), math.INFINITY);
             foreach (Vector2 key in allParentToIndexPosition.Keys)

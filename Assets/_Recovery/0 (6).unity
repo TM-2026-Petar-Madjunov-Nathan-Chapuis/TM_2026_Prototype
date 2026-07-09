@@ -152,61 +152,6 @@ Transform:
   - {fileID: 1892611298}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &267487386
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 267487388}
-  - component: {fileID: 267487387}
-  m_Layer: 0
-  m_Name: ItemWheel
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &267487387
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 267487386}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
-  m_PanelSettings: {fileID: 11400000, guid: 4254776b97f8d484c99e8bb9d81d0294, type: 2}
-  m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: 0514cc471e2cb2243899dd54912fcc19, type: 3}
-  m_SortingOrder: 0
-  m_Position: 0
-  m_WorldSpaceSizeMode: 1
-  m_WorldSpaceWidth: 1920
-  m_WorldSpaceHeight: 1080
-  m_PivotReferenceSize: 0
-  m_Pivot: 0
-  m_WorldSpaceCollider: {fileID: 0}
---- !u!4 &267487388
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 267487386}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2079469477}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &309859388
 GameObject:
   m_ObjectHideFlags: 0
@@ -1690,7 +1635,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1199853305
 Transform:
   m_ObjectHideFlags: 0
@@ -2400,6 +2345,7 @@ GameObject:
   - component: {fileID: 1892611302}
   - component: {fileID: 1892611301}
   - component: {fileID: 1892611304}
+  - component: {fileID: 1892611303}
   - component: {fileID: 1892611305}
   - component: {fileID: 1892611306}
   - component: {fileID: 1892611307}
@@ -2475,7 +2421,6 @@ MonoBehaviour:
   ySensitivity: 25
   thirdPersonSmoothFactor: 9.35
   yClamp: 1.92
-  lookingAllowed: 1
 --- !u!114 &1892611302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2493,6 +2438,18 @@ MonoBehaviour:
   verticalSpeed: 0
   gravity: 20
   animator: {fileID: 1410990534}
+--- !u!114 &1892611303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1892611295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa2ecbfc74de84cf3ba11b4e531f1a5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FunctionTester
 --- !u!114 &1892611304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2750,7 +2707,6 @@ Transform:
   - {fileID: 1657054183}
   - {fileID: 1387130483}
   - {fileID: 929258917}
-  - {fileID: 267487388}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2099082766
@@ -2764,9 +2720,8 @@ GameObject:
   - component: {fileID: 2099082767}
   - component: {fileID: 2099082769}
   - component: {fileID: 2099082768}
-  - component: {fileID: 2099082770}
   m_Layer: 0
-  m_Name: ItemWheelManager
+  m_Name: ItemWheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2826,29 +2781,6 @@ MonoBehaviour:
   outerCircleColor: {r: 0, g: 0, b: 0, a: 0.050980393}
   highlightedColor: {r: 0.18972084, g: 0.7830189, b: 0.15881987, a: 0.3764706}
   hoveredIndex: -1
---- !u!114 &2099082770
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2099082766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f69af218363623b459fb5a0502f2ad07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TM.Player.ItemWheel.UI.ItemWheelManager
-  itemWheelUIDoc: {fileID: 267487387}
-  maxWidthPercentage: 0.6
-  maxHeightPercentage: 0.605
-  sensitivity: 0.5
-  deadZoneRadius: 20
-  clampRadius: 30
-  MaxItemWidth: 100
-  MaxItemHeight: 100
-  wheelVectorImager: {fileID: 2099082769}
-  playerCamera: {fileID: 1892611301}
-  inventoryManager: {fileID: 1892611304}
 --- !u!1001 &2958197273129050822
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -65,10 +65,9 @@ namespace TM.Inventory
             }
             return (occupied, availiable);
         }
-        public bool TryInsertItem(ItemData itemData, Vector2Int pos, int count, bool rotated)
+        public bool TryInsertItem(ItemData itemData, Vector2Int pos, bool rotated)
         {
             InventoryItem item = new InventoryItem();
-            item.SetCount(count);
             item.SetItemData(itemData);
             item.SetPosition(pos);
             item.Rotate();

@@ -29,6 +29,7 @@ namespace TM.Player
         private GameObject thirdPersonCameraPos = null;
         private float thirdPersonBaseY;
         private float thirdPersonVerticalOffset;
+        public bool lookingAllowed = true;
 
 
         public void LoadData(string data)
@@ -107,28 +108,31 @@ namespace TM.Player
         }
         private void Look(InputValues inputValues) // called by the InputManager at every triggered frame
         {
-            Vector2 look = inputValues.vector2Value;
-            if (isFirstPerson)
+            if (lookingAllowed)
             {
-                yRotation += look.x * ySensitivity * 0.01f; //horizontal
-                xRotation -= look.y * xSensitivity * 0.01f; //vertical
+                Vector2 look = inputValues.vector2Value;
+                if (isFirstPerson)
+                {
+                    yRotation += look.x * ySensitivity * 0.01f; //horizontal
+                    xRotation -= look.y * xSensitivity * 0.01f; //vertical
 
-                xRotation = Mathf.Clamp(xRotation, -89f, 89f); //avoid over vertical rotation by clamping
+                    xRotation = Mathf.Clamp(xRotation, -89f, 89f); //avoid over vertical rotation by clamping
 
-                transform.localRotation = Quaternion.Euler(0f, yRotation, 0f);
-                firstPerson.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-            }
-            else
-            {
-                yRotation += look.x * ySensitivity * Time.deltaTime; //horizontal
-                transform.localRotation = Quaternion.Euler(0f, yRotation, 0f); //transforms the player's rotation directly and camera follows as its a child of parent
+                    transform.localRotation = Quaternion.Euler(0f, yRotation, 0f);
+                    firstPerson.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+                }
+                else
+                {
+                    yRotation += look.x * ySensitivity * Time.deltaTime; //horizontal
+                    transform.localRotation = Quaternion.Euler(0f, yRotation, 0f); //transforms the player's rotation directly and camera follows as its a child of parent
 
-                thirdPersonVerticalOffset -= look.y * xSensitivity * Time.deltaTime; //vertical
-                thirdPersonVerticalOffset = Mathf.Clamp(thirdPersonVerticalOffset, -yClamp, yClamp); //clamp max vertical "rotation" or movement
+                    thirdPersonVerticalOffset -= look.y * xSensitivity * Time.deltaTime; //vertical
+                    thirdPersonVerticalOffset = Mathf.Clamp(thirdPersonVerticalOffset, -yClamp, yClamp); //clamp max vertical "rotation" or movement
 
-                Vector3 pos = thirdPersonCameraPos.transform.position;
-                pos.y = thirdPersonBaseY + thirdPersonVerticalOffset + transform.position.y; //calculate camera pos based on the offset
-                thirdPersonCameraPos.transform.position = pos; //set the third person camera target that the acutual camera will learp towards to the pos.
+                    Vector3 pos = thirdPersonCameraPos.transform.position;
+                    pos.y = thirdPersonBaseY + thirdPersonVerticalOffset + transform.position.y; //calculate camera pos based on the offset
+                    thirdPersonCameraPos.transform.position = pos; //set the third person camera target that the acutual camera will learp towards to the pos.
+                }              
             }
         }
     }

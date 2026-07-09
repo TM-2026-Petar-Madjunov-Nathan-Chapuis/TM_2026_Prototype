@@ -79,7 +79,7 @@ namespace TM.Inventory.UI
             item.style.width = size.x * cellSize;
             item.style.height = size.y * cellSize;
 
-            item.AddToClassList("inventory__item");
+            item.AddToClassList("");
             item.style.backgroundImage = Background.FromSprite(selected.itemData.icon);
 
             this.itemPreviewHolder.Add(item);

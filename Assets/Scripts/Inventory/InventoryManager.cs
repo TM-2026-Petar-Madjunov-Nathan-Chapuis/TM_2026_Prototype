@@ -3,6 +3,8 @@ using TM.Saving;
 using UnityEngine;
 using Newtonsoft.Json;
 using TM.Items;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace TM.Inventory
 {
@@ -16,7 +18,8 @@ namespace TM.Inventory
         [field: SerializeField] public Vector2Int gridSize { get; private set; }
         public WeaponData exasdéflkj;
         public DrinkData whatdsaélkfjasédf;
-
+        public InventoryItem[] itemWheelItems;
+        private int itemWheelSlotNumber;
         string ISaveable.UID => "InventoryManager";
 
         public void UpdateCellsize(float width, float height) //width is the total pixel width of the cell slots. 
@@ -28,10 +31,12 @@ namespace TM.Inventory
 
         private void Start()
         {
+            itemWheelSlotNumber = GameObject.FindAnyObjectByType<ItemWheelVectorImager>().slotNumber;
+            itemWheelItems = new InventoryItem[itemWheelSlotNumber];
             inventoryGrid = new InventoryGrid(gridSize);
-            this.inventoryGrid.TryInsertItem(exasdéflkj, new Vector2Int(2,2), 4, false);
-            this.inventoryGrid.TryInsertItem(exasdéflkj, new Vector2Int(6,2), 576, true);
-            this.inventoryGrid.TryInsertItem(whatdsaélkfjasédf, new Vector2Int(5,5), 3, true);
+            this.inventoryGrid.TryInsertItem(exasdéflkj, new Vector2Int(2,2), false);
+            this.inventoryGrid.TryInsertItem(exasdéflkj, new Vector2Int(6,2), true);
+            this.inventoryGrid.TryInsertItem(whatdsaélkfjasédf, new Vector2Int(6,5), false);
         }
 
         public void LoadData(string data)
@@ -39,15 +44,46 @@ namespace TM.Inventory
             InventoryManagerSaveData saveData = JsonConvert.DeserializeObject<InventoryManagerSaveData>(data);
             this.inventoryGrid.Load(saveData.inventory);
             this.gridSize = saveData.gridSize;
+            this.itemWheelItems = new InventoryItem[saveData.itemWheelItems.Count()];
+            UUID?[] uUIDs = saveData.itemWheelItems.Select(s => s.itemDataUUID).ToArray();
+            Dictionary<UUID, ScriptableObject> lookup = UuidFinder.findMultiple(uUIDs);
+            for (int i = 0; i < saveData.itemWheelItems.Count(); i++)
+            {
+                InventoryItemSaveData itemSaveData = saveData.itemWheelItems[i];
+                if (!itemSaveData.itemDataUUID.HasValue) //empty item wheel slot
+                {
+                    this.itemWheelItems[i] = null;
+                    continue;
+                }
+
+                InventoryItem item = new();
+                item.Load(itemSaveData, (ItemData)lookup[itemSaveData.itemDataUUID.Value]);
+                this.itemWheelItems[i] = item;
+            }
         }
 
         public object SaveData()
-        {
-            return new InventoryManagerSaveData
+        {   
+            
+            InventoryManagerSaveData  inventoryManagerSaveData = new InventoryManagerSaveData
             {
                 inventory = this.inventoryGrid.Save(), //needs its own save implementation because it contains a Scriptable Object
                 gridSize = this.gridSize, 
             };
+            InventoryItemSaveData[] saveDatas = new InventoryItemSaveData[itemWheelItems.Count()];
+            for(int i = 0; i<itemWheelItems.Count(); i++)
+            {
+                InventoryItem item = itemWheelItems[i]; 
+                InventoryItemSaveData itemSaveData = item != null ? item.Save() : new InventoryItemSaveData //if item is null then empty save data else save the item
+                {
+                    itemDataUUID = null, //means this save data is empty
+                    position = new Vector2Int(0,0),
+                    rotated = false,
+                };
+                saveDatas[i] = itemSaveData; 
+            }
+            inventoryManagerSaveData.itemWheelItems = saveDatas;
+            return inventoryManagerSaveData;
         }
     }
 
@@ -56,5 +92,6 @@ namespace TM.Inventory
     {
         public InventorySaveData inventory;
         public Vector2Int gridSize;
+        public InventoryItemSaveData[] itemWheelItems;
     }
 }

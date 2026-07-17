@@ -15,7 +15,6 @@ namespace TM.Items
             {
                 new ItemUIStat("Weight", this.weight.ToString()),
                 new ItemUIStat("Damage", this.damage.ToString()),
-                new ItemUIStat("pampidou", "sadéflasdkjflaskdfj"),
             };
         }
         public override ItemType GetItemType()

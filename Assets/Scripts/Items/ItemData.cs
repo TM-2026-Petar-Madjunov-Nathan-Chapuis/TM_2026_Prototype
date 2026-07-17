@@ -18,6 +18,8 @@ namespace TM.Items
         public Sprite icon;
         public Sprite iconRotated;
         public UseBehavior useBehavior;
+        public GameObject heldPrefab;
+        public GameObject worldPrefab;
 
         private void OnValidate() // runs when asset is created/modified in editor
         {
@@ -35,10 +37,10 @@ namespace TM.Items
             return new List<ItemUIStat>();
         }
 
-        public virtual void Use(GameObject user)
+        public virtual void Use(HeldItem heldItem, bool pressed)
         {
             UnityEngine.Debug.Log("Using item");
-            useBehavior.Use(user, this);
+            useBehavior.Use(heldItem, pressed);
         }
     }
 }

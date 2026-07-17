@@ -26,6 +26,7 @@ namespace TM.Player.ItemWheel.UI
         [SerializeField] private ItemWheelVectorImager wheelVectorImager;
         [SerializeField] private PlayerCamera playerCamera;
         [SerializeField] private InventoryManager inventoryManager;
+        [SerializeField] private playerItemController playerItemController;
         private bool MenuOpened = false;
         private VisualElement root;
         private VisualElement itemWheelHolder;
@@ -85,7 +86,7 @@ namespace TM.Player.ItemWheel.UI
 
             if (MenuOpened)
             {
-                Time.timeScale = 0f; //stop time (works for now, might need a global better implementation its own manager)
+                Time.timeScale = 0.3f; //slow time (works for now, might need a global better implementation its own manager)
                 playerCamera.lookingAllowed = false;
                 mouseVector = Vector2.zero;
                 wheelVectorImager.hoveredIndex = -1;
@@ -94,6 +95,9 @@ namespace TM.Player.ItemWheel.UI
             }
             else
             {
+                //the item last select will be the new held item.
+                playerItemController.SetHeldItem(this.wheelVectorImager.hoveredIndex == -1 ? null : this.inventoryManager.itemWheelItems[this.wheelVectorImager.hoveredIndex]);
+                this.wheelVectorImager.hoveredIndex = -1;
                 root.style.display = DisplayStyle.None;
                 playerCamera.lookingAllowed = true;
                 Time.timeScale = 1f;

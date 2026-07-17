@@ -5,15 +5,16 @@ namespace TM.Items
     [CreateAssetMenu(menuName = "Inventory/Behaviors/Drink")]
     public class DrinkBehaviour : UseBehavior
     {
-        public override void Use(GameObject user, ItemData item)
+        public override void Use(HeldItem heldItem, bool pressed)
         {
-            if (item is DrinkData drinkData)
+            if (!pressed) return;
+            if (heldItem.itemData is DrinkData drinkData)
             { // essaie de cast l'item en drinkData
-                Debug.Log($"{drinkData.drinkAmmount} was used by {user.name}, but no effect defined");
+                Debug.Log($"{drinkData.drinkAmmount} was used by the player, but no effect defined");
             }
             else
             {
-                base.Use(user, item);
+                base.Use(heldItem, pressed);
             }
         }
     }

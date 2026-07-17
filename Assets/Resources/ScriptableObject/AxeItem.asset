@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c95b485f68213e84196e9228a8bb8f0c, type: 3}
-  m_Name: New Weapon
+  m_Name: AxeItem
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
   description: "A fallen titan of the forest, this massive log once belonged to a
     tree so old that its roots may have touched the memory of the world itself. Its
@@ -24,6 +24,8 @@ MonoBehaviour:
   size: {x: 3, y: 2}
   icon: {fileID: 21300000, guid: 8f3deba02ac0b5f4f93f064c88f0278d, type: 3}
   iconRotated: {fileID: 21300000, guid: 75adc5b798dee594fb290a79cc599221, type: 3}
-  useBehavior: {fileID: 0}
+  useBehavior: {fileID: 11400000, guid: ffb6da30f6a0c1543851d129a6eaf28b, type: 2}
+  heldPrefab: {fileID: 457814221049907415, guid: 09b652e2ea86d1048bff69d68b7ea009, type: 3}
+  worldPrefab: {fileID: 0}
   damage: 234234234
   weight: 4.95

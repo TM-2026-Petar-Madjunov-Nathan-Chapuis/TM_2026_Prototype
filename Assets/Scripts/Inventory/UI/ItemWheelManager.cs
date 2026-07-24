@@ -20,18 +20,20 @@ public class ItemWheelManager : MonoBehaviour
     public void Enable(VisualElement ItemWheelHolder, InventoryManager inventoryManager)
     {
         this.inventoryManager = inventoryManager;
-        if (this.itemWheelHolder != null && this.itemWheelHolder != ItemWheelHolder)
+        if (this.itemWheelHolder != null)
         {
+            itemWheelHolder.generateVisualContent -= vectorImager.Draw;
             itemWheelHolder.UnregisterCallback<GeometryChangedEvent>(OnUILoaded);
         }
         this.itemWheelHolder = ItemWheelHolder;
         itemWheelHolder.generateVisualContent += vectorImager.Draw;
         itemWheelHolder.RegisterCallback<GeometryChangedEvent>(OnUILoaded);
         items = new VisualElement[this.inventoryManager.itemWheelItems.Count()];
-        vectorImager.hoveredIndex = 0;
+        vectorImager.hoveredIndex = -1;
     }
     public void Disable()
     {
+        itemWheelHolder.generateVisualContent -= vectorImager.Draw;
         itemWheelHolder.UnregisterCallback<GeometryChangedEvent>(OnUILoaded);
     }
     public void OnUILoaded(GeometryChangedEvent evt)

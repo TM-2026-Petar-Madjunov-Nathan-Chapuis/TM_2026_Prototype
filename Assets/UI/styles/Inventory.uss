@@ -10,22 +10,23 @@
 .inventory__items-list {
     margin-top: 10px;
     flex-grow: 1;
+    z-index: 10;
 }
 
 .inventory__weight-bar-holder {
+    z-index: 0;
     align-self: stretch;
     flex-grow: 0;
-    height: 40px;
-    margin-left: 5%;
-    margin-right: 5%;
+    height: 100px;
+    transition-duration: 0.2s;
 }
 
 .inventory__weight-bar {
     position: absolute;
     top: 0px;
     bottom: 0px;
-    right: 0px;
-    left: 0px;
+    right: 5%;
+    left: 5%;
     border-radius: 10px;
     border-width: 0px;
     flex-grow: 0;
@@ -293,4 +294,14 @@
 
 .inventory__item-wheel-item {
     
+}
+.inventory__drop-item-icon {
+    position: absolute;
+    top: 5px;
+    bottom: 5px;
+    align-self: center;
+    display: none;
+    aspect-ratio: 1;
+    background-image: resource("UI/delete");
+    transition-duration: 0.2s;
 }

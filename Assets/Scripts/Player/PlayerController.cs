@@ -28,19 +28,13 @@ namespace TM.Player
         private void OnEnable()
         {
             InputManager.Instance.RegisterListener("Move", Move, InputValueType.Vector2, false);
-            InputManager.Instance.RegisterListener("Jump", Jump, InputValueType.Button, false);
+            InputManager.Instance.RegisterListener("Jump", Jump, InputValueType.Button, true);
         }
         private void OnDisable()
         {
             InputManager.Instance.UnRegisterListener("Move", Move);
             InputManager.Instance.UnRegisterListener("Jump", Jump);
         }
-
-        private void Update()
-        {
-
-        }
-
         private void Move(InputValues inputValues) //mouvement + gravity | ran every frame by the input listener in input manager
         {
             Vector2 move = inputValues.vector2Value;

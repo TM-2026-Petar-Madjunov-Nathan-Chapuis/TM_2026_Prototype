@@ -70,7 +70,7 @@ namespace TM.Inventory
             InventoryItem item = new InventoryItem();
             item.SetItemData(itemData);
             item.SetPosition(pos);
-            item.Rotate();
+            if (rotated) item.Rotate();
 
             if(!CanPlace(item, pos)) return false;
             Vector2Int size = item.itemData.size;

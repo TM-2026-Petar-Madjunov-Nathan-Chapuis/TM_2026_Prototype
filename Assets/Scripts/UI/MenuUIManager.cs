@@ -51,12 +51,7 @@ namespace TM.UI
 
         private void OnEnable()
         {
-            InputManager.Instance.RegisterListener(
-                "OpenInventory",
-                ToggleHideShow,
-                InputValueType.Button,
-                false
-            );
+            InputManager.Instance.RegisterListener("OpenInventory", ToggleHideShow, InputValueType.Button, true);
         }
 
         private void OnDisable()
@@ -75,11 +70,11 @@ namespace TM.UI
                 CursorManager.Instance.ShowCursor();
                 CaptureAndBlurBackground();
                 this.inventoryUIManager.OnEnable();
-                Time.timeScale = 0f; //stop time (works for now, might need a global better implementation its own manager)
+                GameStateManager.Instance.FreezeTime();
             }
             else
             {
-                Time.timeScale = 1f;
+                GameStateManager.Instance.UnFreezeTime();
                 this.inventoryUIManager.OnDisable();
                 CursorManager.Instance.HideCursor();
             }
@@ -102,7 +97,7 @@ namespace TM.UI
             {
                 if (captureRT != null)
                 {
-                    captureRT.Release();                    
+                    captureRT.Release();
                 }
                 captureRT = new RenderTexture(Screen.width, Screen.height, 0);
                 captureRT.Create();
@@ -111,7 +106,7 @@ namespace TM.UI
             {
                 if (flippedRt != null)
                 {
-                    flippedRt.Release();                    
+                    flippedRt.Release();
                 }
                 flippedRt = new RenderTexture(Screen.width, Screen.height, 0);
                 flippedRt.Create();

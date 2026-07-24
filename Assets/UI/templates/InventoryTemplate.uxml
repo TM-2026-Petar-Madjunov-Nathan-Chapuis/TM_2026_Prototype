@@ -9,7 +9,7 @@
             <ui:Label text="&lt;u&gt;Armor" name="ArmorLabel" class="inventory__armor-label font-medium font-size-medium"/>
             <ui:VisualElement name="PlayerViewAndArmorSlots" class="inventory__player-view-and-armor-slots">
                 <ui:VisualElement name="LeftArmorSlotsHolder" class="inventory__left-armor-slots-holder">
-                    <ui:VisualElement name="LegArmorSlotHolder" class="inventory__armor-slot-holder-leg">   d
+                    <ui:VisualElement name="LegArmorSlotHolder" class="inventory__armor-slot-holder-leg">
                         <ui:VisualElement name="LegArmorSlot" class="inventory__armor-slot-leg"/>
                     </ui:VisualElement>
                     <ui:VisualElement name="BootsArmorSlotHolder" class="inventory__armor-slot-holder-boots">
@@ -35,6 +35,7 @@
             </ui:VisualElement>
             <ui:VisualElement name="WeightBarHolder" class="inventory__weight-bar-holder">
                 <ui:ProgressBar name="WeightBar" value="50" class="inventory__weight-bar"/>
+                <ui:VisualElement name="DropItemIcon" enabled="false" class="inventory__drop-item-icon"/>
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="ItemDescription" class="inventory__item-description">

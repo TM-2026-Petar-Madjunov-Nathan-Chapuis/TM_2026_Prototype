@@ -43,7 +43,7 @@ namespace TM.Player.ItemWheel.UI
         void OnEnable()
         {
             itemWheelHolder.RegisterCallback<GeometryChangedEvent>(Resize);
-            InputManager.Instance.RegisterListener("ItemWheel", ToggleMenu, InputValueType.Button, true);
+            InputManager.Instance.RegisterListener("ItemWheel", ToggleMenu, InputValueType.UpAndDownButton, true);
         }
 
         void OnDisable()
@@ -86,7 +86,8 @@ namespace TM.Player.ItemWheel.UI
 
             if (MenuOpened)
             {
-                Time.timeScale = 0.3f; //slow time (works for now, might need a global better implementation its own manager)
+                GameStateManager.Instance.SlowTime();
+                GameStateManager.Instance.FreezeLooking();
                 playerCamera.lookingAllowed = false;
                 mouseVector = Vector2.zero;
                 wheelVectorImager.hoveredIndex = -1;
@@ -100,7 +101,7 @@ namespace TM.Player.ItemWheel.UI
                 this.wheelVectorImager.hoveredIndex = -1;
                 root.style.display = DisplayStyle.None;
                 playerCamera.lookingAllowed = true;
-                Time.timeScale = 1f;
+                GameStateManager.Instance.UnFreezeTime();
             }
         }
         private void HandleMouseMovement()

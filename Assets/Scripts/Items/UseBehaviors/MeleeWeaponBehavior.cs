@@ -6,6 +6,7 @@ namespace TM.Items
     public class MeleeWeaponBehavior : UseBehavior
     {
         public string animationTrigger; //set pour chaque meleeeweaponbehavior.
+        public float knowbackForce = 10000f;
         public override void Use(HeldItem heldItem, bool pressed)
         {
             if (!pressed) return;
@@ -25,8 +26,8 @@ namespace TM.Items
             Vector3 relative =  collider.gameObject.transform.position - playerpos;
             if (collider.gameObject.GetComponent<Rigidbody>())
             {
-            collider.gameObject.GetComponent<Rigidbody>().AddForce(relative * 1000f);
-            collider.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, 1000, 0));             
+            collider.gameObject.GetComponent<Rigidbody>().AddForce(relative * knowbackForce);
+            collider.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, 0, 0));             
             }
         }
     }

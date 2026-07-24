@@ -18,23 +18,30 @@ namespace TM.Inventory.UI
         private VisualElement itemMain;
         private VisualElement playerView;
         private ProgressBar weightBar;
+        private VisualElement weightBarHolder;
+        private VisualElement dropItemIcon;
         private VisualElement headArmorSlot;
         private VisualElement chestArmorSlot;
         private VisualElement legArmorSlot;
         private VisualElement bootsArmorSlot;
         private VisualElement itemWheelHolder;
         private Dictionary<Vector2, Vector2Int> allParentToIndexPositions;
+        private int switchFrameTime;
         //LOWER "MANAGERS"
         private GridHighlighter gridHighlighter;
         private ItemDescriptor itemDescriptor;
         private PlayerViewManager inventoryPlayerViewManager;
         private ItemWheelManager itemWheelManager;
+        private DropAreaManager dropAreaManager;
+        private ItemWheelVectorImager itemWheelVectorImager;
 
         public override void SetRoot(VisualElement root)
         {
             this.gridHighlighter = GameObject.FindAnyObjectByType<GridHighlighter>();
             this.itemDescriptor = GameObject.FindAnyObjectByType<ItemDescriptor>();
             this.itemWheelManager = GameObject.FindAnyObjectByType<ItemWheelManager>();
+            this.dropAreaManager = GameObject.FindAnyObjectByType<DropAreaManager>();
+            this.itemWheelVectorImager = GameObject.FindAnyObjectByType<ItemWheelVectorImager>();
             base.SetRoot(root);
             this.player = GameObject.FindGameObjectWithTag("Player");
             if (this.player == null) { throw new UnityException("no player found by tag : Player"); }
@@ -45,6 +52,8 @@ namespace TM.Inventory.UI
             itemGrid = this.root.Q<VisualElement>("GridBackground");
             equipment = this.root.Q<VisualElement>("Equipement");
             weightBar = this.root.Q<ProgressBar>("WeightBar");
+            weightBarHolder = this.root.Q<VisualElement>("WeightBarHolder");
+            dropItemIcon = this.root.Q<VisualElement>("DropItemIcon");
             itemMain = this.root.Q<VisualElement>("Main");
             playerView = this.root.Q<VisualElement>("PlayerView");
             headArmorSlot = this.root.Q<VisualElement>("HeadArmorSlot");
@@ -63,6 +72,7 @@ namespace TM.Inventory.UI
             inventoryPlayerViewManager.Enable(playerView);
             itemDescriptor.Enable(this.root.Q<VisualElement>("ItemDescription"));
             itemWheelManager.Enable(itemWheelHolder, inventoryManager);
+            dropAreaManager.Enable(weightBar, weightBarHolder, dropItemIcon);
         }
         private void ItemCallback(GeometryChangedEvent evt)
         {
@@ -80,6 +90,7 @@ namespace TM.Inventory.UI
             itemLayer.Clear();
             inventoryPlayerViewManager.Disable();
             itemMain.UnregisterCallback<GeometryChangedEvent>(ItemCallback);
+            this.dropAreaManager.Disable();
         }
         private void WeightBarUpdate()
         {
@@ -178,32 +189,40 @@ namespace TM.Inventory.UI
             Vector2 pos = InventoryManagerHelper.IndexToParentPos(inventoryItem.position, this.inventoryManager);
             item.style.left = pos.x;
             item.style.top = pos.y;
-            SetVisualItem(item, inventoryItem); 
+            SetVisualItem(item, inventoryItem);
 
             this.itemLayer.Add(item);
             this.itemsElements[inventoryItem.position.x, inventoryItem.position.y] = item;
         }
         private void HandleDragEnd(VisualElement item)
         {
+            InventoryItem inventoryItem = item.userData as InventoryItem;
             gridHighlighter.ClearColors();
             itemWheelManager.ClearHighlight();
+            if(dropAreaManager.hightlighted) //if its highlighted means the item was here when dropped.
+            {
+                dropAreaManager.SwitchToWeightBar();
+                this.inventoryManager.DropItem(inventoryItem);
+                this.itemsElements[inventoryItem.position.x, inventoryItem.position.y] = null;
+                itemLayer.Remove(item);
+                return;
+            }
             VisualElement parent = item.parent;
             if (parent == null) return;
 
-            InventoryItem inventoryItem = item.userData as InventoryItem;
             Vector2Int oldPos = inventoryItem.position;
             Vector2 pos = new Vector2(item.style.left.value.value, item.style.top.value.value);
             //IF POS < 0 THEN ITS ABOUT EITHER THE ARMOR OR THE ITEM WHEEL, SO DIFFERENT LOGIC
             if (pos.x < 0)
             {
-                if(pos.y > parent.resolvedStyle.height/2) //ITS ABOUT THE ARMOR
+                if (pos.y > parent.resolvedStyle.height / 2) //ITS ABOUT THE ARMOR
                 {
-                    
+
                 }
                 else //ITS ABOUT THE ITEMWHEEL
                 {
                     pos = parent.ChangeCoordinatesTo(itemWheelHolder, pos); //convert the positions to itemwheellocal space.
-                    pos = new Vector2(pos.x + item.resolvedStyle.width/2, pos.y + item.resolvedStyle.height/2); //ajust to be the center of the item.
+                    pos = new Vector2(pos.x + item.resolvedStyle.width / 2, pos.y + item.resolvedStyle.height / 2); //ajust to be the center of the item.
                     int index = GameObject.FindAnyObjectByType<ItemWheelVectorImager>().NearestItemWheelPosition(pos, itemWheelHolder.resolvedStyle.width);
                     this.itemWheelManager.AddItem(inventoryItem, index);
                     //GET THE ITEM BACK AS WE STORE ONLY THE REFERENCE.
@@ -213,7 +232,7 @@ namespace TM.Inventory.UI
                     item.style.top = newPos.y; //move the item back at the start position, providing the snapping.   
                     if (!result) //the item doesnt fit in the old space, which means it has beens rotated, so rotate it back to what it once was.
                     {
-                        inventoryItem.Rotate(); 
+                        inventoryItem.Rotate();
                         SetVisualItem(item, inventoryItem); //update the item.
                     }
                 }
@@ -237,19 +256,23 @@ namespace TM.Inventory.UI
                 item.style.top = newPos.y; //move the item back at the start position, providing the snapping.   
                 if (!result) //the item doesnt fit in the old space, which means it has beens rotated, so rotate it back to what it once was.
                 {
-                    inventoryItem.Rotate(); 
+                    inventoryItem.Rotate();
                     SetVisualItem(item, inventoryItem); //update the item.
                 }
             }
         }
         private void HandleDragging(VisualElement item, Vector2 pointerPos)
         {
+            if (switchFrameTime>=0) switchFrameTime++;
+            if (switchFrameTime > 3) {switchFrameTime = -1; this.dropAreaManager.SwitchToDropArea();}//we consider this dragging and so put the option to drop items.
             gridHighlighter.OnDragMove(this.gridElements, item, this.inventoryManager, this.allParentToIndexPositions);
-            Vector2 pos = new Vector2(item.resolvedStyle.left + item.resolvedStyle.width/2, item.resolvedStyle.top + item.resolvedStyle.height/2 );
-            itemWheelManager.Highlight(GameObject.FindAnyObjectByType<ItemWheelVectorImager>().NearestItemWheelPosition(item.parent.ChangeCoordinatesTo(itemWheelHolder, pos), itemWheelHolder.resolvedStyle.width));
+            Vector2 pos = new Vector2(item.resolvedStyle.left + item.resolvedStyle.width / 2, item.resolvedStyle.top + item.resolvedStyle.height / 2);
+            this.dropAreaManager.Hightlight(pos, this.inventoryManager.gridSize, this.inventoryManager.cellSize);
+            itemWheelManager.Highlight(this.itemWheelVectorImager.NearestItemWheelPosition(item.parent.ChangeCoordinatesTo(itemWheelHolder, pos), itemWheelHolder.resolvedStyle.width));
         }
         private void HandleDragStart(VisualElement item)
         {
+            this.switchFrameTime = 0;
             ItemSelector.Select(item, item.userData as InventoryItem, inventoryManager);
         }
         private void HandleRotate(VisualElement item)

@@ -36,14 +36,20 @@ namespace TM.Input
                         {
                             listener.action(new InputValues{pressed = true});
                         }
-                        else if (listener.useTriggeredFrames) //if triggered frames is set to true fires a second action call to notify when the button was realeased
+                        else if (!listener.useTriggeredFrames) //fires at all frames if usetriggered frames is set to false.
                         {
-                            if (listener.inputAction.WasReleasedThisFrame())
-                            {
-                                listener.action(new InputValues{pressed = false});
-                            }
+                            listener.action(new InputValues{pressed = false});
                         }
-                        ;
+                        break;
+                    case InputValueType.UpAndDownButton:
+                        if (listener.inputAction.WasPressedThisFrame())
+                        {
+                            listener.action(new InputValues{pressed = true});
+                        }
+                        else if (listener.inputAction.WasReleasedThisFrame())
+                        {
+                            listener.action(new InputValues{pressed = false});
+                        }
                         break;
                     case InputValueType.Float:
                         if (listener.useTriggeredFrames)
@@ -107,13 +113,14 @@ namespace TM.Input
         public Action<InputValues> action; //allows Action function to take any number and types of arguments if for example its a vector2 value or just a button
         public InputAction inputAction;
         public InputValueType inputValueType;
-        public bool useTriggeredFrames; // the usetriggeredframes means that if set to true you call the action only on frames where the input has been triggered. or in case of buttons, calls the action also when the button is realeased.
+        public bool useTriggeredFrames; // the usetriggeredframes means that if set to true you call the action only on frames where the input has been triggered. 
     }
     public enum InputValueType
     { //to easily differenciate each input type in the input listening switch statement
         Button,
         Float,
-        Vector2
+        Vector2,
+        UpAndDownButton,
     }
     public class InputValues //holds all possible input values, exandable ofc
     {

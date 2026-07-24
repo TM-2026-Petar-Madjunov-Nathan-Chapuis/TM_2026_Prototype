@@ -1,0 +1,287 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8861934512814540414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c02bb70996b49eba31d0c206e28da24, type: 3}
+  m_Name: FoxSensorValue
+  m_EditorClassIdentifier: Unity.Behavior::Unity.Behavior.RuntimeBlackboardAsset
+  VersionTimestamp: 639205068782769610
+  AssetID:
+    m_Value0: 1477728985589764232
+    m_Value1: 3817003241037501993
+  m_Blackboard:
+    m_Variables:
+    - rid: 4764778151478034817
+    - rid: 4764778151478034819
+    - rid: 4764778151478034821
+    - rid: 4764778151478034823
+    - rid: 4764778151478034825
+    - rid: 4764778151478034827
+    - rid: 4764778151478034829
+    - rid: 4764778151478035285
+    - rid: 4764778151478035190
+    - rid: 4764778174938873920
+    - rid: 4764778174938874067
+    - rid: 4764778174938874711
+  m_SharedBlackboardVariableGuids: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 4764778151478034817
+      type: {class: 'BlackboardVariable`1[[System.Boolean, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 2869862415437348623
+          m_Value1: 16917958244433145071
+        Name: CanSeePlayer
+        m_Value: 0
+    - rid: 4764778151478034819
+      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 17111192543699934151
+          m_Value1: 2792646062104400729
+        Name: PlayerDistance
+        m_Value: 0
+    - rid: 4764778151478034821
+      type: {class: 'BlackboardVariable`1[[UnityEngine.Vector3, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 3773381179600076762
+          m_Value1: 8688669847122378097
+        Name: LastSeenPosition
+        m_Value: {x: 0, y: 0, z: 0}
+    - rid: 4764778151478034823
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 12683255746572604685
+          m_Value1: 1163018629623631867
+        Name: Player
+        m_Value: {fileID: 0}
+    - rid: 4764778151478034825
+      type: {class: 'BlackboardVariable`1[[System.Boolean, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 10305500965305826754
+          m_Value1: 18356582741461230227
+        Name: HeardPlayer
+        m_Value: 0
+    - rid: 4764778151478034827
+      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 14190926756709749948
+          m_Value1: 17050294048618761124
+        Name: FleeDistance
+        m_Value: 0
+    - rid: 4764778151478034829
+      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 327425015838364085
+          m_Value1: 18137390119756632374
+        Name: WanderRadius
+        m_Value: 0
+    - rid: 4764778151478035190
+      type: {class: 'BlackboardVariable`1[[System.Boolean, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 15868968959524968775
+          m_Value1: 2442200359734024854
+        Name: PlayerIsMoving
+        m_Value: 0
+    - rid: 4764778151478035285
+      type: {class: 'BlackboardVariable`1[[UnityEngine.Vector3, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 14045542074281994310
+          m_Value1: 2200532402037275397
+        Name: LastHeardPosition
+        m_Value: {x: 0, y: 0, z: 0}
+    - rid: 4764778174938873920
+      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 15749047277904362080
+          m_Value1: 4907952375849389137
+        Name: normalSpeed
+        m_Value: 0
+    - rid: 4764778174938874067
+      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 16024163796738095434
+          m_Value1: 8040577795336804613
+        Name: fleeSpeed
+        m_Value: 0
+    - rid: 4764778174938874711
+      type: {class: 'BlackboardVariable`1[[UnityEngine.Vector3, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 17204488738062948951
+          m_Value1: 12888857225390433242
+        Name: basePosition
+        m_Value: {x: 0, y: 0, z: 0}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd922ae02c94c87a66e46a10a7319b9, type: 3}
+  m_Name: FoxSensorValue
+  m_EditorClassIdentifier: Unity.Behavior.Authoring::Unity.Behavior.BehaviorBlackboardAuthoringAsset
+  AssetID:
+    m_Value0: 1477728985589764232
+    m_Value1: 3817003241037501993
+  m_Variables:
+  - rid: 4764778151478034816
+  - rid: 4764778151478034818
+  - rid: 4764778151478034820
+  - rid: 4764778151478034822
+  - rid: 4764778151478034824
+  - rid: 4764778151478034826
+  - rid: 4764778151478034828
+  - rid: 4764778151478035284
+  - rid: 4764778151478035189
+  - rid: 4764778174938873919
+  - rid: 4764778174938874066
+  - rid: 4764778174938874710
+  m_VersionTimestamp: 639205068782769610
+  m_CommandBuffer:
+    m_Commands: []
+  m_RuntimeBlackboardAsset: {fileID: -8861934512814540414}
+  references:
+    version: 2
+    RefIds:
+    - rid: 4764778151478034816
+      type: {class: 'TypedVariableModel`1[[System.Boolean, mscorlib]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 2869862415437348623
+          m_Value1: 16917958244433145071
+        Name: CanSeePlayer
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: 0
+    - rid: 4764778151478034818
+      type: {class: 'TypedVariableModel`1[[System.Single, mscorlib]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 17111192543699934151
+          m_Value1: 2792646062104400729
+        Name: PlayerDistance
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: 0
+    - rid: 4764778151478034820
+      type: {class: 'TypedVariableModel`1[[UnityEngine.Vector3, UnityEngine.CoreModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 3773381179600076762
+          m_Value1: 8688669847122378097
+        Name: LastSeenPosition
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {x: 0, y: 0, z: 0}
+    - rid: 4764778151478034822
+      type: {class: 'TypedVariableModel`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 12683255746572604685
+          m_Value1: 1163018629623631867
+        Name: Player
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 4764778151478034824
+      type: {class: 'TypedVariableModel`1[[System.Boolean, mscorlib]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 10305500965305826754
+          m_Value1: 18356582741461230227
+        Name: HeardPlayer
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: 0
+    - rid: 4764778151478034826
+      type: {class: 'TypedVariableModel`1[[System.Single, mscorlib]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 14190926756709749948
+          m_Value1: 17050294048618761124
+        Name: FleeDistance
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: 0
+    - rid: 4764778151478034828
+      type: {class: 'TypedVariableModel`1[[System.Single, mscorlib]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 327425015838364085
+          m_Value1: 18137390119756632374
+        Name: WanderRadius
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: 0
+    - rid: 4764778151478035189
+      type: {class: 'TypedVariableModel`1[[System.Boolean, mscorlib]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 15868968959524968775
+          m_Value1: 2442200359734024854
+        Name: PlayerIsMoving
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: 0
+    - rid: 4764778151478035284
+      type: {class: 'TypedVariableModel`1[[UnityEngine.Vector3, UnityEngine.CoreModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 14045542074281994310
+          m_Value1: 2200532402037275397
+        Name: LastHeardPosition
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {x: 0, y: 0, z: 0}
+    - rid: 4764778174938873919
+      type: {class: 'TypedVariableModel`1[[System.Single, mscorlib]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 15749047277904362080
+          m_Value1: 4907952375849389137
+        Name: normalSpeed
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: 0
+    - rid: 4764778174938874066
+      type: {class: 'TypedVariableModel`1[[System.Single, mscorlib]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 16024163796738095434
+          m_Value1: 8040577795336804613
+        Name: fleeSpeed
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: 0
+    - rid: 4764778174938874710
+      type: {class: 'TypedVariableModel`1[[UnityEngine.Vector3, UnityEngine.CoreModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 17204488738062948951
+          m_Value1: 12888857225390433242
+        Name: basePosition
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {x: 0, y: 0, z: 0}

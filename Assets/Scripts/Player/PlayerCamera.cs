@@ -24,11 +24,9 @@ namespace TM.Player
 
         [SerializeField] private float xSensitivity = 100f;
         [SerializeField] private float ySensitivity = 50f;
+        [SerializeField] private float thirdPersonDistance = 5f;
         [SerializeField] private float thirdPersonSmoothFactor;
-        [SerializeField] private float yClamp;
-        private GameObject thirdPersonCameraPos = null;
-        private float thirdPersonBaseY;
-        private float thirdPersonVerticalOffset;
+        [SerializeField] private float castRadius = 0.2f;
         public bool lookingAllowed = true;
 
 
@@ -50,7 +48,7 @@ namespace TM.Player
         private void OnEnable()
         {
             InputManager.Instance.RegisterListener("Look", Look, InputValueType.Vector2, true);
-            InputManager.Instance.RegisterListener("ToggleCamera", ToggleCamera, InputValueType.Button, false);
+            InputManager.Instance.RegisterListener("ToggleCamera", ToggleCamera, InputValueType.Button, true);
         }
         private void OnDisable()
         {
@@ -70,16 +68,6 @@ namespace TM.Player
                 firstPerson.gameObject.SetActive(false);
                 thirdPerson.gameObject.SetActive(true);
             }
-            thirdPersonCameraPos = new GameObject("thirdPersonCameraPos");
-            thirdPersonCameraPos.transform.position = thirdPerson.gameObject.transform.position;
-            thirdPersonCameraPos.transform.SetParent(transform);
-
-            thirdPersonBaseY = thirdPersonCameraPos.transform.position.y - transform.position.y;
-        }
-        void OnDrawGizmos()
-        {
-            if (thirdPersonCameraPos == null) return;
-            Gizmos.DrawLine(transform.position, thirdPersonCameraPos.transform.position);
         }
         public void ToggleCamera(InputValues inputValues) //Toggle camera called by input manager, input values is needed for type fulfilling but does nothing
         {
@@ -97,42 +85,30 @@ namespace TM.Player
         }
         void LateUpdate()
         {
-            if (!isFirstPerson) //logic for the lerping of the third camera position to smooth movements
-            {
-                if (Vector3.Distance(thirdPerson.gameObject.transform.position, thirdPersonCameraPos.transform.position) > 0.1)
-                {
-                    thirdPerson.transform.position = Vector3.Lerp(thirdPerson.gameObject.transform.position, thirdPersonCameraPos.transform.position, thirdPersonSmoothFactor * Time.deltaTime);
-                }
-                thirdPerson.gameObject.transform.LookAt(this.gameObject.transform);
-            }
         }
         private void Look(InputValues inputValues) // called by the InputManager at every triggered frame
         {
             if (lookingAllowed)
             {
                 Vector2 look = inputValues.vector2Value;
-                if (isFirstPerson)
+                yRotation += look.x * ySensitivity * 0.01f; //horizontal
+                xRotation -= look.y * xSensitivity * 0.01f; //vertical
+                xRotation = Mathf.Clamp(xRotation, -85f, 85f); //avoid over vertical rotation by clamping
+                transform.localRotation = Quaternion.Euler(0f, yRotation, 0f); //transforms the player's rotation directly and camera follows as its a child of parent
+
+                firstPerson.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f); //just tilt the first person camera
+                if (!this.isFirstPerson)
                 {
-                    yRotation += look.x * ySensitivity * 0.01f; //horizontal
-                    xRotation -= look.y * xSensitivity * 0.01f; //vertical
+                    float dis = thirdPersonDistance;
+                    if (Physics.SphereCast(firstPerson.transform.position, this.castRadius, -firstPerson.transform.forward, out RaycastHit hit, thirdPersonDistance))
+                    {
+                        dis = hit.distance;
+                    }
 
-                    xRotation = Mathf.Clamp(xRotation, -89f, 89f); //avoid over vertical rotation by clamping
-
-                    transform.localRotation = Quaternion.Euler(0f, yRotation, 0f);
-                    firstPerson.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+                    Vector3 direction = new Vector3(0f, math.sin(math.TORADIANS * -xRotation), math.cos(math.TORADIANS * -xRotation)).normalized;
+                    thirdPerson.transform.localPosition = direction * -math.abs(dis) + firstPerson.transform.localPosition;
+                    thirdPerson.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
                 }
-                else
-                {
-                    yRotation += look.x * ySensitivity * Time.deltaTime; //horizontal
-                    transform.localRotation = Quaternion.Euler(0f, yRotation, 0f); //transforms the player's rotation directly and camera follows as its a child of parent
-
-                    thirdPersonVerticalOffset -= look.y * xSensitivity * Time.deltaTime; //vertical
-                    thirdPersonVerticalOffset = Mathf.Clamp(thirdPersonVerticalOffset, -yClamp, yClamp); //clamp max vertical "rotation" or movement
-
-                    Vector3 pos = thirdPersonCameraPos.transform.position;
-                    pos.y = thirdPersonBaseY + thirdPersonVerticalOffset + transform.position.y; //calculate camera pos based on the offset
-                    thirdPersonCameraPos.transform.position = pos; //set the third person camera target that the acutual camera will learp towards to the pos.
-                }              
             }
         }
     }

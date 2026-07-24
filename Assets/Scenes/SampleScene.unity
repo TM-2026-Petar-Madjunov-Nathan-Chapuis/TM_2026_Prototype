@@ -3306,8 +3306,8 @@ NavMeshAgent:
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_AngularSpeed: 240
+  m_StoppingDistance: 0.4
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -3327,8 +3327,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25e5a384f1d4fc24f91581c402c09474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  fleeSpeed: 0
-  normalSpeed: 0
+  fleeSpeed: 7.94
+  normalSpeed: 0.4
 --- !u!114 &1647638713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3376,7 +3376,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1043
   FleeDistance: 30
-  WanderRadius: 0
+  WanderRadius: 100
 --- !u!95 &1647638716
 Animator:
   serializedVersion: 7

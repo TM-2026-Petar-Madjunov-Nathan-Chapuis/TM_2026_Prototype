@@ -25,6 +25,7 @@ public partial class WaitForFinishedPathAction : Action
 
     protected override void OnEnd()
     {
+        Agent.Value.GetComponent<Animator>().SetBool("Creeping", false);
     }
 }
 

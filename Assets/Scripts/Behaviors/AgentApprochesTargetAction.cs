@@ -37,6 +37,7 @@ public partial class AgentApprochesTargetAction : Action
         }
         Vector3 targetPosition = (path.corners[1] - Agent.Value.transform.position).normalized * StepSize.Value + Agent.Value.transform.position;
         agent.speed = NormalSpeed;
+        Agent.Value.GetComponent<Animator>().SetBool("Creeping", true);
         agent.SetDestination(targetPosition);
         return Status.Success;
     }

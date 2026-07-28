@@ -201,12 +201,13 @@ namespace TM.Inventory.UI
             itemWheelManager.ClearHighlight();
             if(dropAreaManager.hightlighted) //if its highlighted means the item was here when dropped.
             {
-                dropAreaManager.SwitchToWeightBar();
                 this.inventoryManager.DropItem(inventoryItem);
                 this.itemsElements[inventoryItem.position.x, inventoryItem.position.y] = null;
                 itemLayer.Remove(item);
+                dropAreaManager.SwitchToWeightBar();
                 return;
             }
+            dropAreaManager.SwitchToWeightBar();
             VisualElement parent = item.parent;
             if (parent == null) return;
 

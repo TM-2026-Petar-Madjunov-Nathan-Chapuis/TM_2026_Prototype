@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c02bb70996b49eba31d0c206e28da24, type: 3}
   m_Name: FoxSensorValue
   m_EditorClassIdentifier: Unity.Behavior::Unity.Behavior.RuntimeBlackboardAsset
-  VersionTimestamp: 639205068782769610
+  VersionTimestamp: 639208466888219799
   AssetID:
     m_Value0: 1477728985589764232
     m_Value1: 3817003241037501993
@@ -30,6 +30,7 @@ MonoBehaviour:
     - rid: 4764778174938873920
     - rid: 4764778174938874067
     - rid: 4764778174938874711
+    - rid: 4764778265087049797
   m_SharedBlackboardVariableGuids: []
   references:
     version: 2
@@ -130,6 +131,14 @@ MonoBehaviour:
           m_Value1: 12888857225390433242
         Name: basePosition
         m_Value: {x: 0, y: 0, z: 0}
+    - rid: 4764778265087049797
+      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 2633643441945184965
+          m_Value1: 675999421055501169
+        Name: creepingSpeed
+        m_Value: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,7 +167,8 @@ MonoBehaviour:
   - rid: 4764778174938873919
   - rid: 4764778174938874066
   - rid: 4764778174938874710
-  m_VersionTimestamp: 639205068782769610
+  - rid: 4764778265087049796
+  m_VersionTimestamp: 639208466888219799
   m_CommandBuffer:
     m_Commands: []
   m_RuntimeBlackboardAsset: {fileID: -8861934512814540414}
@@ -285,3 +295,13 @@ MonoBehaviour:
         IsExposed: 1
         m_IsShared: 0
         m_Value: {x: 0, y: 0, z: 0}
+    - rid: 4764778265087049796
+      type: {class: 'TypedVariableModel`1[[System.Single, mscorlib]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 2633643441945184965
+          m_Value1: 675999421055501169
+        Name: creepingSpeed
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: 0

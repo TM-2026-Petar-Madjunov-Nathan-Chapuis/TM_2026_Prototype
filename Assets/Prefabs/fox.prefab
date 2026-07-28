@@ -1,0 +1,208 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &2366011843830267787
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: c296237a977436b4095c1017c8252ae7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 558.128
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c296237a977436b4095c1017c8252ae7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 569.501
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c296237a977436b4095c1017c8252ae7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 458.617
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c296237a977436b4095c1017c8252ae7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c296237a977436b4095c1017c8252ae7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c296237a977436b4095c1017c8252ae7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c296237a977436b4095c1017c8252ae7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c296237a977436b4095c1017c8252ae7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c296237a977436b4095c1017c8252ae7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c296237a977436b4095c1017c8252ae7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c296237a977436b4095c1017c8252ae7, type: 3}
+      propertyPath: m_Name
+      value: fox
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c296237a977436b4095c1017c8252ae7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: c296237a977436b4095c1017c8252ae7, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 76dbf51ecf8384c46b22219045b7c2e1, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c296237a977436b4095c1017c8252ae7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3419189697763351706}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c296237a977436b4095c1017c8252ae7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1057815598929673288}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c296237a977436b4095c1017c8252ae7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8133947425558850652}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c296237a977436b4095c1017c8252ae7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8403246155842327228}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c296237a977436b4095c1017c8252ae7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4831063227638720473}
+  m_SourcePrefab: {fileID: 100100000, guid: c296237a977436b4095c1017c8252ae7, type: 3}
+--- !u!1 &3176351574667789018 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c296237a977436b4095c1017c8252ae7, type: 3}
+  m_PrefabInstance: {fileID: 2366011843830267787}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3419189697763351706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3176351574667789018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25e5a384f1d4fc24f91581c402c09474, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FoxController
+  fleeSpeed: 9
+  normalSpeed: 1.5
+  creepingSpeed: 0.45
+--- !u!114 &1057815598929673288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3176351574667789018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2a5965ebadc02546bb4b4bf9e3c929a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FoxSensor
+  player: {fileID: 0}
+  maxSeeingDistance: 30
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 1043
+  FleeDistance: 30
+  WanderRadius: 50
+--- !u!114 &8133947425558850652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3176351574667789018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Behavior::Unity.Behavior.BehaviorGraphAgent
+  m_Graph: {fileID: -4059019931416992107, guid: 5c0987abd5334974f863873ccad748a6, type: 2}
+  m_BlackboardVariableOverridesList:
+  - rid: 4764778265087049794
+  - rid: 4764778265087049795
+  m_OriginalGraph: {fileID: 0}
+  m_IsInitialised: 0
+  m_IsStarted: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 4764778265087049794
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        m_Value: {fileID: 3176351574667789018}
+    - rid: 4764778265087049795
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 12683255746572604685
+          m_Value1: 1163018629623631867
+        Name: Player
+        m_Value: {fileID: 0}
+--- !u!195 &8403246155842327228
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3176351574667789018}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.49
+  m_Speed: 0
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 180
+  m_StoppingDistance: 0.68
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 0.8
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!54 &4831063227638720473
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3176351574667789018}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

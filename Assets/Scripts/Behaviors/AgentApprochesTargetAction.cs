@@ -6,13 +6,13 @@ using Unity.Properties;
 using UnityEngine.AI;
 
 [Serializable, GeneratePropertyBag]
-[NodeDescription(name: "AgentApprochesTarget", story: "[Agent] approaches [Target] by [StepSize] at [normalSpeed]", category: "Action/Navigation", id: "a55554e3fab536295c71601d35bfdde9")]
+[NodeDescription(name: "AgentApprochesTarget", story: "[Agent] approaches [Target] by [StepSize] at [CreepingSpeed]", category: "Action/Navigation", id: "a55554e3fab536295c71601d35bfdde9")]
 public partial class AgentApprochesTargetAction : Action
 {
     [SerializeReference] public BlackboardVariable<GameObject> Agent;
     [SerializeReference] public BlackboardVariable<GameObject> Target;
     [SerializeReference] public BlackboardVariable<float> StepSize;
-    [SerializeReference] public BlackboardVariable<float> NormalSpeed;
+    [SerializeReference] public BlackboardVariable<float> CreepingSpeed;
     private NavMeshAgent agent;
 
     protected override Status OnStart()
@@ -36,7 +36,7 @@ public partial class AgentApprochesTargetAction : Action
             agent.CalculatePath(hit.position, path);
         }
         Vector3 targetPosition = (path.corners[1] - Agent.Value.transform.position).normalized * StepSize.Value + Agent.Value.transform.position;
-        agent.speed = NormalSpeed;
+        agent.speed = CreepingSpeed;
         Agent.Value.GetComponent<Animator>().SetBool("Creeping", true);
         agent.SetDestination(targetPosition);
         return Status.Success;

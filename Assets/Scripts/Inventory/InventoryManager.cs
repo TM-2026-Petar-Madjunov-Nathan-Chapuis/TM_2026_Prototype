@@ -18,7 +18,7 @@ namespace TM.Inventory
         [field: SerializeField] public Vector2Int gridSize { get; private set; }
         public WeaponData exasdéflkj;
         public DrinkData whatdsaélkfjasédf;
-        public InventoryItem[] itemWheelItems;
+        public Guid?[] ItemWheelIds;
         private int itemWheelSlotNumber;
         string ISaveable.UID => "InventoryManager";
 
@@ -32,7 +32,7 @@ namespace TM.Inventory
         private void Start()
         {
             itemWheelSlotNumber = GameObject.FindAnyObjectByType<ItemWheelVectorImager>().slotNumber;
-            itemWheelItems = new InventoryItem[itemWheelSlotNumber];
+            ItemWheelIds = new Guid?[itemWheelSlotNumber];
             inventoryGrid = new InventoryGrid(gridSize);
             this.inventoryGrid.TryInsertItem(exasdéflkj, new Vector2Int(2, 2), false);
             this.inventoryGrid.TryInsertItem(exasdéflkj, new Vector2Int(6, 2), true);
@@ -44,22 +44,7 @@ namespace TM.Inventory
             InventoryManagerSaveData saveData = JsonConvert.DeserializeObject<InventoryManagerSaveData>(data);
             this.inventoryGrid.Load(saveData.inventory);
             this.gridSize = saveData.gridSize;
-            this.itemWheelItems = new InventoryItem[saveData.itemWheelItems.Count()];
-            UUID?[] uUIDs = saveData.itemWheelItems.Select(s => s.itemDataUUID).ToArray();
-            Dictionary<UUID, ScriptableObject> lookup = UuidFinder.findMultiple(uUIDs);
-            for (int i = 0; i < saveData.itemWheelItems.Count(); i++)
-            {
-                InventoryItemSaveData itemSaveData = saveData.itemWheelItems[i];
-                if (!itemSaveData.itemDataUUID.HasValue) //empty item wheel slot
-                {
-                    this.itemWheelItems[i] = null;
-                    continue;
-                }
-
-                InventoryItem item = new();
-                item.Load(itemSaveData, (ItemData)lookup[itemSaveData.itemDataUUID.Value]);
-                this.itemWheelItems[i] = item;
-            }
+            this.ItemWheelIds = saveData.ItemWheelIds;
         }
 
         public object SaveData()
@@ -69,20 +54,8 @@ namespace TM.Inventory
             {
                 inventory = this.inventoryGrid.Save(), //needs its own save implementation because it contains a Scriptable Object
                 gridSize = this.gridSize,
+                ItemWheelIds = this.ItemWheelIds,
             };
-            InventoryItemSaveData[] saveDatas = new InventoryItemSaveData[itemWheelItems.Count()];
-            for (int i = 0; i < itemWheelItems.Count(); i++)
-            {
-                InventoryItem item = itemWheelItems[i];
-                InventoryItemSaveData itemSaveData = item != null ? item.Save() : new InventoryItemSaveData //if item is null then empty save data else save the item
-                {
-                    itemDataUUID = null, //means this save data is empty
-                    position = new Vector2Int(0, 0),
-                    rotated = false,
-                };
-                saveDatas[i] = itemSaveData;
-            }
-            inventoryManagerSaveData.itemWheelItems = saveDatas;
             return inventoryManagerSaveData;
         }
 
@@ -106,9 +79,23 @@ namespace TM.Inventory
             }
             return false;
         }
+        public void RemoveFromWheel(Guid id)
+        {
+            for(int i = 0; i < ItemWheelIds.Length; i++)
+            {
+                if(ItemWheelIds[i] == id)
+                    ItemWheelIds[i] = null;
+            }
+        }
+        public InventoryItem GetItemFromGuid(Guid? id)
+        {
+            return this.inventoryGrid.itemsList.FirstOrDefault(x => x.id == id);
+        }
         public void DropItem(InventoryItem inventoryItem)
         {
             this.inventoryGrid.RemoveItem(inventoryItem);
+            FindAnyObjectByType<ItemWheelManager>().OnUILoaded(new UnityEngine.UIElements.GeometryChangedEvent()); //trigger refresh on item wheel, a bit messy.
+            this.RemoveFromWheel(inventoryItem.id);
             GameObject worldItem = GameObject.Instantiate(inventoryItem.itemData.worldPrefab);
             worldItem.GetComponent<WorldItem>().inventoryManager = this;
             worldItem.transform.SetPositionAndRotation(this.transform.position, this.transform.rotation);
@@ -120,6 +107,6 @@ namespace TM.Inventory
     {
         public InventorySaveData inventory;
         public Vector2Int gridSize;
-        public InventoryItemSaveData[] itemWheelItems;
+        public Guid?[] ItemWheelIds;
     }
 }

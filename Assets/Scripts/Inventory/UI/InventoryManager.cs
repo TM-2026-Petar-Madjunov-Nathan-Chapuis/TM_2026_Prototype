@@ -274,7 +274,7 @@ namespace TM.Inventory.UI
         private void HandleDragStart(VisualElement item)
         {
             this.switchFrameTime = 0;
-            ItemSelector.Select(item, item.userData as InventoryItem, inventoryManager);
+            ItemSelector.Select(item, item.userData as InventoryItem, inventoryManager, this.itemWheelHolder);
         }
         private void HandleRotate(VisualElement item)
         {
@@ -288,7 +288,7 @@ namespace TM.Inventory.UI
             }
             else
             {
-                ItemSelector.Select(item, inventoryItem, this.inventoryManager);
+                ItemSelector.Select(item, inventoryItem, this.inventoryManager, this.itemWheelHolder);
                 bool result = this.inventoryManager.inventoryGrid.TryRotateItem(inventoryItem);
                 if (result)
                 {

@@ -9,6 +9,7 @@ namespace TM.Inventory
     public class InventoryItem
     {
         public ItemData itemData { get; private set; }
+        public Guid id { get; private set; } = Guid.NewGuid();
         public Vector2Int position { get; private set; }
         public bool rotated { get; private set; }
 
@@ -34,6 +35,7 @@ namespace TM.Inventory
                     itemDataUUID = this.itemData ? this.itemData.UUID : null,
                     position = this.position,
                     rotated = this.rotated, 
+                    id = this.id,
                 };
         }
         public void Load(InventoryItemSaveData saveData, ItemData itemData)
@@ -41,6 +43,7 @@ namespace TM.Inventory
             this.position = saveData.position;
             this.itemData = itemData;
             this.rotated = saveData.rotated;
+            this.id = saveData.id;
         }
     }
     [Serializable]
@@ -49,5 +52,6 @@ namespace TM.Inventory
         public UUID? itemDataUUID;
         public Vector2Int position;
         public bool rotated;
+        public Guid id;
     }
 }

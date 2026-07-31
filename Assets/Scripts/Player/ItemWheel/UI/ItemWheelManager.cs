@@ -1,4 +1,5 @@
 
+using System;
 using TM.Input;
 using TM.Inventory;
 using TM.Items;
@@ -76,7 +77,7 @@ namespace TM.Player.ItemWheel.UI
             }
             if (this.inventoryManager == null) return;
             if (this.itemWheelHolder == null) return;
-            if (this.inventoryManager.itemWheelItems == null) return;
+            if (this.inventoryManager.ItemWheelIds == null) return;
             this.LoadItems();
         }
         public void ToggleMenu(InputValues inputValues)
@@ -90,15 +91,15 @@ namespace TM.Player.ItemWheel.UI
                 GameStateManager.Instance.FreezeLooking();
                 playerCamera.lookingAllowed = false;
                 mouseVector = Vector2.zero;
-                wheelVectorImager.hoveredIndex = -1;
+                wheelVectorImager.SetHoveredIndex(-1, null);
                 root.style.display = DisplayStyle.Flex;
                 itemWheelHolder.MarkDirtyRepaint();
             }
             else
             {
                 //the item last select will be the new held item.
-                playerItemController.SetHeldItem(this.wheelVectorImager.hoveredIndex == -1 ? null : this.inventoryManager.itemWheelItems[this.wheelVectorImager.hoveredIndex]);
-                this.wheelVectorImager.hoveredIndex = -1;
+                playerItemController.SetHeldItem(this.wheelVectorImager.hoveredIndex == -1 ? null : this.inventoryManager.GetItemFromGuid(inventoryManager.ItemWheelIds[this.wheelVectorImager.hoveredIndex]));
+                this.wheelVectorImager.SetHoveredIndex(-1, null);
                 root.style.display = DisplayStyle.None;
                 playerCamera.lookingAllowed = true;
                 GameStateManager.Instance.UnFreezeTime();
@@ -112,12 +113,12 @@ namespace TM.Player.ItemWheel.UI
             float magnitude = mouseVector.magnitude;
             if (magnitude < deadZoneRadius)
             {
-                this.wheelVectorImager.hoveredIndex = -1;
+                this.wheelVectorImager.SetHoveredIndex(-1, null);
             }
             else
             {
                 Vector2 pos = new Vector2(mouseVector.x, -mouseVector.y) + new Vector2(this.itemWheelHolder.resolvedStyle.width / 2, this.itemWheelHolder.resolvedStyle.width / 2); //convert to correct space. (0,0 on top left)
-                this.wheelVectorImager.hoveredIndex = this.wheelVectorImager.NearestItemWheelPosition(pos, this.itemWheelHolder.resolvedStyle.width);
+                this.wheelVectorImager.SetHoveredIndex(this.wheelVectorImager.NearestItemWheelPosition(pos, this.itemWheelHolder.resolvedStyle.width), null);
             }
             itemWheelHolder.MarkDirtyRepaint();
         }
@@ -125,11 +126,10 @@ namespace TM.Player.ItemWheel.UI
         {
             itemWheelHolder.Clear();
             Vector2[] positions = this.wheelVectorImager.getAllSlotCenters(this.itemWheelHolder.resolvedStyle.width);
-            InventoryItem[] items = inventoryManager.itemWheelItems;
-            for (int i = 0; i < items.Length; i++)
+            for (int i = 0; i < inventoryManager.ItemWheelIds.Length; i++)
             {
-                if (items[i] == null) continue;
-                AddItem(positions[i], items[i].itemData);
+                if (inventoryManager.ItemWheelIds[i] == null) continue;
+                AddItem(positions[i], inventoryManager.GetItemFromGuid(inventoryManager.ItemWheelIds[i]).itemData);
             }
         }
         private void AddItem(Vector2 pos, ItemData itemData)

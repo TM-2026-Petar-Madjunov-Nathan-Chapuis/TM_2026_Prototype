@@ -16,7 +16,7 @@ public partial class WanderAction : Action
     [SerializeReference] public BlackboardVariable<float> Speed;
     [SerializeReference] public BlackboardVariable<Vector3> BasePosition;
 
-    protected override Status OnStart()
+    protected override Status OnUpdate()
     {
         float angle = UnityEngine.Random.Range(0, 360);
         float distance = UnityEngine.Random.value;
@@ -28,9 +28,8 @@ public partial class WanderAction : Action
         {
             Agent.Value.GetComponent<NavMeshAgent>().SetDestination(hit.position);
             Agent.Value.GetComponent<NavMeshAgent>().speed = Speed;
-            return Status.Running;
         }
-        if (Agent.Value.GetComponent<NavMeshAgent>().remainingDistance < 5f) return this.OnStart(); //reroll if the position is too close.
+        if (Agent.Value.GetComponent<NavMeshAgent>().remainingDistance < 5f) return Status.Running; //reroll if the position is too close.
         return Status.Success;
     }
 }

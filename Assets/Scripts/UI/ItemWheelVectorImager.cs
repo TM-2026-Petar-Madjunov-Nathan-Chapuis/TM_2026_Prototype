@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -12,13 +13,34 @@ public class ItemWheelVectorImager : MonoBehaviour
     [SerializeField] private float innerLineWidth = 10f;
     [SerializeField] private float circleLineWidth = 10f;
     [SerializeField] private float outerLineWidth = 10f;
+    [SerializeField] private float highlightedAngleIncrease = 80f;
+    [SerializeField] private float animationSpeed = 1f;
     [SerializeField] private Color innerLineColor;
     [SerializeField] private Color circleLineColor;
     [SerializeField] private Color outerLineColor;
     [SerializeField] private Color innerCircleColor;
     [SerializeField] private Color outerCircleColor;
     [SerializeField] private Color highlightedColor;
-    public int hoveredIndex = -1;
+    public float highlightAnimation; // 0 --> 1, where 0 is default state and 1 finished animation
+    public int hoveredIndex { get; private set; }
+    private VisualElement itemWheelHolder;
+    public void SetHoveredIndex(int i, VisualElement itemWheelHolder)
+    {
+        if (i != hoveredIndex)
+        {
+            hoveredIndex = i;
+            highlightAnimation = 0;
+        }
+        this.itemWheelHolder = itemWheelHolder; //could be null, optional
+    }
+    void Update()
+    {
+        if (highlightAnimation < 1)
+        {
+            highlightAnimation += Time.unscaledDeltaTime * animationSpeed;
+            this.itemWheelHolder?.MarkDirtyRepaint();
+        }
+    }
     public void Draw(MeshGenerationContext ctx)
     {
         float sideLength = ctx.visualElement.resolvedStyle.width;
@@ -49,7 +71,8 @@ public class ItemWheelVectorImager : MonoBehaviour
         painter2D.Stroke();
         painter2D.Fill();
 
-        (List<(Vector2, Vector2)>, List<Vector2>) positions = GetAllLinePositions(radius, innerRadius, center);
+        float[] angles = GetAllLineAngles();
+        (List<(Vector2, Vector2)>, List<Vector2>) positions = GetAllLinePositions(angles, radius, innerRadius, center);
         //DRAW EACH OUTER LINE
         painter2D.strokeColor = outerLineColor;
         painter2D.lineWidth = outerLineWidth;
@@ -73,8 +96,8 @@ public class ItemWheelVectorImager : MonoBehaviour
         }
         if (hoveredIndex >= 0)
         {
-            float start = (hoveredIndex-1) * (360f / slotNumber) + angleOffset;
-            float end = start + (360f / slotNumber);
+            float start = angles[hoveredIndex == 0 ? slotNumber - 1 : hoveredIndex - 1];
+            float end = angles[hoveredIndex];
 
             painter2D.BeginPath();
             // outer arc
@@ -92,24 +115,41 @@ public class ItemWheelVectorImager : MonoBehaviour
             painter2D.Fill(FillRule.OddEven);
         }
     }
-    private (List<(Vector2, Vector2)>, List<Vector2>) GetAllLinePositions(float radius, float innerRadius, Vector2 center)
+    private float[] GetAllLineAngles()
+    {
+        float[] lineAngles = new float[slotNumber];
+        float angleStepSize = 360f / slotNumber;
+
+        for (int i = 0; i < slotNumber; i++)
+        {
+            lineAngles[i] = angleOffset + i * angleStepSize;
+        }
+
+        if (hoveredIndex >= 0)
+        {
+            float halfIncrease = highlightedAngleIncrease * 0.5f * highlightAnimation;
+
+            lineAngles[hoveredIndex == 0 ? slotNumber - 1 : hoveredIndex - 1] -= halfIncrease;
+            lineAngles[hoveredIndex] += halfIncrease; //creates the hole
+        }
+
+        return lineAngles;
+    }
+    private (List<(Vector2, Vector2)>, List<Vector2>) GetAllLinePositions(float[] lineAngles, float radius, float innerRadius, Vector2 center)
     {
         List<(Vector2, Vector2)> couples = new();
         List<Vector2> innerLinePos = new();
-        float angleStepSizeDegrees = 360f / slotNumber;
-        Angle angle = Angle.Degrees(angleOffset);
-        for (int i = 0; i < slotNumber; i++)
+        foreach (float angle in lineAngles)
         {
             Vector2 first = new Vector2();
-            first.x = Mathf.Cos(angle.ToRadians()) * innerRadius + center.x; // (cleared than new( x = ...) to me)
-            first.y = Mathf.Sin(angle.ToRadians()) * innerRadius + center.y;
+            first.x = Mathf.Cos(angle * math.TORADIANS) * innerRadius + center.x; // (cleared than new( x = ...) to me)
+            first.y = Mathf.Sin(angle * math.TORADIANS) * innerRadius + center.y;
             Vector2 second = new Vector2();
-            second.x = Mathf.Cos(angle.ToRadians()) * radius + center.x;
-            second.y = Mathf.Sin(angle.ToRadians()) * radius + center.y;
+            second.x = Mathf.Cos(angle * math.TORADIANS) * radius + center.x;
+            second.y = Mathf.Sin(angle * math.TORADIANS) * radius + center.y;
 
             innerLinePos.Add(first);
             couples.Add((first, second));
-            angle = Angle.Degrees(angle.ToDegrees() + angleStepSizeDegrees);
         }
         return (couples, innerLinePos);
     }
@@ -136,8 +176,8 @@ public class ItemWheelVectorImager : MonoBehaviour
     }
     public int NearestItemWheelPosition(Vector2 pos, float sideLength)
     {
-        Vector2 center = new(sideLength/2f, sideLength/2f);
-        if (Vector2.Distance(pos, center) >  sideLength/2) return -1;
+        Vector2 center = new(sideLength / 2f, sideLength / 2f);
+        if (Vector2.Distance(pos, center) > sideLength / 2) return -1;
         pos = pos - center; //convert to local
         float angle = Mathf.Atan2(pos.y, pos.x) * Mathf.Rad2Deg;
 
@@ -147,4 +187,4 @@ public class ItemWheelVectorImager : MonoBehaviour
         if (i == this.slotNumber) i = 0;
         return i;
     }
-} 
+}

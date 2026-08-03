@@ -61,6 +61,14 @@
         "*.meta": "yaml",
         "*.prefab": "yaml",
         "*.unity": "yaml",
+        "*.shader": "unityshader",
+        "*.cginc": "unityshader",
+        "*.hlsl": "unityshader",
+        "*.hlsli": "unityshader",
+        "*.compute": "unityshader",
+        "*.cg": "unityshader",
+        "*.usf": "unityshader",
+        "*.ush": "unityshader"
     },
     "explorer.fileNesting.enabled": true,
     "explorer.fileNesting.patterns": {

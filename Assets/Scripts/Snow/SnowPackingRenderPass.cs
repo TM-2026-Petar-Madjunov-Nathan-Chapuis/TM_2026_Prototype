@@ -12,10 +12,6 @@ public class SnowPackingRenderPass : ScriptableRenderPass
     {
         this.material = material;
     }
-    private SnowPackingRenderPass pass;
-    private RTHandle packedTexture;
-    public RTHandle PackedTexture => packedTexture;
-
     public override void RecordRenderGraph(RenderGraph renderGraph, ContextContainer frameContext)
     {
         UniversalResourceData resourceData = frameContext.Get<UniversalResourceData>();
@@ -23,24 +19,22 @@ public class SnowPackingRenderPass : ScriptableRenderPass
 
         TextureHandle sourceTexture = resourceData.activeColorTexture; //camera current texture
 
-        RenderTextureDescriptor packedTextureDescriptor = cameraData.cameraTargetDescriptor; //create destination texture with same size. this is a descriptor and texture created below
-        packedTextureDescriptor.depthBufferBits = 0; //force color only
-        packedTextureDescriptor.msaaSamples = 1;
-        RenderingUtils.ReAllocateHandleIfNeeded(
-            ref packedTexture,
-            packedTextureDescriptor,
-            FilterMode.Bilinear,
-            TextureWrapMode.Clamp,
-            name: "Packed Camera Texture"
-        );
-        TextureHandle destinationTexture = renderGraph.ImportTexture(packedTexture);//actually create it
+        TextureDesc desc = resourceData.cameraDepthTexture.GetDescriptor(renderGraph);
+        desc.depthBufferBits = 0;
+        TextureHandle destination = renderGraph.CreateTexture(desc);
 
-        BlitMaterialParameters blitParams = new RenderGraphUtils.BlitMaterialParameters(sourceTexture, destinationTexture, material, 0);
+        //packs the texture into destination
+        BlitMaterialParameters blitParams = new RenderGraphUtils.BlitMaterialParameters(sourceTexture, destination, material, 0);
         renderGraph.AddBlitPass(blitParams, "ChannelPacking pass");
-    }
-    public void Dispose()
-    {
-        packedTexture?.Release();
-        packedTexture = null;
+        
+        //takes the destination texture then outputs it into the camera
+        BlitMaterialParameters copyBackParams = new RenderGraphUtils.BlitMaterialParameters(
+            destination,
+            sourceTexture,
+            Blitter.GetBlitMaterial(TextureDimension.Tex2D),
+            0
+        );
+
+        renderGraph.AddBlitPass( copyBackParams,"Copy Packed Texture To Camera");
     }
 }

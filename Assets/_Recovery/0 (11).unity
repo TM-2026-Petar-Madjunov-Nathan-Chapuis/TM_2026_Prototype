@@ -881,11 +881,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 467350904}
   m_CullTransparentMesh: 1
---- !u!20 &482646433 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 7801781671350518359, guid: 9857a62c2cc9cad4eb658bfe7a994531, type: 3}
-  m_PrefabInstance: {fileID: 5665060520336066176}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &510353633 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 249ab480b08480a4699b86e9b1172d92, type: 3}
@@ -3097,13 +3092,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SnowTerrain
   chunkSize: 50
   subdivision: 4
-  snowRenderDistance: 40
-  snowTextureResolution: {x: 1000, y: 1000}
+  snowRenderDistance: 0
+  snowTextureResolution: {x: 0, y: 0}
   chunkPrefab: {fileID: 3361984713488731439, guid: 3008766d5b408d044afbca810467022d, type: 3}
   mainTerrain: {fileID: 1649232065}
-  playerTopDownCamera: {fileID: 482646433}
-  snowMaterial: {fileID: 2100000, guid: 983605b196967714b87e724e6546350b, type: 2}
-  channelPackerMaterial: {fileID: 2100000, guid: 5602a3cefaa127341a101de6f4d5c919, type: 2}
+  playerTopDownCamera: {fileID: 0}
+  snowMaterial: {fileID: 0}
 --- !u!1 &1387130482
 GameObject:
   m_ObjectHideFlags: 0
@@ -4964,51 +4958,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5169617785573002150, guid: 9857a62c2cc9cad4eb658bfe7a994531, type: 3}
-      propertyPath: m_RenderShadows
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5169617785573002150, guid: 9857a62c2cc9cad4eb658bfe7a994531, type: 3}
       propertyPath: m_RendererIndex
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5169617785573002150, guid: 9857a62c2cc9cad4eb658bfe7a994531, type: 3}
-      propertyPath: m_RequiresDepthTextureOption
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5169617785573002150, guid: 9857a62c2cc9cad4eb658bfe7a994531, type: 3}
-      propertyPath: m_RequiresOpaqueTextureOption
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7801781671350518359, guid: 9857a62c2cc9cad4eb658bfe7a994531, type: 3}
-      propertyPath: m_ClearFlags
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7801781671350518359, guid: 9857a62c2cc9cad4eb658bfe7a994531, type: 3}
-      propertyPath: m_TargetTexture
-      value: 
-      objectReference: {fileID: 8400000, guid: 57b7b2129ea00b8479c8d96871129c0c, type: 2}
-    - target: {fileID: 7801781671350518359, guid: 9857a62c2cc9cad4eb658bfe7a994531, type: 3}
-      propertyPath: m_BackGroundColor.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7801781671350518359, guid: 9857a62c2cc9cad4eb658bfe7a994531, type: 3}
-      propertyPath: m_BackGroundColor.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7801781671350518359, guid: 9857a62c2cc9cad4eb658bfe7a994531, type: 3}
-      propertyPath: m_BackGroundColor.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7801781671350518359, guid: 9857a62c2cc9cad4eb658bfe7a994531, type: 3}
-      propertyPath: m_BackGroundColor.r
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7801781671350518359, guid: 9857a62c2cc9cad4eb658bfe7a994531, type: 3}
       propertyPath: m_CullingMask.m_Bits
       value: 64
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6454100980526233923, guid: 9857a62c2cc9cad4eb658bfe7a994531, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

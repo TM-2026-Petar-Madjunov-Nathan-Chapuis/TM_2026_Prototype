@@ -14,6 +14,7 @@ public class SnowTerrain : MonoBehaviour
     [SerializeField] Terrain mainTerrain;
     [SerializeField] Camera playerTopDownCamera;
     [SerializeField] Material snowMaterial;
+    [SerializeField] Material channelPackerMaterial;
     private List<Terrain> terrains = new List<Terrain>();
     private Vector3 terrainSize; // The total size in world units of the terrain: width, height, and length. (unity docs)
     private Dictionary<Vector2Int, GameObject> chunks;
@@ -29,8 +30,11 @@ public class SnowTerrain : MonoBehaviour
         this.chunks = CreateChunks();
         this.playerTopDownCamera.orthographicSize = this.snowRenderDistance;
         this.snowDisplacement = new RenderTexture(snowTextureResolution.x, snowTextureResolution.y, 0);
+        this.snowDisplacement.depthStencilFormat = UnityEngine.Experimental.Rendering.GraphicsFormat.D24_UNorm_S8_UInt;
         this.snowDisplacement.Create();
         this.playerTopDownCamera.targetTexture = this.snowDisplacement;
+        this.channelPackerMaterial.SetTexture("_HeightMap", this.mainTerrain.terrainData.heightmapTexture);
+        this.channelPackerMaterial.SetTexture("_LayerMask", this.mainTerrain.terrainData.terrainLayers[0].maskMapTexture);
         this.snowMaterial.SetTexture("_BaseMap", this.snowDisplacement);
         this.snowMaterial.SetVector("_OrthographicCameraPos", playerTopDownCamera.transform.position);
         this.snowMaterial.SetVector("_OrthographicCameraSize", new Vector2(playerTopDownCamera.orthographicSize, playerTopDownCamera.orthographicSize));

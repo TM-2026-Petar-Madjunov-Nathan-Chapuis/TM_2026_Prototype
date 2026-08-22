@@ -7,19 +7,16 @@ public class SnowRenderFeature : ScriptableRendererFeature
 {
     [SerializeField]
     private Material channelPacker;
-    public RTHandle packedTexture => snowPackingRenderPass?.PackedTexture;
     private SnowPackingRenderPass snowPackingRenderPass;
     public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
     {
+        if (channelPacker == null)
+            return;
         renderer.EnqueuePass(snowPackingRenderPass);
     }
 
     public override void Create()
     {
         snowPackingRenderPass = new SnowPackingRenderPass(channelPacker);
-    }
-    protected override void Dispose(bool disposing)
-    {
-        snowPackingRenderPass?.Dispose();
     }
 }

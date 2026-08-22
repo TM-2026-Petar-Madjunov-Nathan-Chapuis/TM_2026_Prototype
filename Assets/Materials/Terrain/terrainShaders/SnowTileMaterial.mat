@@ -56,8 +56,8 @@ Material:
     - _Tessellation: 20
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _OrthographicCameraPos: {r: 0, g: 0, b: 0, a: 0}
-    - _OrthographicCameraSize: {r: 0, g: 0, b: 0, a: 0}
+    - _OrthographicCameraPos: {r: 583.9, g: 581.98, b: 472.8, a: 0}
+    - _OrthographicCameraSize: {r: 40, g: 40, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &6306014585611025073

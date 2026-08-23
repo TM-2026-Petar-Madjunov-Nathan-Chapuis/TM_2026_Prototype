@@ -44,6 +44,9 @@
         },
         {
             "m_Id": "3209002e67734e5a871c64d3081b29c9"
+        },
+        {
+            "m_Id": "eddb6ecf9884480c8ed14c5527c29ae0"
         }
     ],
     "m_Keywords": [],
@@ -1082,7 +1085,7 @@
     "m_RefNameGeneratedByDisplayName": "HeightMapMaxHeight",
     "m_DefaultReferenceName": "_HeightMapMaxHeight",
     "m_OverrideReferenceName": "",
-    "m_GeneratePropertyBlock": false,
+    "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
     "m_CustomSlotLabel": "",
     "m_DismissedVersion": 0,
@@ -1320,6 +1323,9 @@
         },
         {
             "m_Id": "3209002e67734e5a871c64d3081b29c9"
+        },
+        {
+            "m_Id": "eddb6ecf9884480c8ed14c5527c29ae0"
         }
     ]
 }
@@ -3202,7 +3208,7 @@
     "m_RefNameGeneratedByDisplayName": "DisplacementTexture",
     "m_DefaultReferenceName": "_DisplacementTexture",
     "m_OverrideReferenceName": "_BaseMap",
-    "m_GeneratePropertyBlock": false,
+    "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
     "m_CustomSlotLabel": "",
     "m_DismissedVersion": 0,
@@ -3506,6 +3512,42 @@
         "z": 0.0
     },
     "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Texture2DShaderProperty",
+    "m_ObjectId": "eddb6ecf9884480c8ed14c5527c29ae0",
+    "m_Guid": {
+        "m_GuidSerialized": "244639c2-b360-4b63-8956-46ff01fe11e9"
+    },
+    "promotedFromAssetID": "",
+    "promotedFromCategoryName": "",
+    "promotedOrdering": -1,
+    "m_Name": "TerrainTexture",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "TerrainTexture",
+    "m_DefaultReferenceName": "_TerrainTexture",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": true,
+    "hlslDeclarationOverride": 2,
+    "m_Hidden": false,
+    "m_PerRendererData": true,
+    "m_customAttributes": [],
+    "m_Value": {
+        "m_SerializedTexture": "",
+        "m_Guid": ""
+    },
+    "isMainTexture": false,
+    "useTilingAndOffset": false,
+    "useTexelSize": true,
+    "m_Modifiable": true,
+    "m_DefaultType": 0
 }
 
 {

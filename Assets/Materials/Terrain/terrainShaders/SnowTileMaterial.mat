@@ -28,6 +28,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _TerrainTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -42,21 +46,21 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _CheckDistance: 0.1
-    - _HeightMapMaxHeight: 0
+    - _CheckDistance: -1.49
+    - _HeightMapMaxHeight: 600
     - _MaxTessellationDist: 60
-    - _MinTess: 0.2
-    - _ProximityTessellation: 6.39
+    - _MinTess: 1
+    - _ProximityTessellation: 5.9
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _RotationIterations: 4
+    - _RotationIterations: 6.49
     - _SnowGreenForce: 1
     - _SnowHeight: 2.72
     - _SnowRedForce: 1
-    - _Tessellation: 20
+    - _Tessellation: 31.91
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _OrthographicCameraPos: {r: 583.9, g: 581.98, b: 472.8, a: 0}
+    - _OrthographicCameraPos: {r: 583.9, g: 581.98004, b: 472.8, a: 0}
     - _OrthographicCameraSize: {r: 40, g: 40, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

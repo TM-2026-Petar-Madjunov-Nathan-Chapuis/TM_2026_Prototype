@@ -33,7 +33,6 @@ float2 CalcCameraUVFromWorld(float3 worldPosition)
     return uv;
 }
 
-
 float invLerp(float from, float to, float value)
 {
    return (value - from) / (to - from);
@@ -94,13 +93,14 @@ TessellationFactors patchConstantFunction(InputPatch<PackedVaryings, 3> patch)
 void vertTess(inout PackedVaryings IN)
 {    
     float2 uv = CalcCameraUVFromWorld(IN.positionWS);
-    float4 textureValue = SAMPLE_TEXTURE2D_LOD(_BaseMap, sampler_BaseMap, uv, 0);
-    IN.positionWS += IN.normalWS * textureValue.b * _HeightMapMaxHeight;
-    if (textureValue.a > 0.001) {
-        IN.positionWS += IN.normalWS * textureValue.a * _SnowHeight;
+    float4 snowTexture = SAMPLE_TEXTURE2D_LOD(_BaseMap, sampler_BaseMap, uv, 0);
+    float4 terrainTexture = SAMPLE_TEXTURE2D_LOD(_TerrainTexture, sampler_TerrainTexture, uv, 0);
+    IN.positionWS += IN.normalWS * terrainTexture.r * _HeightMapMaxHeight * 2;
+    if (terrainTexture.g > 0.001) {
+        IN.positionWS += IN.normalWS * terrainTexture.g * _SnowHeight;
     }
-    IN.positionWS += IN.normalWS * -_SnowRedForce * textureValue.r;
-    IN.positionWS += IN.normalWS * _SnowGreenForce * textureValue.g;
+    IN.positionWS += IN.normalWS * -_SnowRedForce * snowTexture.r;
+    IN.positionWS += IN.normalWS * _SnowGreenForce * snowTexture.g;
     
     float3 objectPos = TransformWorldToObject(IN.positionWS);
     // object to clip space

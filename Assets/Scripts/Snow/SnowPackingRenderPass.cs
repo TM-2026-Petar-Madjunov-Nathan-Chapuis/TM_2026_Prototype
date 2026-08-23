@@ -21,6 +21,9 @@ public class SnowPackingRenderPass : ScriptableRenderPass
 
         TextureDesc desc = resourceData.cameraDepthTexture.GetDescriptor(renderGraph);
         desc.depthBufferBits = 0;
+        desc.colorFormat = UnityEngine.Experimental.Rendering.GraphicsFormat.R8G8B8A8_UNorm;
+        desc.msaaSamples = MSAASamples.None;
+        desc.name = "ChannelPackedTexture";
         TextureHandle destination = renderGraph.CreateTexture(desc);
 
         //packs the texture into destination

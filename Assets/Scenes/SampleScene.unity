@@ -4969,7 +4969,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5169617785573002150, guid: 9857a62c2cc9cad4eb658bfe7a994531, type: 3}
       propertyPath: m_RendererIndex
-      value: -1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5169617785573002150, guid: 9857a62c2cc9cad4eb658bfe7a994531, type: 3}
       propertyPath: m_RequiresDepthTextureOption

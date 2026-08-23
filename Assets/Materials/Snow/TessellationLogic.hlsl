@@ -95,9 +95,9 @@ void vertTess(inout PackedVaryings IN)
 {    
     float2 uv = CalcCameraUVFromWorld(IN.positionWS);
     float4 textureValue = SAMPLE_TEXTURE2D_LOD(_BaseMap, sampler_BaseMap, uv, 0);
-    IN.positionWS += textureValue.b * _HeightMapMaxHeight;
-    if (textureValue.a > 0.1) {
-        IN.positionWS += textureValue.a * _SnowHeight;
+    IN.positionWS += IN.normalWS * textureValue.b * _HeightMapMaxHeight;
+    if (textureValue.a > 0.001) {
+        IN.positionWS += IN.normalWS * textureValue.a * _SnowHeight;
     }
     IN.positionWS += IN.normalWS * -_SnowRedForce * textureValue.r;
     IN.positionWS += IN.normalWS * _SnowGreenForce * textureValue.g;

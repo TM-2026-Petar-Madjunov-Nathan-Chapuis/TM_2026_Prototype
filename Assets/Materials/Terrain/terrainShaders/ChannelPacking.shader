@@ -24,16 +24,15 @@ Shader "Custom/ChannelPacking"
             #pragma fragment Frag
 
             TEXTURE2D(_HeightMap);
-            SAMPLER(sampler_LinearClamp);
-
             TEXTURE2D(_LayerMask);
 
             float4 Frag (Varyings input) : SV_Target
             {
                 float4 color = SAMPLE_TEXTURE2D(_BlitTexture, sampler_LinearClamp, input.texcoord).rgba;
-                float4 added = float4(color.r, color.g, SAMPLE_TEXTURE2D(_HeightMap, sampler_LinearClamp, input.texcoord).b, SAMPLE_TEXTURE2D(_LayerMask, sampler_LinearClamp, input.texcoord).r);
-                return float4(1,1,1,1);
+                float4 added = float4(color.r, color.g, SAMPLE_TEXTURE2D(_HeightMap, sampler_LinearClamp, input.texcoord).r, SAMPLE_TEXTURE2D(_LayerMask, sampler_LinearClamp, input.texcoord).r);
+                return added;
             }
+
 
             ENDHLSL
         }

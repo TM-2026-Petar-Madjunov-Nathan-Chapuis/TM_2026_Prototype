@@ -67,6 +67,7 @@ public class SnowTerrain : MonoBehaviour
                     chunk.GetComponent<MeshFilter>().mesh = this.chunkMesh;
                     chunk.gameObject.transform.localScale = new Vector3(chunkSize, 1, chunkSize);
                     chunk.name = $"{globalX}:{globalY}";
+                    chunk.GetComponent<Renderer>().material = snowMaterial;
                     newChunks[new Vector2Int(globalX,globalY)] = chunk;
                 }
             }

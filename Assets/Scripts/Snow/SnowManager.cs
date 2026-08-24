@@ -19,7 +19,6 @@ public class SnowTerrain : MonoBehaviour
     [SerializeField] Terrain mainTerrain;
     [SerializeField] Camera playerTopDownCamera;
     [SerializeField] Material snowMaterial;
-    [SerializeField] Material channelPackerMaterial;
     [SerializeField] Material packerMaterial;
     private List<Terrain> terrains = new List<Terrain>();
     private Vector3 terrainSize; // The total size in world units of the terrain: width, height, and length. (unity docs)
@@ -54,18 +53,17 @@ public class SnowTerrain : MonoBehaviour
                 RenderTextureFormat.ARGBFloat
             );
 
-            terrainTextures[i].filterMode = FilterMode.Bilinear;
+            terrainTextures[i].filterMode = FilterMode.Point;
             terrainTextures[i].wrapMode = TextureWrapMode.Clamp;
             terrainTextures[i].Create();
         }
 
         //materials propreties
-        this.channelPackerMaterial.SetTexture("_HeightMap", this.mainTerrain.terrainData.heightmapTexture);
-        this.channelPackerMaterial.SetTexture("_LayerMask", this.mainTerrain.terrainData.terrainLayers[0].maskMapTexture);
         this.snowMaterial.SetTexture("_BaseMap", this.snowDisplacement);
         this.snowMaterial.SetVector("_OrthographicCameraPos", playerTopDownCamera.transform.position);
         this.snowMaterial.SetVector("_OrthographicCameraSize", new Vector2(playerTopDownCamera.orthographicSize, playerTopDownCamera.orthographicSize));
         this.snowMaterial.SetFloat("_HeightMapMaxHeight", this.mainTerrain.terrainData.heightmapScale.y);
+        this.snowMaterial.SetVector("_TerrainSize", new Vector2(this.terrainSize.x/2, this.terrainSize.z/2)); //needs to be divided by two for some reason.
         this.mat1 = new Material(snowMaterial.shader);
         this.mat2 = new Material(snowMaterial.shader);
         this.mat3 = new Material(snowMaterial.shader);
@@ -85,7 +83,10 @@ public class SnowTerrain : MonoBehaviour
     }
     void Update()
     {
-        this.snowMaterial.SetVector("_OrthographicCameraPos", playerTopDownCamera.transform.position);     
+        this.snowMaterial.SetVector("_OrthographicCameraPos", playerTopDownCamera.transform.position);
+        this.mat1.SetVector("_OrthographicCameraPos", playerTopDownCamera.transform.position);
+        this.mat2.SetVector("_OrthographicCameraPos", playerTopDownCamera.transform.position);
+        this.mat3.SetVector("_OrthographicCameraPos", playerTopDownCamera.transform.position);
         QuadrantCheck();
     }
 
@@ -126,7 +127,24 @@ public class SnowTerrain : MonoBehaviour
         for (int i = 0; i < closestTerrains.Length; i++)
         {
             SetRenderTexture(closestTerrains[i], i);
-            result.Add(terrainCenter(terrainChunkSize, closestTerrains[i].transform.position), i);
+            Vector3 terrainPos = terrainCenter(terrainChunkSize, closestTerrains[i].transform.position);
+            switch (i)
+            {
+                case 0:
+                    this.snowMaterial.SetVector("_TerrainPos", terrainPos);
+                    break;
+                case 1:
+                    this.mat1.SetVector("_TerrainPos", terrainPos);
+                    break;
+                case 2:
+                    this.mat2.SetVector("_TerrainPos", terrainPos);
+                    break;
+                case 3:
+                    this.mat3.SetVector("_TerrainPos", terrainPos);
+                    break;
+                default: throw new ArgumentException();
+            }
+            result.Add(terrainPos, i);
         }
         return result;
     }
@@ -134,21 +152,14 @@ public class SnowTerrain : MonoBehaviour
     {
         RenderTexture heightmap = terrain.terrainData.heightmapTexture;
         Texture2D layerMask = terrain.terrainData.GetAlphamapTexture(0);
-
-        channelPackerMaterial.SetTexture("_HeightMap", heightmap);
-        channelPackerMaterial.SetTexture("_LayerMask", layerMask);
-
+        
         packerMaterial.SetTexture("_LayerMask", layerMask);
         Graphics.Blit(heightmap, terrainTextures[slot], packerMaterial);
-        this.snowMaterial.SetTexture("_TerrainTexture", this.terrainTextures[0]);
-        this.mat1.SetTexture("_TerrainTexture", this.terrainTextures[1]);
-        this.mat2.SetTexture("_TerrainTexture", this.terrainTextures[2]);
-        this.mat3.SetTexture("_TerrainTexture", this.terrainTextures[3]);
     }
 
-    private Vector2 terrainCenter(float chunkSize, Vector3 position)
+    private Vector3 terrainCenter(float chunkSize, Vector3 position)
     {
-        return new Vector2(position.x + chunkSize/2, position.z + chunkSize/2);
+        return new Vector3(position.x + chunkSize / 2f, 0f, position.z + chunkSize / 2f);
     }
 
     private Dictionary<Vector2Int, GameObject> CreateChunks()

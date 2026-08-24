@@ -124,10 +124,10 @@ Material:
     m_Floats:
     - _Contrast: 3.3
     - _EnableInstancedPerPixelNormal: 1
-    - _HeightSharpness: 0.293
+    - _HeightSharpness: 0.253
     - _MaskScaleMultiplier: 4.98
-    - _MaxNumberSteps: 287.85
-    - _MaxParallaxHeight: 9
+    - _MaxNumberSteps: 129.2
+    - _MaxParallaxHeight: 7.14
     - _Metallic0: 0
     - _Metallic1: 0
     - _Metallic2: 0

@@ -55,26 +55,13 @@ Shader "Custom/TerrainTexturePacker"
 
             float4 frag(v2f i) : SV_Target
             {
-                // IMPORTANT:
                 // Unity Terrain heightmaps must be decoded with
                 // UnpackHeightmap(), not sampled directly as .r.
-                float height = UnpackHeightmap(
-                    tex2D(_MainTex, i.uv)
-                );
+                // coming from : https://docs.unity3d.com/Packages/com.unity.terrain-tools@4.0/manual/create-filterstacks-and-filters.html
+                float height = UnpackHeightmap(tex2D(_MainTex, i.uv));
+                float layer = tex2D(_LayerMask, i.uv).r;
 
-                float layer = tex2D(
-                    _LayerMask,
-                    i.uv
-                ).r;
-
-                // Store the DECODED height in R
-                // and the layer mask in G.
-                return float4(
-                    height,
-                    layer,
-                    0.0,
-                    1.0
-                );
+                return float4(height, layer, 0.0, 1.0);
             }
 
             ENDHLSL

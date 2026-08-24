@@ -5,9 +5,11 @@ Shader "Custom/DeformationTesselation"
         [MainColor] _BaseColor("Base Color", Color) = (1, 1, 1, 1)
         [MainTexture] _BaseMap("Base Map", 2D) = "white" {}
         _TerrainTexture ("Terrain Texture", 2D) = "white" {}
+        _TerrainPos ("Terrain Pos", Vector) = (0,0,0,0)
+        _TerrainSize("Terrain Size", Vector) = (0,0,0,0)
         _HeightMapMaxHeight ("Height map max height", Float) = 0
-        _OrthographicCameraPos ("Orthographic Camera pos", Vector) = (1, 1, 1, 1)
-        _OrthographicCameraSize ("Orthographic Camera size", Vector) = (1, 1, 1, 1)
+        _OrthographicCameraPos ("Orthographic Camera pos", Vector) = (0,0,0,0)
+        _OrthographicCameraSize ("Orthographic Camera size", Vector) = (0,0,0,0)
         _SnowHeight ("Snow height", Float) = 0
         _SnowRedForce ("Snow red force", Float) = 0
         _SnowGreenForce ("Snow green force", Float) = 0
@@ -47,6 +49,7 @@ Shader "Custom/DeformationTesselation"
             {
                 float4 positionHCS : SV_POSITION;
                 float2 uv : TEXCOORD0;
+                float3 positionWS : TEXCOORD1;
             };
 
             struct TessellationFactors
@@ -65,6 +68,8 @@ Shader "Custom/DeformationTesselation"
                 half4 _BaseColor;
                 float4 _BaseMap_ST;
                 float4 _TerrainTexture_ST;
+                float3 _TerrainPos;
+                float2 _TerrainSize;
                 float3 _OrthographicCameraPos;
                 float2 _OrthographicCameraSize;
                 float _SnowHeight;
@@ -120,6 +125,18 @@ Shader "Custom/DeformationTesselation"
 
                 return uv;
             }
+
+            float2 CalcTerrainUVFromWorld(float3 worldPosition)
+            {
+                float3 terrainLocal = worldPosition - _TerrainPos;
+
+                float2 uv;
+                uv.x = terrainLocal.x / _TerrainSize.x * 0.5 + 0.5;
+                uv.y = terrainLocal.z / _TerrainSize.y * 0.5 + 0.5;
+
+                return uv;
+            }
+
             float invLerp(float from, float to, float value)
             {
             return (value - from) / (to - from);
@@ -155,9 +172,20 @@ Shader "Custom/DeformationTesselation"
                 float3 positionWorldSpace1 = mul(unity_ObjectToWorld, vertex1.positionOS);
                 float3 positionWorldSpace2 = mul(unity_ObjectToWorld, vertex2.positionOS);
 
-                vertexTessFactors.x = CalcDistanceTessFactor(positionWorldSpace0) * CalculateTextureChangeTessFactor(vertex0.uv);
-                vertexTessFactors.y = CalcDistanceTessFactor(positionWorldSpace1) * CalculateTextureChangeTessFactor(vertex1.uv);
-                vertexTessFactors.z = CalcDistanceTessFactor(positionWorldSpace2) * CalculateTextureChangeTessFactor(vertex2.uv);
+                float2 uv0 = CalcCameraUVFromWorld(positionWorldSpace0);
+                float2 uv1 = CalcCameraUVFromWorld(positionWorldSpace1);
+                float2 uv2 = CalcCameraUVFromWorld(positionWorldSpace2);
+
+                float3 centerWorldSpacePos = (positionWorldSpace0 + positionWorldSpace1 + positionWorldSpace2) / 3.0;
+
+                float2 terrainUv = CalcTerrainUVFromWorld(centerWorldSpacePos); //takes the center position of the triangle to optimize rendering
+                float terrainHeight = SAMPLE_TEXTURE2D_LOD(_TerrainTexture, sampler_TerrainTexture, terrainUv, 0).r;
+                centerWorldSpacePos += float3(0, 1, 0) * terrainHeight * _HeightMapMaxHeight * 2;
+
+                float distanceTessFactor = CalcDistanceTessFactor(centerWorldSpacePos);
+                vertexTessFactors.x = distanceTessFactor * CalculateTextureChangeTessFactor(uv0);
+                vertexTessFactors.y = distanceTessFactor * CalculateTextureChangeTessFactor(uv1);
+                vertexTessFactors.z = distanceTessFactor * CalculateTextureChangeTessFactor(uv2);
 
                 return CalcTriEdgeTessFactors(vertexTessFactors);
             }
@@ -176,12 +204,13 @@ Shader "Custom/DeformationTesselation"
             {
                 Varyings OUT;
                 float3 positionWS = mul(unity_ObjectToWorld, float4(IN.positionOS.xyz, 1.0));
-                float3 normalWS = IN.normal;
-                float2 uv = CalcCameraUVFromWorld(positionWS);
-                float4 snowTexture = SAMPLE_TEXTURE2D_LOD(_BaseMap, sampler_BaseMap, uv, 0);
-                float4 terrainTexture = SAMPLE_TEXTURE2D_LOD(_TerrainTexture, sampler_TerrainTexture, uv, 0);
+                float3 normalWS = IN.normal; //shure not real but this shader's only meant for flat, upward pointing uvs.
+                float2 camUv = CalcCameraUVFromWorld(positionWS);
+                float2 terrainUv = CalcTerrainUVFromWorld(positionWS);
+                float4 snowTexture = SAMPLE_TEXTURE2D_LOD(_BaseMap, sampler_BaseMap, camUv, 0);
+                float4 terrainTexture = SAMPLE_TEXTURE2D_LOD(_TerrainTexture, sampler_TerrainTexture, terrainUv, 0);
 
-                positionWS += normalWS * terrainTexture.r * _HeightMapMaxHeight * 2;
+                positionWS += normalWS * terrainTexture.r * _HeightMapMaxHeight * 2; //somehow * 2 is needed here.
                 if (terrainTexture.g > 0.001) {
                     positionWS += normalWS * terrainTexture.g * _SnowHeight;
                 }
@@ -191,6 +220,7 @@ Shader "Custom/DeformationTesselation"
 
                 OUT.positionHCS = TransformWorldToHClip(positionWS);
                 OUT.uv = TRANSFORM_TEX(IN.uv, _BaseMap);
+                OUT.positionWS = positionWS;
                 return OUT;
             }
 
@@ -213,8 +243,9 @@ Shader "Custom/DeformationTesselation"
 
             half4 frag(Varyings IN) : SV_Target
             {
-                half4 color = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, IN.uv) * _BaseColor;
-                return float4(1,1,1,1);
+                float2 terrainUv = CalcTerrainUVFromWorld(IN.positionWS);
+                float4 terrainTexture = SAMPLE_TEXTURE2D(_TerrainTexture, sampler_TerrainTexture, terrainUv);
+                return float4(terrainTexture.r, 0, 0, 1.0);
             }
             ENDHLSL
         }

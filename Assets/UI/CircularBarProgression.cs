@@ -3,7 +3,8 @@ using UnityEngine.UIElements;
 
 [UxmlElement]
 public partial class CircularBarProgression : VisualElement
-{
+{   
+    [UxmlAttribute]public float baseLineWidht = 15f;
     [UxmlAttribute]public Color32 color = Color.black;
     [UxmlAttribute]public bool background = false;
     [UxmlAttribute]public Color32 backgroundColor = Color.white;
@@ -32,19 +33,19 @@ public partial class CircularBarProgression : VisualElement
     {
         float width = contentRect.width;
         float height = contentRect.height;
-        float baseLineWidht = 15f;
-        float borderLineWidht = baseLineWidht/5f;
+        float lineWidth = baseLineWidht*width/100f;
+        float borderLineWidht = lineWidth/5f;
         var painter = context.painter2D;
         float startAngle = -90f;
         float endAngle = -90f - (360f*progress/100f);
         float segmentsWidth = 5f;
 
-        painter.lineWidth = baseLineWidht;
+        painter.lineWidth = lineWidth;
         painter.lineCap = LineCap.Butt;
 
         if(background)
         {
-            painter.lineWidth = baseLineWidht;
+            painter.lineWidth = lineWidth;
             painter.strokeColor = backgroundColor;
 
             painter.BeginPath();
@@ -52,7 +53,7 @@ public partial class CircularBarProgression : VisualElement
             painter.Stroke();
         }
 
-        painter.lineWidth = baseLineWidht;
+        painter.lineWidth = lineWidth;
         painter.strokeColor = color;
 
         painter.BeginPath();
@@ -65,15 +66,15 @@ public partial class CircularBarProgression : VisualElement
             painter.lineWidth = borderLineWidht;
 
             painter.BeginPath();
-            painter.Arc(new Vector2(width*0.5f, height*0.5f), height*0.5f + baseLineWidht/2, startAngle - 360f, startAngle);
+            painter.Arc(new Vector2(width*0.5f, height*0.5f), height*0.5f + lineWidth/2, startAngle - 360f, startAngle);
             painter.Stroke();
 
             painter.BeginPath();
-            painter.Arc(new Vector2(width*0.5f, height*0.5f), height*0.5f - baseLineWidht/2, startAngle - 360f, startAngle);
+            painter.Arc(new Vector2(width*0.5f, height*0.5f), height*0.5f - lineWidth/2, startAngle - 360f, startAngle);
             painter.Stroke();
 
 
-            painter.lineWidth = baseLineWidht;
+            painter.lineWidth = lineWidth;
 
             //border du startAngle
             painter.BeginPath();
@@ -92,7 +93,7 @@ public partial class CircularBarProgression : VisualElement
         if(segments)
         {
             painter.strokeColor = segmentsColor;
-            painter.lineWidth = baseLineWidht/2f;
+            painter.lineWidth = lineWidth/2f;
 
             painter.BeginPath();
             painter.Arc(new Vector2(width*0.5f, height*0.5f), height*0.5f, startAngle - 90f - segmentsWidth/2, startAngle - 90f + segmentsWidth/2);

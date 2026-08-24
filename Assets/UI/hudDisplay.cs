@@ -16,17 +16,20 @@ public class HUDDisplay : MonoBehaviour
     [SerializeField] private VisualElement healthBarFill;
     [SerializeField] private CircularBarProgression circularFoodBar;
     [SerializeField] private Label foodBarLabel;
+    [SerializeField] private VisualElement foodFill;
     private byte thermometerFillColorRed;
     private byte thermometerFillColorGreen = 0;
     private byte thermometerFillColorBlue;
     private byte thermometerFillColorOpacity = 255;
+    
     [SerializeField] private GameObject player;
     private PlayerInfo playerInfo;
-
+    private HungerAndThirstCalculation hungerAndThirstCalculation;
 
     void Awake()
     {
         playerInfo = player.GetComponent<PlayerInfo>();
+        hungerAndThirstCalculation = player.GetComponent<HungerAndThirstCalculation>();
     }
     void Start()
     {
@@ -36,13 +39,16 @@ public class HUDDisplay : MonoBehaviour
 
         healthBarFill = root.Q<VisualElement>("heathBarDisplay").Q<VisualElement>("healthBarFill");
 
-        foodBarLabel = root.Q<VisualElement>("foodDisplay").Q<Label>("foodBarLabel");
+        foodBarLabel = root.Q<VisualElement>("foodDisplay").Q<VisualElement>("foodFill").Q<Label>("foodBarLabel");
+        foodFill = root.Q<VisualElement>("foodDisplay").Q<VisualElement>("foodFill");
         circularFoodBar = root.Q<VisualElement>("foodDisplay").Q<CircularBarProgression>("circularFoodBar");
+        circularFoodBar.baseLineWidht = 20f;
         circularFoodBar.color = new Color32(255, 127, 39, 255);
         circularFoodBar.background = true;
         circularFoodBar.backgroundColor = new Color32(255, 210, 174, 255);
         circularFoodBar.border = true;
         circularFoodBar.segments = true;
+
     }
 
     void Update()
@@ -86,7 +92,8 @@ public class HUDDisplay : MonoBehaviour
         circularFoodBar.progress = playerInfo.playerHunger;
     }
     void DefineFoodBarLabelText()
-    {
-        foodBarLabel.text = $"{playerInfo.playerHunger}";
+    {   
+        foodBarLabel.text = $"{hungerAndThirstCalculation.roundedPlayerHunger}";
     }
+
 }

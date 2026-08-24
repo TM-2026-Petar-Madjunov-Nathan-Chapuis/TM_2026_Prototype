@@ -70,11 +70,11 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Snow_Accumulation: 0.005
-    - _Snow_Contrast: 1
+    - _Snow_Contrast: 1.5
     - _Snow_Surface_0_None_1_Full: 0.66
     m_Colors:
     - _Material_Tiling: {r: 10, g: 10, b: 0, a: 0}
     - _Snow_Direction: {r: 0, g: 1, b: 0, a: 0}
-    - _Snow_Tiling: {r: 2, g: 2, b: 0, a: 0}
+    - _Snow_Tiling: {r: 3, g: 3, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using TM.Player;
 
-public class ThermometerDisplay : MonoBehaviour
+public class HUDDisplay : MonoBehaviour
 {
     [SerializeField] private UIDocument uIDocument;
     [SerializeField] private CorporalTemperatureCalculation corporalTemperatureCalculation;
@@ -13,6 +13,9 @@ public class ThermometerDisplay : MonoBehaviour
     [SerializeField] private VisualElement thermometerFill;
     [SerializeField] private float thermometerFillPercent;
     [SerializeField] private float localPlayerCorporalTemperature;
+    [SerializeField] private VisualElement healthBarFill;
+    [SerializeField] private CircularBarProgression circularFoodBar;
+    [SerializeField] private Label foodBarLabel;
     private byte thermometerFillColorRed;
     private byte thermometerFillColorGreen = 0;
     private byte thermometerFillColorBlue;
@@ -28,18 +31,30 @@ public class ThermometerDisplay : MonoBehaviour
     void Start()
     {
         var root = uIDocument.rootVisualElement;
-        temperatureLabel = root.Q<Label>("temperatureLabel");
-        thermometerFill = root.Q<VisualElement>("thermometerTube").Q<VisualElement>("thermometerFill");
+        temperatureLabel = root.Q<VisualElement>("temperatureDisplay").Q<VisualElement>("temperatureFill").Q<Label>("temperatureLabel");
+        thermometerFill = root.Q<VisualElement>("temperatureDisplay").Q<VisualElement>("temperatureFill");
+
+        healthBarFill = root.Q<VisualElement>("heathBarDisplay").Q<VisualElement>("healthBarFill");
+
+        foodBarLabel = root.Q<VisualElement>("foodDisplay").Q<Label>("foodBarLabel");
+        circularFoodBar = root.Q<VisualElement>("foodDisplay").Q<CircularBarProgression>("circularFoodBar");
+        circularFoodBar.color = new Color32(255, 127, 39, 255);
+        circularFoodBar.background = true;
+        circularFoodBar.backgroundColor = new Color32(255, 210, 174, 255);
+        circularFoodBar.border = true;
+        circularFoodBar.segments = true;
     }
 
-    // Update is called once per frame
     void Update()
     {
         thermometerFillPercent = playerInfo.playerCorporalTemperature*2;
         
         DefineTemperatureLabelText();
-        DefineThermometerFillHeight();
+        //DefineThermometerFillHeight();
         DefineThermometerFilllColor();
+        DefineHealthBarFill();
+        DefineFoodBar();
+        DefineFoodBarLabelText();
     }
 
     void DefineThermometerFilllColor()
@@ -61,5 +76,17 @@ public class ThermometerDisplay : MonoBehaviour
     void DefineTemperatureLabelText()
     {
         temperatureLabel.text = $"{playerInfo.playerCorporalTemperature}";
+    }
+    void DefineHealthBarFill()
+    {
+        healthBarFill.style.width = Length.Percent(playerInfo.playerHealth);
+    }
+    void DefineFoodBar()
+    {
+        circularFoodBar.progress = playerInfo.playerHunger;
+    }
+    void DefineFoodBarLabelText()
+    {
+        foodBarLabel.text = $"{playerInfo.playerHunger}";
     }
 }

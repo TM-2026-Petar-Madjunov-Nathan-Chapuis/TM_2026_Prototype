@@ -57,8 +57,8 @@ Material:
     - _Material_Tiling: 0.1
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Snow_Accumulation: 0.01
-    - _Snow_Contrast: 1
+    - _Snow_Accumulation: 0.005
+    - _Snow_Contrast: 1.5
     - _Snow_Surface_0_None_1_Full: 0.66
     - _Snow_Tiling: 0.33
     m_Colors:

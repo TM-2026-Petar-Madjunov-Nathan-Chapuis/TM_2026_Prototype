@@ -1791,7 +1791,7 @@ GameObject:
   - component: {fileID: 929258918}
   - component: {fileID: 929258919}
   m_Layer: 0
-  m_Name: HUD
+  m_Name: ThermometerUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

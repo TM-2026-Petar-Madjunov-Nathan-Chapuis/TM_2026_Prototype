@@ -3,7 +3,7 @@ struct TessellationFactors {
     float inside : SV_InsideTessFactor;
 };
 
-[patchconstantfunc("patchConstantFunction")]
+[patchconstantfunc("patchConstantFunction")] //this basically takes in the patch and calculates a tesselation factor for the triangle, telling the gpu how much to tesselate it.
 [domain("tri")]//tesselating triangles
 [outputcontrolpoints(3)]//patch of 3
 [outputtopology("triangle_cw")] // triangle clockwise, meaning the vertex order of storage
@@ -93,9 +93,14 @@ TessellationFactors patchConstantFunction(InputPatch<PackedVaryings, 3> patch)
 void vertTess(inout PackedVaryings IN)
 {    
     float2 uv = CalcCameraUVFromWorld(IN.positionWS);
-    float4 textureValue = SAMPLE_TEXTURE2D_LOD(_BaseMap, sampler_BaseMap, uv, 0);
-    IN.positionWS += IN.normalWS * -_SnowRedForce * textureValue.r;
-    IN.positionWS += IN.normalWS * _SnowGreenForce * textureValue.g;
+    float4 snowTexture = SAMPLE_TEXTURE2D_LOD(_BaseMap, sampler_BaseMap, uv, 0);
+    float4 terrainTexture = SAMPLE_TEXTURE2D_LOD(_TerrainTexture, sampler_TerrainTexture, uv, 0);
+    IN.positionWS += IN.normalWS * terrainTexture.r * _HeightMapMaxHeight * 2;
+    if (terrainTexture.g > 0.001) {
+        IN.positionWS += IN.normalWS * terrainTexture.g * _SnowHeight;
+    }
+    IN.positionWS += IN.normalWS * -_SnowRedForce * snowTexture.r;
+    IN.positionWS += IN.normalWS * _SnowGreenForce * snowTexture.g;
     
     float3 objectPos = TransformWorldToObject(IN.positionWS);
     // object to clip space

@@ -22,6 +22,8 @@ namespace TM.Player
         [SerializeField] private float timeCoefficient = 0.005f;
         private float wherePlayerHungerAndThirstIsTooLowToMaintainMetabolism = 50f; //à partir de combien, le metabolisme ne régule pas de 20°
         private float minimalBaseMetabloismWork = 10f; // le régulation minimale de temperature même si le joueur a 0 eau et 0 nourriture
+        [field: SerializeField] public float roundedCorpralTemperature { get; private set; }
+        
         [SerializeField] private GameObject player;
         private PlayerInfo playerInfo;
 
@@ -66,6 +68,8 @@ namespace TM.Player
 
             playerInfo.playerThermalBlilan = -(playerInfo.playerClothesResistance * deltaTemperature) + (playerInfo.playerMetabolismWork + playerInfo.playerBaseMetabolismwork);
             playerInfo.playerCorporalTemperature += playerInfo.playerThermalBlilan * timeCoefficient * Time.deltaTime;
+
+            roundedCorpralTemperature = (float)Math.Round(playerInfo.playerCorporalTemperature, 1);
         }
 
         void Update()

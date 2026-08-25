@@ -78,12 +78,12 @@ public partial class CircularBarProgression : VisualElement
 
             //border du startAngle
             painter.BeginPath();
-            painter.Arc(new Vector2(width*0.5f, height*0.5f), height*0.5f, startAngle - borderLineWidht/2, startAngle + borderLineWidht/2);
+            painter.Arc(new Vector2(width*0.5f, height*0.5f), height*0.5f, startAngle - borderLineWidht, startAngle + borderLineWidht); // should be borderLineWidht/2
             painter.Stroke();
 
             // border du endAngle (S'actualise)
             painter.BeginPath();
-            painter.Arc(new Vector2(width*0.5f, height*0.5f), height*0.5f, endAngle - borderLineWidht/2, endAngle + borderLineWidht/2);
+            painter.Arc(new Vector2(width*0.5f, height*0.5f), height*0.5f, endAngle - borderLineWidht, endAngle + borderLineWidht); // should be borderLineWidht/2
             painter.Stroke();
 
 

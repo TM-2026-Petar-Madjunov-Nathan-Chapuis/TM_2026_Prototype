@@ -16,7 +16,7 @@ namespace TM.Player
         public float hypothermiaTemperature = 35f; //Constante // la vie est perdue 1* plus vite (=)
         public float hyperthermiaTemperature = 39f; //Constante // la vie est perdue 1* plus vite (=)
 
-        public float playerCorporalTemperature; // [25; 45] < 28 mort, > 42 mort
+        public float playerCorporalTemperature; // [24; 43] < 28 mort, > 42 mort
         public float playerThermalBlilan;
         public float playerClothesResistance = 0f; // 0 -> 1
 

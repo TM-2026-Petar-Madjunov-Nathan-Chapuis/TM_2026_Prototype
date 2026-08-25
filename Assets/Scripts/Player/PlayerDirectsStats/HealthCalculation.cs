@@ -6,7 +6,8 @@ namespace TM.Player
 
 
     public class HealthCalculation : MonoBehaviour
-    {
+    {   
+        [field: SerializeField] public float roundedHealth { get; private set; }
         [SerializeField] private float timeCoefficient = 0.05f;
         [SerializeField] private float HealthBecauseHungryCoefficient = 1f; //coeff de vitesse de perte de vie quand faim
         [SerializeField] private float HealthBecauseThirstCoefficient = 1f; //coeff de vitesse de perte de vie quand soif
@@ -88,6 +89,7 @@ namespace TM.Player
             LooseHealthbecauseHungryOrThirst();
             LooseHealthbecauseCorporalTempearture();
             playerInfo.playerHealth = Math.Clamp(playerInfo.playerHealth, 0, 100);
+            roundedHealth = (float)Math.Round(playerInfo.playerHealth);
         }
     }
 }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7801781671350518359}
   - component: {fileID: 6454100980526233923}
   - component: {fileID: 5169617785573002150}
+  - component: {fileID: 3046896732346580851}
   m_Layer: 3
   m_Name: TopDownSnowCamera
   m_TagString: Untagged
@@ -27,12 +28,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1621180942440876414}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 10.71, z: 0}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0.000024437904, y: 10.710007, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1248942794267138818}
+  m_Father: {fileID: 3400999212160370979}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!20 &7801781671350518359
 Camera:
@@ -137,6 +138,19 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!114 &3046896732346580851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1621180942440876414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78930b28d61a6784988545585aaccd8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FollowParentPositionOnly
+  parent: {fileID: 2303917331248119258}
 --- !u!1 &1723410674940564817
 GameObject:
   m_ObjectHideFlags: 0
@@ -441,6 +455,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1248942794267138818}
+  - {fileID: 2273982308420414712}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2303917331248119258
@@ -485,7 +500,6 @@ Transform:
   - {fileID: 253872908170810571}
   - {fileID: 6706156846323120202}
   - {fileID: 6958134917241702481}
-  - {fileID: 2273982308420414712}
   - {fileID: 4916574609272670827}
   - {fileID: 8514962386710860112}
   - {fileID: 1172310836481607115}

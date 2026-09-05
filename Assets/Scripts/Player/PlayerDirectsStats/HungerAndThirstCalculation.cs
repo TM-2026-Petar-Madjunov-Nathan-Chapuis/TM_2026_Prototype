@@ -63,7 +63,6 @@ namespace TM.Player
 
             playerInfo.playerHunger -= timeCoefficient * hungerMetabolismCoefficient * Time.deltaTime;
             playerInfo.playerHunger = Math.Clamp(playerInfo.playerHunger, 0f, 100f);
-            roundedPlayerHunger = (int)Math.Round(playerInfo.playerHunger);
         }
 
         void ThirstCalculation()
@@ -72,12 +71,14 @@ namespace TM.Player
 
             playerInfo.playerThirst -= timeCoefficient * thirstMetabolismCoefficient * Time.deltaTime;
             playerInfo.playerThirst = Math.Clamp(playerInfo.playerThirst, 0f, 100f);
-            roundedplayerThirst = (int)Math.Round(playerInfo.playerThirst);
         }
         void Update()
         {
             HungerCalculation();
+            roundedPlayerHunger = (int)Math.Round(playerInfo.playerHunger);
+            
             ThirstCalculation();
+            roundedplayerThirst = (int)Math.Round(playerInfo.playerThirst);
         }
     }
 }

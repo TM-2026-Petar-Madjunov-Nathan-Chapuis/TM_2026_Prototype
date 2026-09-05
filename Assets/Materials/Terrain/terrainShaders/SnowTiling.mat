@@ -65,7 +65,7 @@ Material:
     - _Tessellation: 38.57
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _OrthographicCameraPos: {r: 703.7791, g: 763.26935, b: 398.68347, a: 0}
+    - _OrthographicCameraPos: {r: 515.66064, g: 730.4069, b: 447.40778, a: 0}
     - _OrthographicCameraSize: {r: 40, g: 40, b: 0, a: 0}
     - _TerrainPos: {r: 577.5, g: 0, b: 493.2, a: 0}
     - _TerrainSize: {r: 150, g: 150, b: 0, a: 0}

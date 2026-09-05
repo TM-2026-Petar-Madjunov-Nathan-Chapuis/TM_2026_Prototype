@@ -60,6 +60,24 @@ public partial class CircularBarProgression : VisualElement
         painter.Arc(new Vector2(width*0.5f, height*0.5f), height*0.5f, endAngle, startAngle);
         painter.Stroke();
 
+        if(segments)
+        {
+            painter.strokeColor = segmentsColor;
+            painter.lineWidth = lineWidth/2f;
+
+            painter.BeginPath();
+            painter.Arc(new Vector2(width*0.5f, height*0.5f), height*0.5f, startAngle - 90f - segmentsWidth/2, startAngle - 90f + segmentsWidth/2);
+            painter.Stroke();
+
+            painter.BeginPath();
+            painter.Arc(new Vector2(width*0.5f, height*0.5f), height*0.5f, startAngle - 180f - segmentsWidth/2, startAngle - 180f + segmentsWidth/2);
+            painter.Stroke();
+
+            painter.BeginPath();
+            painter.Arc(new Vector2(width*0.5f, height*0.5f), height*0.5f, startAngle - 270f - segmentsWidth/2, startAngle - 270f + segmentsWidth/2);
+            painter.Stroke();
+        }
+
         if(border)
         {
             painter.strokeColor = borderColor;
@@ -85,27 +103,7 @@ public partial class CircularBarProgression : VisualElement
             painter.BeginPath();
             painter.Arc(new Vector2(width*0.5f, height*0.5f), height*0.5f, endAngle - borderLineWidht, endAngle + borderLineWidht); // should be borderLineWidht/2
             painter.Stroke();
-
-
-
-        }
-
-        if(segments)
-        {
-            painter.strokeColor = segmentsColor;
-            painter.lineWidth = lineWidth/2f;
-
-            painter.BeginPath();
-            painter.Arc(new Vector2(width*0.5f, height*0.5f), height*0.5f, startAngle - 90f - segmentsWidth/2, startAngle - 90f + segmentsWidth/2);
-            painter.Stroke();
-
-            painter.BeginPath();
-            painter.Arc(new Vector2(width*0.5f, height*0.5f), height*0.5f, startAngle - 180f - segmentsWidth/2, startAngle - 180f + segmentsWidth/2);
-            painter.Stroke();
-
-            painter.BeginPath();
-            painter.Arc(new Vector2(width*0.5f, height*0.5f), height*0.5f, startAngle - 270f - segmentsWidth/2, startAngle - 270f + segmentsWidth/2);
-            painter.Stroke();
+            
         }
     }
 }

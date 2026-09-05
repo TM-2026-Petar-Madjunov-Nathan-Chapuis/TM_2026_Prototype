@@ -68,13 +68,12 @@ namespace TM.Player
 
             playerInfo.playerThermalBlilan = -(playerInfo.playerClothesResistance * deltaTemperature) + (playerInfo.playerMetabolismWork + playerInfo.playerBaseMetabolismwork);
             playerInfo.playerCorporalTemperature += playerInfo.playerThermalBlilan * timeCoefficient * Time.deltaTime;
-
-            roundedCorpralTemperature = (float)Math.Round(playerInfo.playerCorporalTemperature, 1);
         }
 
         void Update()
         {
             CalculatePlayerCorporalTemperature();
+            roundedCorpralTemperature = (float)Math.Round(playerInfo.playerCorporalTemperature, 1);
         }
     }
 }

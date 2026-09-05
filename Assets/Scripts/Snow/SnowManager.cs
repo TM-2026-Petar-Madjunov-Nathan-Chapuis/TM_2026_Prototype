@@ -20,6 +20,9 @@ public class SnowTerrain : MonoBehaviour
     [SerializeField] Camera playerTopDownCamera;
     [SerializeField] Material snowMaterial;
     [SerializeField] Material packerMaterial;
+    [SerializeField] Material terrainMaterial;
+    [SerializeField] int playerParticleEmmissionCount;
+    [SerializeField] int animalParticleEmmissionCount;
     private List<Terrain> terrains = new List<Terrain>();
     private Vector3 terrainSize; // The total size in world units of the terrain: width, height, and length. (unity docs)
     private Dictionary<Vector2Int, GameObject> chunks;
@@ -29,12 +32,28 @@ public class SnowTerrain : MonoBehaviour
     private Material mat2;
     private Material mat3;
     private RenderTexture[] terrainTextures = new RenderTexture[4];
-    private int currentTerrainQuadrant = 0; // stores the current terrain quadrants the camera is in, 1 top right, 2 top left, 3 bottom left, 4 bottom right
     private float terrainChunkSize;
-    private Dictionary<Vector2, int> textureInfos; //the key vector2 is the materialpreoprtyblock's terrain center. contains at max 4 pair of key-value
+    private Dictionary<Terrain, int> textureInfos;
+    private Dictionary<GameObject, Terrain> chunkTerrains = new();
+
+    void OnDisable()
+    {
+        terrainMaterial.SetInt("_ShowSnow", 1); //show snow again
+    }
 
     void Start()
     {
+        //particles emission scripts
+        UnityEngine.Object[] animals = FindObjectsByType<AnimalSnowParticles>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+        foreach (UnityEngine.Object emiter in animals)
+        {
+            (emiter as AnimalSnowParticles).particleEmitedCount = animalParticleEmmissionCount;
+        }
+        FindAnyObjectByType<PlayerSnowParticles>().particleEmitedCount = playerParticleEmmissionCount;
+
+        //hides the snow layer, so that it saves perf
+        terrainMaterial.SetInt("_ShowSnow", 0);
+
         terrainSize = mainTerrain.terrainData.size;
         Terrain.GetActiveTerrains(terrains);
         this.terrainChunkSize = mainTerrain.terrainData.size.x;//assumes all terrain are the same size and squares, which they are
@@ -53,7 +72,9 @@ public class SnowTerrain : MonoBehaviour
                 RenderTextureFormat.ARGBFloat
             );
 
-            terrainTextures[i].filterMode = FilterMode.Point;
+            terrainTextures[i].useMipMap = true;
+            terrainTextures[i].autoGenerateMips = true;
+            terrainTextures[i].filterMode = FilterMode.Bilinear;
             terrainTextures[i].wrapMode = TextureWrapMode.Clamp;
             terrainTextures[i].Create();
         }
@@ -62,8 +83,8 @@ public class SnowTerrain : MonoBehaviour
         this.snowMaterial.SetTexture("_BaseMap", this.snowDisplacement);
         this.snowMaterial.SetVector("_OrthographicCameraPos", playerTopDownCamera.transform.position);
         this.snowMaterial.SetVector("_OrthographicCameraSize", new Vector2(playerTopDownCamera.orthographicSize, playerTopDownCamera.orthographicSize));
-        this.snowMaterial.SetFloat("_HeightMapMaxHeight", this.mainTerrain.terrainData.heightmapScale.y);
-        this.snowMaterial.SetVector("_TerrainSize", new Vector2(this.terrainSize.x/2, this.terrainSize.z/2)); //needs to be divided by two for some reason.
+        this.snowMaterial.SetFloat("_HeightMapMaxHeight", this.mainTerrain.terrainData.heightmapScale.y - 0.5f);
+        this.snowMaterial.SetVector("_TerrainSize", new Vector2(this.terrainSize.x / 2, this.terrainSize.z / 2)); //needs to be divided by two for some reason.
         this.mat1 = new Material(snowMaterial.shader);
         this.mat2 = new Material(snowMaterial.shader);
         this.mat3 = new Material(snowMaterial.shader);
@@ -78,7 +99,7 @@ public class SnowTerrain : MonoBehaviour
         this.chunkMesh = SubdividedMesh();
         this.chunks = CreateChunks();
         QuadrantCheck();
-        
+
 
     }
     void Update()
@@ -92,38 +113,35 @@ public class SnowTerrain : MonoBehaviour
 
     private void QuadrantCheck()
     {
-        Vector2 terrainOffset = new Vector2(Mathf.Repeat(playerTopDownCamera.transform.position.x, terrainChunkSize) - terrainChunkSize/2, 
-                                            Mathf.Repeat(playerTopDownCamera.transform.position.z, terrainChunkSize) - terrainChunkSize/2);   
-        int quadrant = terrainOffset switch
+        Terrain[] closestTerrains = GetClosestTerrains();
+        bool terrainSetChanged = this.textureInfos == null || !new HashSet<Terrain>(closestTerrains).SetEquals(this.textureInfos.Keys); //hashset.setequals checks if there is the same elements in both values regardless of order
+
+        if (terrainSetChanged)
         {
-            { x: >= 0, y: >= 0 } => 1,
-            { x: < 0, y: >= 0 } => 2,
-            { x: < 0, y: < 0 } => 3,
-            { x: >= 0, y: < 0 } => 4,
-            _ => throw new ArgumentException(),
-        };
-        if (quadrant != this.currentTerrainQuadrant)
-        {
-            this.currentTerrainQuadrant = quadrant;
-            this.textureInfos = SetRenderTextures();
+            this.textureInfos = SetRenderTextures(closestTerrains);
             UpdateChunkMaterials();
         }
     }
 
-    private Dictionary<Vector2, int> SetRenderTextures()
-    { 
-        Vector2Int currentTerrainIndex = new (Mathf.FloorToInt(playerTopDownCamera.transform.position.x / terrainChunkSize), Mathf.FloorToInt(playerTopDownCamera.transform.position.z / terrainChunkSize));
-        Vector2 position = currentTerrainQuadrant switch
-        {  //gets the corner position of the currentTerrain the camera is in to get the four closest terrains we want and get no trouble (-1 because closest still the terrain we are in)
-            1 => new Vector2(currentTerrainIndex.x * terrainChunkSize + terrainChunkSize/2 - 1, currentTerrainIndex.y * terrainChunkSize + terrainChunkSize/2 - 1), //top right
-            2 => new Vector2(currentTerrainIndex.x * terrainChunkSize - terrainChunkSize/2 + 1, currentTerrainIndex.y * terrainChunkSize + terrainChunkSize/2 - 1), //top left
-            3 => new Vector2(currentTerrainIndex.x * terrainChunkSize - terrainChunkSize/2 + 1, currentTerrainIndex.y * terrainChunkSize - terrainChunkSize/2 + 1), //bottom left
-            4 => new Vector2(currentTerrainIndex.x * terrainChunkSize + terrainChunkSize/2 - 1, currentTerrainIndex.y * terrainChunkSize - terrainChunkSize/2 + 1), //bottom right
-            _ => throw new ArgumentOutOfRangeException()
-        }; 
-        //takes the four closest terrain that will be used in rendering.
-        Terrain[] closestTerrains = terrains.OrderBy(terrain => (terrain.transform.position - playerTopDownCamera.transform.position).sqrMagnitude).Take(4).ToArray();
-        Dictionary<Vector2, int> result = new();
+    private Terrain[] GetClosestTerrains() //gets the 4 closest terrains
+    {
+        Vector3 playerPosition = playerTopDownCamera.transform.position; //camera is the same postion as the player just above
+
+        return terrains.OrderBy(terrain => //orders by distance
+            {
+                Vector3 terrainPosition = terrain.transform.position;
+                Vector3 size = terrain.terrainData.size;
+
+                float closestX = Mathf.Clamp(playerPosition.x, terrainPosition.x, terrainPosition.x + size.x); //clamps player position x and z to terrain bounds so that it takes the closest point on the terrain
+                float closestZ = Mathf.Clamp(playerPosition.z, terrainPosition.z, terrainPosition.z + size.z);
+
+                return (new Vector2(closestX, closestZ) - new Vector2(playerPosition.x, playerPosition.z)).sqrMagnitude; //basically closest point on the terrain - player pos
+            }).Take(4).ToArray(); //take the four closest
+    }
+
+    private Dictionary<Terrain, int> SetRenderTextures(Terrain[] closestTerrains)
+    {
+        Dictionary<Terrain, int> result = new();
         for (int i = 0; i < closestTerrains.Length; i++)
         {
             SetRenderTexture(closestTerrains[i], i);
@@ -144,7 +162,7 @@ public class SnowTerrain : MonoBehaviour
                     break;
                 default: throw new ArgumentException();
             }
-            result.Add(terrainPos, i);
+            result.Add(closestTerrains[i], i);
         }
         return result;
     }
@@ -152,7 +170,7 @@ public class SnowTerrain : MonoBehaviour
     {
         RenderTexture heightmap = terrain.terrainData.heightmapTexture;
         Texture2D layerMask = terrain.terrainData.GetAlphamapTexture(0);
-        
+
         packerMaterial.SetTexture("_LayerMask", layerMask);
         Graphics.Blit(heightmap, terrainTextures[slot], packerMaterial);
     }
@@ -171,7 +189,7 @@ public class SnowTerrain : MonoBehaviour
         foreach (Terrain terrain in terrains)
         {
             Vector3 terrainPos = terrain.transform.position;
-            
+
             for (int x = 0; x < chunkCount; x++)
             {
                 for (int y = 0; y < chunkCount; y++)
@@ -186,7 +204,7 @@ public class SnowTerrain : MonoBehaviour
                     chunk.gameObject.transform.localScale = new Vector3(chunkSize, 1, chunkSize);
                     chunk.name = $"{globalX}:{globalY}";
                     chunk.GetComponent<Renderer>().sharedMaterial = snowMaterial;
-                    chunk.GetComponent<Renderer>().localBounds = new Bounds(
+                    chunk.GetComponent<Renderer>().localBounds = new Bounds( //these are the bounds for culling. important to save performance.
                         new Vector3(
                             chunkSize / 2f,
                             mainTerrain.terrainData.heightmapScale.y / 2f,
@@ -198,7 +216,8 @@ public class SnowTerrain : MonoBehaviour
                             chunkSize
                         )
                     );
-                    newChunks[new Vector2Int(globalX,globalY)] = chunk;
+                    newChunks[new Vector2Int(globalX, globalY)] = chunk;
+                    this.chunkTerrains[chunk] = terrain;
                 }
             }
         }
@@ -208,31 +227,24 @@ public class SnowTerrain : MonoBehaviour
     {
         foreach (GameObject chunk in chunks.Values)
         {
-            Vector2 chunkPosition = new(
-                chunk.transform.position.x,
-                chunk.transform.position.z
-            );
+            MeshRenderer renderer = chunk.GetComponent<MeshRenderer>();
 
-            int index = -1;
-            float closestDistance = float.MaxValue;
-
-            foreach (var pair in textureInfos)
+             //if the current terrain isnt in the four closest just stop rendering
+            if (!textureInfos.TryGetValue(chunkTerrains[chunk], out int index))
             {
-                float dis = (pair.Key - chunkPosition).sqrMagnitude;
-                if (dis < closestDistance)
-                {
-                    closestDistance = dis;
-                    index = pair.Value;
-                }
+                renderer.enabled = false;
+                continue;
             }
 
-            chunk.GetComponent<MeshRenderer>().material = index switch
+            //set the new mat corresponding to the terrain its in to
+            renderer.enabled = true;
+            renderer.sharedMaterial = index switch
             {
-                0 => this.snowMaterial,
-                1 => this.mat1,
-                2 => this.mat2,
-                3 => this.mat3,
-                _ => throw new ArgumentException(),
+                0 => snowMaterial,
+                1 => mat1,
+                2 => mat2,
+                3 => mat3,
+                _ => throw new ArgumentException()
             };
         }
     }

@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 using TM.Player;
+using TM.Inventory.UI;
 
 public class HUDDisplay : MonoBehaviour
 {
@@ -28,6 +29,8 @@ public class HUDDisplay : MonoBehaviour
     private HungerAndThirstCalculation hungerAndThirstCalculation;
     private CorporalTemperatureCalculation corporalTemperatureCalculation;
     private HealthCalculation healthCalculation;
+
+    private bool isShowed;
 
     void Awake()
     {
@@ -62,24 +65,28 @@ public class HUDDisplay : MonoBehaviour
         circularThirstBar.backgroundColor = new Color32(164, 235, 255, 255);
         circularThirstBar.border = true;
         circularThirstBar.segments = true;
+
+        Show();
     }
 
     void Update()
     {
         
-        
-        DefineTemperatureLabelText();
-        //DefineThermometerFillHeight();
-        DefineThermometerFilllColor();
+        if (isShowed)
+        {
+            DefineTemperatureLabelText();
+            //DefineThermometerFillHeight();
+            DefineThermometerFilllColor();
 
-        DefineHealthBarFill();
-        DefineHealthBarLabelText();
+            DefineHealthBarFill();
+            DefineHealthBarLabelText();
         
-        DefineFoodBar();
-        DefineFoodBarLabelText();
+            DefineFoodBar();
+            DefineFoodBarLabelText();
         
-        DefineThirstBar();
-        DefineThirstBarLabelText();
+            DefineThirstBar();
+            DefineThirstBarLabelText();
+        }
     }
 
     void DefineThermometerFilllColor()
@@ -106,10 +113,6 @@ public class HUDDisplay : MonoBehaviour
         thermometerFill.style.backgroundColor = thermometerFillColor;
     }
 
-    void DefineThermometerFillHeight()
-    {
-        thermometerFill.style.height = Length.Percent(playerInfo.playerCorporalTemperature*2);
-    }
     void DefineTemperatureLabelText()
     {
         temperatureLabel.text = $"{corporalTemperatureCalculation.roundedCorpralTemperature}"+"°C";
@@ -149,5 +152,14 @@ public class HUDDisplay : MonoBehaviour
     {   
         thirstBarLabel.text = $"{hungerAndThirstCalculation.roundedplayerThirst}";
     }
-
+    public void Show()
+    {
+        uIDocument.rootVisualElement.style.display = DisplayStyle.Flex;
+        isShowed = true;
+    }
+    public void Hide()
+    {
+        uIDocument.rootVisualElement.style.display = DisplayStyle.None;
+        isShowed = false;
+    }
 }

@@ -15,7 +15,6 @@ namespace TM.UI
         [SerializeField] private Shader flipShader;
         private Material flipMaterial;
         private InventoryManager inventoryUIManager;
-
         private VisualElement root;
         private VisualElement templateHolder;
 
@@ -71,6 +70,8 @@ namespace TM.UI
                 CaptureAndBlurBackground();
                 this.inventoryUIManager.OnEnable();
                 GameStateManager.Instance.FreezeTime();
+
+                
             }
             else
             {

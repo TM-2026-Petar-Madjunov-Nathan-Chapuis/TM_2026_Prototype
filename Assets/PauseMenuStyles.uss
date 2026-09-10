@@ -1,0 +1,82 @@
+:root {
+}
+
+.PauseMenuButtonsUSS {
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-left-color: rgb(126, 126, 126);
+    border-right-color: rgb(126, 126, 126);
+    border-top-color: rgb(126, 126, 126);
+    border-bottom-color: rgb(126, 126, 126);
+    top: auto;
+    height: 15%;
+    width: auto;
+    align-self: center;
+    margin-top: 5%;
+    margin-right: 0;
+    margin-bottom: 5%;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    font-size: 150%;
+    -unity-font-definition: url("project://database/Assets/Font/Barlow_Condensed/BarlowCondensed-Medium.ttf?fileID=12800000&guid=c06f3f986c1b1d646a8e06a534fd74a0&type=3#BarlowCondensed-Medium");
+    color: rgb(255, 255, 255);
+    background-color: rgb(46, 46, 46);
+    background-repeat: no-repeat no-repeat;
+    position: relative;
+    aspect-ratio: 5.666667;
+    -unity-text-auto-size: none;
+    -unity-text-generator: standard;
+    -unity-text-align: middle-center;
+    text-overflow: ellipsis;
+    white-space: pre-wrap;
+    -unity-text-outline-width: 0;
+    -unity-font-style: normal;
+}
+
+
+
+
+
+.PauseMenuButtonsUSS:hover {
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-left-color: rgb(126, 126, 126);
+    border-right-color: rgb(126, 126, 126);
+    border-top-color: rgb(126, 126, 126);
+    border-bottom-color: rgb(126, 126, 126);
+    top: auto;
+    height: 15%;
+    width: auto;
+    align-self: center;
+    margin-top: 5%;
+    margin-right: 0;
+    margin-bottom: 5%;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    font-size: 150%;
+    -unity-font-definition: url("project://database/Assets/Font/Barlow_Condensed/BarlowCondensed-Medium.ttf?fileID=12800000&guid=c06f3f986c1b1d646a8e06a534fd74a0&type=3#BarlowCondensed-Medium");
+    color: rgb(255, 255, 255);
+    background-color: rgb(66, 109, 180);
+    background-repeat: no-repeat no-repeat;
+    position: relative;
+    aspect-ratio: 5.666667;
+    scale: 1.1 1.1;
+    transition-duration: 0.15s;
+    -unity-text-align: middle-center;
+    white-space: pre-wrap;
+    text-overflow: ellipsis;
+    -unity-text-auto-size: none;
+    transition-property: all;
+    transition-timing-function: ease;
+    transition-delay: 0s;
+}

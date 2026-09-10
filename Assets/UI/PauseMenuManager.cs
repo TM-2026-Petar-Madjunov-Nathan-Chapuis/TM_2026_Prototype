@@ -1,5 +1,6 @@
 using System;
 using TM.Input;
+using TM.Misc;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
@@ -16,17 +17,25 @@ public class PauseMenuManager : MonoBehaviour
     private Button BackFromSettingsToPause;
     private bool menuIsOpen;
     private bool settingsMenuIsOpen;
+    private VisualElement root;
+
+    [SerializeField] private BlurManager blurManager;
+    private Material flipMaterial;
+    [SerializeField] private Shader flipShader;
+    private RenderTexture captureRT;
+    private RenderTexture flippedRt;
+    private RenderTexture blurredRT;
 
     [SerializeField] private InputActionAsset inputActions;
 
     
     void Awake()
     {
-
+        flipMaterial = new Material(flipShader);
     }
     void Start()
     {
-        var root = uIDocument.rootVisualElement;
+        root = uIDocument.rootVisualElement;
 
         PauseMenu =  root.Q<VisualElement>("MenuBackground");
         ReturnToGameButton = root.Q<VisualElement>("MenuBackground").Q<Button>("ReturnToGameButton");
@@ -90,6 +99,7 @@ public class PauseMenuManager : MonoBehaviour
             GameStateManager.Instance.FreezeTime();
             inputActions.FindActionMap("Player").Disable();
             inputActions.FindAction("Player/OpenPauseMenu").Enable();
+            CaptureAndBlurBackground();
 
 
             CursorManager.Instance.ShowCursor();
@@ -122,6 +132,8 @@ public class PauseMenuManager : MonoBehaviour
             settingsMenuIsOpen = true;
         } 
     }
+
+
     void ReturnToGameAction(ClickEvent clickEvent)
     {
         ShowAndHidePauseMenu(new InputValues());
@@ -138,5 +150,42 @@ public class PauseMenuManager : MonoBehaviour
     {
         Application.Quit();
     }
+
+    //copied from MenuUIManager
+
+            private void CaptureAndBlurBackground()
+        {
+            UpdateRenderTexture();
+
+            ScreenCapture.CaptureScreenshotIntoRenderTexture(captureRT); //capture the game view
+
+            Graphics.Blit(captureRT, flippedRt, flipMaterial); //flip the image cause somehow its flipped.
+            blurredRT = blurManager.Blur(flippedRt); //blur the image
+            root.style.backgroundImage = Background.FromRenderTexture(blurredRT);//apply to background
+        }
+
+    private void UpdateRenderTexture()
+    {
+        if (captureRT == null || captureRT.width != Screen.width || captureRT.height != Screen.height)
+        {
+            if (captureRT != null)
+            {
+                captureRT.Release();
+            }
+            captureRT = new RenderTexture(Screen.width, Screen.height, 0);
+            captureRT.Create();
+        }
+        if (flippedRt == null || flippedRt.width != Screen.width || flippedRt.height != Screen.height)
+        {
+            if (flippedRt != null)
+            {
+                flippedRt.Release();
+            }
+            flippedRt = new RenderTexture(Screen.width, Screen.height, 0);
+            flippedRt.Create();
+        }
+    }
+
+    //until here
     
 }

@@ -330,13 +330,21 @@ PrefabInstance:
       propertyPath: ShapeModule.radiusThickness
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6400458092687452641, guid: 8b33dd61e821a48f4ab6d491401b5e43, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400458092687452641, guid: 8b33dd61e821a48f4ab6d491401b5e43, type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 8778991633825053926, guid: 8b33dd61e821a48f4ab6d491401b5e43, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8778991633825053926, guid: 8b33dd61e821a48f4ab6d491401b5e43, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.672
       objectReference: {fileID: 0}
     - target: {fileID: 8778991633825053926, guid: 8b33dd61e821a48f4ab6d491401b5e43, type: 3}
       propertyPath: m_LocalPosition.z
@@ -430,6 +438,14 @@ PrefabInstance:
     - target: {fileID: 1196108836026556488, guid: 91963dda4e6c94ece87fd009da00e31b, type: 3}
       propertyPath: ShapeModule.radiusThickness
       value: 0.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 1196108836026556488, guid: 91963dda4e6c94ece87fd009da00e31b, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 1196108836026556488, guid: 91963dda4e6c94ece87fd009da00e31b, type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7957468214808312072, guid: 91963dda4e6c94ece87fd009da00e31b, type: 3}
       propertyPath: m_LocalPosition.x

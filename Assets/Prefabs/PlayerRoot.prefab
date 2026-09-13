@@ -603,6 +603,7 @@ MonoBehaviour:
   ambientTemperature: 15
   deltaTemperature: 0
   timeCoefficient: 0.005
+  <roundedCorpralTemperature>k__BackingField: 0
   player: {fileID: 2303917331248119258}
 --- !u!114 &4891386161292877890
 MonoBehaviour:
@@ -616,6 +617,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c54d99d25caf3049985f19df5d3841e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HungerAndThirstCalculation
+  <roundedPlayerHunger>k__BackingField: 0
+  <roundedplayerThirst>k__BackingField: 0
   <hungerMetabolismCoefficient>k__BackingField: 0
   <thirstMetabolismCoefficient>k__BackingField: 0
   timeCoefficient: 0.005
@@ -660,6 +663,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06311fe092a0dcd4d8f6ef276fd29da5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthCalculation
+  <roundedHealth>k__BackingField: 0
   timeCoefficient: 0.05
   HealthBecauseHungryCoefficient: 1
   HealthBecauseThirstCoefficient: 1
@@ -743,6 +747,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SnowGreen
       objectReference: {fileID: 0}
+    - target: {fileID: 1196108836026556488, guid: 91963dda4e6c94ece87fd009da00e31b, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 1196108836026556488, guid: 91963dda4e6c94ece87fd009da00e31b, type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 4752339161682364639, guid: 91963dda4e6c94ece87fd009da00e31b, type: 3}
       propertyPath: characterController
       value: 
@@ -809,6 +821,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: SnowRed
       objectReference: {fileID: 0}
+    - target: {fileID: 6400458092687452641, guid: 8b33dd61e821a48f4ab6d491401b5e43, type: 3}
+      propertyPath: InitialModule.size3D
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400458092687452641, guid: 8b33dd61e821a48f4ab6d491401b5e43, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400458092687452641, guid: 8b33dd61e821a48f4ab6d491401b5e43, type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400458092687452641, guid: 8b33dd61e821a48f4ab6d491401b5e43, type: 3}
+      propertyPath: InitialModule.startLifetime.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6975179378326641321, guid: 8b33dd61e821a48f4ab6d491401b5e43, type: 3}
       propertyPath: characterController
       value: 
@@ -819,7 +847,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8778991633825053926, guid: 8b33dd61e821a48f4ab6d491401b5e43, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.82
+      value: -0.572
       objectReference: {fileID: 0}
     - target: {fileID: 8778991633825053926, guid: 8b33dd61e821a48f4ab6d491401b5e43, type: 3}
       propertyPath: m_LocalPosition.z

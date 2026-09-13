@@ -3194,7 +3194,7 @@ MonoBehaviour:
   snowRenderDistance: 40
   snowTextureResolution: {x: 2049, y: 2049}
   chunkPrefab: {fileID: 3361984713488731439, guid: 3008766d5b408d044afbca810467022d, type: 3}
-  mainTerrain: {fileID: 0}
+  mainTerrain: {fileID: 1855405245}
   playerTopDownCamera: {fileID: 482646433}
   snowMaterial: {fileID: 2100000, guid: 0221bad7c1cbbe140b733f0d7e36950d, type: 2}
   packerMaterial: {fileID: 2100000, guid: a02e8d358939a0745b39f34ba6ac7195, type: 2}
@@ -4189,7 +4189,7 @@ Terrain:
   m_StaticShadowCaster: 0
   m_IgnoreQualitySettings: 0
   m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 2100000, guid: fdb4f240e56745345bb60f6693b1f5fd, type: 2}
+  m_MaterialTemplate: {fileID: 2100000, guid: a39ae130049ffec4796d1414ac867947, type: 2}
   m_BakeLightProbesForTrees: 1
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
@@ -5023,15 +5023,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1248942794267138818, guid: 9857a62c2cc9cad4eb658bfe7a994531, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.34
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1248942794267138818, guid: 9857a62c2cc9cad4eb658bfe7a994531, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1019.83
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1248942794267138818, guid: 9857a62c2cc9cad4eb658bfe7a994531, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 99.78
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1621180942440876414, guid: 9857a62c2cc9cad4eb658bfe7a994531, type: 3}
       propertyPath: m_Layer
@@ -5051,7 +5051,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3400999212160370979, guid: 9857a62c2cc9cad4eb658bfe7a994531, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -406.60095
+      value: 630.3
       objectReference: {fileID: 0}
     - target: {fileID: 3400999212160370979, guid: 9857a62c2cc9cad4eb658bfe7a994531, type: 3}
       propertyPath: m_LocalPosition.z

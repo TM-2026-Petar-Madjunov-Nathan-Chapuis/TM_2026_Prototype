@@ -47,7 +47,7 @@ Material:
     - _CheckDistance: 0.1
     - _HeightDisplacement: 89.42
     - _HeightMapCheckDistance: 0.02
-    - _HeightMapMaxHeight: 599.5
+    - _HeightMapMaxHeight: 1999.5
     - _LayerTextureCheckDistance: 0.006
     - _LayerTextureFactor: 4
     - _MaxTessellationDistance: 60
@@ -65,9 +65,9 @@ Material:
     - _Tessellation: 38.57
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _OrthographicCameraPos: {r: 836.2306, g: 231.1366, b: 203.8306, a: 0}
+    - _OrthographicCameraPos: {r: 289.5505, g: 1213.124, b: 274.09088, a: 0}
     - _OrthographicCameraSize: {r: 40, g: 40, b: 0, a: 0}
-    - _TerrainPos: {r: 577.5, g: 0, b: 493.2, a: 0}
-    - _TerrainSize: {r: 150, g: 150, b: 0, a: 0}
+    - _TerrainPos: {r: 500, g: 0, b: 500, a: 0}
+    - _TerrainSize: {r: 500, g: 500, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

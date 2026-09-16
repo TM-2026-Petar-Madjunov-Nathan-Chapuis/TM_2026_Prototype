@@ -47,8 +47,8 @@ Shader "Custom/TerrainTexturePacker"
         Pass
         {
             Name "Pack"
-
             HLSLPROGRAM
+
 
             #pragma vertex vert
             #pragma fragment frag

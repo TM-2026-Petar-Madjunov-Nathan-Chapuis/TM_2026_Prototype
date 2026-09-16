@@ -1,6 +1,7 @@
 
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -97,10 +98,13 @@ namespace TM.Input
         }
         public void UnRegisterListener(string InputActionName, Action<InputValues> action)
         {
-            DictKey key = new DictKey { name = InputActionName, action = action };
-            if (!inputListeners.TryGetValue(key, out var listener))
-                return;
-            inputListeners.Remove(key);
+            foreach(DictKey key in this.inputListeners.Keys)
+            {
+                if (key.name == InputActionName && key.action == action)
+                {
+                    this.inputListeners.Remove(key);
+                }
+            }
         }
     }
     public class DictKey //refer to line 14 to get why this is needed

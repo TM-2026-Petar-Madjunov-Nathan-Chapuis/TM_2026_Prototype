@@ -20,6 +20,7 @@ public class SnowTerrain : MonoBehaviour
     [SerializeField] Camera playerTopDownCamera;
     [SerializeField] Material snowMaterial;
     [SerializeField] Material packerMaterial;
+    [SerializeField] Material triplanarMaterial;
     [SerializeField] Material terrainMaterial;
     [SerializeField] int playerParticleEmmissionCount;
     [SerializeField] int animalParticleEmmissionCount;
@@ -32,6 +33,7 @@ public class SnowTerrain : MonoBehaviour
     private Material mat2;
     private Material mat3;
     private RenderTexture[] terrainTextures = new RenderTexture[4];
+    private RenderTexture[] triplanarTerrainTextures = new RenderTexture[4];
     private float terrainChunkSize;
     private Dictionary<Terrain, int> textureInfos;
     private Dictionary<GameObject, Terrain> chunkTerrains = new();
@@ -39,6 +41,10 @@ public class SnowTerrain : MonoBehaviour
     void OnDisable()
     {
         terrainMaterial.SetInt("_ShowSnow", 1); //show snow again
+        foreach (Terrain terrain in terrains)
+        {
+            terrain.materialTemplate.SetInteger("_ShowSnow", 1);
+        }
     }
 
     void Start()
@@ -56,6 +62,11 @@ public class SnowTerrain : MonoBehaviour
 
         terrainSize = mainTerrain.terrainData.size;
         Terrain.GetActiveTerrains(terrains);
+        foreach (Terrain terrain in terrains)
+        {
+            terrain.materialTemplate = new Material(terrain.materialTemplate);
+            terrain.materialTemplate.SetInt("_ShowSnow", 0);
+        }
         this.terrainChunkSize = mainTerrain.terrainData.size.x;//assumes all terrain are the same size and squares, which they are
         this.playerTopDownCamera.orthographicSize = this.snowRenderDistance;
         this.snowDisplacement = new RenderTexture(snowTextureResolution.x, snowTextureResolution.y, 0);
@@ -63,7 +74,7 @@ public class SnowTerrain : MonoBehaviour
         this.snowDisplacement.Create();
         this.playerTopDownCamera.targetTexture = this.snowDisplacement;
 
-        for (int i = 0; i < 4; i++) //HEIGHTMAP TEXTURE AND CONTROL TEXTURE MUST BE THE SAME
+        for (int i = 0; i < 4; i++) //HEIGHTMAP TEXTURE AND CONTROL TEXTURE MUST BE THE SAME SIZE
         {
             terrainTextures[i] = new RenderTexture(
                 mainTerrain.terrainData.heightmapTexture.width,
@@ -77,6 +88,16 @@ public class SnowTerrain : MonoBehaviour
             terrainTextures[i].filterMode = FilterMode.Bilinear;
             terrainTextures[i].wrapMode = TextureWrapMode.Clamp;
             terrainTextures[i].Create();
+
+            triplanarTerrainTextures[i] = new RenderTexture(
+                mainTerrain.terrainData.heightmapTexture.width,
+                mainTerrain.terrainData.heightmapTexture.height,
+                0,
+                RenderTextureFormat.ARGBFloat
+            );
+            triplanarTerrainTextures[i].filterMode = FilterMode.Bilinear;
+            triplanarTerrainTextures[i].wrapMode = TextureWrapMode.Clamp;
+            triplanarTerrainTextures[i].Create();
         }
 
         //materials propreties
@@ -85,6 +106,12 @@ public class SnowTerrain : MonoBehaviour
         this.snowMaterial.SetVector("_OrthographicCameraSize", new Vector2(playerTopDownCamera.orthographicSize, playerTopDownCamera.orthographicSize));
         this.snowMaterial.SetFloat("_HeightMapMaxHeight", this.mainTerrain.terrainData.heightmapScale.y - 0.5f);
         this.snowMaterial.SetVector("_TerrainSize", new Vector2(this.terrainSize.x / 2, this.terrainSize.z / 2)); //needs to be divided by two for some reason.
+        this.triplanarMaterial.SetVector("_TerrainSize", new Vector4(
+            this.terrainSize.x,
+            this.mainTerrain.terrainData.heightmapScale.y,
+            this.terrainSize.z,
+            0f
+        ));
         this.mat1 = new Material(snowMaterial.shader);
         this.mat2 = new Material(snowMaterial.shader);
         this.mat3 = new Material(snowMaterial.shader);
@@ -169,9 +196,11 @@ public class SnowTerrain : MonoBehaviour
     private void SetRenderTexture(Terrain terrain, int slot)
     {
         RenderTexture heightmap = terrain.terrainData.heightmapTexture;
-        Texture2D layerMask = terrain.terrainData.GetAlphamapTexture(0);
 
-        packerMaterial.SetTexture("_LayerMask", layerMask);
+        Graphics.Blit(heightmap, triplanarTerrainTextures[slot], triplanarMaterial);
+        terrain.materialTemplate.SetTexture("_TriplanarLayer", triplanarTerrainTextures[slot]);
+
+        packerMaterial.SetTexture("_LayerMask", triplanarTerrainTextures[slot]);
         Graphics.Blit(heightmap, terrainTextures[slot], packerMaterial);
     }
 

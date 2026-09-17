@@ -4,6 +4,7 @@ Shader "Custom/TerrainTexturePacker"
     {
         _MainTex ("Heightmap", 2D) = "black" {}
         _LayerMask ("Layer Mask", 2D) = "white" {}
+        _TerrainLayerMask ("Terrain Layer Mask", 2D) = "white" {}
     }
 
     SubShader
@@ -19,6 +20,7 @@ Shader "Custom/TerrainTexturePacker"
 
         sampler2D _MainTex;
         sampler2D _LayerMask;
+        sampler2D _TerrainLayerMask;
 
         struct appdata_t
         {
@@ -60,8 +62,9 @@ Shader "Custom/TerrainTexturePacker"
                 // coming from : https://docs.unity3d.com/Packages/com.unity.terrain-tools@4.0/manual/create-filterstacks-and-filters.html
                 float height = UnpackHeightmap(tex2D(_MainTex, i.uv));
                 float layer = tex2D(_LayerMask, i.uv).r;
+                float terrainMask = tex2D(_TerrainLayerMask, i.uv).r;
 
-                return float4(height, layer, 0.0, 1.0);
+                return float4(height, layer * terrainMask, 0.0, 1.0);
             }
 
             ENDHLSL

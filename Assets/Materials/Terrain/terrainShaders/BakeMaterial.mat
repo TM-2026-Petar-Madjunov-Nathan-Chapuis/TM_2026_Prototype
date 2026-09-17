@@ -29,9 +29,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Normal_Displacement: 0.001
-    - _Snow_Contrast: 0.81
-    - _Snow_Surface: 0.85
+    - _Normal_Displacement: 0.01
+    - _Snow_Contrast: 10.22
+    - _Snow_Surface: 0.18
     m_Colors:
     - _Snow_Direction: {r: 0, g: 1, b: 0, a: 0}
     - _TerrainSize: {r: 1000, g: 2000, b: 1000, a: 0}

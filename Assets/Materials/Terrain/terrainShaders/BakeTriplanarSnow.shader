@@ -81,9 +81,9 @@ Shader "Custom/BakeTriplanarSnow"
                 //triplanar, a bit obscure
                 float upwardness = saturate(dot(normal, snowDirection));
                 float threshold = 1.0 - saturate(_Snow_Surface);
-                float snowMask = saturate((upwardness - threshold) * _Snow_Contrast);
+                float snowMask = smoothstep(0.45, 0.55, saturate((upwardness - threshold) * _Snow_Contrast));
 
-                return float4(snowMask, 1.0 - snowMask, 0.0, 1.0);
+                return normalize(float4(snowMask, 1.0 - snowMask, 0.0, 1.0));
             }
             ENDHLSL
         }

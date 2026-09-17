@@ -142,7 +142,7 @@ public class SnowTerrain : MonoBehaviour
     {
         Terrain[] closestTerrains = GetClosestTerrains();
         bool terrainSetChanged = this.textureInfos == null || !new HashSet<Terrain>(closestTerrains).SetEquals(this.textureInfos.Keys); //hashset.setequals checks if there is the same elements in both values regardless of order
-
+        
         if (terrainSetChanged)
         {
             this.textureInfos = SetRenderTextures(closestTerrains);
@@ -201,6 +201,7 @@ public class SnowTerrain : MonoBehaviour
         terrain.materialTemplate.SetTexture("_TriplanarLayer", triplanarTerrainTextures[slot]);
 
         packerMaterial.SetTexture("_LayerMask", triplanarTerrainTextures[slot]);
+        packerMaterial.SetTexture("_TerrainLayerMask", terrain.terrainData.GetAlphamapTexture(0));
         Graphics.Blit(heightmap, terrainTextures[slot], packerMaterial);
     }
 

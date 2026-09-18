@@ -104,6 +104,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _TriplanarLayer:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _blendmask:
         m_Texture: {fileID: 2800000, guid: f2844356058603c49a574b68ca6958ab, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -122,9 +126,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Blend: 0.23
     - _Contrast: 3.3
     - _EnableInstancedPerPixelNormal: 1
-    - _HeightSharpness: 0.293
+    - _Height: 0
+    - _HeightSharpness: 0.632
     - _MaskScaleMultiplier: 4.98
     - _MaxNumberSteps: 129.2
     - _MaxParallaxHeight: 7.14
@@ -133,14 +139,21 @@ Material:
     - _Metallic2: 0
     - _Metallic3: 0
     - _NoiseScale: 0.02
+    - _NormalScale: 100
+    - _Occlusion: 0
     - _ShowSnow: 1
+    - _Smoothness: 0.24
     - _Smoothness0: 1
     - _Smoothness1: 1
     - _Smoothness2: 1
     - _Smoothness3: 1
+    - _Snow_Contrast: 1
+    - _Snow_Surface_0_None_1_Full: 0.66
     - _TextureOffset: 1
+    - _Tile: 0.2
     m_Colors:
     - _MaskScaleMultiplier: {r: 1, g: 1, b: 0, a: 0}
+    - _Snow_Direction: {r: 0, g: 1, b: 0, a: 0}
     - _maskscalemultiplier: {r: 15.9, g: 15.81, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

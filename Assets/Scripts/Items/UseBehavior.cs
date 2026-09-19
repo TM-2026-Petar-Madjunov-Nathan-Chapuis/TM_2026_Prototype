@@ -8,7 +8,7 @@ namespace TM.Items
         {
             Debug.Log($"{heldItem.itemData.name} was used by {heldItem.itemData.name}, but no effect is defined");
         }
-        public virtual void OnTriggerEnter(Collider collision, HeldItem heldItem)
+        public virtual void OnTriggerEnter(Collider collision, HeldItem heldItem, GameObject player)
         {
             Debug.Log($"collided without effect");
         }

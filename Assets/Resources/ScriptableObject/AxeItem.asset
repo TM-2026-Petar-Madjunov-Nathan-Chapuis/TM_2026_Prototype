@@ -24,7 +24,7 @@ MonoBehaviour:
   size: {x: 3, y: 2}
   icon: {fileID: 21300000, guid: 8f3deba02ac0b5f4f93f064c88f0278d, type: 3}
   iconRotated: {fileID: 21300000, guid: 75adc5b798dee594fb290a79cc599221, type: 3}
-  useBehavior: {fileID: 11400000, guid: ffb6da30f6a0c1543851d129a6eaf28b, type: 2}
+  useBehavior: {fileID: 11400000, guid: 1c6a13f9a2bcc8e40810705446986d32, type: 2}
   heldPrefab: {fileID: 457814221049907415, guid: 09b652e2ea86d1048bff69d68b7ea009, type: 3}
   worldPrefab: {fileID: 4436084999159797185, guid: 57322f64a655dd84a928a2f2bdfd53a1, type: 3}
   damage: 234234234

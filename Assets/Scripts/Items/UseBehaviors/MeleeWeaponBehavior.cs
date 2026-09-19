@@ -19,7 +19,7 @@ namespace TM.Items
                 base.Use(heldItem, pressed);
             }
         }
-        public override void OnTriggerEnter(Collider collider, HeldItem heldItem)
+        public override void OnTriggerEnter(Collider collider, HeldItem heldItem, GameObject player)
         {
             Debug.Log("handle damage assignement and knoback here");
             Vector3 playerpos = heldItem.player.gameObject.transform.position;

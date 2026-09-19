@@ -16,7 +16,7 @@ public class HeldItem : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        this.useBehavior.OnTriggerEnter(other, this);
+        this.useBehavior.OnTriggerEnter(other, this, player);
     }
     public void EnableHitbox()
     {

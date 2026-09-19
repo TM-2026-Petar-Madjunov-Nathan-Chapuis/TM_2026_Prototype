@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2271e54776ced14182504b47c195e92, type: 3}
+  m_Script: {fileID: 11500000, guid: f6c07f1837e351348ba986ea87563ccf, type: 3}
   m_Name: AxeBehavior
-  m_EditorClassIdentifier: Assembly-CSharp::TM.Items.MeleeWeaponBehavior
+  m_EditorClassIdentifier: Assembly-CSharp::TM.Items.AxeBehavior
   animationTrigger: AxeSwing

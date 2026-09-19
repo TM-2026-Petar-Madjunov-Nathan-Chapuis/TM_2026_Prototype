@@ -1,11 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using TM.Player;
-using Unity.Mathematics;
-using Unity.Properties;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class SnowTerrain : MonoBehaviour
@@ -142,10 +137,9 @@ public class SnowTerrain : MonoBehaviour
     {
         Terrain[] closestTerrains = GetClosestTerrains();
         bool terrainSetChanged = this.textureInfos == null || !new HashSet<Terrain>(closestTerrains).SetEquals(this.textureInfos.Keys); //hashset.setequals checks if there is the same elements in both values regardless of order
-        this.textureInfos = SetRenderTextures(closestTerrains);
         if (terrainSetChanged)
         {
-            
+            this.textureInfos = SetRenderTextures(closestTerrains);
             UpdateChunkMaterials();
         }
     }

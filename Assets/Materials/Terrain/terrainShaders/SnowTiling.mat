@@ -49,8 +49,8 @@ Material:
     - _HeightMapCheckDistance: 0.02
     - _HeightMapMaxHeight: 1999.5
     - _LayerTextureCheckDistance: 0.006
-    - _LayerTextureFactor: 4
-    - _MaxTessellationDistance: 1000
+    - _LayerTextureFactor: 0.94
+    - _MaxTessellationDistance: 287.23
     - _MinTess: 0.01
     - _NormalCheckDistance: 0.19
     - _NormalStrength: 1
@@ -59,15 +59,15 @@ Material:
     - _ProximityTessellation: 5.14
     - _SnowAlbedoSaturation: 0.15
     - _SnowGreenForce: 0.39
-    - _SnowHeight: 1.69
+    - _SnowHeight: 1.17
     - _SnowRedForce: 0.8
     - _SnowTextureTileSize: 5
     - _Tessellation: 38.57
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _OrthographicCameraPos: {r: 555.4033, g: 1218.3822, b: 501.8068, a: 0}
+    - _OrthographicCameraPos: {r: 547.4, g: 1219.5542, b: 508, a: 0}
     - _OrthographicCameraSize: {r: 40, g: 40, b: 0, a: 0}
-    - _TerrainPos: {r: 500, g: 0, b: 500, a: 0}
-    - _TerrainSize: {r: 500, g: 500, b: 0, a: 0}
+    - _TerrainPos: {r: 750, g: 0, b: 750, a: 0}
+    - _TerrainSize: {r: 250, g: 250, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

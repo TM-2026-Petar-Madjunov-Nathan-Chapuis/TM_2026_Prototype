@@ -34,6 +34,6 @@ Material:
     - _Snow_Surface: 0.6
     m_Colors:
     - _Snow_Direction: {r: 0, g: 1, b: 0, a: 0}
-    - _TerrainSize: {r: 1000, g: 2000, b: 1000, a: 0}
+    - _TerrainSize: {r: 500, g: 2000, b: 500, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

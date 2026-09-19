@@ -30,8 +30,8 @@ Material:
     m_Ints: []
     m_Floats:
     - _Normal_Displacement: 0.01
-    - _Snow_Contrast: 10.22
-    - _Snow_Surface: 0.18
+    - _Snow_Contrast: 1
+    - _Snow_Surface: 0.6
     m_Colors:
     - _Snow_Direction: {r: 0, g: 1, b: 0, a: 0}
     - _TerrainSize: {r: 1000, g: 2000, b: 1000, a: 0}

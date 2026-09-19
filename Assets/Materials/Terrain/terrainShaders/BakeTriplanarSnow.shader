@@ -1,13 +1,13 @@
-Shader "Custom/BakeTriplanarSnow"
+ Shader "Custom/BakeTriplanarSnow"
 {
     Properties
     {
         [MainTexture] _MainTex("Source Texture", 2D) = "white" {}
-        _Normal_Displacement("Normal UV displacement", Float) = 0.001
+        _Normal_Displacement("Normal UV displacement", Float) = 0.01
         _TerrainSize("Terrain size (width, height, length)", Vector) = (1, 1, 1, 0)
         [Header(Snow)]
-        _Snow_Surface("Snow Surface (0=None 1=full)", Float) = 0.66
-        _Snow_Contrast("Snow Contrast", Float) = 1
+        _Snow_Surface("Snow Surface (0=None 1=full)", Float) = 0.4
+        _Snow_Contrast("Snow Contrast", Float) = 4
         _Snow_Direction("Snow Direction", Vector) = (0,1,0,0)
     }
 

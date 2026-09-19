@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TerrainTexturePacker
-  m_Shader: {fileID: 4800000, guid: c1b5183331413b345940b54326cb67af, type: 3}
+  m_Name: BakeMaterial
+  m_Shader: {fileID: 4800000, guid: 64bd0a878252aa34ba2cabfe72ddb797, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -23,20 +23,17 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _LayerMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _TerrainLayerMask:
-        m_Texture: {fileID: 3716730433326429056, guid: e28313ac707149b4cb347709cf63920f, type: 2}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     m_Ints: []
-    m_Floats: []
-    m_Colors: []
+    m_Floats:
+    - _Normal_Displacement: 0.01
+    - _Snow_Contrast: 10.22
+    - _Snow_Surface: 0.18
+    m_Colors:
+    - _Snow_Direction: {r: 0, g: 1, b: 0, a: 0}
+    - _TerrainSize: {r: 1000, g: 2000, b: 1000, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

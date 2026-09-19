@@ -3198,6 +3198,7 @@ MonoBehaviour:
   playerTopDownCamera: {fileID: 482646433}
   snowMaterial: {fileID: 2100000, guid: 0221bad7c1cbbe140b733f0d7e36950d, type: 2}
   packerMaterial: {fileID: 2100000, guid: a02e8d358939a0745b39f34ba6ac7195, type: 2}
+  triplanarMaterial: {fileID: 2100000, guid: ee735521e6e674d4d880c0a50ff9c7fd, type: 2}
   terrainMaterial: {fileID: 2100000, guid: a39ae130049ffec4796d1414ac867947, type: 2}
   playerParticleEmmissionCount: 5
   animalParticleEmmissionCount: 5
@@ -5051,7 +5052,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3400999212160370979, guid: 9857a62c2cc9cad4eb658bfe7a994531, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 630.3
+      value: 755
       objectReference: {fileID: 0}
     - target: {fileID: 3400999212160370979, guid: 9857a62c2cc9cad4eb658bfe7a994531, type: 3}
       propertyPath: m_LocalPosition.z

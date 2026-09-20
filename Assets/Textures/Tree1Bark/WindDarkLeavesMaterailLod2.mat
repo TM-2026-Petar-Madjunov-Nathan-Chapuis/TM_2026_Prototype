@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WindDarkLeavesMaterail
+  m_Name: WindDarkLeavesMaterailLod2
   m_Shader: {fileID: -6465566751694194690, guid: 29798936c56f67f4aa996b704e4eac17, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -57,9 +57,9 @@ Material:
     m_Floats:
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Wind_Max_Strengh_Range: 1.5
+    - _Wind_Max_Strengh_Range: 0
     - _Wind_Random: 5
-    - _Wind_Speed: 3
+    - _Wind_Speed: 0
     m_Colors:
     - _Wind_Direction: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []

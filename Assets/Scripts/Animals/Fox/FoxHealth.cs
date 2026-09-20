@@ -1,0 +1,26 @@
+using UnityEngine;
+
+public class FoxHealth : HealthManager
+{
+    public override void TakeDamage(float ammount, string source)
+    {
+        Debug.Log("Fox took damage : " + ammount + " by " + source);
+        this.health -= ammount;
+        if (this.health < 0)
+        {
+            this.Die(source);
+        }
+    }
+
+    public override void RestoreHealth(float ammount) //will never be used
+    {
+        Debug.Log("Fox restored health : " + ammount);
+        this.health += ammount;
+        Mathf.Clamp(0, 100, health);
+    }
+
+    protected override void Die(string source)
+    {
+        Debug.Log("Fox died by " + source);
+    }
+}

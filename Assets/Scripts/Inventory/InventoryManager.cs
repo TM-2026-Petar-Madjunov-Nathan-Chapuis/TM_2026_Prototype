@@ -100,6 +100,12 @@ namespace TM.Inventory
             worldItem.GetComponent<WorldItem>().inventoryManager = this;
             worldItem.transform.SetPositionAndRotation(this.transform.position, this.transform.rotation);
         }
+        public void DestroyItem(InventoryItem inventoryItem)
+        {
+            this.inventoryGrid.RemoveItem(inventoryItem);
+            FindAnyObjectByType<ItemWheelManager>().OnUILoaded(new UnityEngine.UIElements.GeometryChangedEvent()); //trigger refresh on item wheel, a bit messy.
+            this.RemoveFromWheel(inventoryItem.id);
+        }
     }
 
     [Serializable]

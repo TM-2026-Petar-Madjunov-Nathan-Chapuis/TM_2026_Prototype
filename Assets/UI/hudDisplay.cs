@@ -116,7 +116,7 @@ public class HUDDisplay : MonoBehaviour
     }
     void DefineHealthBarFill()
     {
-        healthBarFill.style.width = Length.Percent(playerInfo.playerHealth);
+        healthBarFill.style.width = Length.Percent(playerInfo.health);
     }
 
     void DefineHealthBarLabelText()

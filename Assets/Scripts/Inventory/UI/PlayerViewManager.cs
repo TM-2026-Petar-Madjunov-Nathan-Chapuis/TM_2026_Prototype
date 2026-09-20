@@ -19,6 +19,7 @@ namespace TM.Inventory.UI
         [SerializeField] private float angleX = 0;
         [SerializeField] private float widthSizePercentage = 25;
         [SerializeField] private float aspectRatioheightperwidth = 3;
+        [SerializeField, Min(1)] private int renderScale = 2;
         public RenderTexture playerViewRT;
         private VisualElement playerView;
         private float width;
@@ -36,6 +37,10 @@ namespace TM.Inventory.UI
             this.height = this.playerView.resolvedStyle.height;
             UpdatePlayerViewSize(null);
             OnMoveAction(new Vector2(0, 0));
+        }
+        void Update()
+        {
+            UpdatePlayerViewSize(null);
         }
         public void Disable()
         {
@@ -63,7 +68,10 @@ namespace TM.Inventory.UI
                 this.playerViewRT.Release();
                 DestroyImmediate(this.playerViewRT, true);
             }
-            this.playerViewRT = new RenderTexture(width, height, 24) { depthStencilFormat = UnityEngine.Experimental.Rendering.GraphicsFormat.D24_UNorm_S8_UInt };
+            this.playerViewRT = new RenderTexture(width, height, 24, RenderTextureFormat.ARGB32);
+            this.playerViewRT.width = width * this.renderScale;
+            this.playerViewRT.height = height * this.renderScale;
+            this.playerViewRT.filterMode = FilterMode.Bilinear;
             this.playerViewRT.Create();
             this.playerViewCamera.targetTexture = this.playerViewRT;
 

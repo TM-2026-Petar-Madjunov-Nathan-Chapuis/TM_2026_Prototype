@@ -161,7 +161,10 @@ PrefabInstance:
       addedObject: {fileID: 8403246155842327228}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c296237a977436b4095c1017c8252ae7, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4831063227638720473}
+      addedObject: {fileID: 3940038211798029517}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c296237a977436b4095c1017c8252ae7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6122719899199826981}
   m_SourcePrefab: {fileID: 100100000, guid: c296237a977436b4095c1017c8252ae7, type: 3}
 --- !u!4 &2837120709915039840 stripped
 Transform:
@@ -267,33 +270,42 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!54 &4831063227638720473
-Rigidbody:
+--- !u!136 &3940038211798029517
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3176351574667789018}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.49
+  m_Height: 1.92
+  m_Direction: 2
+  m_Center: {x: 0, y: 0.52, z: 0}
+--- !u!114 &6122719899199826981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3176351574667789018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b86c69a41b6874a93525d9706e8bca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FoxHealth
+  health: 0
 --- !u!1001 &4975830927521600272
 PrefabInstance:
   m_ObjectHideFlags: 0

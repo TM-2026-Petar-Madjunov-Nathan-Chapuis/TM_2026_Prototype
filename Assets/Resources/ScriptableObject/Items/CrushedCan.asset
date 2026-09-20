@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5c46887f289b7846b2ad9af09b6c38c, type: 3}
+  m_Name: CrushedCan
+  m_EditorClassIdentifier: Assembly-CSharp::TM.Items.ItemData
+  description: 'What was left of a potent bewerage
+
+'
+  size: {x: 1, y: 1}
+  icon: {fileID: 21300000, guid: cfd8e6bb74f8fb548a947043d8d68498, type: 3}
+  iconRotated: {fileID: 21300000, guid: 6baaccaf3ab99f840a004cea7c64eb3c, type: 3}
+  useBehavior: {fileID: 0}
+  heldPrefab: {fileID: 2502935356652152055, guid: 4c22c5018424e0d43b88021fffb5ab51, type: 3}
+  worldPrefab: {fileID: 6568821005688225977, guid: db451db3a848fe344a3e13783b9a361e, type: 3}

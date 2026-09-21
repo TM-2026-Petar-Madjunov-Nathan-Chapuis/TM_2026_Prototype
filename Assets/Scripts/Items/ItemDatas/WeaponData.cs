@@ -9,12 +9,14 @@ namespace TM.Items
     {
         public int damage;
         public float weight;
+        public float knockbackForce;
         public override List<ItemUIStat> GetItemUIStats()
         {
             return new List<ItemUIStat>()
             {
                 new ItemUIStat("Weight", this.weight.ToString()),
                 new ItemUIStat("Damage", this.damage.ToString()),
+                new ItemUIStat("KnockbackForce", this.knockbackForce.ToString())
             };
         }
         public override ItemType GetItemType()

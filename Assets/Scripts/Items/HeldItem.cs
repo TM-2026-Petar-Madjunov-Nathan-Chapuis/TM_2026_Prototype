@@ -1,4 +1,7 @@
+using TM.Inventory;
 using TM.Items;
+using TM.Player;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class HeldItem : MonoBehaviour
@@ -7,24 +10,11 @@ public class HeldItem : MonoBehaviour
     public GameObject player;
     public ItemData itemData;
     public playerItemController playerItemController;
-    private Collider hitboxCollider;
-
-    void Start()
-    {
-        hitboxCollider = this.gameObject.GetComponent<Collider>();
-        hitboxCollider.enabled = false;
+    public void Collision(Collider collider) {
+        this.itemData.useBehavior.Collision(collider, this, player);
     }
-    void OnTriggerEnter(Collider other)
-    {
-        this.useBehavior.OnTriggerEnter(other, this);
-    }
-    public void EnableHitbox()
-    {
-        hitboxCollider.enabled = true;
-    }
-    public void DisableHitbox()
-    {
-        hitboxCollider.enabled = false;
+    public void AnimationUse(InventoryItem inventoryItem) {
+        this.itemData.useBehavior.OnAnimationUse(this, player, inventoryItem);
     }
     public void Animate(string triggerName)
     {

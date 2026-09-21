@@ -22,9 +22,6 @@ public partial class FleeAction : Action
     protected override Status OnStart()
     {
 
-        if (Agent != null)
-            Debug.Log($"Agent value: {Agent.Value}");
-
         if (Target.Value == null)
         {
             Debug.LogError("Target is null!");

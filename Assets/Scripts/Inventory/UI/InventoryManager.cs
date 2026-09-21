@@ -236,6 +236,8 @@ namespace TM.Inventory.UI
                         inventoryItem.Rotate();
                         SetVisualItem(item, inventoryItem); //update the item.
                     }
+
+                    return;
                 }
             }
 
@@ -314,4 +316,5 @@ namespace TM.Inventory.UI
             return item;
         }
     }
+    
 }

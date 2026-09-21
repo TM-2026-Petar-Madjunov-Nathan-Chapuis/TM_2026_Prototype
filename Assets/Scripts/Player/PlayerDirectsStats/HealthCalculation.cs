@@ -35,7 +35,7 @@ namespace TM.Player
                 HealthBecauseHungryCoefficient = Math.Clamp(HealthBecauseHungryCoefficient, 1, 11); // par securité
                 HealthBecauseHungryCoefficient = ((HealthBecauseHungryCoefficient - 1) / 10) + 1;
 
-                playerInfo.playerHealth -= timeCoefficient * HealthBecauseHungryCoefficient * Time.deltaTime;
+                playerInfo.TakeDamage(timeCoefficient * HealthBecauseHungryCoefficient * Time.deltaTime, "Hunger");
             }
             if (playerInfo.playerThirst <= 0)
             {
@@ -43,7 +43,7 @@ namespace TM.Player
                 HealthBecauseThirstCoefficient = Math.Clamp(HealthBecauseThirstCoefficient, 1, 11); // par securité
                 HealthBecauseThirstCoefficient = ((HealthBecauseThirstCoefficient - 1) / 10) + 1;
 
-                playerInfo.playerHealth -= timeCoefficient * HealthBecauseThirstCoefficient * Time.deltaTime;
+                playerInfo.TakeDamage(timeCoefficient * HealthBecauseThirstCoefficient * Time.deltaTime, "Thirst");
             }
 
         }
@@ -56,12 +56,12 @@ namespace TM.Player
                 {
                     healthBecauseHypothermiaCoefficient = ((playerInfo.hypothermiaTemperature - playerInfo.playerCorporalTemperature) / (playerInfo.hypothermiaTemperature - playerInfo.coldTemperatureLimit)) * maximalHypothermicAndHyperthermicCoefficient;
 
-                    playerInfo.playerHealth -= timeCoefficient * healthBecauseHypothermiaCoefficient * Time.deltaTime;
+                    playerInfo.TakeDamage(timeCoefficient * healthBecauseHypothermiaCoefficient * Time.deltaTime, "Hypothermia");
                 }
 
                 if (playerInfo.playerCorporalTemperature <= playerInfo.coldTemperatureLimit)
                 {
-                    playerInfo.playerHealth = 0f;
+                    playerInfo.TakeDamage(10000f, "Hyperthermia"); //essentially kill
                 }
 
             }
@@ -71,12 +71,12 @@ namespace TM.Player
                 {
                     healthBecauseHyperthermiaCoefficient = ((playerInfo.playerCorporalTemperature - playerInfo.hyperthermiaTemperature) / (playerInfo.hotTemperatureLimit - playerInfo.hyperthermiaTemperature)) * maximalHypothermicAndHyperthermicCoefficient;
 
-                    playerInfo.playerHealth -= timeCoefficient * healthBecauseHyperthermiaCoefficient * Time.deltaTime;
+                    playerInfo.TakeDamage(timeCoefficient * healthBecauseHyperthermiaCoefficient * Time.deltaTime, "Hyperthermia");
                 }
 
                 if (playerInfo.playerCorporalTemperature >= playerInfo.hotTemperatureLimit)
                 {
-                    playerInfo.playerHealth = 0f;
+                    playerInfo.TakeDamage(10000f, "Hyperthermia"); //essentially kill
                 }
             }
 
@@ -88,8 +88,7 @@ namespace TM.Player
         {
             LooseHealthbecauseHungryOrThirst();
             LooseHealthbecauseCorporalTempearture();
-            playerInfo.playerHealth = Math.Clamp(playerInfo.playerHealth, 0, 100);
-            roundedHealth = (float)Math.Round(playerInfo.playerHealth);
+            roundedHealth = (float)Math.Round(playerInfo.health);
         }
     }
 }

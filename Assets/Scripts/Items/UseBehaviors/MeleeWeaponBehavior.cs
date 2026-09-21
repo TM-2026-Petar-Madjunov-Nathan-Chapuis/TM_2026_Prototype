@@ -6,7 +6,6 @@ namespace TM.Items
     public class MeleeWeaponBehavior : UseBehavior
     {
         public string animationTrigger; //set pour chaque meleeeweaponbehavior.
-        public float knowbackForce = 10000f;
         public override void Use(HeldItem heldItem, bool pressed)
         {
             if (!pressed) return;
@@ -19,16 +18,19 @@ namespace TM.Items
                 base.Use(heldItem, pressed);
             }
         }
-        public override void OnTriggerEnter(Collider collider, HeldItem heldItem)
+        public override void Collision(Collider collider, HeldItem heldItem, GameObject player)
         {
-            Debug.Log("handle damage assignement and knoback here");
-            Vector3 playerpos = heldItem.player.gameObject.transform.position;
-            Vector3 relative =  collider.gameObject.transform.position - playerpos;
-            if (collider.gameObject.GetComponent<Rigidbody>())
+            if (heldItem.itemData is WeaponData weaponData) 
             {
-            collider.gameObject.GetComponent<Rigidbody>().AddForce(relative * knowbackForce);
-            collider.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, 0, 0));             
+                Vector3 playerpos = heldItem.player.gameObject.transform.position;
+                Vector3 relative =  collider.gameObject.transform.position - playerpos;
+                if (collider.gameObject.GetComponent<HealthManager>() && collider.gameObject.GetComponent<Rigidbody>())
+                {
+                    collider.gameObject.GetComponent<HealthManager>().TakeDamage(weaponData.damage, "Was stuck by " + weaponData.name);
+                    collider.gameObject.GetComponent<Rigidbody>().AddForce(relative.normalized * weaponData.knockbackForce);
+                }
             }
         }
+ 
     }
 }

@@ -39,7 +39,6 @@ namespace TM.Items
 
         public virtual void Use(HeldItem heldItem, bool pressed)
         {
-            UnityEngine.Debug.Log("Using item");
             useBehavior.Use(heldItem, pressed);
         }
     }

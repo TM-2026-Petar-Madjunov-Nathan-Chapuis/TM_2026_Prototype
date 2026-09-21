@@ -287,9 +287,17 @@
     white-space: normal;
     -unity-text-align: middle-left;
     width: 100%;
+    min-width: 0;
+    flex-shrink: 1;
+    overflow: hidden;
+    font-size: 14px;
 }
 
 .inventory__description-holder {
+    width: 100%;
+    min-width: 0;
+    flex-shrink: 1;
+    overflow: hidden;
 }
 
 .inventory__item-wheel-item {

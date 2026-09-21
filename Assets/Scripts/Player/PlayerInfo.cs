@@ -1,10 +1,8 @@
 using UnityEngine;
 namespace TM.Player
 {
-    public class PlayerInfo : MonoBehaviour
+    public class PlayerInfo : HealthManager
     {
-        public float playerHealth; // 100 -> 0
-
 
         public float playerHunger; // 100 -> 0
         public float playerThirst; // 100 -> 0
@@ -25,5 +23,28 @@ namespace TM.Player
         public float playerMinimumMetabolismWork = -20f;
         public float playerMaximumMetabolismWork = 20f;
         public float playerBaseMetabolismwork = 8f; //Constante //le metabolisme produit par le corp quoi qu'il arrive
+
+        public override void TakeDamage(float ammount, string source)
+        {
+            Debug.Log("Player took damage : " + ammount + " by " + source);
+            this.health -= ammount;
+            if (this.health < 0)
+            {
+                this.Die(source);
+            }
+        }
+
+        public override void RestoreHealth(float ammount)
+        {
+            Debug.Log("player restored health : " + ammount);
+            this.health += ammount;
+            Mathf.Clamp(0, 100, health);
+        }
+
+        protected override void Die(string source)
+        {
+            Debug.Log("player died by " + source);
+            this.health = 100;
+        }
     }
 }

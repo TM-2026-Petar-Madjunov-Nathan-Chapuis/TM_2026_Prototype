@@ -9,6 +9,7 @@ public class PlayerInteracter : MonoBehaviour
     [SerializeField] private float interactionDistance = 3f;
     [SerializeField] private LayerMask interactionMask;
     [SerializeField] private PlayerCamera playerCamera;
+    [SerializeField] private CrosshairManager crosshairManager;
     void Start()
     {
     }
@@ -26,7 +27,18 @@ public class PlayerInteracter : MonoBehaviour
         {
             if (inputValues.pressed)
             {
-                hit.collider.gameObject.GetComponent<IInteractable>().Interact();   
+                hit.collider.gameObject.GetComponent<IInteractable>().Interact(this.gameObject);   
+            }
+            if (!crosshairManager.selected)
+            {
+            crosshairManager.Select();                
+            }
+        }
+        else
+        {
+            if (crosshairManager.selected)
+            {
+                crosshairManager.UnSelect();                 
             }
         }
     }

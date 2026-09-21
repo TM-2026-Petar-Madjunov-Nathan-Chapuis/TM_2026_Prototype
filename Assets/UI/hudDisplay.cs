@@ -63,6 +63,14 @@ public class HUDDisplay : MonoBehaviour
         circularThirstBar.border = true;
         circularThirstBar.segments = true;
     }
+    public void Hide()
+    {
+        uIDocument.rootVisualElement.style.display = DisplayStyle.None;
+    }
+    public void Show()
+    {
+        uIDocument.rootVisualElement.style.display = DisplayStyle.Flex;
+    }
 
     void Update()
     {
@@ -116,7 +124,7 @@ public class HUDDisplay : MonoBehaviour
     }
     void DefineHealthBarFill()
     {
-        healthBarFill.style.width = Length.Percent(playerInfo.playerHealth);
+        healthBarFill.style.width = Length.Percent(playerInfo.health);
     }
 
     void DefineHealthBarLabelText()

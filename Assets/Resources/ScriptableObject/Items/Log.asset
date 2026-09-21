@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8a61f26d139ad642b9d16acefd3aa17, type: 3}
+  m_Name: Log
+  m_EditorClassIdentifier: Assembly-CSharp::TM.Items.CombustibleData
+  description: "A fallen titan of the forest, this massive log once belonged to a
+    tree so old that its roots may have touched the memory of the world itself. Its
+    bark is weathered and cracked like dried earth after a thousand summers, yet
+    beneath the surface lies a stubborn strength that refuses to surrender to time.\n\nMoss
+    clings to its surface in quiet devotion, and faint rings along its cut edge tell
+    a story of centuries \u2014 of seasons endured, storms survived, and sunlight
+    slowly gathered into its core. When you run your hand along it, you can feel
+    the ghost of life still lingering inside, as if the wood has not fully accepted
+    its own death.\n\nIt is heavy. Not just in weight, but in history."
+  size: {x: 3, y: 2}
+  icon: {fileID: 21300000, guid: 8f3deba02ac0b5f4f93f064c88f0278d, type: 3}
+  iconRotated: {fileID: 21300000, guid: 75adc5b798dee594fb290a79cc599221, type: 3}
+  useBehavior: {fileID: 0}
+  heldPrefab: {fileID: 2937027418918562568, guid: f801ecb463f337144b5c1a12ce5d9472, type: 3}
+  worldPrefab: {fileID: 1351059539790418255, guid: d2ab122fa37671c49b0c281765d5d0c5, type: 3}

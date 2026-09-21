@@ -27,8 +27,9 @@ namespace TM.Player
         [SerializeField] private float thirdPersonDistance = 5f;
         [SerializeField] private float thirdPersonSmoothFactor;
         [SerializeField] private float castRadius = 0.2f;
+        [SerializeField] private CrosshairManager crosshairManager;
+        [SerializeField] private LayerMask layerMask;
         public bool lookingAllowed = true;
-
 
         public void LoadData(string data)
         {
@@ -74,11 +75,13 @@ namespace TM.Player
             this.isFirstPerson = !this.isFirstPerson;
             if (isFirstPerson)
             {
+                crosshairManager.FirstP();
                 firstPerson.gameObject.SetActive(true);
                 thirdPerson.gameObject.SetActive(false);
             }
             else
             {
+                crosshairManager.ThirdP();
                 firstPerson.gameObject.SetActive(false);
                 thirdPerson.gameObject.SetActive(true);
             }
@@ -100,7 +103,7 @@ namespace TM.Player
                 if (!this.isFirstPerson)
                 {
                     float dis = thirdPersonDistance;
-                    if (Physics.SphereCast(firstPerson.transform.position, this.castRadius, -firstPerson.transform.forward, out RaycastHit hit, thirdPersonDistance))
+                    if (Physics.SphereCast(firstPerson.transform.position, this.castRadius, -firstPerson.transform.forward, out RaycastHit hit, thirdPersonDistance, layerMask))
                     {
                         dis = hit.distance;
                     }

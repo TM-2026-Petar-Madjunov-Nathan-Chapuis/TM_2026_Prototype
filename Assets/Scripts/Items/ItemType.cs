@@ -2,6 +2,9 @@ public enum ItemType
 {
     Weapon,
     Drink,
-    Consumable,
+    Food,
+    RawMeat,
+    Axe,
+    Combustible,
     None,
 }

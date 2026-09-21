@@ -21,7 +21,7 @@ namespace TM.Items
         }
         public override ItemType GetItemType()
         {
-            return ItemType.Weapon;
+            return ItemType.Axe;
         }
     }
 }

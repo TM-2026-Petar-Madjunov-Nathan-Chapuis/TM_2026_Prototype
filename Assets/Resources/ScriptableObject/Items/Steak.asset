@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f58061cb1e757a24fb5b4d7f1193d5a5, type: 3}
+  m_Name: Steak
+  m_EditorClassIdentifier: Assembly-CSharp::TM.Items.FoodData
+  description: The flesh of a gentle creature, once warm beneath the sun, now reduced
+    to a meal by the very hands that ended its life.
+  size: {x: 1, y: 1}
+  icon: {fileID: 21300000, guid: f3bdb0ae6c2552644aaf9fe5d22349ce, type: 3}
+  iconRotated: {fileID: 21300000, guid: 54af3f1bf322ef545937af9243ddf52d, type: 3}
+  useBehavior: {fileID: 11400000, guid: 5cb0125b8b5ad2749a04c319884b8ece, type: 2}
+  heldPrefab: {fileID: 6632609411154435905, guid: f957fbea161707c449dfb0e936b95108, type: 3}
+  worldPrefab: {fileID: 4241095439203635510, guid: 3a17bcf0dd24c684d8e6293f64895503, type: 3}
+  satietyAmmount: 10
+  weight: 2

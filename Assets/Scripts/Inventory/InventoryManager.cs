@@ -16,8 +16,6 @@ namespace TM.Inventory
         [field: SerializeField, Range(0, 30f)]
         public int cellPosMargin { get; private set; }
         [field: SerializeField] public Vector2Int gridSize { get; private set; }
-        public WeaponData exasdéflkj;
-        public DrinkData whatdsaélkfjasédf;
         public Guid?[] ItemWheelIds;
         private int itemWheelSlotNumber;
         string ISaveable.UID => "InventoryManager";
@@ -34,9 +32,6 @@ namespace TM.Inventory
             itemWheelSlotNumber = GameObject.FindAnyObjectByType<ItemWheelVectorImager>().slotNumber;
             ItemWheelIds = new Guid?[itemWheelSlotNumber];
             inventoryGrid = new InventoryGrid(gridSize);
-            this.inventoryGrid.TryInsertItem(exasdéflkj, new Vector2Int(2, 2), false);
-            this.inventoryGrid.TryInsertItem(exasdéflkj, new Vector2Int(6, 2), true);
-            this.inventoryGrid.TryInsertItem(whatdsaélkfjasédf, new Vector2Int(6, 5), false);
         }
 
         public void LoadData(string data)
@@ -97,7 +92,6 @@ namespace TM.Inventory
             FindAnyObjectByType<ItemWheelManager>().OnUILoaded(new UnityEngine.UIElements.GeometryChangedEvent()); //trigger refresh on item wheel, a bit messy.
             this.RemoveFromWheel(inventoryItem.id);
             GameObject worldItem = GameObject.Instantiate(inventoryItem.itemData.worldPrefab);
-            worldItem.GetComponent<WorldItem>().inventoryManager = this;
             worldItem.transform.SetPositionAndRotation(this.transform.position, this.transform.rotation);
         }
         public void DestroyItem(InventoryItem inventoryItem)

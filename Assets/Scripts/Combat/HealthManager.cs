@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class HealthManager : MonoBehaviour
 {
-    public float health; // 0 -> 100
+    public float health = 100; // 0 -> 100
 
     public abstract void TakeDamage(float ammount, string source);
 

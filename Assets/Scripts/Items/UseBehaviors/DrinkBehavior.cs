@@ -35,7 +35,6 @@ namespace TM.Items
                 crushedCan.transform.position = heldItem.transform.position + player.transform.up * 1.4f; //small vertical offset
                 Vector3 direction = Quaternion.AngleAxis(-throwAngle, player.transform.right) * (-player.transform.forward);
                 crushedCan.GetComponent<Rigidbody>().AddForce(direction * throwForce);
-                crushedCan.GetComponent<WorldItem>().inventoryManager = player.GetComponent<InventoryManager>();
                 GameObject.Destroy(heldItem.gameObject);
                 player.GetComponent<InventoryManager>().DestroyItem(inventoryItem);
             }

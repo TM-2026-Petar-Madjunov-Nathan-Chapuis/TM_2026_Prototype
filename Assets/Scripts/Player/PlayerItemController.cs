@@ -26,6 +26,8 @@ namespace TM.Player
 
         public void SetHeldItem(InventoryItem inventoryItem)
         {
+            itemActionInProgress = false;
+
             if (this.heldItemGameobject) Destroy(this.heldItemGameobject);
             if (inventoryItem == null)
             {

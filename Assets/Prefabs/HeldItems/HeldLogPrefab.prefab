@@ -1,0 +1,128 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &2594921321501824601
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 9ae33a21ca27fa24d80789fbf73de0f2, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9ae33a21ca27fa24d80789fbf73de0f2, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9ae33a21ca27fa24d80789fbf73de0f2, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9ae33a21ca27fa24d80789fbf73de0f2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.1253
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9ae33a21ca27fa24d80789fbf73de0f2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0453
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9ae33a21ca27fa24d80789fbf73de0f2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.0089
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9ae33a21ca27fa24d80789fbf73de0f2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.61840844
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9ae33a21ca27fa24d80789fbf73de0f2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9ae33a21ca27fa24d80789fbf73de0f2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9ae33a21ca27fa24d80789fbf73de0f2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.7858569
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9ae33a21ca27fa24d80789fbf73de0f2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9ae33a21ca27fa24d80789fbf73de0f2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9ae33a21ca27fa24d80789fbf73de0f2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 103.6
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9ae33a21ca27fa24d80789fbf73de0f2, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9ae33a21ca27fa24d80789fbf73de0f2, type: 3}
+      propertyPath: m_Name
+      value: HeldLogPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9ae33a21ca27fa24d80789fbf73de0f2, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9ae33a21ca27fa24d80789fbf73de0f2, type: 3}
+      propertyPath: m_TagString
+      value: Knockbackable
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444136015947279688, guid: 9ae33a21ca27fa24d80789fbf73de0f2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444136015947279688, guid: 9ae33a21ca27fa24d80789fbf73de0f2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444136015947279688, guid: 9ae33a21ca27fa24d80789fbf73de0f2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444136015947279688, guid: 9ae33a21ca27fa24d80789fbf73de0f2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1700632255236584042, guid: 9ae33a21ca27fa24d80789fbf73de0f2, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects:
+    - {fileID: 65702495048144492, guid: 9ae33a21ca27fa24d80789fbf73de0f2, type: 3}
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9ae33a21ca27fa24d80789fbf73de0f2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1930668807773382326}
+  m_SourcePrefab: {fileID: 100100000, guid: 9ae33a21ca27fa24d80789fbf73de0f2, type: 3}
+--- !u!1 &2937027418918562568 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9ae33a21ca27fa24d80789fbf73de0f2, type: 3}
+  m_PrefabInstance: {fileID: 2594921321501824601}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1930668807773382326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2937027418918562568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 336ec71dbdf73da4795aa8ed21295851, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HeldItem
+  useBehavior: {fileID: 0}
+  player: {fileID: 0}
+  itemData: {fileID: 0}
+  playerItemController: {fileID: 0}

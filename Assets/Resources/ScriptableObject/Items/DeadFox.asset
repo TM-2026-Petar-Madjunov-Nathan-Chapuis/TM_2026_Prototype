@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07188e3f7456fa04e800b45bddcd722b, type: 3}
+  m_Name: DeadFox
+  m_EditorClassIdentifier: Assembly-CSharp::TM.Items.DeadFoxData
+  description: 'This gentle creature once danced beneath the moonlight. Now, it lies
+    still, its final breath spent for a moment of your hunger.
+
+    A life of quiet
+    paws and curious eyes, ended by a hand that will never know the warmth it took
+    away.
+
+    It never knew your name, never wished you harm. Yet here it rests,
+    a small and silent price for a world that calls killing survival.
+
+    The fox
+    had a thousand paths left to wander, a thousand dawns left to greet. You gave
+    it only one final sunset.
+
+    Its fur is still soft, its body still warm. How
+    strange that something so full of life should become so easily carried.'
+  size: {x: 2, y: 2}
+  icon: {fileID: 21300000, guid: 82863b81a34f008448007dab3808e22f, type: 3}
+  iconRotated: {fileID: 21300000, guid: 21c64f206291de44d8d238846098b0b2, type: 3}
+  useBehavior: {fileID: 0}
+  heldPrefab: {fileID: 5346361513430122255, guid: 96042ff60a6f53b42a8e0e086c718bdf, type: 3}
+  worldPrefab: {fileID: 4994672848557695451, guid: 6a633348d341b9044acf9fd9043a09c7, type: 3}

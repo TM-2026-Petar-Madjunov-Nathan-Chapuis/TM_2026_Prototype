@@ -13,6 +13,8 @@ namespace TM.UI
         [SerializeField] private UIDocument uIDocument;
         [SerializeField] private BlurManager blurManager;
         [SerializeField] private Shader flipShader;
+        [SerializeField] private CrosshairManager crosshairManager;
+        [SerializeField] private HUDDisplay hUDDisplay;
         private Material flipMaterial;
         private InventoryManager inventoryUIManager;
 
@@ -46,6 +48,8 @@ namespace TM.UI
             flipMaterial = new Material(flipShader);
 
             root.style.display = DisplayStyle.None;
+            hUDDisplay.Show();
+            crosshairManager.Show();
             isOpen = false;
         }
 
@@ -71,12 +75,16 @@ namespace TM.UI
                 CaptureAndBlurBackground();
                 this.inventoryUIManager.OnEnable();
                 GameStateManager.Instance.FreezeTime();
+                hUDDisplay.Hide();
+                crosshairManager.Hide();
             }
             else
             {
                 GameStateManager.Instance.UnFreezeTime();
                 this.inventoryUIManager.OnDisable();
                 CursorManager.Instance.HideCursor();
+                hUDDisplay.Show();
+                crosshairManager.Show();
             }
         }
 

@@ -1,0 +1,13 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/PauseMenuStyles.uss?fileID=7433441132597879392&amp;guid=15a7d94582a302b4bb8d3ddfc62b2494&amp;type=3#PauseMenuStyles"/>
+    <ui:VisualElement name="MenuBackground" picking-mode="Ignore" style="flex-grow: 1; align-items: center; align-self: center; width: auto; height: 40%; aspect-ratio: 1; position: absolute; top: 25%; display: flex; visibility: visible; max-width: none; max-height: none; justify-content: center; min-width: auto; min-height: auto;">
+        <ui:Button text="RETURN TO GAME" name="ReturnToGameButton" emoji-fallback-support="true" class="PauseMenuButtonsUSS"/>
+        <ui:Button text="SETTINGS" name="SettingsButton" emoji-fallback-support="true" class="PauseMenuButtonsUSS"/>
+        <ui:Button text="SAVE AND QUIT TO MAIN MENU" name="SaveAndQuitToMainMenuButton" emoji-fallback-support="true" class="PauseMenuButtonsUSS"/>
+        <ui:Button text="QUIT GAME" name="QuitGameButton" emoji-fallback-support="true" class="PauseMenuButtonsUSS"/>
+    </ui:VisualElement>
+    <ui:VisualElement name="SettingsMenu" picking-mode="Ignore" style="flex-grow: 1; position: absolute; top: 25%; width: auto; aspect-ratio: 1; align-self: center; background-color: rgba(0, 0, 0, 0.5); visibility: visible; height: 40%;">
+        <ui:Label text="Settings (NOT COMING SOON)" name="Label" style="color: rgb(255, 255, 255); font-size: 20%; -unity-text-align: upper-center; top: 25%; position: absolute; align-self: center;"/>
+        <ui:Button text="Back" name="BackFromSettingsToPause" style="position: absolute; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; aspect-ratio: 1; width: 10%; top: 2%; left: 2%;"/>
+    </ui:VisualElement>
+</ui:UXML>

@@ -17,7 +17,6 @@ namespace TM.UI
         [SerializeField] private HUDDisplay hUDDisplay;
         private Material flipMaterial;
         private InventoryManager inventoryUIManager;
-
         private VisualElement root;
         private VisualElement templateHolder;
 

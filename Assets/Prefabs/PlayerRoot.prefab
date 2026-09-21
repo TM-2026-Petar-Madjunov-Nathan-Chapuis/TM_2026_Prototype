@@ -569,6 +569,10 @@ MonoBehaviour:
   thirdPersonDistance: 5
   thirdPersonSmoothFactor: 9.35
   castRadius: 0.2
+  crosshairManager: {fileID: 0}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
   lookingAllowed: 1
 --- !u!114 &4992514106411587469
 MonoBehaviour:
@@ -585,8 +589,6 @@ MonoBehaviour:
   <cellSize>k__BackingField: 70
   <cellPosMargin>k__BackingField: 10
   <gridSize>k__BackingField: {x: 10, y: 9}
-  "exasd\xE9flkj": {fileID: 11400000, guid: 650a0118680721241862d3af314c7733, type: 2}
-  "whatdsa\xE9lkfjas\xE9df": {fileID: 11400000, guid: 592d6b0ffb8e66248aaabce25c23372b, type: 2}
 --- !u!114 &2811979671063941433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -603,7 +605,6 @@ MonoBehaviour:
   deltaTemperature: 0
   timeCoefficient: 0.005
   <roundedCorpralTemperature>k__BackingField: 0
-  <roundedCorpralTemperature>k__BackingField: 0
   player: {fileID: 2303917331248119258}
 --- !u!114 &4891386161292877890
 MonoBehaviour:
@@ -617,8 +618,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c54d99d25caf3049985f19df5d3841e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HungerAndThirstCalculation
-  <roundedPlayerHunger>k__BackingField: 0
-  <roundedplayerThirst>k__BackingField: 0
   <roundedPlayerHunger>k__BackingField: 0
   <roundedplayerThirst>k__BackingField: 0
   <hungerMetabolismCoefficient>k__BackingField: 0
@@ -665,7 +664,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06311fe092a0dcd4d8f6ef276fd29da5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthCalculation
-  <roundedHealth>k__BackingField: 0
   <roundedHealth>k__BackingField: 0
   timeCoefficient: 0.05
   HealthBecauseHungryCoefficient: 1
@@ -798,7 +796,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1809175204809229956}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: e4a89d13416e3de42ad8a0202883c6ab, type: 3}
+  m_Avatar: {fileID: 9000000, guid: 4fd5b9d6ddd3dd34c8c5eceee4dc656d, type: 3}
   m_Controller: {fileID: 9100000, guid: 15daf083373592243bcecc33eb1b2683, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0

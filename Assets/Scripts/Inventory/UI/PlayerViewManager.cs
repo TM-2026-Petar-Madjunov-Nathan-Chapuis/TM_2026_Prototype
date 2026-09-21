@@ -38,10 +38,6 @@ namespace TM.Inventory.UI
             UpdatePlayerViewSize(null);
             OnMoveAction(new Vector2(0, 0));
         }
-        void Update()
-        {
-            UpdatePlayerViewSize(null);
-        }
         public void Disable()
         {
             this.gameObject.SetActive(false);

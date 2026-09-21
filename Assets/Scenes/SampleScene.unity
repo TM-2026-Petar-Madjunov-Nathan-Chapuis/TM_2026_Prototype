@@ -5168,9 +5168,6 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5319291283979018673, guid: ba06c9814473ffe4586b5fd117a5354f, type: 3}
-      insertIndex: 4
-      addedObject: {fileID: 1711815815}
-    - targetCorrespondingSourceObject: {fileID: 5319291283979018673, guid: ba06c9814473ffe4586b5fd117a5354f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1382485695}
     m_AddedComponents: []
@@ -5480,18 +5477,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 327682529}
     m_Modifications:
-    - target: {fileID: 1219661548539884124, guid: 3d8cd1a42451d1b4ea01b6c449812f66, type: 3}
-      propertyPath: inventoryManager
-      value: 
-      objectReference: {fileID: 1892611304}
-    - target: {fileID: 7488129612693490933, guid: 3d8cd1a42451d1b4ea01b6c449812f66, type: 3}
-      propertyPath: m_Name
-      value: Can
-      objectReference: {fileID: 0}
-    - target: {fileID: 7827536089314072143, guid: 3d8cd1a42451d1b4ea01b6c449812f66, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6873963569726501810, guid: eab12d4018840ad409fedea957aed6c7, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
@@ -5514,6 +5499,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7697296655184927951, guid: eab12d4018840ad409fedea957aed6c7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1219661548539884124, guid: 3d8cd1a42451d1b4ea01b6c449812f66, type: 3}
+      propertyPath: inventoryManager
+      value: 
+      objectReference: {fileID: 1892611304}
+    - target: {fileID: 7488129612693490933, guid: 3d8cd1a42451d1b4ea01b6c449812f66, type: 3}
+      propertyPath: m_Name
+      value: Can
+      objectReference: {fileID: 0}
+    - target: {fileID: 7827536089314072143, guid: 3d8cd1a42451d1b4ea01b6c449812f66, type: 3}
+      propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -5815,6 +5812,10 @@ PrefabInstance:
     - target: {fileID: 5169617785573002150, guid: 9857a62c2cc9cad4eb658bfe7a994531, type: 3}
       propertyPath: m_RequiresOpaqueTextureOption
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6697312587295927490, guid: 9857a62c2cc9cad4eb658bfe7a994531, type: 3}
+      propertyPath: m_Depth
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6697312587295927490, guid: 9857a62c2cc9cad4eb658bfe7a994531, type: 3}
       propertyPath: m_CullingMask.m_Bits

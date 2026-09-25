@@ -678,6 +678,11 @@ Transform:
   - {fileID: 115224816}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &329742095 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 600441584526602373, guid: 5ad68d3bcf045b143b6e3f88992ae20b, type: 3}
+  m_PrefabInstance: {fileID: 1603425642}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &341919867
 GameObject:
   m_ObjectHideFlags: 0
@@ -3496,6 +3501,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1444545219}
   m_CullTransparentMesh: 1
+--- !u!114 &1445766411 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8895048293594844839, guid: ba06c9814473ffe4586b5fd117a5354f, type: 3}
+  m_PrefabInstance: {fileID: 18208326891076453}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3c58121032c6bc4a86056373d2de716, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BlurManager
 --- !u!1 &1471252247
 GameObject:
   m_ObjectHideFlags: 0
@@ -3508,7 +3524,7 @@ GameObject:
   - component: {fileID: 1471252251}
   - component: {fileID: 1471252250}
   m_Layer: 0
-  m_Name: fog diffuser
+  m_Name: foggy sky
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3790,6 +3806,67 @@ MonoBehaviour:
   m_IgnoreFromBuild: 0
   m_ApplyToChildren: 1
   m_AffectedAgents: ffffffff
+--- !u!1001 &1603425642
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2079469477}
+    m_Modifications:
+    - target: {fileID: 504749424885558415, guid: 5ad68d3bcf045b143b6e3f88992ae20b, type: 3}
+      propertyPath: m_Name
+      value: PauseMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 600441584526602373, guid: 5ad68d3bcf045b143b6e3f88992ae20b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 76.25757
+      objectReference: {fileID: 0}
+    - target: {fileID: 600441584526602373, guid: 5ad68d3bcf045b143b6e3f88992ae20b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 655.2517
+      objectReference: {fileID: 0}
+    - target: {fileID: 600441584526602373, guid: 5ad68d3bcf045b143b6e3f88992ae20b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -196.14215
+      objectReference: {fileID: 0}
+    - target: {fileID: 600441584526602373, guid: 5ad68d3bcf045b143b6e3f88992ae20b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 600441584526602373, guid: 5ad68d3bcf045b143b6e3f88992ae20b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 600441584526602373, guid: 5ad68d3bcf045b143b6e3f88992ae20b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 600441584526602373, guid: 5ad68d3bcf045b143b6e3f88992ae20b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 600441584526602373, guid: 5ad68d3bcf045b143b6e3f88992ae20b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 600441584526602373, guid: 5ad68d3bcf045b143b6e3f88992ae20b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 600441584526602373, guid: 5ad68d3bcf045b143b6e3f88992ae20b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6359166358733672201, guid: 5ad68d3bcf045b143b6e3f88992ae20b, type: 3}
+      propertyPath: blurManager
+      value: 
+      objectReference: {fileID: 1445766411}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5ad68d3bcf045b143b6e3f88992ae20b, type: 3}
 --- !u!1 &1607080724
 GameObject:
   m_ObjectHideFlags: 0
@@ -4701,6 +4778,7 @@ Transform:
   - {fileID: 929258917}
   - {fileID: 2115807652}
   - {fileID: 1607080725}
+  - {fileID: 329742095}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2115807650
@@ -5586,6 +5664,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 15498853}
     m_Modifications:
+    - target: {fileID: 638610257508780048, guid: 9857a62c2cc9cad4eb658bfe7a994531, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 824419987329872454, guid: 9857a62c2cc9cad4eb658bfe7a994531, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1248942794267138818, guid: 9857a62c2cc9cad4eb658bfe7a994531, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -5693,6 +5779,10 @@ PrefabInstance:
     - target: {fileID: 6697312587295927490, guid: 9857a62c2cc9cad4eb658bfe7a994531, type: 3}
       propertyPath: m_CullingMask.m_Bits
       value: 1207
+      objectReference: {fileID: 0}
+    - target: {fileID: 7294967553918197612, guid: 9857a62c2cc9cad4eb658bfe7a994531, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.a
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7801781671350518359, guid: 9857a62c2cc9cad4eb658bfe7a994531, type: 3}
       propertyPath: m_ClearFlags

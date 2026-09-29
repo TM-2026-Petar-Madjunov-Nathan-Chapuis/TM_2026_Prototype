@@ -42,7 +42,7 @@ Shader "Hidden/FlipY"
                 Varyings o;
                 o.positionHCS = TransformObjectToHClip(v.positionOS.xyz);
 
-                // FLIP HERE
+                //ici le flip est fait par la substraction dans les uvs.
                 o.uv = float2(v.uv.x, 1.0 - v.uv.y);
 
                 return o;

@@ -24,10 +24,15 @@ namespace TM.Items
         {
             if (heldItem.itemData is AxeData axeData)
             {
-                if (collider.gameObject.CompareTag("Tree"))
-                {
-                    collider.gameObject.GetComponent<TreeFall>().Fall(player.GetComponent<InventoryManager>(), player.transform.position);
-                }
+                    TreeFall treeFall = collider.GetComponentInParent<TreeFall>();
+
+                    if (treeFall != null)
+                    {
+                        treeFall.Fall(
+                            player.GetComponent<InventoryManager>(),
+                            player.transform.position
+                        );
+                    }
                 if (collider.gameObject.CompareTag("Knockbackable"))
                 {
                     Vector3 playerpos = heldItem.player.gameObject.transform.position;

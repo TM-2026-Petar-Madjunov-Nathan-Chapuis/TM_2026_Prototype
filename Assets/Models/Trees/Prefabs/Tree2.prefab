@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 6985405659632749045}
   - component: {fileID: 5620197152535177695}
   - component: {fileID: 1564685848370525279}
+  - component: {fileID: 9176161484737538710}
   m_Layer: 0
   m_Name: Tree2
-  m_TagString: Untagged
+  m_TagString: Tree
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34,6 +35,7 @@ Transform:
   - {fileID: 609220174911457423}
   - {fileID: 7724339548773167521}
   - {fileID: 8164960323980973058}
+  - {fileID: 6436484383069060784}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!205 &5620197152535177695
@@ -89,6 +91,25 @@ CapsuleCollider:
   m_Height: 45
   m_Direction: 1
   m_Center: {x: 0, y: 22.5, z: 0}
+--- !u!114 &9176161484737538710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7946934862756401457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1bc067681f185b44aaf41cb694f2eac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TM.Misc.TreeFall
+  droppedWorldItemPrefabs: {fileID: 1351059539790418255, guid: d2ab122fa37671c49b0c281765d5d0c5, type: 3}
+  particlesSystem: {fileID: 6434290760266280261}
+  leavesParticlesCount: 100
+  leavesTimerSeconds: 5
+  treeFallDirectionFactor: 0.5
+  UpperLootBound: 4
+  LowerLootBound: 2
 --- !u!1001 &1152600413072273252
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -168,6 +189,95 @@ MeshRenderer:
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 1446317025356153247, guid: ae4a139ecf456614ea03b3de2779f894, type: 3}
   m_PrefabInstance: {fileID: 1152600413072273252}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5734764987707042231
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6985405659632749045}
+    m_Modifications:
+    - target: {fileID: 1641287386212996871, guid: 2a4100bc485fe8a4197215e13b0f2762, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.04826
+      objectReference: {fileID: 0}
+    - target: {fileID: 1641287386212996871, guid: 2a4100bc485fe8a4197215e13b0f2762, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 8.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 1641287386212996871, guid: 2a4100bc485fe8a4197215e13b0f2762, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.09894
+      objectReference: {fileID: 0}
+    - target: {fileID: 1641287386212996871, guid: 2a4100bc485fe8a4197215e13b0f2762, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1641287386212996871, guid: 2a4100bc485fe8a4197215e13b0f2762, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1641287386212996871, guid: 2a4100bc485fe8a4197215e13b0f2762, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1641287386212996871, guid: 2a4100bc485fe8a4197215e13b0f2762, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1641287386212996871, guid: 2a4100bc485fe8a4197215e13b0f2762, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1641287386212996871, guid: 2a4100bc485fe8a4197215e13b0f2762, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1641287386212996871, guid: 2a4100bc485fe8a4197215e13b0f2762, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1647977733342348530, guid: 2a4100bc485fe8a4197215e13b0f2762, type: 3}
+      propertyPath: m_Name
+      value: TreeFallParticles
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5829783408677011794, guid: 2a4100bc485fe8a4197215e13b0f2762, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1647977733342348530, guid: 2a4100bc485fe8a4197215e13b0f2762, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8967108995404435760}
+  m_SourcePrefab: {fileID: 100100000, guid: 2a4100bc485fe8a4197215e13b0f2762, type: 3}
+--- !u!198 &4211172703749455767 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8495175503461652000, guid: 2a4100bc485fe8a4197215e13b0f2762, type: 3}
+  m_PrefabInstance: {fileID: 5734764987707042231}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6434290760266280261 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1647977733342348530, guid: 2a4100bc485fe8a4197215e13b0f2762, type: 3}
+  m_PrefabInstance: {fileID: 5734764987707042231}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8967108995404435760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6434290760266280261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98aad1d2880197944870005bf1741677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TreeDroppedLeaves
+  leavesParticlesSystem: {fileID: 4211172703749455767}
+--- !u!4 &6436484383069060784 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1641287386212996871, guid: 2a4100bc485fe8a4197215e13b0f2762, type: 3}
+  m_PrefabInstance: {fileID: 5734764987707042231}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7834262900001560138
 PrefabInstance:

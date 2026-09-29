@@ -70,7 +70,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 95992eba013840a459f913a1459c9127, type: 3}
       propertyPath: m_Layer
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 95992eba013840a459f913a1459c9127, type: 3}
       propertyPath: m_TagString
@@ -157,5 +157,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2727ead975c8d4046817ed063cccddc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TM.Items.WorldItem
-  inventoryManager: {fileID: 0}
   itemData: {fileID: 11400000, guid: 2ed6d2c062310444eaa231be9a4662d7, type: 2}

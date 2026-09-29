@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7561940409656799252}
   - component: {fileID: 6128942205177967720}
   - component: {fileID: 166480186637156088}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: WorldAxePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +75,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2727ead975c8d4046817ed063cccddc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TM.Items.WorldItem
-  inventoryManager: {fileID: 0}
   itemData: {fileID: 11400000, guid: 0f3a26f3475cba14ebf2af65557c9611, type: 2}
 --- !u!65 &6128942205177967720
 BoxCollider:

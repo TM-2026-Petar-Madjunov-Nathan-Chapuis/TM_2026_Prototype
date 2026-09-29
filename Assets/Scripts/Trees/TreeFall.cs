@@ -9,7 +9,7 @@ namespace TM.Misc
     public class TreeFall : MonoBehaviour
     {
         [SerializeField] private GameObject droppedWorldItemPrefabs;
-        [SerializeField] private GameObject particlesSystem;
+        [SerializeField] public GameObject particlesSystem;
         [SerializeField] int leavesParticlesCount;
         [SerializeField] float leavesTimerSeconds;
         [SerializeField] float treeFallDirectionFactor;
@@ -17,11 +17,14 @@ namespace TM.Misc
         private int UpperLootBound;
         [SerializeField, Range(1, 5)]
         private int LowerLootBound;
+        void Start() {
+            Debug.Log("hello from " + this.gameObject.name);
+        }
         public void Fall(InventoryManager inventoryManager, Vector3 playerPosition)
         {
             Vector3 direction = Vector3.Normalize(this.transform.position - playerPosition);
             Vector3 rotationAxis = Vector3.Cross(Vector3.up, direction).normalized; //gets the axis around wich the logs should rotate to face away from the player and the tree to fall corectly
-            float height = this.GetComponent<MeshRenderer>().bounds.size.y;
+            float height = this.GetComponent<LODGroup>().GetLODs()[0].renderers[0].bounds.size.y;
             float objectHeight = this.droppedWorldItemPrefabs.GetComponentInChildren<MeshRenderer>().bounds.size.y;
             int count = UnityEngine.Random.Range(LowerLootBound, UpperLootBound+1);
             float step = height / objectHeight;
@@ -38,5 +41,6 @@ namespace TM.Misc
             particles.GetComponent<TreeDroppedLeaves>().Emit(leavesParticlesCount, leavesTimerSeconds);
             GameObject.Destroy(this.gameObject);
         }
+
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TM.Input;
 using TM.Inventory;
+using TM.Misc;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -91,7 +92,7 @@ namespace TM.Player
             {
                 if (hit.collider.transform == this.gameObject.transform || hit.collider.transform.IsChildOf(this.gameObject.transform)) continue; //if player (normally exluded), continue
                 bool isHealthTarget = hit.collider.GetComponentInParent<HealthManager>() != null;
-                bool isTreeTarget = hit.collider.CompareTag("Tree");
+                bool isTreeTarget = hit.collider.GetComponentInParent<TreeFall>() != null;
                 bool isInteractableTarget = hit.collider.gameObject.layer == LayerMask.NameToLayer("Interactable");
                 if (!isHealthTarget && !isTreeTarget && !isInteractableTarget) continue;
 

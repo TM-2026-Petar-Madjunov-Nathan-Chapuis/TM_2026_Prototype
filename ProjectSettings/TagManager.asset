@@ -15,10 +15,10 @@ TagManager:
   - UI
   - SnowDisplacement
   - Foxes
-  - 
-  - 
+  - SnowTerrainCollider
+  - Items
   - Interactable
-  - 
+  - Tree
   - 
   - 
   - PlayerView

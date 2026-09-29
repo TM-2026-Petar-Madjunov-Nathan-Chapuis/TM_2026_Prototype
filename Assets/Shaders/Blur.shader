@@ -1,3 +1,5 @@
+//Ce shader a été majoritairement été généré par une IA générative, GPT-5.6 Terra, avec l'accord du tuteur. Toutefois nous comprenons parfaitement son fonctionnement, seul les calculs sont obscures et n'ont pas la place dans ce tm.
+
 Shader "CustomEffects/Blur"
 {
     Properties

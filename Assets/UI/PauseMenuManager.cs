@@ -13,6 +13,8 @@ public class PauseMenuManager : MonoBehaviour, ISaveable
     private VisualElement PauseMenu;
     private Button ReturnToGameButton;
     private Button SettingsButton;
+    private Button SaveButton;
+    private Button LoadButton; //temporary button
     private Button SaveAndQuitToMainMenuButton;
     private Button QuitGameButton;
     private VisualElement SettingsMenu;
@@ -29,6 +31,8 @@ public class PauseMenuManager : MonoBehaviour, ISaveable
     private RenderTexture blurredRT;
 
     [SerializeField] private InputActionAsset inputActions;
+    [SerializeField] private SavingManager savingManager;
+
 
     public string UID => "PauseMenuManager";
 
@@ -43,6 +47,8 @@ public class PauseMenuManager : MonoBehaviour, ISaveable
         PauseMenu = root.Q<VisualElement>("MenuBackground");
         ReturnToGameButton = root.Q<VisualElement>("MenuBackground").Q<Button>("ReturnToGameButton");
         SettingsButton = root.Q<VisualElement>("MenuBackground").Q<Button>("SettingsButton");
+        SaveButton = root.Q<VisualElement>("MenuBackground").Q<Button>("SaveButton");
+        LoadButton = root.Q<VisualElement>("MenuBackground").Q<Button>("LoadButton"); //temporary button
         SaveAndQuitToMainMenuButton = root.Q<VisualElement>("MenuBackground").Q<Button>("SaveAndQuitToMainMenuButton");
         QuitGameButton = root.Q<VisualElement>("MenuBackground").Q<Button>("QuitGameButton");
 
@@ -85,6 +91,8 @@ public class PauseMenuManager : MonoBehaviour, ISaveable
 
             ReturnToGameButton.UnregisterCallback<ClickEvent>(ReturnToGameAction);
             SettingsButton.UnregisterCallback<ClickEvent>(OpenSettingsAction);
+            SaveButton.UnregisterCallback<ClickEvent>(SaveAction);
+            LoadButton.UnregisterCallback<ClickEvent>(LoadAction); //temporary button
             SaveAndQuitToMainMenuButton.UnregisterCallback<ClickEvent>(SaveAndQuitToMainMenuAction);
             QuitGameButton.UnregisterCallback<ClickEvent>(QuitGameAction);
 
@@ -109,6 +117,8 @@ public class PauseMenuManager : MonoBehaviour, ISaveable
 
             ReturnToGameButton.RegisterCallback<ClickEvent>(ReturnToGameAction);
             SettingsButton.RegisterCallback<ClickEvent>(OpenSettingsAction);
+            SaveButton.RegisterCallback<ClickEvent>(SaveAction);
+            LoadButton.RegisterCallback<ClickEvent>(LoadAction); //temporary button
 
             menuIsOpen = true;
         }
@@ -145,9 +155,20 @@ public class PauseMenuManager : MonoBehaviour, ISaveable
     {
         ShowAndHideSettingsMenu();
     }
+    void SaveAction(ClickEvent clickEvent)
+    {
+        savingManager.Save();
+        Debug.Log("saved succesfully");
+    }
+    void LoadAction(ClickEvent clickEvent) //temporary button
+    {
+        savingManager.Load();
+        Debug.Log("loaded succesfully");
+    }
     void SaveAndQuitToMainMenuAction(ClickEvent clickEvent)
     {
-
+        savingManager.Save();
+        Application.Quit(); // temporary
     }
     void QuitGameAction(ClickEvent clickEvent)
     {

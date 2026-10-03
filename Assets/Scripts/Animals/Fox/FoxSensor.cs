@@ -17,20 +17,21 @@ using UnityEngine;
 
 public class FoxSensor : MonoBehaviour
 {
-    [SerializeField] private GameObject player;
     [SerializeField] private float maxSeeingDistance;
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private float FleeDistance;
     [SerializeField] private float WanderRadius;
     private BehaviorGraphAgent behaviorGraphAgent;
     private float timer;
+    private GameObject player;
 
     void Start()
     {
+        this.player = FindAnyObjectByType<PlayerController>().gameObject;
         this.behaviorGraphAgent = this.GetComponent<BehaviorGraphAgent>();
         this.behaviorGraphAgent.SetVariableValue("WanderRadius", WanderRadius);
         this.behaviorGraphAgent.SetVariableValue("FleeDistance", FleeDistance);
-        this.behaviorGraphAgent.SetVariableValue("Player",player);
+        this.behaviorGraphAgent.SetVariableValue("Player", player);
         this.behaviorGraphAgent.SetVariableValue("basePosition", this.transform.position);
     }
 

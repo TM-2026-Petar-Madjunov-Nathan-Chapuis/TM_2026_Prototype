@@ -10,6 +10,7 @@ namespace TM.Inventory
 {
     public class InventoryManager : MonoBehaviour, ISaveable //sits on the player
     {
+        [SerializeField] private GameObject droppedItemParent;
         public InventoryGrid inventoryGrid;
         [field: SerializeField] public int cellSize { get; private set; } = 64;
 
@@ -89,16 +90,17 @@ namespace TM.Inventory
         public void DropItem(InventoryItem inventoryItem)
         {
             this.inventoryGrid.RemoveItem(inventoryItem);
-            FindAnyObjectByType<ItemWheelManager>().OnUILoaded(new UnityEngine.UIElements.GeometryChangedEvent()); //trigger refresh on item wheel, a bit messy.
             this.RemoveFromWheel(inventoryItem.id);
-            GameObject worldItem = GameObject.Instantiate(inventoryItem.itemData.worldPrefab);
-            worldItem.transform.SetPositionAndRotation(this.transform.position, this.transform.rotation);
+            FindAnyObjectByType<ItemWheelManager>().OnUILoaded(new UnityEngine.UIElements.GeometryChangedEvent()); //trigger refresh on item wheel, a bit messy.
+
+            GameObject worldItem = GameObject.Instantiate(inventoryItem.itemData.worldPrefab, droppedItemParent.transform);
+            worldItem.transform.SetPositionAndRotation(this.transform.position, this.transform.rotation); //maybe in the future spawn the item a bit in front of the player. right now they shoot outward from its collider.
         }
         public void DestroyItem(InventoryItem inventoryItem)
         {
             this.inventoryGrid.RemoveItem(inventoryItem);
-            FindAnyObjectByType<ItemWheelManager>().OnUILoaded(new UnityEngine.UIElements.GeometryChangedEvent()); //trigger refresh on item wheel, a bit messy.
             this.RemoveFromWheel(inventoryItem.id);
+            FindAnyObjectByType<ItemWheelManager>().OnUILoaded(new UnityEngine.UIElements.GeometryChangedEvent()); //trigger refresh on item wheel, a bit messy.
         }
     }
 

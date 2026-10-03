@@ -7,6 +7,7 @@ using UnityEngine;
 public class TreeConverterManager : MonoBehaviour
 {
     private List<Terrain> terrains = new List<Terrain>();
+    [SerializeField] private GameObject treeParent;
 
     private void Start()
     {
@@ -31,7 +32,7 @@ public class TreeConverterManager : MonoBehaviour
 
         Terrain.GetActiveTerrains(terrains);
 
-        foreach(Terrain terrain in terrains)
+        foreach (Terrain terrain in terrains)
         {
             terrain.terrainData.treeInstances = new List<TreeInstance>().ToArray();
             terrain.terrainData.SetTreeInstances(new TreeInstance[0], false);
@@ -49,7 +50,7 @@ public class TreeConverterManager : MonoBehaviour
             Vector3 localPosition = Vector3.Scale(treeInstance.position, terrainData.size); //turn the [0-1] into the size of the terrain
             Vector3 worldPosition = terrain.transform.TransformPoint(localPosition); //gets the world pos from the local
 
-            GameObject tree = Instantiate(treePrefab, this.gameObject.transform); //initiate the tree under this gameobject
+            GameObject tree = Instantiate(treePrefab, treeParent.transform); //initiate the tree under the parent gameobject
             tree.transform.SetPositionAndRotation(worldPosition, Quaternion.Euler(0, treeInstance.rotation, 0));
 
         }

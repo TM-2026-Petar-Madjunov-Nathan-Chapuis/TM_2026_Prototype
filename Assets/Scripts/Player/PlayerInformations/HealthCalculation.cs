@@ -3,8 +3,6 @@ using UnityEngine;
 
 namespace TM.Player
 {
-
-
     public class HealthCalculation : MonoBehaviour
     {   
         [field: SerializeField] public float roundedHealth { get; private set; }

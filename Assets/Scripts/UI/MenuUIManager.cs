@@ -2,12 +2,13 @@ using System;
 using TM.Input;
 using TM.Inventory.UI;
 using TM.Misc;
+using TM.Saving;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace TM.UI
 {
-    public class MenuUIManager : MonoBehaviour
+    public class MenuUIManager : MonoBehaviour, ISaveable
     {
         [SerializeField] private VisualTreeAsset inventoryTemplate;
         [SerializeField] private UIDocument uIDocument;
@@ -25,6 +26,8 @@ namespace TM.UI
         private RenderTexture blurredRT;
 
         private bool isOpen = false;
+
+        public string UID => "MenuUIManager";
 
         void Awake()
         {
@@ -118,6 +121,17 @@ namespace TM.UI
                 flippedRt = new RenderTexture(Screen.width, Screen.height, 0);
                 flippedRt.Create();
             }
+        }
+
+        public object SaveData()
+        {
+            return null;
+        }
+
+        public void LoadData(string data) //hide the inventory on load
+        {
+            this.isOpen = true;
+            this.ToggleHideShow(new InputValues());
         }
     }
 }

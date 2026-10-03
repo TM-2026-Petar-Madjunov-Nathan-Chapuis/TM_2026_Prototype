@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e1ed819e44f71048a16d129b8395ac2, type: 3}
   m_Name: RedCan
   m_EditorClassIdentifier: Assembly-CSharp::TM.Items.DrinkData
-  description: The iconic red bewerage
+  description: 'The iconic red beverage.
+
+    Drink to quench thirst'
   size: {x: 1, y: 1}
   icon: {fileID: 21300000, guid: 03edd2dea1f182a44ae4745cc0e949fe, type: 3}
   iconRotated: {fileID: 21300000, guid: ecb388ec12e175c44812ccb587471a15, type: 3}

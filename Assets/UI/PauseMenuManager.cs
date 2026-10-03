@@ -1,11 +1,12 @@
 using System;
 using TM.Input;
 using TM.Misc;
+using TM.Saving;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
-public class PauseMenuManager : MonoBehaviour
+public class PauseMenuManager : MonoBehaviour, ISaveable
 {
     [SerializeField] private UIDocument uIDocument;
     private VisualElement PauseMenu;
@@ -28,7 +29,8 @@ public class PauseMenuManager : MonoBehaviour
 
     [SerializeField] private InputActionAsset inputActions;
 
-    
+    public string UID => "PauseMenuManager";
+
     void Awake()
     {
         flipMaterial = new Material(flipShader);
@@ -37,7 +39,7 @@ public class PauseMenuManager : MonoBehaviour
     {
         root = uIDocument.rootVisualElement;
 
-        PauseMenu =  root.Q<VisualElement>("MenuBackground");
+        PauseMenu = root.Q<VisualElement>("MenuBackground");
         ReturnToGameButton = root.Q<VisualElement>("MenuBackground").Q<Button>("ReturnToGameButton");
         SettingsButton = root.Q<VisualElement>("MenuBackground").Q<Button>("SettingsButton");
         SaveAndQuitToMainMenuButton = root.Q<VisualElement>("MenuBackground").Q<Button>("SaveAndQuitToMainMenuButton");
@@ -45,7 +47,7 @@ public class PauseMenuManager : MonoBehaviour
 
         SettingsMenu = root.Q<VisualElement>("SettingsMenu");
         BackFromSettingsToPause = root.Q<VisualElement>("SettingsMenu").Q<Button>("BackFromSettingsToPause");
-        
+
         menuIsOpen = true;
         ShowAndHidePauseMenu(new InputValues()); // ferme le menu au début
 
@@ -54,7 +56,7 @@ public class PauseMenuManager : MonoBehaviour
     }
 
     void OnEnable()
-    {   
+    {
         InputManager.Instance.RegisterListener("OpenPauseMenu", ShowAndHidePauseMenu, InputValueType.Button, true); //[ESCAPE]
     }
     void OnDisable()
@@ -71,7 +73,7 @@ public class PauseMenuManager : MonoBehaviour
         uIDocument.rootVisualElement.style.display = DisplayStyle.None;
     }
     void ShowAndHidePauseMenu(InputValues input)
-    {   
+    {
         if (menuIsOpen == true)
         {
             HidePauseMenu();
@@ -130,7 +132,7 @@ public class PauseMenuManager : MonoBehaviour
             BackFromSettingsToPause.RegisterCallback<ClickEvent>(OpenSettingsAction);
 
             settingsMenuIsOpen = true;
-        } 
+        }
     }
 
 
@@ -144,7 +146,7 @@ public class PauseMenuManager : MonoBehaviour
     }
     void SaveAndQuitToMainMenuAction(ClickEvent clickEvent)
     {
-        
+
     }
     void QuitGameAction(ClickEvent clickEvent)
     {
@@ -153,16 +155,16 @@ public class PauseMenuManager : MonoBehaviour
 
     //copied from MenuUIManager
 
-            private void CaptureAndBlurBackground()
-        {
-            UpdateRenderTexture();
+    private void CaptureAndBlurBackground()
+    {
+        UpdateRenderTexture();
 
-            ScreenCapture.CaptureScreenshotIntoRenderTexture(captureRT); //capture the game view
+        ScreenCapture.CaptureScreenshotIntoRenderTexture(captureRT); //capture the game view
 
-            Graphics.Blit(captureRT, flippedRt, flipMaterial); //flip the image cause somehow its flipped.
-            blurredRT = blurManager.Blur(flippedRt); //blur the image
-            root.style.backgroundImage = Background.FromRenderTexture(blurredRT);//apply to background
-        }
+        Graphics.Blit(captureRT, flippedRt, flipMaterial); //flip the image cause somehow its flipped.
+        blurredRT = blurManager.Blur(flippedRt); //blur the image
+        root.style.backgroundImage = Background.FromRenderTexture(blurredRT);//apply to background
+    }
 
     private void UpdateRenderTexture()
     {
@@ -186,6 +188,17 @@ public class PauseMenuManager : MonoBehaviour
         }
     }
 
+    public object SaveData()
+    {
+        return null;
+    }
+
+    public void LoadData(string data)
+    {
+        menuIsOpen = true;
+        ShowAndHidePauseMenu(new InputValues());
+    }
+
     //until here
-    
+
 }

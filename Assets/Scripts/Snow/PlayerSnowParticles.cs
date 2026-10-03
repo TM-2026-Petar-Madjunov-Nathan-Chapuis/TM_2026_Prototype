@@ -5,6 +5,7 @@ public class PlayerSnowParticles : MonoBehaviour
     [SerializeField] private CharacterController characterController;
     private ParticleSystem snowParticleSystem;
     public int particleEmitedCount = 5;
+
     void Awake()
     {
         snowParticleSystem = this.GetComponent<ParticleSystem>();
@@ -21,4 +22,5 @@ public class PlayerSnowParticles : MonoBehaviour
     {
         if (characterController.isGrounded && characterController.velocity.magnitude > 0)   snowParticleSystem.Emit(particleEmitedCount);   
     }
+
 }

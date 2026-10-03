@@ -17,7 +17,6 @@ namespace TM.Player
         [SerializeField] private GameObject player;
         private PlayerInfo playerInfo;
 
-
         void Awake()
         {
             playerInfo = player.GetComponent<PlayerInfo>();

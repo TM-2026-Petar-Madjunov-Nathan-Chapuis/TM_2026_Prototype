@@ -18,8 +18,10 @@ public partial class WaitForFinishedPathAction : Action
 
     protected override Status OnUpdate()
     {
-        if(Agent.Value.GetComponent<NavMeshAgent>().pathPending) return Status.Running;
-        if(Agent.Value.GetComponent<NavMeshAgent>().remainingDistance < 1f) return Status.Success; //if remaining distance smaller it makes some acceleration and decceleration issues
+        NavMeshAgent navMeshAgent = Agent.Value.GetComponent<NavMeshAgent>();
+        if (!navMeshAgent.isOnNavMesh) return Status.Running;
+        if (navMeshAgent.pathPending) return Status.Running;
+        if (navMeshAgent.remainingDistance < 1f) return Status.Success; //if remaining distance smaller it makes some acceleration and decceleration issues
         return Status.Running;
     }
 

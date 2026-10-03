@@ -7,6 +7,7 @@ public class AnimalSnowParticles : MonoBehaviour
     [SerializeField] private NavMeshAgent navMeshAgent;
     public int particleEmitedCount = 5;
     private ParticleSystem snowParticleSystem;
+
     void Awake()
     {
         snowParticleSystem = this.GetComponent<ParticleSystem>();
@@ -23,4 +24,5 @@ public class AnimalSnowParticles : MonoBehaviour
     {
         if (navMeshAgent.isOnNavMesh && navMeshAgent.velocity.magnitude > 0)   snowParticleSystem.Emit(particleEmitedCount);   
     }
+
 }

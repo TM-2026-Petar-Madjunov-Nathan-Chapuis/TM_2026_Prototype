@@ -1,9 +1,6 @@
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UIElements;
 using TM.Misc;
-using UnityEditor.Rendering;
-using TM.Inventory;
 using TM.UI;
 
 namespace TM.Inventory.UI
@@ -62,7 +59,8 @@ namespace TM.Inventory.UI
             {
                 this.playerViewCamera.targetTexture = null;
                 this.playerViewRT.Release();
-                DestroyImmediate(this.playerViewRT, true);
+                Destroy(this.playerViewRT);
+                this.playerViewRT = null;
             }
             this.playerViewRT = new RenderTexture(width, height, 24, RenderTextureFormat.ARGB32);
             this.playerViewRT.width = width * this.renderScale;

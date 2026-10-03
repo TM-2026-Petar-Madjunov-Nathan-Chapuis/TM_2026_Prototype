@@ -1,13 +1,15 @@
-using System;
+ using System;
 using System.Runtime.CompilerServices;
+using Newtonsoft.Json;
 using TM.Input;
+using TM.Saving;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace TM.Player
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : MonoBehaviour, ISaveable
     {
         [Header("References")]
         private CharacterController controller;
@@ -20,6 +22,8 @@ namespace TM.Player
         private static readonly int JumpHash = Animator.StringToHash("jump"); // better performance according to unity UNT0041 warning (store hash reference to parameter rather than repeated id lookup)
         private static readonly int SpeedHash = Animator.StringToHash("speed");
         private static readonly int FallingHash = Animator.StringToHash("falling");
+
+        public string UID => "PlayerController";
 
         private void Start()
         {
@@ -53,7 +57,7 @@ namespace TM.Player
             else
             {
                 verticalSpeed += -gravity * Time.deltaTime;
-                animator.SetBool(FallingHash, true);
+                animator.SetBool(FallingHash, verticalSpeed < 0);
             }
         }
         private void Jump(InputValues inputValues) //only called when jump button is pressed (and parameter is just for type checking, doesnt do anything)
@@ -64,5 +68,38 @@ namespace TM.Player
                 animator.SetTrigger(JumpHash);
             }
         }
+
+        public object SaveData()
+        {
+            Vector3 rootPosition = transform.position;
+            PlayerControllerSaveData saveData = new PlayerControllerSaveData
+            {
+                rootPositionX = rootPosition.x,
+                rootPositionY = rootPosition.y,
+                rootPositionZ = rootPosition.z,
+            };
+            return saveData;
+        }
+
+        public void LoadData(string data)
+        {
+            PlayerControllerSaveData saveData = JsonConvert.DeserializeObject<PlayerControllerSaveData>(data);
+            Vector3 savedPosition = new Vector3(saveData.rootPositionX, saveData.rootPositionY, saveData.rootPositionZ);
+
+            CharacterController characterController = GetComponent<CharacterController>();
+            characterController.enabled = false; //in order to move the player, character controller must be disabled
+
+            transform.position = savedPosition;
+            verticalSpeed = 0f;
+
+            characterController.enabled = true; //reenable
+        }
+    }
+    [Serializable]
+    public struct PlayerControllerSaveData
+    {
+        public float rootPositionX;
+        public float rootPositionY;
+        public float rootPositionZ;
     }
 }

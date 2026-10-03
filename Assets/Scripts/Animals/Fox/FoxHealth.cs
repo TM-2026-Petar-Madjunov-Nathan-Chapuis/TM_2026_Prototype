@@ -26,7 +26,7 @@ public class FoxHealth : HealthManager
     protected override void Die(string source)
     {
         Debug.Log("Fox died by " + source);
-        GameObject doll = GameObject.Instantiate(foxDollPrefab);
+        GameObject doll = GameObject.Instantiate(foxDollPrefab, this.transform.parent);
         doll.transform.SetPositionAndRotation(this.transform.position, this.transform.rotation);
         doll.GetComponent<Rigidbody>().AddForceAtPosition(doll.transform.position + new Vector3(0, 0.1f, 0), this.transform.up * -1000);
         Destroy(this.gameObject);

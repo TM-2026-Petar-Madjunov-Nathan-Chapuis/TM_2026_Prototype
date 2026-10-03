@@ -35,7 +35,9 @@ namespace TM.Player
         {
             PlayerCameraSaveData saveData = JsonConvert.DeserializeObject<PlayerCameraSaveData>(data);
             this.FOV = saveData.FOV;
-            this.isFirstPerson = saveData.isFirstPerson;
+            this.isFirstPerson = !saveData.isFirstPerson;
+            this.ToggleCamera(new InputValues());
+            this.lookingAllowed = true;
         }
 
         public object SaveData()
@@ -85,9 +87,6 @@ namespace TM.Player
                 firstPerson.gameObject.SetActive(false);
                 thirdPerson.gameObject.SetActive(true);
             }
-        }
-        void LateUpdate()
-        {
         }
         private void Look(InputValues inputValues) // called by the InputManager at every triggered frame
         {

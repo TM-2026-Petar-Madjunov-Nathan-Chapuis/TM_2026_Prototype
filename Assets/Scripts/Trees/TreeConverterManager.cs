@@ -22,21 +22,14 @@ public class TreeConverterManager : MonoBehaviour
             TreeInstance[] treeInstances = terrainData.treeInstances;
             SpawnTrees(terrain, terrainData, treePrototypes, treeInstances);
 
+            //clear the terrain trees
             terrainData.treeInstances = new TreeInstance[0];
             terrain.Flush();
-        }
-    }
-    public void ClearAllTerrainTreeInstances()
-    {
-        List<Terrain> terrains = new List<Terrain>();
 
-        Terrain.GetActiveTerrains(terrains);
-
-        foreach (Terrain terrain in terrains)
-        {
-            terrain.terrainData.treeInstances = new List<TreeInstance>().ToArray();
-            terrain.terrainData.SetTreeInstances(new TreeInstance[0], false);
-            terrain.Flush();
+            //"refresh" the collider
+            TerrainCollider collider = terrain.GetComponent<TerrainCollider>();
+            collider.enabled = false;
+            collider.enabled = true;
         }
     }
     private void SpawnTrees(Terrain terrain, TerrainData terrainData, TreePrototype[] treePrototypes, TreeInstance[] treeInstances)

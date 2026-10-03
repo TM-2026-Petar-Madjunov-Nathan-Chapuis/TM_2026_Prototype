@@ -7,13 +7,11 @@ using UnityEngine;
 
 namespace TM.Player
 {
-
-
     public class playerItemController : MonoBehaviour
     {
         [SerializeField] private float raycastRadius; //makes the targeting easier
         [SerializeField] private float raycastDistance; //reach
-        [SerializeField] private LayerMask raycastMask = Physics.DefaultRaycastLayers & ~(1 << 3); //exclude the Player layer
+        [SerializeField] private LayerMask raycastMask; //exclude the Player layer
         [SerializeField] private GameObject itemSocket;
         [SerializeField] private Animator animator;
         public InventoryItem heldItem { get; private set; }

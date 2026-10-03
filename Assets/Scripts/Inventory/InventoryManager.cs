@@ -5,12 +5,14 @@ using Newtonsoft.Json;
 using TM.Items;
 using System.Linq;
 using System.Collections.Generic;
+using TM.Player;
 
 namespace TM.Inventory
 {
     public class InventoryManager : MonoBehaviour, ISaveable //sits on the player
     {
         [SerializeField] private GameObject droppedItemParent;
+        [SerializeField] private playerItemController playerItemController;
         public InventoryGrid inventoryGrid;
         [field: SerializeField] public int cellSize { get; private set; } = 64;
 
@@ -41,6 +43,7 @@ namespace TM.Inventory
             this.inventoryGrid.Load(saveData.inventory);
             this.gridSize = saveData.gridSize;
             this.ItemWheelIds = saveData.ItemWheelIds;
+            this.playerItemController.SetHeldItem(null); //clear held item.
         }
 
         public object SaveData()
@@ -81,6 +84,10 @@ namespace TM.Inventory
             {
                 if(ItemWheelIds[i] == id)
                     ItemWheelIds[i] = null;
+            }
+            if (playerItemController.heldItem.id == id) //clear held item.
+            {
+                playerItemController.SetHeldItem(null);
             }
         }
         public InventoryItem GetItemFromGuid(Guid? id)

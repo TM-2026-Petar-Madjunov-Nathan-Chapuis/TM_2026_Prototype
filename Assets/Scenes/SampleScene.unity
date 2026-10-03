@@ -3082,9 +3082,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1237696797349745933, guid: ba06c9814473ffe4586b5fd117a5354f, type: 3}
+      propertyPath: maxItemWidth
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 1237696797349745933, guid: ba06c9814473ffe4586b5fd117a5354f, type: 3}
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 1892611301}
+    - target: {fileID: 1237696797349745933, guid: ba06c9814473ffe4586b5fd117a5354f, type: 3}
+      propertyPath: maxItemHeight
+      value: 150
+      objectReference: {fileID: 0}
     - target: {fileID: 1237696797349745933, guid: ba06c9814473ffe4586b5fd117a5354f, type: 3}
       propertyPath: itemWheelUIDoc
       value: 
@@ -3093,6 +3101,14 @@ PrefabInstance:
       propertyPath: inventoryManager
       value: 
       objectReference: {fileID: 1892611304}
+    - target: {fileID: 1237696797349745933, guid: ba06c9814473ffe4586b5fd117a5354f, type: 3}
+      propertyPath: itemSizeWidthRatio
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1237696797349745933, guid: ba06c9814473ffe4586b5fd117a5354f, type: 3}
+      propertyPath: itemSizeHeightRatio
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1237696797349745933, guid: ba06c9814473ffe4586b5fd117a5354f, type: 3}
       propertyPath: playerItemController
       value: 
@@ -3156,6 +3172,14 @@ PrefabInstance:
     - target: {fileID: 5319291283979018673, guid: ba06c9814473ffe4586b5fd117a5354f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7283046330811827879, guid: ba06c9814473ffe4586b5fd117a5354f, type: 3}
+      propertyPath: <maxItemWidth>k__BackingField
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 7283046330811827879, guid: ba06c9814473ffe4586b5fd117a5354f, type: 3}
+      propertyPath: <maxItemHeight>k__BackingField
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 8047914095174770093, guid: ba06c9814473ffe4586b5fd117a5354f, type: 3}
       propertyPath: playerCamera
@@ -3509,6 +3533,10 @@ PrefabInstance:
       propertyPath: droppedItemParent
       value: 
       objectReference: {fileID: 327682528}
+    - target: {fileID: 4992514106411587469, guid: 9857a62c2cc9cad4eb658bfe7a994531, type: 3}
+      propertyPath: playerItemController
+      value: 
+      objectReference: {fileID: 1892611309}
     - target: {fileID: 5169617785573002150, guid: 9857a62c2cc9cad4eb658bfe7a994531, type: 3}
       propertyPath: m_RenderShadows
       value: 0

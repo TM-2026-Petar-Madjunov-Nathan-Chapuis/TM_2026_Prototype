@@ -27,6 +27,7 @@ namespace TM.Inventory.UI
         private VisualElement itemWheelHolder;
         private Dictionary<Vector2, Vector2Int> allParentToIndexPositions;
         private int switchFrameTime;
+        
         //LOWER "MANAGERS"
         private GridHighlighter gridHighlighter;
         private ItemDescriptor itemDescriptor;

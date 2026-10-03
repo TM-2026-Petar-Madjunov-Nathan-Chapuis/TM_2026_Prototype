@@ -7,8 +7,8 @@ using UnityEngine.UIElements;
 
 public class ItemWheelManager : MonoBehaviour
 {
-    [field: SerializeField] public float itemWidth {get; private set;}
-    [field: SerializeField] public float itemHeight {get; private set;}
+    [field: SerializeField] public float maxItemWidth {get; private set;}
+    [field: SerializeField] public float maxItemHeight {get; private set;}
     private ItemWheelVectorImager vectorImager;
     private TM.Inventory.InventoryManager inventoryManager;
     private Vector2[] itemPos;
@@ -87,18 +87,9 @@ public class ItemWheelManager : MonoBehaviour
         items[index] = item;
         item.style.position = Position.Absolute;
         Vector2Int size = this.inventoryManager.GetItemFromGuid(this.inventoryManager.ItemWheelIds[index]).itemData.size;
-        float x = itemWidth / size.x * size.y;
-        float y = itemHeight / size.y * size.x;
-        if (x < itemHeight)
-        {
-            item.style.width = itemWidth;
-            item.style.height = x;
-        }
-        else
-        {
-            item.style.width = y;
-            item.style.height = itemHeight;
-        }
+        float scale = Mathf.Min(maxItemWidth / size.x, maxItemHeight / size.y);
+        item.style.width = size.x * scale;
+        item.style.height = size.y * scale;
         item.style.left = itemPos[index].x - (item.style.width.value.value / 2);
         item.style.top = itemPos[index].y - (item.style.height.value.value / 2);
         item.style.backgroundImage = Background.FromSprite(this.inventoryManager.GetItemFromGuid(this.inventoryManager.ItemWheelIds[index]).itemData.icon);

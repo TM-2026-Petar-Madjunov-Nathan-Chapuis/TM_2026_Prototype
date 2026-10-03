@@ -22,8 +22,10 @@ namespace TM.Player.ItemWheel.UI
         [SerializeField] private float sensitivity = 0.5f;
         [SerializeField] private float deadZoneRadius = 20;
         [SerializeField] private float clampRadius = 30;
-        [SerializeField] private float MaxItemWidth;
-        [SerializeField] private float MaxItemHeight;
+        [SerializeField] private float maxItemWidth;
+        [SerializeField] private float maxItemHeight;
+        [SerializeField] private float itemSizeWidthRatio;
+        [SerializeField] private float itemSizeHeightRatio;
         [SerializeField] private ItemWheelVectorImager wheelVectorImager;
         [SerializeField] private PlayerCamera playerCamera;
         [SerializeField] private InventoryManager inventoryManager;
@@ -63,6 +65,8 @@ namespace TM.Player.ItemWheel.UI
         {
             float width = itemWheelHolder.parent.resolvedStyle.width;
             float height = itemWheelHolder.parent.resolvedStyle.height;
+            if (width <= 0 || height <= 0) return;
+
             float x = width * maxWidthPercentage;
             float y = height * maxHeightPercentage;
             if (x < y)
@@ -136,18 +140,14 @@ namespace TM.Player.ItemWheel.UI
         {
             VisualElement item = new();
             Vector2Int size = itemData.size;
-            float x = MaxItemWidth / size.x * size.y;
-            float y = MaxItemHeight / size.y * size.x;
-            if (x < MaxItemHeight)
-            {
-                item.style.width = MaxItemWidth;
-                item.style.height = x;
-            }
-            else
-            {
-                item.style.width = y;
-                item.style.height = MaxItemHeight;
-            }
+            float itemWidth = size.x * itemSizeWidthRatio;
+            float itemHeight = size.y * itemSizeHeightRatio;
+
+            //if the item is wider than tall, then multiply so that it fits in the max width if taller then multiply for max height
+            float scale = Mathf.Min(maxItemWidth / itemWidth, maxItemHeight / itemHeight);
+            item.style.width = itemWidth * scale;
+            item.style.height = itemHeight * scale;
+
             item.style.position = Position.Absolute;
             item.style.top = pos.y - item.style.height.value.value/2;
             item.style.left = pos.x - item.style.width.value.value/2;

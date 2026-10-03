@@ -12,6 +12,7 @@ public class Campfire : MonoBehaviour, IInteractable
     [SerializeField] private Mesh fourlogs;
     [SerializeField] private ParticleSystem fireParticles;
     [SerializeField] private GameObject meatPrefab;
+    [SerializeField] private Transform transformParent;
     public InteractionType GetInteractionType() => InteractionType.Fuel;
     private CampfireState campfireState = CampfireState.Empty;
     public void Interact(GameObject player)
@@ -27,7 +28,7 @@ public class Campfire : MonoBehaviour, IInteractable
         {
             if (this.campfireState == CampfireState.Lit)
             {
-                GameObject meat = GameObject.Instantiate(meatPrefab);
+                GameObject meat = GameObject.Instantiate(meatPrefab, transformParent);
                 meat.transform.position = this.transform.position + this.transform.up * 1.5f;
                 meat.GetComponent<Rigidbody>().AddForceAtPosition(meat.transform.position + new Vector3(0, 0.1f, 0), this.transform.up * -1000);
 

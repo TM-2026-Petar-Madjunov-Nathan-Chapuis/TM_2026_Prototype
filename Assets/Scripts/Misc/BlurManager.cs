@@ -37,6 +37,12 @@ namespace TM.Misc
 
             return result;
         }
+
+        public static Vector2Int GetCaptureSize() //gets the full screen resolution required by ScreenCapture
+        {
+            return new Vector2Int(Screen.width, Screen.height);
+        }
+
         private void UpdateRTs(RenderTexture input)
         {
             if (temp == null || temp.height != input.height || temp.width != input.width)

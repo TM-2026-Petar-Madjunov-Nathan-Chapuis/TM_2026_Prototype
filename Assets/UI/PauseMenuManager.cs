@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TM.Input;
 using TM.Misc;
 using TM.Saving;
@@ -101,7 +102,7 @@ public class PauseMenuManager : MonoBehaviour, ISaveable
             GameStateManager.Instance.FreezeTime();
             inputActions.FindActionMap("Player").Disable();
             inputActions.FindAction("Player/OpenPauseMenu").Enable();
-            CaptureAndBlurBackground();
+            StartCoroutine(CaptureAndBlurBackground()); //wait till end of frame in a couroutine
 
 
             CursorManager.Instance.ShowCursor();
@@ -155,8 +156,11 @@ public class PauseMenuManager : MonoBehaviour, ISaveable
 
     //copied from MenuUIManager
 
-    private void CaptureAndBlurBackground()
+    private IEnumerator CaptureAndBlurBackground() //same as menuimanager.
     {
+        HidePauseMenu();
+        yield return new WaitForEndOfFrame(); //wait end of frame
+
         UpdateRenderTexture();
 
         ScreenCapture.CaptureScreenshotIntoRenderTexture(captureRT); //capture the game view
@@ -164,26 +168,29 @@ public class PauseMenuManager : MonoBehaviour, ISaveable
         Graphics.Blit(captureRT, flippedRt, flipMaterial); //flip the image cause somehow its flipped.
         blurredRT = blurManager.Blur(flippedRt); //blur the image
         root.style.backgroundImage = Background.FromRenderTexture(blurredRT);//apply to background
+        ShowPauseMenu();
     }
 
-    private void UpdateRenderTexture()
+    private void UpdateRenderTexture() //same as menuimanager
     {
-        if (captureRT == null || captureRT.width != Screen.width || captureRT.height != Screen.height)
+        Vector2Int captureSize = BlurManager.GetCaptureSize();
+
+        if (captureRT == null || captureRT.width != captureSize.x || captureRT.height != captureSize.y)
         {
             if (captureRT != null)
             {
                 captureRT.Release();
             }
-            captureRT = new RenderTexture(Screen.width, Screen.height, 0);
+            captureRT = new RenderTexture(captureSize.x, captureSize.y, 0);
             captureRT.Create();
         }
-        if (flippedRt == null || flippedRt.width != Screen.width || flippedRt.height != Screen.height)
+        if (flippedRt == null || flippedRt.width != captureSize.x || flippedRt.height != captureSize.y)
         {
             if (flippedRt != null)
             {
                 flippedRt.Release();
             }
-            flippedRt = new RenderTexture(Screen.width, Screen.height, 0);
+            flippedRt = new RenderTexture(captureSize.x, captureSize.y, 0);
             flippedRt.Create();
         }
     }

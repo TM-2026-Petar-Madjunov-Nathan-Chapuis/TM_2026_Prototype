@@ -2055,6 +2055,7 @@ MonoBehaviour:
   - {fileID: 6895985511911221309, guid: 0a86bcebc0b28064694ce00b759be249, type: 3}
   - {fileID: 7691941163368415593, guid: e8ca87c2ef867624e8116e92c38468e4, type: 3}
   - {fileID: 4363324572144264477, guid: 72f308cdc739ce9418ec75904528e9a1, type: 3}
+  - {fileID: 3176351574667789018, guid: 52e0e249ad366254ba74c2bf7a8497eb, type: 3}
 --- !u!1 &1528157999
 GameObject:
   m_ObjectHideFlags: 0
@@ -2712,6 +2713,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1892611295}
+    - target: {fileID: 1057815598929673288, guid: 52e0e249ad366254ba74c2bf7a8497eb, type: 3}
+      propertyPath: layerMask.m_Bits
+      value: 3585
+      objectReference: {fileID: 0}
     - target: {fileID: 2837120709915039840, guid: 52e0e249ad366254ba74c2bf7a8497eb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 91.96185

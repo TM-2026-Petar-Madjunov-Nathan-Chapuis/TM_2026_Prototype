@@ -11,12 +11,12 @@
     border-top-color: rgb(126, 126, 126);
     border-bottom-color: rgb(126, 126, 126);
     top: auto;
-    height: 15%;
+    height: 14%;
     width: auto;
     align-self: center;
-    margin-top: 5%;
+    margin-top: 3%;
     margin-right: 0;
-    margin-bottom: 5%;
+    margin-bottom: 3%;
     margin-left: 0;
     padding-top: 0;
     padding-right: 0;
@@ -38,10 +38,6 @@
     -unity-font-style: normal;
 }
 
-
-
-
-
 .PauseMenuButtonsUSS:hover {
     border-top-width: 1px;
     border-right-width: 1px;
@@ -52,12 +48,12 @@
     border-top-color: rgb(126, 126, 126);
     border-bottom-color: rgb(126, 126, 126);
     top: auto;
-    height: 15%;
+    height: 14%;
     width: auto;
     align-self: center;
-    margin-top: 5%;
+    margin-top: 4%;
     margin-right: 0;
-    margin-bottom: 5%;
+    margin-bottom: 4%;
     margin-left: 0;
     padding-top: 0;
     padding-right: 0;

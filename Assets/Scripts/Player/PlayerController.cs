@@ -48,7 +48,7 @@ namespace TM.Player
 
             if (isGrounded && verticalSpeed <= 0)
             {
-                verticalSpeed = -stickToGroundFactor * Time.deltaTime;
+                verticalSpeed = -stickToGroundFactor * Time.deltaTime; //heavy downward speed to keep from slope boucing
                 animator.SetBool(FallingHash, false);
             }
             else

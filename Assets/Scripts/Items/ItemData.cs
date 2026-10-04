@@ -13,7 +13,7 @@ namespace TM.Items
         [SerializeField, TextArea(3, 10)]
         public string description;
         public Vector2Int size;
-        [JsonProperty] private UUID uuid;
+        [SerializeField, JsonProperty] private UUID uuid;
         public UUID UUID => uuid;
         public Sprite icon;
         public Sprite iconRotated;

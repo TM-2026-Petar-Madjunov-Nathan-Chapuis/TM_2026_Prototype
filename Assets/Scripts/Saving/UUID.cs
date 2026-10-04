@@ -7,7 +7,7 @@ namespace TM.Saving
     [Serializable]
     public struct UUID : IEquatable<UUID>
     {
-        [JsonProperty] private int uuid;
+        [SerializeField, JsonProperty] private int uuid;
 
         public static UUID NewUUID()
         {

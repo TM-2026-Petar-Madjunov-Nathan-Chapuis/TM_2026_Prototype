@@ -20,6 +20,7 @@ namespace TM.Player
         public float hyperthermiaTemperature = 39f; //Constante // la vie est perdue 1* plus vite (=)
 
         public float playerCorporalTemperature; // [24; 43] < 28 mort, > 42 mort
+        public float playerFeelAmbiantTemperature = 20f;
         public float playerThermalBlilan;
         public float playerClothesResistance = 0f; // 0 -> 1
 

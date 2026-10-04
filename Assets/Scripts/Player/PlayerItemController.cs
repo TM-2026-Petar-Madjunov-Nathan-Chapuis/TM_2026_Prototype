@@ -107,6 +107,8 @@ namespace TM.Player
         }
         public void AnimationUse()
         {
+            if (this.heldItem == null || this.heldItemGameobject == null) return;
+
             this.heldItemGameobject.GetComponent<HeldItem>().AnimationUse(heldItem);
         }
     }

@@ -85,7 +85,7 @@ namespace TM.Inventory
                 if(ItemWheelIds[i] == id)
                     ItemWheelIds[i] = null;
             }
-            if (playerItemController.heldItem.id == id) //clear held item.
+            if (playerItemController.heldItem != null && playerItemController.heldItem.id == id) //clear held item.
             {
                 playerItemController.SetHeldItem(null);
             }

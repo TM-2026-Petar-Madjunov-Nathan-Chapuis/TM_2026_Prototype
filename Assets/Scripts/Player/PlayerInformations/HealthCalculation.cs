@@ -11,6 +11,9 @@ namespace TM.Player
         [SerializeField] private float HealthBecauseThirstCoefficient = 1f; //coeff de vitesse de perte de vie quand soif
         [SerializeField] private float healthBecauseHypothermiaCoefficient = 1f; //coeff de vitesse de perte de vie quand hypothermie
         [SerializeField] private float healthBecauseHyperthermiaCoefficient = 1f; //coeff de vitesse de perte de vie quand hyperthermie
+        [SerializeField] private float healthBecauseHypothermiaCoefficientMultiplier = 10f; //coeff de vitesse de perte de vie quand hypothermie
+        [SerializeField] private float healthBecauseHyperthermiaCoefficientMultiplier = 10f; //coeff de vitesse de perte de vie quand hyperthermie
+
         [SerializeField] private float maximalHypothermicAndHyperthermicCoefficient = 10f;
         [SerializeField] private HungerAndThirstCalculation hungerAndThirstCalculation;
         [SerializeField] private GameObject player;
@@ -54,7 +57,7 @@ namespace TM.Player
                 {
                     healthBecauseHypothermiaCoefficient = ((playerInfo.hypothermiaTemperature - playerInfo.playerCorporalTemperature) / (playerInfo.hypothermiaTemperature - playerInfo.coldTemperatureLimit)) * maximalHypothermicAndHyperthermicCoefficient;
 
-                    playerInfo.TakeDamage(timeCoefficient * healthBecauseHypothermiaCoefficient * Time.deltaTime, "Hypothermia");
+                    playerInfo.TakeDamage(timeCoefficient * healthBecauseHypothermiaCoefficientMultiplier * healthBecauseHypothermiaCoefficient * Time.deltaTime, "Hypothermia");
                 }
 
                 if (playerInfo.playerCorporalTemperature <= playerInfo.coldTemperatureLimit)
@@ -69,7 +72,7 @@ namespace TM.Player
                 {
                     healthBecauseHyperthermiaCoefficient = ((playerInfo.playerCorporalTemperature - playerInfo.hyperthermiaTemperature) / (playerInfo.hotTemperatureLimit - playerInfo.hyperthermiaTemperature)) * maximalHypothermicAndHyperthermicCoefficient;
 
-                    playerInfo.TakeDamage(timeCoefficient * healthBecauseHyperthermiaCoefficient * Time.deltaTime, "Hyperthermia");
+                    playerInfo.TakeDamage(timeCoefficient * healthBecauseHyperthermiaCoefficientMultiplier * healthBecauseHyperthermiaCoefficient * Time.deltaTime, "Hyperthermia");
                 }
 
                 if (playerInfo.playerCorporalTemperature >= playerInfo.hotTemperatureLimit)

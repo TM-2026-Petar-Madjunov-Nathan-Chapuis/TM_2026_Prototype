@@ -19,7 +19,7 @@ namespace TM.Player
         //[SerializeField] private float playerMetabolismWork; // in °
         //[SerializeField] private float playerThermalBlilan; // in °
         [SerializeField] private float deltaTemperature;
-        [SerializeField] private float timeCoefficient = 0.005f;
+        [SerializeField] private float timeCoefficient = 0.002f;
         private float wherePlayerHungerAndThirstIsTooLowToMaintainMetabolism = 50f; //à partir de combien, le metabolisme ne régule pas de 20°
         private float minimalBaseMetabloismWork = 10f; // le régulation minimale de temperature même si le joueur a 0 eau et 0 nourriture
         [field: SerializeField] public float roundedCorpralTemperature { get; private set; }
@@ -31,9 +31,7 @@ namespace TM.Player
         void Awake()
         {
             playerInfo = player.GetComponent<PlayerInfo>();
-
-            WorldInfos worldInfos = new WorldInfos();
-            ambientTemperature = worldInfos.ambientTemperature;
+            ambientTemperature = playerInfo.playerFeelAmbiantTemperature;
         }
 
         void Start()
@@ -43,6 +41,8 @@ namespace TM.Player
 
         void CalculatePlayerCorporalTemperature()
         {
+            ambientTemperature = playerInfo.playerFeelAmbiantTemperature;
+
             deltaTemperature = playerInfo.playerCorporalTemperature - ambientTemperature; //ce que l'air vole au joueur
 
             playerInfo.playerMetabolismWork = playerInfo.playerNormalCorporalTemperature - playerInfo.playerCorporalTemperature + playerInfo.playerClothesResistance * (deltaTemperature - playerInfo.playerBaseMetabolismwork);

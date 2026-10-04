@@ -44,7 +44,7 @@ public class PlayerHeatCalculation : MonoBehaviour
                 {
                     distancePlayerSource = Vector3.Distance(obj.transform.position, playerCordonates.position);
                     
-                    float newPotentialTemperature = (ambiantTemperature + (baseSourceTemperature-ambiantTemperature)) * (baseSourcePower/(1+math.max(0, distancePlayerSource*distancePlayerSource))); // normallement distancePlayerSource n'est pas ^2
+                    float newPotentialTemperature = ambiantTemperature + (baseSourceTemperature-ambiantTemperature) * (baseSourcePower/(1+math.max(0, distancePlayerSource*distancePlayerSource))); // normallement distancePlayerSource n'est pas ^2
                     heatObjectsPlayersHeat[obj] = newPotentialTemperature; // obj, temperature at player position
                 }
             } 

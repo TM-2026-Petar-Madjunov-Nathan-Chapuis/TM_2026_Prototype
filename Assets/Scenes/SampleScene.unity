@@ -3840,7 +3840,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad504b2749eac064bb5283ec58d50beb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHeatCalculation
-  baseSourceTemperature: 100
+  baseSourceTemperature: 300
   baseSourcePower: 1
   player: {fileID: 1892611295}
   playerCordonates: {fileID: 1892611317}

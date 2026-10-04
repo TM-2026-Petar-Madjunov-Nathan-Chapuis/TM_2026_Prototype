@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class WorldInfos : MonoBehaviour
 {
-    public float ambientTemperature {get; private set;} = 10f;
+    public float ambientTemperature {get; private set;} = 0f;
     public List<GameObject> environnementObjects {get; private set;} = new List<GameObject>();
     public GameObject environnementObjectsFolder;
 

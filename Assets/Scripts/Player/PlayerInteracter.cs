@@ -1,6 +1,5 @@
 using TM.Input;
 using TM.Player;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerInteracter : MonoBehaviour

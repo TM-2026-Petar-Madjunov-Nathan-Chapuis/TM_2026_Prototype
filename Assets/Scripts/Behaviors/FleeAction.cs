@@ -3,11 +3,7 @@ using Unity.Behavior;
 using UnityEngine;
 using Action = Unity.Behavior.Action;
 using Unity.Properties;
-using Unity.VisualScripting;
-using Unity.Mathematics;
-using UnityEngine.UIElements;
 using UnityEngine.AI;
-using UnityEditor.Analytics;
 
 [Serializable, GeneratePropertyBag]
 [NodeDescription(name: "Flee", story: "[Agent] flees from [target] at [distance] at [fleeSpeed]", category: "Action", id: "e52c63e0ee54dd4aa62b10cb87c11156")]

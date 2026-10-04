@@ -1,33 +1,20 @@
-using System.Collections.Generic;
-using JetBrains.Annotations;
-using Unity.VisualScripting;
+using TM.Player;
 using UnityEngine;
 
 
 public class WorldInfos : MonoBehaviour
 {
-    public float ambientTemperature {get; private set;} = 0f;
-    public List<GameObject> environnementObjects {get; private set;} = new List<GameObject>();
-    public GameObject environnementObjectsFolder;
-
-    void Awake()
-    {
-            
-    }
+    public float baseAmbientTemperature;
+    [SerializeField] private PlayerHeatCalculation playerHeatCalculation;
+    private int count;
     void Update()
     {
-        GetAllEnvironnementObjects();
-    }
-
-    void GetAllEnvironnementObjects()
-    {
-        environnementObjects.Clear();
-
-        environnementObjectsFolder = GameObject.Find("ENVIRONNEMENTS OBJECTS");
-
-        foreach (Transform transform in environnementObjectsFolder.GetComponentInChildren<Transform>(true))
+        count++;
+        if (count > 30)
         {
-            environnementObjects.Add(transform.gameObject);
+            count = 0;
+            this.gameObject.GetComponent<PlayerInfo>().playerFeelAmbiantTemperature = playerHeatCalculation.CalculateAmbientHeat(this.baseAmbientTemperature);
+            Debug.Log(this.baseAmbientTemperature);
         }
     }
 }

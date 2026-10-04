@@ -29,7 +29,14 @@ namespace TM.Saving
             {
                 if (uID != null && !final.ContainsKey(uID.Value))
                 {
-                    final.Add(uID.Value, lookup[uID.Value]);
+                    if (lookup.TryGetValue(uID.Value, out ScriptableObject scriptableObject)) //tries gettting the saved UUId
+                    {
+                        final.Add(uID.Value, scriptableObject);
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Could not find saved UUID " + uID.Value);
+                    }
                 }
             }
             return final;

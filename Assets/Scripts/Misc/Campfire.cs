@@ -1,10 +1,13 @@
+using JetBrains.Annotations;
+using Newtonsoft.Json;
 using TM.Inventory;
-using TM.Items;
 using TM.Player;
+using TM.Saving;
 using UnityEngine;
 
-public class Campfire : MonoBehaviour, IInteractable
+public class Campfire : MonoBehaviour, IInteractable, ISaveable, IHeatObject
 {
+    [SerializeField] private float campfireHeat;
     [SerializeField] private MeshFilter meshFilter;
     [SerializeField] private Mesh onelog;
     [SerializeField] private Mesh twologs;
@@ -15,6 +18,22 @@ public class Campfire : MonoBehaviour, IInteractable
     [SerializeField] private Transform transformParent;
     public InteractionType GetInteractionType() => InteractionType.Fuel;
     private CampfireState campfireState = CampfireState.Empty;
+
+    public string UID => "Campfire";
+
+    public float temp => GetTemperature();
+
+    GameObject IHeatObject.gameObject => this.gameObject;
+
+    private float GetTemperature()
+    {
+        if (this.campfireState == CampfireState.Lit)
+        {
+            return campfireHeat;
+        }
+        return 0;
+    }
+
     public void Interact(GameObject player)
     {
         playerItemController playerItemController = player.GetComponent<playerItemController>();
@@ -91,6 +110,18 @@ public class Campfire : MonoBehaviour, IInteractable
         var emission = this.fireParticles.emission;
         emission.enabled = false;
     }
+
+    public object SaveData()
+    {
+        CampfireSaveData data = new CampfireSaveData { campfireStateIndex = (int)this.campfireState };
+        return data;
+    }
+
+    public void LoadData(string data)
+    {
+        CampfireSaveData saveData = JsonConvert.DeserializeObject<CampfireSaveData>(data);
+        this.campfireState = (CampfireState)saveData.campfireStateIndex;
+    }
 }
 public enum CampfireState
 {
@@ -100,4 +131,9 @@ public enum CampfireState
     ThreeLogs,
     FourLogs,
     Lit,
+}
+[System.Serializable]
+public struct CampfireSaveData
+{
+    public int campfireStateIndex;
 }

@@ -1,8 +1,6 @@
 using System;
 using System.Text;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 namespace TM.Player
 {

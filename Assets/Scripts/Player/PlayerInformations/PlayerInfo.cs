@@ -1,9 +1,7 @@
 using System;
 using Newtonsoft.Json;
 using TM.Saving;
-using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.Animations;
 namespace TM.Player
 {
     public class PlayerInfo : HealthManager, ISaveable
@@ -51,7 +49,7 @@ namespace TM.Player
         {
             Debug.Log("player restored health : " + ammount);
             this.health += ammount;
-            Mathf.Clamp(0, 100, health);
+            this.health = Mathf.Clamp(this.health, 0, 100);
         }
 
         protected override void Die(string source)

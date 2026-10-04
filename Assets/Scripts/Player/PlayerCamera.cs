@@ -1,14 +1,9 @@
 using System;
 using Newtonsoft.Json;
-using NUnit.Framework;
 using TM.Input;
 using TM.Saving;
 using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Animations;
-using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
 
 namespace TM.Player
 {

@@ -4,9 +4,6 @@ using System.Linq;
 using UnityEngine;
 using TM.Saving;
 using TM.Items;
-using UnityEngine.UIElements;
-using Unity.Collections;
-using Unity.VisualScripting;
 
 namespace TM.Inventory
 {

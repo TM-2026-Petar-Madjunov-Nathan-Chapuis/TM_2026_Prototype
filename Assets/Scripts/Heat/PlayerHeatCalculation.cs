@@ -1,81 +1,40 @@
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using NUnit.Framework;
 using TM.Player;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerHeatCalculation : MonoBehaviour
 {
-
-    [SerializeField] private float baseSourceTemperature = 100f;
-    [SerializeField] private float baseSourcePower = 1f;
-
-    private float ambiantTemperature;
-    private List<GameObject> heatObjects;
-    private Dictionary<GameObject, float> heatObjectsPlayersHeat = new Dictionary<GameObject, float>(); // --> object, heat that provide at player position
-
-
-
     [SerializeField] private GameObject player;
-    [SerializeField] private Transform playerCordonates;
-    [SerializeField] private PlayerInfo playerInfo;
-    [SerializeField] private WorldInfos worldInfos;
+    private IHeatObject[] heatGeneratingObjects;
+    [SerializeField] private float maxHeat;
 
-    void Awake()
+    void Start()
     {
-        heatObjects = worldInfos.environnementObjects;
-        ambiantTemperature = worldInfos.ambientTemperature;
-    }
-    void Update()
-    {   
-        calculateNewPlayersAmbiantTemperature();
-    }
-
-    void GetHeatForEachHeatObject()
-    {
-        float distancePlayerSource;
-        
-        foreach (GameObject obj in worldInfos.environnementObjects)
+        List<IHeatObject> list = new List<IHeatObject>();
+        MonoBehaviour[] monoBehaviours = FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+        foreach (MonoBehaviour monobehavior in monoBehaviours)
         {
+            if (monobehavior is IHeatObject iheat)
             {
-                if(obj.TryGetComponent<HeatObject>(out _))
-                {
-                    distancePlayerSource = Vector3.Distance(obj.transform.position, playerCordonates.position);
-                    
-                    float newPotentialTemperature = ambiantTemperature + (baseSourceTemperature-ambiantTemperature) * (baseSourcePower/(1+math.max(0, distancePlayerSource*distancePlayerSource))); // normallement distancePlayerSource n'est pas ^2
-                    heatObjectsPlayersHeat[obj] = newPotentialTemperature; // obj, temperature at player position
-                }
-            } 
-        }
-    }
-    GameObject FindHeatestHeatObject()
-    {
-        GameObject HeatestObject = null;
-
-        foreach (GameObject obj in heatObjectsPlayersHeat.Keys)
-        {
-            if(HeatestObject == null || heatObjectsPlayersHeat[HeatestObject] < heatObjectsPlayersHeat[obj])
-            {
-                HeatestObject = obj;
+                list.Add(iheat);
             }
         }
-        return HeatestObject;
+        heatGeneratingObjects = list.ToArray();
     }
 
-    void calculateNewPlayersAmbiantTemperature()
+    public float CalculateAmbientHeat(float baseAmbientTemperature)
     {
-        GetHeatForEachHeatObject();
+        Vector3 playerPos = this.player.transform.position;
 
-        if (heatObjectsPlayersHeat.Count == 0)
+        float heat = 0f;
+        foreach (IHeatObject heatObject in heatGeneratingObjects)
         {
-            playerInfo.playerFeelAmbiantTemperature = ambiantTemperature;
-            //Debug.Log($"0{ambiantTemperature}");
+            Vector3 offset = heatObject.gameObject.transform.position - playerPos;
+
+            heat += heatObject.temp / (1f + offset.sqrMagnitude); //basically distance squared disatnce*distance
         }
-        else
-        {
-            playerInfo.playerFeelAmbiantTemperature = heatObjectsPlayersHeat[FindHeatestHeatObject()];
-        }
+        heat = Math.Clamp(heat, 0, maxHeat);
+        return baseAmbientTemperature + heat;
     }
 }

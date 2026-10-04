@@ -1,7 +1,6 @@
 using TM.Inventory;
 using TM.Items;
 using TM.Player;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class HeldItem : MonoBehaviour

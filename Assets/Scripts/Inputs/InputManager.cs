@@ -98,12 +98,19 @@ namespace TM.Input
         }
         public void UnRegisterListener(string InputActionName, Action<InputValues> action)
         {
-            foreach(DictKey key in this.inputListeners.Keys)
+            DictKey keyToRemove = null;
+            foreach (DictKey key in this.inputListeners.Keys)
             {
                 if (key.name == InputActionName && key.action == action)
                 {
-                    this.inputListeners.Remove(key);
+                    keyToRemove = key;
+                    break;
                 }
+            }
+
+            if (keyToRemove != null)
+            {
+                this.inputListeners.Remove(keyToRemove);
             }
         }
     }

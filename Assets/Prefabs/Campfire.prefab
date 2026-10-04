@@ -375,9 +375,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 48713cb69de4e35478a26117e2c4607c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8134118635723580118}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 48713cb69de4e35478a26117e2c4607c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8175041438788668647}
   m_SourcePrefab: {fileID: 100100000, guid: 48713cb69de4e35478a26117e2c4607c, type: 3}
 --- !u!1 &5788660522788775874 stripped
 GameObject:
@@ -5199,6 +5196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba7094d725c87534bb75772e2913713d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Campfire
+  campfireHeat: 200
   meshFilter: {fileID: 8538489485250687310}
   onelog: {fileID: 196202608711037324, guid: 8913e70eaafe4134f8d84592a4cc129f, type: 3}
   twologs: {fileID: 1718675391903387477, guid: bc7168917cd459c42bdc580503de5099, type: 3}
@@ -5206,6 +5204,7 @@ MonoBehaviour:
   fourlogs: {fileID: 5700193381349220432, guid: d3d21e71e3bfa4647ad9f0d9e4adfc80, type: 3}
   fireParticles: {fileID: 1860381697463653276}
   meatPrefab: {fileID: 4241095439203635510, guid: 3a17bcf0dd24c684d8e6293f64895503, type: 3}
+  transformParent: {fileID: 0}
 --- !u!65 &8134118635723580118
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5227,18 +5226,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.8329387, y: 1.7144132, z: 2.832939}
   m_Center: {x: 0, y: 0.5592633, z: 0}
---- !u!114 &8175041438788668647
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5788660522788775874}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f8758d27f4222548adc03a8a509ec18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HeatObject
 --- !u!4 &6565866451034881400 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 48713cb69de4e35478a26117e2c4607c, type: 3}

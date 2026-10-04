@@ -1,6 +1,5 @@
 using System;
 using Unity.Behavior;
-using UnityEditor.Analytics;
 using UnityEngine;
 using UnityEngine.AI;
 

@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using TM.Inventory;
 using TM.Inventory.UI;
 using TM.UI;
-using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.UIElements;
 

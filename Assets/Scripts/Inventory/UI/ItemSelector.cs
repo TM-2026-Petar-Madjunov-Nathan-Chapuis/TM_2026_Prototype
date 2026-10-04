@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using TM.Inventory;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 namespace TM.Inventory.UI

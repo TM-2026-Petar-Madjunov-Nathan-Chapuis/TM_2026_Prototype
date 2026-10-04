@@ -119,6 +119,8 @@ public class PauseMenuManager : MonoBehaviour, ISaveable
             SettingsButton.RegisterCallback<ClickEvent>(OpenSettingsAction);
             SaveButton.RegisterCallback<ClickEvent>(SaveAction);
             LoadButton.RegisterCallback<ClickEvent>(LoadAction); //temporary button
+            SaveAndQuitToMainMenuButton.RegisterCallback<ClickEvent>(SaveAndQuitToMainMenuAction);
+            QuitGameButton.RegisterCallback<ClickEvent>(QuitGameAction);
 
             menuIsOpen = true;
         }

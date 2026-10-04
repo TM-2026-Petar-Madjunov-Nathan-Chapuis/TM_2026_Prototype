@@ -14,7 +14,6 @@ public class WorldInfos : MonoBehaviour
         {
             count = 0;
             this.gameObject.GetComponent<PlayerInfo>().playerFeelAmbiantTemperature = playerHeatCalculation.CalculateAmbientHeat(this.baseAmbientTemperature);
-            Debug.Log(this.baseAmbientTemperature);
         }
     }
 }

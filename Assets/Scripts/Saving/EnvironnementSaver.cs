@@ -67,7 +67,7 @@ public class EnvironnementSaver : MonoBehaviour, ISaveable
         GameObject prefab = prefabRegistry.GetPrefab(saveData.name);
         if (prefab == null)
         {
-            Debug.LogError("could not find prefab from gameobject name");
+            Debug.LogError("Could not find prefab for saved environment object '" + saveData.name + "'.");
             return;
         }
 

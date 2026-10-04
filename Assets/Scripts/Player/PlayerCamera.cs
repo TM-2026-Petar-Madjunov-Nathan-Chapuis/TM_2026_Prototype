@@ -24,7 +24,9 @@ namespace TM.Player
         [SerializeField] private float castRadius = 0.2f;
         [SerializeField] private CrosshairManager crosshairManager;
         [SerializeField] private LayerMask layerMask;
+        [SerializeField] private GameObject firstPersonSocket;
         public bool lookingAllowed = true;
+        private PlayerController playerController;
 
         public void LoadData(string data)
         {
@@ -65,6 +67,14 @@ namespace TM.Player
             {
                 firstPerson.gameObject.SetActive(false);
                 thirdPerson.gameObject.SetActive(true);
+            }
+            playerController = this.gameObject.GetComponent<PlayerController>();
+        }
+        void LateUpdate()
+        {
+            if (isFirstPerson && playerController != null && !playerController.IsGrounded && firstPersonSocket != null)
+            {
+                firstPerson.transform.position = firstPersonSocket.transform.position;
             }
         }
         public void ToggleCamera(InputValues inputValues) //Toggle camera called by input manager, input values is needed for type fulfilling but does nothing

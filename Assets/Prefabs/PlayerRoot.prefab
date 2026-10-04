@@ -178,12 +178,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1723410674940564817}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.03635743, y: 0.01090704, z: 0.0018424218, w: 0.9992777}
-  m_LocalPosition: {x: 0.000093039445, y: 0.0006361026, z: 0.0015261857}
-  m_LocalScale: {x: 0.010000003, y: 0.010000001, z: 0.010000001}
+  m_LocalRotation: {x: -0.00000011920929, y: 3.2927217e-10, z: -0.0000000016463613, w: 1}
+  m_LocalPosition: {x: -0.000012397766, y: 0.5328369, z: 0.31671906}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2686503882985252298}
+  m_Father: {fileID: 1248942794267138818}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &6697312587295927490
 Camera:
@@ -501,6 +501,7 @@ Transform:
   - {fileID: 4916574609272670827}
   - {fileID: 8514962386710860112}
   - {fileID: 1172310836481607115}
+  - {fileID: 253872908170810571}
   - {fileID: 8152254838096969505}
   m_Father: {fileID: 3400999212160370979}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -545,6 +546,7 @@ MonoBehaviour:
   jumpForce: 10
   verticalSpeed: 0
   gravity: 20
+  stickToGroundFactor: 400
   animator: {fileID: 2991158274922668805}
 --- !u!114 &2327216549896367930
 MonoBehaviour:
@@ -586,6 +588,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3a9fd471c65846dfad58cfe5e28c894, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TM.Inventory.InventoryManager
+  droppedItemParent: {fileID: 0}
+  playerItemController: {fileID: 0}
   <cellSize>k__BackingField: 70
   <cellPosMargin>k__BackingField: 10
   <gridSize>k__BackingField: {x: 10, y: 9}
@@ -645,6 +649,7 @@ MonoBehaviour:
   hypothermiaTemperature: 35
   hyperthermiaTemperature: 39
   playerCorporalTemperature: 0
+  playerFeelAmbiantTemperature: 20
   playerThermalBlilan: 0
   playerClothesResistance: 1
   playerMetabolismWork: 0
@@ -670,6 +675,8 @@ MonoBehaviour:
   HealthBecauseThirstCoefficient: 1
   healthBecauseHypothermiaCoefficient: 1
   healthBecauseHyperthermiaCoefficient: 1
+  healthBecauseHypothermiaCoefficientMultiplier: 10
+  healthBecauseHyperthermiaCoefficientMultiplier: 10
   maximalHypothermicAndHyperthermicCoefficient: 10
   hungerAndThirstCalculation: {fileID: 4891386161292877890}
   player: {fileID: 2303917331248119258}
@@ -1018,9 +1025,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8397270516352263895, guid: dcc5cdf407d3cb145a409a5067336b2a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8013621580142871025}
-    - targetCorrespondingSourceObject: {fileID: -3179408415998018304, guid: dcc5cdf407d3cb145a409a5067336b2a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 253872908170810571}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: dcc5cdf407d3cb145a409a5067336b2a, type: 3}
       insertIndex: -1
@@ -1032,11 +1036,6 @@ PrefabInstance:
 --- !u!4 &153404837592989213 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8397270516352263895, guid: dcc5cdf407d3cb145a409a5067336b2a, type: 3}
-  m_PrefabInstance: {fileID: 8550112378153851082}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &2686503882985252298 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -3179408415998018304, guid: dcc5cdf407d3cb145a409a5067336b2a, type: 3}
   m_PrefabInstance: {fileID: 8550112378153851082}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &8152254838096969505 stripped

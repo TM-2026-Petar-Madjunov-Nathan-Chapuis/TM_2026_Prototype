@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2004823035825697552
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8502360867999301844}
+  m_Layer: 0
+  m_Name: SteakSocket
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8502360867999301844
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004823035825697552}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.156, z: 0}
+  m_LocalScale: {x: 1.668391, y: 1.668391, z: 1.668391}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6565866451034881400}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3306308982180327148
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,6 +393,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 48713cb69de4e35478a26117e2c4607c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4742595418629177067}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 48713cb69de4e35478a26117e2c4607c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8502360867999301844}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 48713cb69de4e35478a26117e2c4607c, type: 3}
       insertIndex: -1
@@ -375,6 +409,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 48713cb69de4e35478a26117e2c4607c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8134118635723580118}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 48713cb69de4e35478a26117e2c4607c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5718419161020947337}
   m_SourcePrefab: {fileID: 100100000, guid: 48713cb69de4e35478a26117e2c4607c, type: 3}
 --- !u!1 &5788660522788775874 stripped
 GameObject:
@@ -1213,7 +1250,7 @@ ParticleSystem:
           m_PostInfinity: 2
           m_RotationOrder: 4
   EmissionModule:
-    enabled: 1
+    enabled: 0
     serializedVersion: 4
     rateOverTime:
       serializedVersion: 2
@@ -5205,6 +5242,8 @@ MonoBehaviour:
   fireParticles: {fileID: 1860381697463653276}
   meatPrefab: {fileID: 4241095439203635510, guid: 3a17bcf0dd24c684d8e6293f64895503, type: 3}
   transformParent: {fileID: 0}
+  steakSocket: {fileID: 2004823035825697552}
+  throwStrength: 1
 --- !u!65 &8134118635723580118
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5224,8 +5263,29 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.8329387, y: 1.7144132, z: 2.832939}
-  m_Center: {x: 0, y: 0.5592633, z: 0}
+  m_Size: {x: 1.9168578, y: 1.0848899, z: 1.5686991}
+  m_Center: {x: -0.108857006, y: 0.2445012, z: -0.120923825}
+--- !u!65 &5718419161020947337
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5788660522788775874}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.44, y: 1.66, z: 2.38}
+  m_Center: {x: -0.108857, y: 0.2445012, z: -0.1209238}
 --- !u!4 &6565866451034881400 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 48713cb69de4e35478a26117e2c4607c, type: 3}

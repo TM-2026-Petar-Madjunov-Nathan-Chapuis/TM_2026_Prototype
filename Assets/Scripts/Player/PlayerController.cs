@@ -20,6 +20,8 @@ namespace TM.Player
         private static readonly int JumpHash = Animator.StringToHash("jump"); // better performance according to unity UNT0041 warning (store hash reference to parameter rather than repeated id lookup)
         private static readonly int SpeedHash = Animator.StringToHash("speed");
         private static readonly int FallingHash = Animator.StringToHash("falling");
+        public bool falling = false;
+        public bool IsGrounded => controller != null && controller.isGrounded;
 
         public string UID => "PlayerController";
 
@@ -50,11 +52,13 @@ namespace TM.Player
             {
                 verticalSpeed = -stickToGroundFactor * Time.deltaTime; //heavy downward speed to keep from slope boucing
                 animator.SetBool(FallingHash, false);
+                falling = false;
             }
             else
             {
                 verticalSpeed += -gravity * Time.deltaTime;
                 animator.SetBool(FallingHash, verticalSpeed < 0);
+                falling = verticalSpeed < 0;
             }
 
             Vector2 move = inputValues.vector2Value;

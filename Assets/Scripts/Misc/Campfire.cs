@@ -16,6 +16,8 @@ public class Campfire : MonoBehaviour, IInteractable, ISaveable, IHeatObject
     [SerializeField] private ParticleSystem fireParticles;
     [SerializeField] private GameObject meatPrefab;
     [SerializeField] private Transform transformParent;
+    [SerializeField] private GameObject steakSocket;
+    [SerializeField] private float throwStrength;
     public InteractionType GetInteractionType() => InteractionType.Fuel;
     private CampfireState campfireState = CampfireState.Empty;
 
@@ -48,9 +50,8 @@ public class Campfire : MonoBehaviour, IInteractable, ISaveable, IHeatObject
             if (this.campfireState == CampfireState.Lit)
             {
                 GameObject meat = GameObject.Instantiate(meatPrefab, transformParent);
-                meat.transform.position = this.transform.position + this.transform.up * 1.5f;
-                meat.GetComponent<Rigidbody>().AddForceAtPosition(meat.transform.position + new Vector3(0, 0.1f, 0), this.transform.up * -1000);
-
+                meat.transform.position = steakSocket.transform.position;
+                meat.GetComponent<Rigidbody>().AddForce(transform.up * throwStrength);
                 player.GetComponent<InventoryManager>().DestroyItem(playerItemController.heldItem);
                 GameObject.Destroy(playerItemController.heldItemGameobject);
             }

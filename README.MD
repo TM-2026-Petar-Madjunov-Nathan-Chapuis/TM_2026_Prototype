@@ -29,7 +29,7 @@ Pour jouer, il faut télécharger puis extraire le fichier disponible dans les *
 Il suffit ensuite de lancer le fichier .exe
 
 ### Touches
-- <kbd>W</kbd><kbd>A</kbd>S<kbd></kbd><kbd>D</kbd> - Touches de déplacements
+- <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> - Touches de déplacements
 - <kbd>I</kbd> - Ouvrir l'inventaire
 - <kbd>T</kbd> - Toggle entre caméra première personne et caméra troisième personne
 - <kbd>E</kbd> - Intéragir

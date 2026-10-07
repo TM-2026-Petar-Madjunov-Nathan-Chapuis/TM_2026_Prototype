@@ -21,11 +21,18 @@ Cette repository comporte les deux annexes externes au rapport de TM en pdf :
 Le projet est encore en développement. Certaines fonctionnalités peuvent être ajoutée d'ici la soutenance orale.
 
 ## Jouer
+### Installation
 Pour l'instant, seul windows possède un build, car la neige n'est disponible que sur windows et non sur mac.
 
 Pour jouer, il faut télécharger puis extraire le fichier disponible dans les **[Releases](../../releases)** du projet.
 
 Il suffit ensuite de lancer le fichier .exe
+
+### Touches
+- <kbd>W</kbd><kbd>A</kbd>S<kbd></kbd><kbd>D</kbd> - Touches de déplacements
+- <kbd>I</kbd> - Ouvrir l'inventaire
+- <kbd>T</kbd> - Toggle entre caméra première personne et caméra troisième personne
+- <kbd>E</kbd> - Intéragir
 
 ## Développement
 

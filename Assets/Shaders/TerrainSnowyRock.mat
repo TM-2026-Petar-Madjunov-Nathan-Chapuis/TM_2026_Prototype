@@ -127,6 +127,7 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _Snow_Accumulation: 0.01
     - _Snow_Contrast: 4
+    - _Snow_Saturation: 1
     - _Snow_Surface_0_None_1_Full: 0.4
     - _Snow_Tiling: 0.1
     - _SpecularHighlights: 1

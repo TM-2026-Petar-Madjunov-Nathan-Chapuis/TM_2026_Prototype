@@ -47,6 +47,7 @@ Shader "Custom/DeformationTesselation"
             #pragma fragment frag
             #pragma hull hull
             #pragma domain domain
+            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
@@ -347,17 +348,26 @@ Shader "Custom/DeformationTesselation"
                     IN.normalWS    * normalTS.z
                 );
 
-                Light mainLight = GetMainLight();
+                //CONNECT THE SNOW TO THE SCENE'S LIGHTNING AND SHADOWS.
+                //https://docs.unity3d.com/6000.0/Documentation/Manual/urp/use-built-in-shader-methods-shadows.html
+                //https://docs.unity3d.com/6000.0/Documentation/Manual/urp/use-built-in-shader-methods-lighting.html
 
-                float3 lightDir = normalize(mainLight.direction); //direction of the light
-                float lightIntensity = Luminance(mainLight.color.rgb); //calculates a light intensity based on the color of the light
+                VertexPositionInputs positions = GetVertexPositionInputs(TransformWorldToObject(IN.positionWS));
+                float4 shadowCoordinates = GetShadowCoord(positions);
+                //shadow ammount (comming from the unity docs example)
+                half shadowAmount = MainLightRealtimeShadow(shadowCoordinates);
 
-                float NdotL = saturate(dot(normalWS, lightDir));  //produit scalaire pour calculer la lumière 1 si même direction, 0 si opposé
+                Light light = GetMainLight();
+                //light ammount (same)
+                float3 lightAmount = LightingLambert(light.color, light.direction, normalWS);
 
-                float3 color = albedo.rgb * lightIntensity * saturate(NdotL + 0.15);
+                float3 directLighting = lightAmount * shadowAmount;
+                //this is to take account the ambient lighting from the scene
+                float3 indirectLighting = SampleSH(normalWS);
+                //add the two factors.
+                float3 color = albedo.rgb * _BaseColor.rgb * (indirectLighting + directLighting);
 
                 return float4(color, 1.0);
-                return float4(normalWS * 0.5 + 0.5, 1.0);
             }
             ENDHLSL
         }

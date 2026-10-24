@@ -50,7 +50,11 @@ public class SnowTerrain : MonoBehaviour
         {
             (emiter as AnimalSnowParticles).particleEmitedCount = animalParticleEmmissionCount;
         }
-        FindAnyObjectByType<PlayerSnowParticles>().particleEmitedCount = playerParticleEmmissionCount;
+        PlayerSnowParticles particle = FindAnyObjectByType<PlayerSnowParticles>();
+        if (particle != null)
+        {
+            particle.particleEmitedCount = playerParticleEmmissionCount;
+        }
 
         //hides the snow layer, so that it saves perf
         terrainMaterial.SetInt("_ShowSnow", 0);
@@ -126,6 +130,11 @@ public class SnowTerrain : MonoBehaviour
     }
     void Update()
     {
+        if (mat1 == null)
+        {
+            return;
+        }
+
         this.snowMaterial.SetVector("_OrthographicCameraPos", playerTopDownCamera.transform.position);
         this.mat1.SetVector("_OrthographicCameraPos", playerTopDownCamera.transform.position);
         this.mat2.SetVector("_OrthographicCameraPos", playerTopDownCamera.transform.position);

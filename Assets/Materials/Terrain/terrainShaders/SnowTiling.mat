@@ -58,15 +58,20 @@ Material:
     - _OrthographicCameraSize: 0
     - _ProximityTessellation: 5.14
     - _SnowAlbedoSaturation: 0.15
+    - _SnowAmbientStrength: 1
     - _SnowGreenForce: 0.39
     - _SnowHeight: 1.17
     - _SnowRedForce: 0.8
+    - _SnowRimStrength: 0.394
+    - _SnowScatterPower: 2
+    - _SnowScatterStrength: 0.35
     - _SnowTextureTileSize: 5
     - _Tessellation: 38.57
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _OrthographicCameraPos: {r: 574.87225, g: 1212.1204, b: 468.06967, a: 0}
+    - _OrthographicCameraPos: {r: 811.8861, g: 1248.2584, b: 331.11667, a: 0}
     - _OrthographicCameraSize: {r: 40, g: 40, b: 0, a: 0}
+    - _SnowAmbientColor: {r: 0, g: 0.39999986, b: 1, a: 1}
     - _TerrainPos: {r: 750, g: 0, b: 750, a: 0}
     - _TerrainSize: {r: 250, g: 250, b: 0, a: 0}
   m_BuildTextureStacks: []

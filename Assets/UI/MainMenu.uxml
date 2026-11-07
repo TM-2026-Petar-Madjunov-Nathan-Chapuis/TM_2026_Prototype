@@ -1,0 +1,31 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/styles/PauseMenuStyles.uss?fileID=7433441132597879392&amp;guid=15a7d94582a302b4bb8d3ddfc62b2494&amp;type=3"/>
+    <ui:VisualElement name="MenuBackground" picking-mode="Ignore" class="PauseMenuBorder" style="flex-grow: 1; align-items: center; align-self: center; width: auto; height: 50%; aspect-ratio: 1; position: absolute; top: 20%; display: flex; visibility: visible; max-width: none; max-height: none; justify-content: center; min-width: auto; min-height: auto; background-color: rgba(0, 0, 0, 0.5);">
+        <ui:Button text="PLAY" name="PlayButton" emoji-fallback-support="true" class="PauseMenuButtonsUSS"/>
+        <ui:Button text="SETTINGS" name="SettingsButton" emoji-fallback-support="true" class="PauseMenuButtonsUSS"/>
+        <ui:Button text="QUIT GAME" name="QuitGameButton" emoji-fallback-support="true" class="PauseMenuButtonsUSS"/>
+    </ui:VisualElement>
+    <ui:VisualElement name="SettingsMenu" picking-mode="Ignore" class="PauseMenuBorder" style="flex-grow: 1; position: absolute; top: 20%; width: auto; aspect-ratio: 1; align-self: center; background-color: rgba(0, 0, 0, 0.5); visibility: visible; height: 50%;">
+        <ui:Label text="Settings (NOT COMING SOON)" name="Label" style="color: rgb(255, 255, 255); font-size: 20%; -unity-text-align: upper-center; top: 25%; position: absolute; align-self: center;"/>
+        <ui:Button text="Back" name="BackFromSettingsToPause" style="position: absolute; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; aspect-ratio: 1; width: 10%; top: 2%; left: 2%;"/>
+    </ui:VisualElement>
+    <ui:VisualElement name="LoadSaveMenu" picking-mode="Ignore" class="PauseMenuBorder" style="flex-grow: 1; position: absolute; top: 20%; width: auto; aspect-ratio: 1; align-self: center; background-color: rgba(0, 0, 0, 0.5); visibility: visible; height: 50%;">
+        <ui:VisualElement name="TopRow" style="flex-grow: 0; justify-content: space-between; align-items: flex-start; align-content: auto; flex-direction: row; align-self: auto; padding-top: 20px; padding-right: 20px; padding-left: 20px; background-size: 100% 100%; width: 100%;">
+            <ui:Button text="Back" name="BackFromLoadingToPause" class="PauseMenuButtonsUSS" style="position: relative; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; aspect-ratio: 1; width: 15%; top: auto; left: auto; align-content: auto; align-items: auto; flex-shrink: 0; align-self: auto;"/>
+            <ui:Label text="Load a save file" name="Label" double-click-selects-word="false" style="color: rgb(255, 255, 255); font-size: 32%; -unity-text-align: upper-center; top: auto; position: relative; align-self: auto; height: 37px; align-items: auto; align-content: auto; justify-content: center; flex-direction: column; margin-top: 0%; margin-right: 0%; margin-bottom: 0%; margin-left: 0%; -unity-font-definition: resource(&quot;Font/Barlow_Condensed/BarlowCondensed-SemiBold&quot;);"/>
+            <ui:VisualElement style="flex-grow: 0; flex-shrink: 1; width: 10%; aspect-ratio: 1;"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="BottomRow" style="flex-grow: 1; padding-top: 20px; padding-right: 20px; padding-bottom: 20px; padding-left: 20px;">
+            <ui:VisualElement name="FileSelection" class="PauseMenuBorder" style="flex-grow: 1;">
+                <ui:VisualElement name="SaveFileTemplate" class="PauseMenuButtonsUSS SaveFileTemplate">
+                    <ui:Label text="Save 1" name="SaveFileName" class="SaveFileName" style="height: 40%;"/>
+                    <ui:VisualElement name="ButtonHolder" class="ButtonHolder">
+                        <ui:Button text="" name="RenameButton" class="PauseMenuButtonsUSS RenameButton"/>
+                        <ui:Button text="" name="DeleteButton" class="PauseMenuButtonsUSS DeleteButton"/>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:Button text="Or create a new save" parse-escape-sequences="true" name="CreateNewSave" class="PauseMenuButtonsUSS" style="margin-top: 1%; margin-bottom: 1%; width: 116%; flex-grow: 0; height: auto; aspect-ratio: 8; -unity-font-definition: resource(&quot;Font/Barlow_Condensed/BarlowCondensed-SemiBold&quot;);"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

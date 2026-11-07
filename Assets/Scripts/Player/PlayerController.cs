@@ -41,6 +41,7 @@ namespace TM.Player
         }
         private void Move(InputValues inputValues) //mouvement + gravity | ran every frame by the input listener in input manager
         {
+            Debug.Log(inputValues.vector2Value);
             if (Time.deltaTime <= 0f)
             {
                 return;

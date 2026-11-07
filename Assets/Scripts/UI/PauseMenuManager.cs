@@ -5,6 +5,7 @@ using TM.Misc;
 using TM.Saving;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class PauseMenuManager : MonoBehaviour, ISaveable
@@ -170,7 +171,7 @@ public class PauseMenuManager : MonoBehaviour, ISaveable
     void SaveAndQuitToMainMenuAction(ClickEvent clickEvent)
     {
         savingManager.Save();
-        Application.Quit(); // temporary
+        SceneManager.LoadScene(0);
     }
     void QuitGameAction(ClickEvent clickEvent)
     {

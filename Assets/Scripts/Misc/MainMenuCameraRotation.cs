@@ -8,6 +8,10 @@ public class MainMenuCameraRotation : MonoBehaviour
     [SerializeField] private float speed = 1f;
 
     // Update is called once per frame
+    void Start()
+    {
+        Time.timeScale = 1f;
+    }
     void Update()
     {
         this.transform.Rotate(this.transform.up, speed * Time.deltaTime);

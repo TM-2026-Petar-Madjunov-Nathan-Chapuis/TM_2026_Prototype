@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Runtime.CompilerServices;
 using TM.Input;
 using TM.Misc;
 using TM.Saving;
@@ -11,8 +12,11 @@ public class MainMenuManager : MonoBehaviour
 {
     [SerializeField] private UIDocument uIDocument;
     private VisualElement MainMenu;
+    private Button NewGameButton;
+    private Button LoadGameButton; 
     private Button SettingsButton;
-    private Button PlayButton;
+    private Button CreditsButton;
+    
     private Button QuitGameButton;
 
     private VisualElement SettingsMenu;
@@ -24,6 +28,7 @@ public class MainMenuManager : MonoBehaviour
     private Button BackFromLoadingToPause;
     private Button CreateNewSaveButton;
 
+
     private bool loadingMenuIsOpen;
     private bool settingsMenuIsOpen;
 
@@ -33,8 +38,10 @@ public class MainMenuManager : MonoBehaviour
         root = uIDocument.rootVisualElement;
 
         MainMenu = root.Q<VisualElement>("MenuBackground");
+        NewGameButton = MainMenu.Q<Button>("NewGameButton");
+        LoadGameButton = MainMenu.Q<Button>("LoadGameButton");
         SettingsButton = MainMenu.Q<Button>("SettingsButton");
-        PlayButton = MainMenu.Q<Button>("PlayButton"); //temporary button
+        CreditsButton = MainMenu.Q<Button>("CreditsButton");
         QuitGameButton = MainMenu.Q<Button>("QuitGameButton");
 
         SettingsMenu = root.Q<VisualElement>("SettingsMenu");
@@ -51,20 +58,24 @@ public class MainMenuManager : MonoBehaviour
         OpenSettingsAction(new ClickEvent()); // ferme le menu au début
 
         loadingMenuIsOpen = true;
-        OpenLoadMenuAction(new ClickEvent()); // ferme le menu au début
+        OpenLoadMenuAction(new ClickEvent()); // ferme le menu au début 
+
+        MainMenu.style.display = DisplayStyle.Flex;
+        CloseMenuBySwiping(MainMenu, false, 0.5f);
+        
 
         EnableCallbacks();
     }
     private void EnableCallbacks()
     {
         SettingsButton.RegisterCallback<ClickEvent>(OpenSettingsAction);
-        PlayButton.RegisterCallback<ClickEvent>(OpenLoadMenuAction);
+        LoadGameButton.RegisterCallback<ClickEvent>(OpenLoadMenuAction);
         QuitGameButton.RegisterCallback<ClickEvent>(QuitGameAction);
     }
     private void DisableCallbacks()
     {
         SettingsButton.UnregisterCallback<ClickEvent>(OpenSettingsAction);
-        PlayButton.UnregisterCallback<ClickEvent>(OpenLoadMenuAction);
+        LoadGameButton.UnregisterCallback<ClickEvent>(OpenLoadMenuAction);
         QuitGameButton.UnregisterCallback<ClickEvent>(QuitGameAction);
     }
 
@@ -73,7 +84,8 @@ public class MainMenuManager : MonoBehaviour
         if (settingsMenuIsOpen == true)
         {
             SettingsMenu.style.display = DisplayStyle.None;
-            MainMenu.style.display = DisplayStyle.Flex;
+            //MainMenu.style.display = DisplayStyle.Flex;
+            CloseMenuBySwiping(MainMenu, false, 0.5f);
 
             BackFromSettingsToPause.UnregisterCallback<ClickEvent>(OpenSettingsAction);
             settingsMenuIsOpen = false;
@@ -81,7 +93,8 @@ public class MainMenuManager : MonoBehaviour
         else // settingsMenuIsOpen == false
         {
             SettingsMenu.style.display = DisplayStyle.Flex;
-            MainMenu.style.display = DisplayStyle.None;
+            //MainMenu.style.display = DisplayStyle.None;
+            CloseMenuBySwiping(MainMenu, true, 0.5f);
 
             BackFromSettingsToPause.RegisterCallback<ClickEvent>(OpenSettingsAction);
             settingsMenuIsOpen = true;
@@ -92,7 +105,8 @@ public class MainMenuManager : MonoBehaviour
         if (loadingMenuIsOpen == true)
         {
             LoadSaveMenu.style.display = DisplayStyle.None;
-            MainMenu.style.display = DisplayStyle.Flex;
+            //MainMenu.style.display = DisplayStyle.Flex;
+            CloseMenuBySwiping(MainMenu, false, 0.5f);
 
             BackFromLoadingToPause.UnregisterCallback<ClickEvent>(OpenLoadMenuAction);
             BackFromLoadingToPause.UnregisterCallback<ClickEvent>(CreateNewSaveAction);
@@ -101,7 +115,8 @@ public class MainMenuManager : MonoBehaviour
         else
         {
             LoadSaveMenu.style.display = DisplayStyle.Flex;
-            MainMenu.style.display = DisplayStyle.None;
+            //MainMenu.style.display = DisplayStyle.None;
+            CloseMenuBySwiping(MainMenu, true, 0.5f);
 
             BackFromLoadingToPause.RegisterCallback<ClickEvent>(OpenLoadMenuAction);
             BackFromLoadingToPause.RegisterCallback<ClickEvent>(CreateNewSaveAction);
@@ -162,6 +177,20 @@ public class MainMenuManager : MonoBehaviour
         {
             saveFile.RemoveFromClassList("SaveFileButton");
             saveFile.AddToClassList("SaveFileButtonHover");
+        }
+    }
+    private void CloseMenuBySwiping(VisualElement menu, bool menuIsOpen, float timeAnimation)
+    {   
+
+        if(menuIsOpen == true)
+        {
+            menu.style.translate = new StyleTranslate(new Translate(Length.Percent(0f),Length.Percent(100f)));
+            //menu.style.display = DisplayStyle.None;
+        }
+        if(menuIsOpen == false)
+        {
+            //menu.style.display = DisplayStyle.Flex;
+            menu.style.translate = new StyleTranslate(new Translate(Length.Percent(0f),Length.Percent(0f)));
         }
     }
     private void SelectSaveFile(string fileName)

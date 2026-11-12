@@ -10,24 +10,22 @@
     border-right-color: rgb(126, 126, 126);
     border-top-color: rgb(126, 126, 126);
     border-bottom-color: rgb(126, 126, 126);
+    -unity-font-definition: url("project://database/Assets/Font/Barlow_Condensed/BarlowCondensed-Medium.ttf?fileID=12800000&guid=c06f3f986c1b1d646a8e06a534fd74a0&type=3#BarlowCondensed-Medium");
 }
 
 .PauseMenuButtonsUSS {
-    border-top-width: 1px;
-    border-right-width: 1px;
-    border-bottom-width: 1px;
-    border-left-width: 1px;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
     border-left-color: rgb(126, 126, 126);
     border-right-color: rgb(126, 126, 126);
     border-top-color: rgb(126, 126, 126);
     border-bottom-color: rgb(126, 126, 126);
     top: auto;
-    height: 14%;
-    width: auto;
     align-self: center;
     margin-top: 3%;
     margin-right: 0;
-    
     margin-bottom: 3%;
     margin-left: 0;
     padding-top: 0;
@@ -40,7 +38,6 @@
     background-color: rgb(46, 46, 46);
     background-repeat: no-repeat no-repeat;
     position: relative;
-    aspect-ratio: 5.666667;
     -unity-text-auto-size: none;
     -unity-text-generator: standard;
     -unity-text-align: middle-center;
@@ -48,13 +45,15 @@
     white-space: pre-wrap;
     -unity-text-outline-width: 0;
     -unity-font-style: normal;
+    height: 14%;
+    aspect-ratio: 5.666667;
 }
 
 .PauseMenuButtonsUSS:hover {
-    border-top-width: 1px;
-    border-right-width: 1px;
-    border-bottom-width: 1px;
-    border-left-width: 1px;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
     border-left-color: rgb(126, 126, 126);
     border-right-color: rgb(126, 126, 126);
     border-top-color: rgb(126, 126, 126);
@@ -88,12 +87,12 @@
     transition-timing-function: ease;
     transition-delay: 0s;
 }
-/*same as pause menu button but differentiation needed because the hover state is being controlled by c# because of inner button hovers.*/
+
 .SaveFileButton {
-    border-top-width: 1px;
-    border-right-width: 1px;
-    border-bottom-width: 1px;
-    border-left-width: 1px;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
     border-left-color: rgb(126, 126, 126);
     border-right-color: rgb(126, 126, 126);
     border-top-color: rgb(126, 126, 126);
@@ -125,11 +124,12 @@
     -unity-text-outline-width: 0;
     -unity-font-style: normal;
 }
+
 .SaveFileButtonHover {
-    border-top-width: 1px;
-    border-right-width: 1px;
-    border-bottom-width: 1px;
-    border-left-width: 1px;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
     border-left-color: rgb(126, 126, 126);
     border-right-color: rgb(126, 126, 126);
     border-top-color: rgb(126, 126, 126);
@@ -189,6 +189,7 @@
     align-self: auto;
     justify-content: center;
     aspect-ratio: auto;
+    -unity-font-definition: url("project://database/Assets/Font/Barlow_Condensed/BarlowCondensed-Medium.ttf?fileID=12800000&guid=c06f3f986c1b1d646a8e06a534fd74a0&type=3#BarlowCondensed-Medium");
 }
 
 .RenameButton {
@@ -204,7 +205,8 @@
     border-right-width: 0;
     border-bottom-width: 0;
     border-left-width: 0;
-
+    -unity-font-definition: url("project://database/Assets/Font/Barlow_Condensed/BarlowCondensed-Medium.ttf?fileID=12800000&guid=c06f3f986c1b1d646a8e06a534fd74a0&type=3#BarlowCondensed-Medium");
+    background-color: rgba(0, 0, 0, 0);
 }
 
 .DeleteButton {
@@ -216,14 +218,18 @@
     border-right-width: 0;
     border-bottom-width: 0;
     border-left-width: 0;
+    -unity-font-definition: url("project://database/Assets/Font/Barlow_Condensed/BarlowCondensed-Medium.ttf?fileID=12800000&guid=c06f3f986c1b1d646a8e06a534fd74a0&type=3#BarlowCondensed-Medium");
+    background-color: rgba(0, 0, 0, 0);
 }
 
 .PauseMenuButtonsUSS.RenameButton {
-    border-width: 0px;
+    border-width: 0;
+    -unity-font-definition: url("project://database/Assets/Font/Barlow_Condensed/BarlowCondensed-Medium.ttf?fileID=12800000&guid=c06f3f986c1b1d646a8e06a534fd74a0&type=3#BarlowCondensed-Medium");
 }
 
 .PauseMenuButtonsUSS.DeleteButton {
-    border-width: 0px;
+    border-width: 0;
+    -unity-font-definition: url("project://database/Assets/Font/Barlow_Condensed/BarlowCondensed-Medium.ttf?fileID=12800000&guid=c06f3f986c1b1d646a8e06a534fd74a0&type=3#BarlowCondensed-Medium");
 }
 
 .PauseMenuButtonsUSS.RenameButton:hover,
@@ -234,14 +240,17 @@
     margin-top: 0;
     margin-bottom: 0;
     scale: 1.1 1.1;
+    -unity-font-definition: url("project://database/Assets/Font/Barlow_Condensed/BarlowCondensed-Medium.ttf?fileID=12800000&guid=c06f3f986c1b1d646a8e06a534fd74a0&type=3#BarlowCondensed-Medium");
 }
 
 .PauseMenuButtonsUSS.RenameButton:hover {
     margin-left: 5px;
+    -unity-font-definition: url("project://database/Assets/Font/Barlow_Condensed/BarlowCondensed-Medium.ttf?fileID=12800000&guid=c06f3f986c1b1d646a8e06a534fd74a0&type=3#BarlowCondensed-Medium");
 }
 
 .PauseMenuButtonsUSS.DeleteButton:hover {
     margin-right: 5px;
+    -unity-font-definition: url("project://database/Assets/Font/Barlow_Condensed/BarlowCondensed-Medium.ttf?fileID=12800000&guid=c06f3f986c1b1d646a8e06a534fd74a0&type=3#BarlowCondensed-Medium");
 }
 
 .BottomHolder {
@@ -252,4 +261,163 @@
     align-content: center;
     width: 100%;
     height: 100%;
+    -unity-font-definition: url("project://database/Assets/Font/Barlow_Condensed/BarlowCondensed-Medium.ttf?fileID=12800000&guid=c06f3f986c1b1d646a8e06a534fd74a0&type=3#BarlowCondensed-Medium");
+}
+
+.unity-buttonMM {
+    aspect-ratio: 6;
+    height: auto;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    margin-right: 0%;
+    margin-left: 0%;
+    width: 125%;
+    background-color: rgba(0, 0, 0, 0);
+    font-size: 25px;
+    align-self: center;
+    top: 20%;
+    bottom: auto;
+    -unity-font-definition: url("project://database/Assets/Font/Barlow_Condensed/BarlowCondensed-Medium.ttf?fileID=12800000&guid=c06f3f986c1b1d646a8e06a534fd74a0&type=3#BarlowCondensed-Medium");
+}
+
+.unity-buttonMM:hover {
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    border-left-color: rgb(126, 126, 126);
+    border-right-color: rgb(126, 126, 126);
+    border-top-color: rgb(126, 126, 126);
+    border-bottom-color: rgb(126, 126, 126);
+    top: 20%;
+    height: auto;
+    width: 125%;
+    align-self: center;
+    margin-top: 3%;
+    margin-right: 0%;
+    margin-bottom: 3%;
+    margin-left: 0%;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    font-size: 25px;
+    -unity-font-definition: url("project://database/Assets/Font/Barlow_Condensed/BarlowCondensed-Medium.ttf?fileID=12800000&guid=c06f3f986c1b1d646a8e06a534fd74a0&type=3#BarlowCondensed-Medium");
+    color: rgb(255, 255, 255);
+    background-color: rgba(66, 109, 180, 0.5);
+    background-repeat: no-repeat no-repeat;
+    position: relative;
+    aspect-ratio: 6;
+    scale: 1.1 1.1;
+    transition-duration: 0.2s, 1s;
+    -unity-text-align: middle-center;
+    white-space: pre-wrap;
+    text-overflow: ellipsis;
+    -unity-text-auto-size: none;
+    transition-property: all, translate;
+    transition-timing-function: ease, ease;
+    transition-delay: 0s, 0s;
+}
+
+.MMmenues {
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    border-left-color: rgb(126, 126, 126);
+    border-right-color: rgb(126, 126, 126);
+    border-top-color: rgb(126, 126, 126);
+    border-bottom-color: rgb(126, 126, 126);
+    -unity-text-auto-size: none;
+    top: 50%;
+    height: auto;
+    aspect-ratio: 1;
+    left: auto;
+    width: 40%;
+    align-items: stretch;
+    align-self: flex-start;
+    align-content: auto;
+    justify-content: flex-end;
+    right: 15%;
+    translate: 0% -50%;
+    -unity-font-definition: url("project://database/Assets/Font/Barlow_Condensed/BarlowCondensed-Medium.ttf?fileID=12800000&guid=c06f3f986c1b1d646a8e06a534fd74a0&type=3#BarlowCondensed-Medium");
+}
+
+.BackToMMButtons {
+    position: relative;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    aspect-ratio: 1;
+    width: 15%;
+    top: auto;
+    left: auto;
+    align-content: auto;
+    align-items: auto;
+    flex-shrink: 0;
+    align-self: auto;
+    font-size: 50px;
+    background-color: rgb(46, 46, 46);
+    -unity-font-definition: url("project://database/Assets/Font/Barlow_Condensed/BarlowCondensed-Medium.ttf?fileID=12800000&guid=c06f3f986c1b1d646a8e06a534fd74a0&type=3#BarlowCondensed-Medium");
+    -unity-font-style: normal;
+    -unity-text-auto-size: none;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    color: rgb(255, 255, 255);
+    -unity-text-align: middle-center;
+    border-left-color: rgb(126, 126, 126);
+    border-right-color: rgb(126, 126, 126);
+    border-top-color: rgb(126, 126, 126);
+    border-bottom-color: rgb(126, 126, 126);
+    height: auto;
+}
+
+.BackToMMButtons:hover {
+    position: relative;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    aspect-ratio: 1;
+    width: 15%;
+    top: auto;
+    left: auto;
+    align-content: auto;
+    align-items: auto;
+    flex-shrink: 0;
+    align-self: auto;
+    font-size: 50px;
+    background-color: rgb(66, 109, 180);
+    -unity-font-definition: url("project://database/Assets/Font/Barlow_Condensed/BarlowCondensed-Medium.ttf?fileID=12800000&guid=c06f3f986c1b1d646a8e06a534fd74a0&type=3#BarlowCondensed-Medium");
+    -unity-font-style: normal;
+    -unity-text-auto-size: none;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    color: rgb(255, 255, 255);
+    -unity-text-align: middle-center;
+    transition-duration: 0.15s;
+    scale: 1.1 1.1 1.1;
+    border-left-color: rgb(126, 126, 126);
+    border-right-color: rgb(126, 126, 126);
+    border-top-color: rgb(126, 126, 126);
+    border-bottom-color: rgb(126, 126, 126);
+}
+
+.unity-button {
+}
+
+.unity-text-element {
 }

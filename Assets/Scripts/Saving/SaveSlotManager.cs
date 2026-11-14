@@ -1,5 +1,7 @@
 using System;
 using System.IO;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -47,6 +49,19 @@ namespace TM.Saving
                 Debug.Log(fileNames[i]);
             }
             return fileNames;
+        }
+
+        public SaveFile GetSaveFileInfo(string fileName)
+        {
+            string path = Application.persistentDataPath + "/" + fileName + ".json";
+
+            if (File.Exists(path))
+            {
+                string json = File.ReadAllText(path);
+                SaveFile saveFile = JsonConvert.DeserializeObject<SaveFile>(json);
+                return saveFile;
+            } 
+            return null;
         }
     }
 }

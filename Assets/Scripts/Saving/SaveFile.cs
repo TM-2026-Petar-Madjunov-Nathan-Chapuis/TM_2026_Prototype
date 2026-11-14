@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace TM.Saving
@@ -6,6 +7,9 @@ namespace TM.Saving
     public class SaveFile
     {
         public List<SaveData> saveData = new List<SaveData>();
+        public DateTime createdAtUtc;
+        public DateTime lastSavedAtUtc;
+        public double totalPlaySeconds;
     }
     [System.Serializable]
     public class SaveData

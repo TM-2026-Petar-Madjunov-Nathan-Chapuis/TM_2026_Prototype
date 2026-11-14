@@ -24,9 +24,19 @@ public class MainMenuManager : MonoBehaviour
 
     private VisualElement LoadSaveMenu;
     private VisualElement LoadFileList;
-    private VisualElement FileSaveTemplate;
+
     private Button BackFromLoadingToPause;
     private Button CreateNewSaveButton;
+
+    private VisualElement SaveInfosMenu;
+    private VisualElement SaveImage;
+    private VisualElement SaveName;
+    private Label FirstTimeDateValue;
+    private Label LastTimeDateValue;
+    private Label TimePlayedValue;
+    private Button PlayButton;
+
+    private VisualElement selectedSaveFile;
 
 
     private bool loadingMenuIsOpen;
@@ -49,10 +59,16 @@ public class MainMenuManager : MonoBehaviour
 
         LoadSaveMenu = root.Q<VisualElement>("LoadSaveMenu");
         LoadFileList = LoadSaveMenu.Q<VisualElement>("FileSelection");
-        FileSaveTemplate = LoadFileList.Q<VisualElement>("SaveFileTemplate");
-        FileSaveTemplate.style.display = DisplayStyle.None;
         BackFromLoadingToPause = LoadSaveMenu.Q<Button>("BackFromLoadingToPause");
-        CreateNewSaveButton = LoadSaveMenu.Q<Button>("CreateNewSave");
+        CreateNewSaveButton = LoadSaveMenu.Q<Button>("CreateNewSaveButton");
+
+        SaveInfosMenu = root.Q<VisualElement>("SaveInfosMenu");
+        SaveImage = SaveInfosMenu.Q<VisualElement>("SaveImage");
+        FirstTimeDateValue = SaveInfosMenu.Q<Label>("FirstTimeDateValue");
+        LastTimeDateValue = SaveInfosMenu.Q<Label>("LastTimeDateValue");
+        TimePlayedValue = SaveInfosMenu.Q<Label>("TimePlayedValue");
+        PlayButton = SaveInfosMenu.Q<Button>("PlayButton");
+
 
         settingsMenuIsOpen = true;
         OpenSettingsAction(new ClickEvent()); // ferme le menu au début
@@ -63,6 +79,7 @@ public class MainMenuManager : MonoBehaviour
         MainMenu.style.display = DisplayStyle.Flex;
         CloseMenuBySwiping(MainMenu, false, 0.5f);
         
+        CloseMenuBySwiping(SaveInfosMenu, true, 0f);
 
         EnableCallbacks();
     }
@@ -71,12 +88,7 @@ public class MainMenuManager : MonoBehaviour
         SettingsButton.RegisterCallback<ClickEvent>(OpenSettingsAction);
         LoadGameButton.RegisterCallback<ClickEvent>(OpenLoadMenuAction);
         QuitGameButton.RegisterCallback<ClickEvent>(QuitGameAction);
-    }
-    private void DisableCallbacks()
-    {
-        SettingsButton.UnregisterCallback<ClickEvent>(OpenSettingsAction);
-        LoadGameButton.UnregisterCallback<ClickEvent>(OpenLoadMenuAction);
-        QuitGameButton.UnregisterCallback<ClickEvent>(QuitGameAction);
+        PlayButton.RegisterCallback<ClickEvent>(PlaySelectedAction);
     }
 
     void ShowAndHideSettingsMenu()
@@ -114,6 +126,8 @@ public class MainMenuManager : MonoBehaviour
         }
         else
         {
+            this.selectedSaveFile = null;
+            ShowAndHideSelectedMenu();
             LoadSaveMenu.style.display = DisplayStyle.Flex;
             //MainMenu.style.display = DisplayStyle.None;
             CloseMenuBySwiping(MainMenu, true, 0.5f);
@@ -122,62 +136,90 @@ public class MainMenuManager : MonoBehaviour
             BackFromLoadingToPause.RegisterCallback<ClickEvent>(CreateNewSaveAction);
             loadingMenuIsOpen = true;
 
-            LoadFileList.Clear();
+            LoadFileList.Query<VisualElement>(className: "SaveFileTemplate") //all the save files
+                        .ToList() //to a list
+                        .ForEach(button => button.RemoveFromHierarchy()); //remove all of them.
 
             String[] filenames = SaveSlotManager.Instance.GetAllSaveFiles();
             foreach (string file in filenames)
             {
-                Button saveFile = new Button();
-                saveFile.AddToClassList("SaveFileButton");
-                saveFile.AddToClassList("SaveFileTemplate");
-                
-                Label saveFileText = new Label();
-                saveFileText.AddToClassList("SaveFileName");
-                saveFileText.text = file;
-                saveFile.Add(saveFileText);
+                SaveFile saveFileInfo = SaveSlotManager.Instance.GetSaveFileInfo(file);
 
-                VisualElement bottomHolder = new VisualElement();
-                bottomHolder.AddToClassList("BottomHolder");
-                
+                VisualElement saveFile = new VisualElement();
+                saveFile.userData = file;
+                saveFile.AddToClassList("SaveFileTemplate");
+
+                //SAVE FILE IMAGE
+                VisualElement saveFileImage = new VisualElement();
+                saveFileImage.AddToClassList("SaveFileImage");
+
+                VisualElement bottomBorder = new VisualElement();
+                bottomBorder.AddToClassList("SaveImageBottomLeftBorder");
+
+                VisualElement topborder = new VisualElement();
+                topborder.AddToClassList("SaveImageTopRightBorder");
+
+                saveFileImage.Add(bottomBorder);
+                saveFileImage.Add(topborder);
+
+                //SAVE FILE BACKGROUND (INFOS)
+                VisualElement background = new VisualElement();
+                background.AddToClassList("SaveFileBackground");
+
+                VisualElement separator = new VisualElement();
+                separator.AddToClassList("BackgroundSeparator");
+
+                Label saveName = new Label();
+                saveName.text = file;
+                saveName.AddToClassList("SaveFileName");
+
                 Button renameButton = new Button();
-                renameButton.AddToClassList("PauseMenuButtonsUSS");
                 renameButton.AddToClassList("RenameButton");
                 renameButton.RegisterCallback<ClickEvent>(evt => RenameSavefile(file));
 
                 Button deleteButton = new Button();
-                deleteButton.AddToClassList("PauseMenuButtonsUSS");
                 deleteButton.AddToClassList("DeleteButton");
                 deleteButton.RegisterCallback<ClickEvent>(evt => DeleteSavefile(file));
 
-                bottomHolder.Add(renameButton);
-                bottomHolder.Add(deleteButton);
+                Label date = new Label();
+                date.text = saveFileInfo.lastSavedAtUtc.ToString();
+                date.AddToClassList("SaveFileDate");
 
-                saveFile.Add(bottomHolder);
+                //HIDDEN BUTTON 
+                Button hiddenButton = new Button();
+                hiddenButton.AddToClassList("SaveFileHiddenButton");
+                hiddenButton.RegisterCallback<ClickEvent>(evt => SelectSaveFile(evt, saveFile, file));
+
+                background.Add(separator);
+                background.Add(saveName);
+                background.Add(renameButton);
+                background.Add(deleteButton);
+                background.Add(date);
+
+                saveFile.Add(saveFileImage);
+                saveFile.Add(background);
+                saveFile.Add(hiddenButton);
 
                 LoadFileList.Add(saveFile);
-                saveFile.RegisterCallback<ClickEvent>(e => SelectSaveFile(file));
-                saveFile.RegisterCallback<PointerMoveEvent>(evt => SaveFilePointerMove(evt, saveFile, renameButton, deleteButton));
-                saveFile.RegisterCallback<PointerEnterEvent>(evt => saveFile.AddToClassList("SaveFileButtonHover"));
-                saveFile.RegisterCallback<PointerLeaveEvent>(evt =>
-                {
-                    saveFile.RemoveFromClassList("SaveFileButtonHover");
-                    saveFile.AddToClassList("SaveFileButton");
-                });
             }
         }
     }
-    private void SaveFilePointerMove(PointerMoveEvent evt, Button saveFile, Button renameButton, Button deleteButton)
+    private void ShowAndHideSelectedMenu()
     {
-        if (renameButton.worldBound.Contains(evt.position) || deleteButton.worldBound.Contains(evt.position))
+        if (this.selectedSaveFile != null)
         {
-            saveFile.RemoveFromClassList("SaveFileButtonHover");
-            saveFile.AddToClassList("SaveFileButton");
+            SaveInfosMenu.style.display = DisplayStyle.Flex;
+            CloseMenuBySwiping(SaveInfosMenu, false, 0.5f);
+            SaveFile saveFileInfo = SaveSlotManager.Instance.GetSaveFileInfo(this.selectedSaveFile.userData as string);
+            LastTimeDateValue.text = saveFileInfo.lastSavedAtUtc.ToString();
+            FirstTimeDateValue.text = saveFileInfo.createdAtUtc.ToString();
+            TimePlayedValue.text = FormatPlayTime(saveFileInfo.totalPlaySeconds);
         }
-        else
-        {
-            saveFile.RemoveFromClassList("SaveFileButton");
-            saveFile.AddToClassList("SaveFileButtonHover");
-        }
+    }
+    private string FormatPlayTime(double totalSeconds)
+    {
+        TimeSpan time = TimeSpan.FromSeconds(Math.Max(0, totalSeconds));
+        return $"{(int)time.TotalHours:D2} hours, {time.Minutes:D2} minutes, {time.Seconds:D2} seconds"; //creates a string with hours:minutes. :D2 transforms 5 into 05 and 12 into 12 (keeps two digits)
     }
     private void CloseMenuBySwiping(VisualElement menu, bool menuIsOpen, float timeAnimation)
     {   
@@ -193,9 +235,22 @@ public class MainMenuManager : MonoBehaviour
             menu.style.translate = new StyleTranslate(new Translate(Length.Percent(0f),Length.Percent(0f)));
         }
     }
-    private void SelectSaveFile(string fileName)
+    private void SelectSaveFile(ClickEvent evt, VisualElement saveFile, string fileName)
     {
-        SaveSlotManager.Instance.SelectSaveFile(fileName);
+        if (evt.clickCount == 1)
+        {
+            if (this.selectedSaveFile != null)
+            {
+                this.selectedSaveFile.RemoveFromClassList("selected");
+            }
+            saveFile.AddToClassList("selected");
+            this.selectedSaveFile = saveFile;
+        }
+        else if (evt.clickCount == 2)
+        {
+            SaveSlotManager.Instance.SelectSaveFile(fileName);     
+        }
+        ShowAndHideSelectedMenu();
     }
     private void DeleteSavefile(string fileName)
     {
@@ -208,6 +263,13 @@ public class MainMenuManager : MonoBehaviour
     private void CreateNewSave()
     {
         Debug.Log("fds");
+    }
+    private void PlaySelectedAction(ClickEvent clickEvent)
+    {
+        if (this.selectedSaveFile.userData  != null)
+        {
+            SaveSlotManager.Instance.SelectSaveFile(this.selectedSaveFile.userData as string);        
+        }
     }
     void OpenSettingsAction(ClickEvent clickEvent)
     {

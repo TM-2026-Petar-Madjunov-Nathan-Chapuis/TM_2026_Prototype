@@ -659,3 +659,59 @@
 .SaveFileHiddenButton {
     background-color: rgba(255, 255, 255, 0);
 }
+
+.NewSaveButton {
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    align-content: auto;
+    width: 100%;
+    font-size: 17.5px;
+    background-color: rgba(46, 46, 46, 0.5);
+    border-top-width: 1px;
+    border-right-width: 0;
+    border-bottom-width: 1px;
+    border-left-width: 0;
+    margin-top: 0%;
+    margin-right: 0%;
+    margin-bottom: 0%;
+    margin-left: 0%;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    height: 80%;
+    border-left-color: rgb(255, 255, 255);
+    border-right-color: rgb(255, 255, 255);
+    border-top-color: rgb(255, 255, 255);
+    border-bottom-color: rgb(255, 255, 255);
+}
+
+.NewSaveButton:hover {
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    align-content: auto;
+    width: 100%;
+    font-size: 17.5px;
+    background-color: rgba(66, 109, 180, 0.5);
+    border-top-width: 1px;
+    border-right-width: 0;
+    border-bottom-width: 1px;
+    border-left-width: 0;
+    margin-top: 0%;
+    margin-right: 0%;
+    margin-bottom: 0%;
+    margin-left: 0%;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    height: 80%;
+    border-left-color: rgb(255, 255, 255);
+    border-right-color: rgb(255, 255, 255);
+    border-top-color: rgb(255, 255, 255);
+    border-bottom-color: rgb(255, 255, 255);
+    scale: 1.1 1.1 1.1;
+    transition-duration: 0.2s;
+}

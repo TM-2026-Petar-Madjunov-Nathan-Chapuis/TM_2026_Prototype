@@ -69,10 +69,10 @@ Material:
     - _Tessellation: 38.57
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _OrthographicCameraPos: {r: 552.80005, g: 1230.5576, b: 602.406, a: 0}
+    - _OrthographicCameraPos: {r: 0, g: 0, b: 0, a: 0}
     - _OrthographicCameraSize: {r: 40, g: 40, b: 0, a: 0}
     - _SnowAmbientColor: {r: 0, g: 0.39999986, b: 1, a: 1}
-    - _TerrainPos: {r: 750, g: 0, b: 750, a: 0}
+    - _TerrainPos: {r: 250, g: 0, b: 250, a: 0}
     - _TerrainSize: {r: 250, g: 250, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

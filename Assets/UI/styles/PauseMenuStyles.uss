@@ -22,7 +22,6 @@
     border-right-color: rgb(126, 126, 126);
     border-top-color: rgb(126, 126, 126);
     border-bottom-color: rgb(126, 126, 126);
-    top: auto;
     align-self: center;
     margin-top: 3%;
     margin-right: 0;
@@ -715,3 +714,26 @@
     scale: 1.1 1.1 1.1;
     transition-duration: 0.2s;
 }
+
+.TextFieldInput > .unity-base-field__input {
+    border-left-color: rgba(255, 255, 255, 0.5);
+    border-right-color: rgba(255, 255, 255, 0.5);
+    border-top-color: rgba(255, 255, 255, 0.5);
+    border-bottom-color: rgba(255, 255, 255, 0.5);
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    background-color: rgba(255, 255, 255, 0);
+    font-size: 20px;
+    padding-top: 1%;
+    padding-right: 1%;
+    padding-bottom: 1%;
+    padding-left: 1%;
+}
+
+.TextFieldLabel:focus > .unity-base-field__label {
+    color: rgb(255, 255, 255);
+}
+
+

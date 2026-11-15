@@ -36,9 +36,12 @@ public class MainMenuManager : MonoBehaviour
     private Label TimePlayedValue;
     private Button PlayButton;
 
+    private VisualElement CreateNewSaveMenu;
+    private Button BackFromCreatingNewSaveToPause;
+
     private VisualElement selectedSaveFile;
 
-
+    private bool CreateNewSaveMenuIsOpen;
     private bool loadingMenuIsOpen;
     private bool settingsMenuIsOpen;
 
@@ -69,12 +72,18 @@ public class MainMenuManager : MonoBehaviour
         TimePlayedValue = SaveInfosMenu.Q<Label>("TimePlayedValue");
         PlayButton = SaveInfosMenu.Q<Button>("PlayButton");
 
+        CreateNewSaveMenu = root.Q<VisualElement>("CreateNewSaveMenu");
+        BackFromCreatingNewSaveToPause = CreateNewSaveMenu.Q<Button>("BackFromCreatingNewSaveToPause");
+
 
         settingsMenuIsOpen = true;
         OpenSettingsAction(new ClickEvent()); // ferme le menu au début
 
         loadingMenuIsOpen = true;
         OpenLoadMenuAction(new ClickEvent()); // ferme le menu au début 
+
+        CreateNewSaveMenuIsOpen = true;
+        OpenCreateNewSaveMenuAction(new ClickEvent()); // ferme le menu au début
 
         MainMenu.style.display = DisplayStyle.Flex;
         CloseMenuBySwiping(MainMenu, false, 0.5f);
@@ -85,6 +94,7 @@ public class MainMenuManager : MonoBehaviour
     }
     private void EnableCallbacks()
     {
+        NewGameButton.RegisterCallback<ClickEvent>(OpenCreateNewSaveMenuAction);
         SettingsButton.RegisterCallback<ClickEvent>(OpenSettingsAction);
         LoadGameButton.RegisterCallback<ClickEvent>(OpenLoadMenuAction);
         QuitGameButton.RegisterCallback<ClickEvent>(QuitGameAction);
@@ -204,6 +214,24 @@ public class MainMenuManager : MonoBehaviour
             }
         }
     }
+    private void ShowAndHideCreateNewSaveMenuMenu()
+    {
+        if (CreateNewSaveMenuIsOpen == true)
+        {
+            CreateNewSaveMenu.style.display = DisplayStyle.None;
+            CloseMenuBySwiping(MainMenu, false, 0.5f);
+            BackFromCreatingNewSaveToPause.UnregisterCallback<ClickEvent>(OpenCreateNewSaveMenuAction);
+            CreateNewSaveMenuIsOpen = false;
+
+        }
+        else
+        {
+            CreateNewSaveMenu.style.display = DisplayStyle.Flex;
+            CloseMenuBySwiping(MainMenu, true, 0.5f);
+            BackFromCreatingNewSaveToPause.RegisterCallback<ClickEvent>(OpenCreateNewSaveMenuAction);
+            CreateNewSaveMenuIsOpen = true;
+        }
+    }
     private void ShowAndHideSelectedMenu()
     {
         if (this.selectedSaveFile != null)
@@ -286,5 +314,9 @@ public class MainMenuManager : MonoBehaviour
     void CreateNewSaveAction(ClickEvent clickEvent)
     {
         CreateNewSave();
+    }
+    void OpenCreateNewSaveMenuAction(ClickEvent clickEvent)
+    {
+        ShowAndHideCreateNewSaveMenuMenu();
     }
 }

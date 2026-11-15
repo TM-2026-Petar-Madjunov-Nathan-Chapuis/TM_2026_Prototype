@@ -16,7 +16,7 @@
         </ui:VisualElement>
         <ui:Label text="Settings (NOT COMING SOON)" name="Label" style="color: rgb(255, 255, 255); font-size: 20%; -unity-text-align: upper-center; top: auto; position: relative; align-self: center;"/>
     </ui:VisualElement>
-    <ui:VisualElement name="LoadSaveMenu" picking-mode="Ignore" enabled="true" class="MMmenues" style="flex-grow: 1; position: absolute; align-self: center; background-color: rgba(0, 0, 0, 0.5); visibility: visible; display: flex; height: auto; width: 40%;">
+    <ui:VisualElement name="LoadSaveMenu" picking-mode="Ignore" enabled="true" class="MMmenues" style="flex-grow: 1; position: absolute; align-self: center; background-color: rgba(0, 0, 0, 0.5); visibility: visible; display: none; height: auto; width: 40%;">
         <ui:VisualElement name="TopRow" style="flex-grow: 0; justify-content: space-between; align-items: flex-start; align-content: auto; flex-direction: row; align-self: auto; padding-top: 20px; padding-right: 20px; padding-left: 20px; background-size: 100% 100%; width: 100%; position: relative; aspect-ratio: auto;">
             <ui:Button name="BackFromLoadingToPause" text="←" class="BackToMMButtons"/>
             <ui:Label text="Load a save file" name="Label" double-click-selects-word="false" style="color: rgb(255, 255, 255); font-size: 32%; -unity-text-align: upper-center; top: auto; position: relative; align-self: auto; height: 37px; align-items: auto; align-content: auto; justify-content: center; flex-direction: column; margin-top: 0%; margin-right: 0%; margin-bottom: 0%; margin-left: 0%; -unity-font-definition: resource(&quot;Font/Barlow_Condensed/BarlowCondensed-SemiBold&quot;);"/>
@@ -25,7 +25,7 @@
         <ui:VisualElement name="BottomRow" style="flex-grow: 1; padding-top: 20px; padding-right: 20px; padding-bottom: 20px; padding-left: 20px; display: flex;">
             <ui:VisualElement name="FileSelection" class="PauseMenuBorder" style="flex-grow: 1; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px;">
                 <ui:VisualElement name="CreateNewSave" style="height: auto; width: 100%; aspect-ratio: 5; margin-right: 0%; margin-left: 0%; margin-top: 1%; margin-bottom: 1%; background-color: rgba(46, 46, 46, 0); align-content: auto; align-self: center; justify-content: center; align-items: center; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; translate: 0% 0; position: relative;">
-                    <ui:Button text="Button" name="CreateNewSaveButton" class="CreateSaveFileButton NewSaveButton">
+                    <ui:Button text="Button" name="GoToCreateNewSaveButton" class="CreateSaveFileButton NewSaveButton">
                         <ui:VisualElement name="PlusCross" style="flex-grow: 1; align-content: center; justify-content: center; align-items: center; align-self: center; aspect-ratio: 1; position: absolute; height: 100%;">
                             <ui:VisualElement name="VericalBar" style="flex-grow: 1; position: absolute; aspect-ratio: 0.3333333; align-self: center; justify-content: flex-start; top: auto; background-color: rgb(255, 255, 255); width: 15px; align-content: flex-start; border-top-left-radius: 6px; border-top-right-radius: 6px; border-bottom-right-radius: 6px; border-bottom-left-radius: 6px;"/>
                             <ui:VisualElement name="HorizontalBar" style="flex-grow: 1; position: absolute; height: 15px; aspect-ratio: 3; align-self: center; justify-content: flex-start; top: auto; background-color: rgb(255, 255, 255); border-top-left-radius: 6px; border-top-right-radius: 6px; border-bottom-right-radius: 6px; border-bottom-left-radius: 6px;"/>
@@ -59,6 +59,19 @@
                     </ui:VisualElement>
                     <ui:Button text="" selectable="true" class="SaveFileHiddenButton"/>
                 </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="CreateNewSaveMenu" picking-mode="Ignore" enabled="true" class="MMmenues" style="flex-grow: 1; position: absolute; align-self: center; background-color: rgba(0, 0, 0, 0.5); visibility: visible; display: flex; height: auto; width: 40%;">
+        <ui:VisualElement name="TopRow" style="flex-grow: 0; justify-content: space-between; align-items: flex-start; align-content: auto; flex-direction: row; align-self: auto; padding-top: 20px; padding-right: 20px; padding-left: 20px; background-size: 100% 100%; width: 100%; position: relative; aspect-ratio: auto;">
+            <ui:Button name="BackFromCreatingNewSaveToPause" text="←" class="BackToMMButtons"/>
+            <ui:Label text="Create a new save file" name="Label" double-click-selects-word="false" style="color: rgb(255, 255, 255); font-size: 32%; -unity-text-align: upper-center; top: auto; position: relative; align-self: auto; height: 37px; align-items: auto; align-content: auto; justify-content: center; flex-direction: column; margin-top: 0%; margin-right: 0%; margin-bottom: 0%; margin-left: 0%; -unity-font-definition: resource(&quot;Font/Barlow_Condensed/BarlowCondensed-SemiBold&quot;);"/>
+            <ui:VisualElement style="flex-grow: 0; flex-shrink: 1; width: 10%; aspect-ratio: 1;"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="BottomRow" style="flex-grow: 1; padding-top: 20px; padding-right: 20px; padding-bottom: 20px; padding-left: 20px; display: flex;">
+            <ui:VisualElement name="FileCreation" class="PauseMenuBorder" style="flex-grow: 1; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; justify-content: flex-start; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;">
+                <ui:Button text="Create New Save" name="CreateNewSaveButton" class="CreateSaveFileButton PauseMenuButtonsUSS" style="bottom: 5%; position: absolute;"/>
+                <ui:TextField label="Save Name :" placeholder-text="" max-length="50" password="false" readonly="false" focusable="true" class="TextField TextFieldLabel TextFieldInput textFieldTextCursor" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; align-self: center; width: 80%; position: absolute; height: 10%; background-color: rgba(0, 0, 0, 0); color: rgb(255, 255, 255); font-size: 20px; -unity-text-align: middle-left; top: 10%;"/>
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

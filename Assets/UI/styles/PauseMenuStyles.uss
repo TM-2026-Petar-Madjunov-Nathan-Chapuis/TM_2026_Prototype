@@ -735,5 +735,10 @@
 .TextFieldLabel:focus > .unity-base-field__label {
     color: rgb(255, 255, 255);
 }
+.Label {
+    color: rgb(255, 255, 255);   
+}
 
-
+.TextFieldInput #unity-text-input {
+    --unity-cursor-color: rgb(255, 255, 255);
+}

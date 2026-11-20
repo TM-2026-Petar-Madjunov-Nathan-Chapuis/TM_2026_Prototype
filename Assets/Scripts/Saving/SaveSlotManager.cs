@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -32,7 +33,7 @@ namespace TM.Saving
         }
         public void DeleteSaveFile(string fileName)
         {
-            string path = Application.persistentDataPath + "/" + fileName + ".json";
+            string path = Path.Combine(Application.persistentDataPath, fileName + ".json");
 
             if (File.Exists(path)) File.Delete(path);
 
@@ -53,7 +54,7 @@ namespace TM.Saving
 
         public SaveFile GetSaveFileInfo(string fileName)
         {
-            string path = Application.persistentDataPath + "/" + fileName + ".json";
+            string path = Path.Combine(Application.persistentDataPath, fileName + ".json");
 
             if (File.Exists(path))
             {
@@ -62,6 +63,32 @@ namespace TM.Saving
                 return saveFile;
             } 
             return null;
+        }
+        public bool CreateSaveFile(string fileName)
+        {
+            foreach (char invalidCharacter in Path.GetInvalidFileNameChars()) //check if it has wrong characters.
+            {
+                if (fileName.Contains(invalidCharacter))
+                    return false;
+            }
+            
+            string path = Path.Combine(Application.persistentDataPath, fileName + ".json");
+
+            if (File.Exists(path)) return false;
+
+            DateTime nowUtc = DateTime.UtcNow;
+            SaveFile newSaveFile = new SaveFile
+            {
+                saveData = new List<SaveData>(),
+                createdAtUtc = nowUtc,
+                lastSavedAtUtc = nowUtc,
+                totalPlaySeconds = 0,
+            };
+
+            string json = JsonConvert.SerializeObject(newSaveFile);
+            File.WriteAllText(path, json);
+
+            return true;
         }
     }
 }

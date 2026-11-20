@@ -26,7 +26,7 @@ namespace TM.Saving
         public void Update()//autosave every 2min.
         {
             timer += Time.unscaledDeltaTime;
-            if(timer > 120 && File.Exists(Application.persistentDataPath + "/" + SaveSlotManager.Instance.CurrentSaveFile + ".json"))
+            if(timer > 120 && File.Exists(Path.Combine(Application.persistentDataPath, SaveSlotManager.Instance.CurrentSaveFile + ".json")))
             {
                 timer = 0;
                 this.Save();
@@ -35,7 +35,7 @@ namespace TM.Saving
 
         public void Save()
         {
-            string path = Application.persistentDataPath + "/" + SaveSlotManager.Instance.CurrentSaveFile + ".json";
+            string path = Path.Combine(Application.persistentDataPath, SaveSlotManager.Instance.CurrentSaveFile + ".json");
             SaveFile saveFile = JsonConvert.DeserializeObject<SaveFile>(File.ReadAllText(path)); //gets the total time and created time.
             MonoBehaviour[] monobehaviours = FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None);
             if (saveFile.saveData == null)
@@ -68,7 +68,7 @@ namespace TM.Saving
         }
         public void Load()
         {
-            string path = Application.persistentDataPath + "/" + SaveSlotManager.Instance.CurrentSaveFile + ".json";
+            string path = Path.Combine(Application.persistentDataPath, SaveSlotManager.Instance.CurrentSaveFile + ".json");
             if (!File.Exists(path))
             {
                 Debug.LogWarning("No save file found at " + path);

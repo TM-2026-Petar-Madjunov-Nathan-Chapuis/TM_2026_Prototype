@@ -71,7 +71,10 @@
         <ui:VisualElement name="BottomRow" style="flex-grow: 1; padding-top: 20px; padding-right: 20px; padding-bottom: 20px; padding-left: 20px; display: flex;">
             <ui:VisualElement name="FileCreation" class="PauseMenuBorder" style="flex-grow: 1; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; justify-content: flex-start; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;">
                 <ui:Button text="Create New Save" name="CreateNewSaveButton" class="CreateSaveFileButton PauseMenuButtonsUSS" style="bottom: 5%; position: absolute;"/>
-                <ui:TextField label="Save Name :" placeholder-text="" max-length="50" password="false" readonly="false" focusable="true" class="TextField TextFieldLabel TextFieldInput textFieldTextCursor" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; align-self: center; width: 80%; position: absolute; height: 10%; background-color: rgba(0, 0, 0, 0); color: rgb(255, 255, 255); font-size: 20px; -unity-text-align: middle-left; top: 10%;"/>
+                <ui:VisualElement style="flex-grow: 0; position: absolute; top: 10%; left: 10%; flex-shrink: 0; width: 80%; height: 20%;">
+                    <ui:Label text="Label" name="WarningLabel" style="color: rgb(255, 126, 126); font-size: 16px; position: absolute; top: 0; left: 0; width: 100%; -unity-text-align: upper-center;"/>
+                    <ui:TextField name="NewSaveField" label="Save Name :" placeholder-text="" max-length="50" password="false" readonly="false" focusable="true" class="TextField TextFieldLabel TextFieldInput textFieldTextCursor" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; align-self: center; width: 100%; position: absolute; height: 50%; background-color: rgba(0, 0, 0, 0); color: rgb(255, 255, 255); font-size: 20px; -unity-text-align: middle-left; top: 50%;"/>
+                </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
